@@ -1,5 +1,5 @@
 {
-  "name": "Interlink",
+  "name": "interlink",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.15.5",
@@ -30,6 +30,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postInstall": "webpack",
+    "heroku-postbuild": "webpack -p",
     "start": "webpack --watch --mode=development"
   },
   "repository": {
