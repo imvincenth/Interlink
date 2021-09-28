@@ -1,11 +1,13 @@
 import React from 'react';
 
-class SessionForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
+      first_name: '',
+      last_name: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -36,19 +38,19 @@ class SessionForm extends React.Component {
 
   render() {
     return (
-      <div className="session-form-container">
-        <form onSubmit={this.handleSubmit} className="session-form-box">
+      <div className="signup-form-container">
+        <form onSubmit={this.handleSubmit} className="signup-form-box">
           Welcome to Interlink!
           <br/>
           Please {this.props.formType} or {this.props.navLink}
           {this.renderErrors()}
-          <div className="session-form">
+          <div className="signup-form">
             <br/>
 
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
-                className="session-input"
+                className="signup-input"
                 placeholder="Email"
               />
 
@@ -57,8 +59,26 @@ class SessionForm extends React.Component {
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
-                className="session-input"
+                className="signup-input"
                 placeholder="Password"
+              />
+
+            <br/>
+
+              <input type="text"
+                value={this.state.first_name}
+                onChange={this.update('first_name')}
+                className="signup-input"
+                placeholder="First Name"
+              />
+
+            <br/>
+
+              <input type="text"
+                value={this.state.last_name}
+                onChange={this.update('last_name')}
+                className="signup-input"
+                placeholder="Last Name"
               />
 
             <br/>
@@ -70,4 +90,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default SessionForm;
+export default SignupForm;
