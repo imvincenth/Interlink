@@ -22,15 +22,6 @@ class SignupForm extends React.Component {
     window.location.reload(false);
   }
 
-  clearState() {
-    this.setState({
-      email: '',
-      password: '',
-      first_name: '',
-      last_name: ''
-    })
-  }
-
   demoLogin(e) {
     e.preventDefault();
     this.props.demoLogin();
@@ -122,7 +113,8 @@ class SignupForm extends React.Component {
     }
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user)
   }

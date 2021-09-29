@@ -5,12 +5,12 @@
 .homepage-nav {
   max-width: 1128px;
   margin: auto;
-  padding: 5px 0 16px;
+  padding: 5px 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
+  align-items: bottom;
   position: relative;
+  justify-content: space-between;
+  flex-wrap: nowrap;
 }
 
 .login-logo {
@@ -23,12 +23,11 @@
 
 .joinnow-nav {
   font-size: 1rem;
-  font-weight: 550;
+  font-weight: 600;
   border-radius: .3em;
-  padding: 7px 8px;
   margin-right: 12px;
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .joinnow-nav:hover {
@@ -41,9 +40,9 @@
   color: #0a66c2;
   box-shadow: inset 0 0 0 1px #0a66c2;
   border-radius: 25px;
-  padding: 10px 25px;
+  padding: 5px 15px;
   font-size: 1rem;
-  font-weight: 550;
+  font-weight: 600;
   line-height: 40px;
   text-align: center;
   text-decoration: none;
@@ -65,21 +64,45 @@
   padding-bottom: 130px;
   padding: 60px 0;
   position: relative;
-  flex-wrap: wrap;
   width: 100%;
-  max-width: 128px;
+  max-width: 1128px;
   align-items: center;
+  flex-wrap: wrap;
   margin: auto;
-  @media (max-width: 768) {
+  @media (max-width: 769px) {
     margin: auto;
     min-height: 0px;
   }
 }
 
-.homepage-picture {
-  width: 100%;
+.homepage-text {
+  width: 55%;
+  font-size: 35px;
+  font-weight: 300;
+  line-height: 60px;
+  padding-bottom: 24px;
+  color: #8f5849;
+  @media (max-width: 769px) {
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
+    line-height: 2;
+  }
 }
 
-p > .homepage-picture {
-  color: #8f584a;
+.homepage-picture {
+  width: 400px;
+  @media (max-width: 769px) {
+    margin: auto;
+    height: 240px;
+    min-width: 374px;
+    min-height: 0px;
+  }
+}
+
+.fire-picture {
+  width: 100%;
+  position: fixed;
+  right: 0%;
+  bottom: 0px;
 }
