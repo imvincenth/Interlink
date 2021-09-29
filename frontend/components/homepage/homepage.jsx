@@ -14,7 +14,7 @@ class Homepage extends React.Component {
       <div className="homepage">
         <nav className="homepage-nav">
           <a href="/">
-            <img src={Logo} className="login-logo" alt="login logo" />
+            <img src={window.namelogoURL} className="login-logo" alt="login logo" />
           </a>
 
           <div>
@@ -28,8 +28,8 @@ class Homepage extends React.Component {
             One Ring to find them,<br/>
             One Ring to bring them all<br/>
             and in the darkness bind them.</h3>
-          <img src={Ring} className="homepage-picture" alt="hero picture" />
-          <img src={Fire} className="fire-picture" alt="fire picture" />
+          <img src={window.ringURL} className="homepage-picture" alt="hero picture" />
+          <img src={window.fireURL} className="fire-picture" alt="fire picture" />
         </section>
       </div>
     )

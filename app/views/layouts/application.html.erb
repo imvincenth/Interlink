@@ -4,7 +4,12 @@
     <title>RingIn</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-  
+    <script type="text/javascript">
+      window.namelogoURL = "<%= image_url("namelogo.svg") %>"
+      window.ringURL = "<%= image_url("theonering.svg") %>"
+      window.fireURL = "<%= image_url("homepage-fire.svg") %>"
+    </script>
+
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
