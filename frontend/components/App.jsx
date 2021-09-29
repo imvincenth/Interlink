@@ -19,7 +19,7 @@ const App = () => (
   <div>
     <div>
       <Link to="/">
-        <h1>Ring In</h1>
+        <h1>RingIn</h1>
       </Link>
     </div>
     
