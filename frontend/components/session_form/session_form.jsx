@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -8,6 +9,10 @@ class SessionForm extends React.Component {
       password: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  refreshPage() {
+    window.location.reload(false);
   }
 
   update(field) {
@@ -24,17 +29,22 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     return(
-      <ul>
+      <div>
         {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`}>
+          <span key={`error-${i}`} className="error">
             {error}
-          </li>
+          </span>
         ))}
-      </ul>
+      </div>
     );
   }
-
+  
   render() {
+    this.props.errors.forEach(error => {
+      if (error.includes("First") || error.includes("Last")) {
+        this.refreshPage();
+      }
+    })
     return (
       <div className="session-form-container">
         <form onSubmit={this.handleSubmit} className="session-form-box">
@@ -58,12 +68,13 @@ class SessionForm extends React.Component {
                 />
 
             <br/>
+
             <input className="session-submit" type="submit" value={this.props.formType} />
           </div>
+          {this.renderErrors()}
           
           <br />
-          New to Interlink? {this.props.navLink}
-          {this.renderErrors()}
+          New to Interlink? <Link to="/signup" >Join Now</Link>
         </form>
       </div>
     );

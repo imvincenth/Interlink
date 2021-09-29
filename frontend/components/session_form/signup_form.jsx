@@ -11,12 +11,24 @@ class SignupForm extends React.Component {
       last_name: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleFirstErrors = this.handleFirstErrors.bind(this);
-    this.handleSecondErrors = this.handleSecondErrors.bind(this);
     // this.firstErrors;
     this.demoLogin = this.demoLogin.bind(this);
-    this.secondErrors;
+    this.flip = this.flip.bind(this);
+    this.check = 0;
     this.page = 1;
+  }
+
+  refreshPage() {
+    window.location.reload(false);
+  }
+
+  clearState() {
+    this.setState({
+      email: '',
+      password: '',
+      first_name: '',
+      last_name: ''
+    })
   }
 
   demoLogin(e) {
@@ -38,6 +50,8 @@ class SignupForm extends React.Component {
         </label>
   
         <br />
+        {this.renderEmailError()}
+        <br />
     
         <label>Password (6 of more characters)
           <br />
@@ -49,10 +63,16 @@ class SignupForm extends React.Component {
         </label>
 
         <br />
+        {this.renderPasswordError()}
+        <br />
 
         <input className="session-submit" type="submit" value={"Agree & Join"} />
+        
         <br />
         <input className="session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+        
+        <br />
+        Already on RingIn? <Link to="/login">Sign In</Link>
       </div>
     )
   }
@@ -71,6 +91,8 @@ class SignupForm extends React.Component {
         </label>
   
         <br />
+        {this.check !== 0 ? this.renderFirstNameError() : ""}
+        <br />
   
         <label>Last name
           <br />
@@ -82,18 +104,16 @@ class SignupForm extends React.Component {
         </label>
 
         <br />
+        {this.check !== 0 ? this.renderLastNameError() : ""}
+        <br />
 
-        <input className="session-submit" type="submit" value={this.props.formType} onClick={this.handleSecondErrors} />
+        <input className="session-submit" type="submit" value={this.props.formType} onClick={this.flip} />
       </div>
     )
   }
 
-  // handleFirstErrors() {
-  //   this.firstErrors = this.renderOneErrors();
-  // }
-
-  handleSecondErrors() {
-    this.secondErrors = this.renderTwoErrors();
+  flip() {
+    this.check++;
   }
 
   update(field) {
@@ -107,45 +127,72 @@ class SignupForm extends React.Component {
     this.props.processForm(user)
   }
 
-  renderOneErrors() {
+  renderEmailError() {
     let pageOneErrors = [];
     this.props.errors.forEach(error => {
-      if (error.includes("Email") || error.includes("Password")) {
+      if (error.includes("Email")) {
         pageOneErrors.push(error);
       }
     })
     return(
-      <ul>
-        {pageOneErrors.map((error, i) => (
-          <li key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
+      <span className="error">
+        {pageOneErrors}
+      </span>
     );
   }
 
-  renderTwoErrors() {
+  renderPasswordError() {
+    let pageOneErrors = [];
+    this.props.errors.forEach(error => {
+      if (error.includes("Password")) {
+        pageOneErrors.push(error);
+      }
+    })
+    return(
+      <span className="error">
+        {pageOneErrors}
+      </span>
+    );
+  }
+
+  renderFirstNameError() {
     let pageTwoErrors = [];
     if (this.props.errors.length !== 0) {
       this.props.errors.forEach(error => {
-        if (error.includes("First") || error.includes("Last")) {
+        if (error.includes("First")) {
           pageTwoErrors.push(error);
         }
       })
       return(
-        <ul>
-          {pageTwoErrors.map((error, i) => (
-            <li key={`error-${i}`}>
-              {error}
-            </li>
-          ))}
-        </ul>
+        <span className="error">
+          {pageTwoErrors}
+        </span>
+      );
+    }
+  }
+
+  renderLastNameError() {
+    let pageTwoErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Last")) {
+          pageTwoErrors.push(error);
+        }
+      })
+      return(
+        <span className="error">
+          {pageTwoErrors}
+        </span>
       );
     }
   }
 
   render() {
+    this.props.errors.forEach(error => {
+      if (error.includes("email")) {
+        this.refreshPage();
+      }
+    })
     return (
       <div className="signup-form-container">
         <form onSubmit={this.handleSubmit} className="signup-form-box">
@@ -155,10 +202,8 @@ class SignupForm extends React.Component {
             <br />
             {this.props.errors.length !== 2 && this.props.errors.length !== 1 ? this.pageOne() : this.pageTwo()}
             <br />
-            {this.page === 1 ? this.renderOneErrors() : this.secondErrors}
           </div>
         </form>
-        <p>Already on RingIn? <Link to="/login">Sign In</Link></p>
       </div>
     );
   }
