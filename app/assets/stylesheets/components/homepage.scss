@@ -1,0 +1,85 @@
+.homepage {
+  padding: 0px;
+}
+
+.homepage-nav {
+  max-width: 1128px;
+  margin: auto;
+  padding: 5px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.login-logo {
+  width: 135px;
+  height: 47px;
+  @media (max-width: 768px) {
+    padding: 0 5px;
+  }
+}
+
+.joinnow-nav {
+  font-size: 1rem;
+  font-weight: 550;
+  border-radius: .3em;
+  padding: 7px 8px;
+  margin-right: 12px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.joinnow-nav:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: black;
+  text-decoration: none;
+}
+
+.signup-nav {
+  color: #0a66c2;
+  box-shadow: inset 0 0 0 1px #0a66c2;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: 550;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 167ms;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.signup-nav:hover {
+  background-color: rgba(112, 181, 249, 0.15);
+  color: #0a66c2;
+  text-decoration: none;
+}
+
+.homepage-main {
+  display: flex;
+  align-content: start;
+  min-height: 700px;
+  padding-top: 40px;
+  padding-bottom: 130px;
+  padding: 60px 0;
+  position: relative;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 128px;
+  align-items: center;
+  margin: auto;
+  @media (max-width: 768) {
+    margin: auto;
+    min-height: 0px;
+  }
+}
+
+.homepage-picture {
+  width: 100%;
+}
+
+p > .homepage-picture {
+  color: #8f584a;
+}

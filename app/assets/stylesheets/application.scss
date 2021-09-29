@@ -14,6 +14,38 @@
  *= require_self
  */
 
+// Global
+body,
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#root,
+body,
+html {
+  background-color: #ffffff;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+div, h1, h2, h3, h4, 
+h5, h6, header, html, 
+img, i, label, ul, li, 
+nav, p, small, span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
 .error {
   color: red;
 }
+
+// Components
+@import "components/*";
+
