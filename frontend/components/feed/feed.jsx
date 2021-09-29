@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Logo from "../../../app/assets/images/namelogo.svg";
 
 class Feed extends React.Component {

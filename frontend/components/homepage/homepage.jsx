@@ -1,8 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Logo from "../../../app/assets/images/namelogo.svg";
-import Ring from "../../../app/assets/images/theonering.svg";
-import Fire from "../../../app/assets/images/homepage-fire.svg";
+import { Link, Redirect } from 'react-router-dom';
 
 class Homepage extends React.Component {
   refreshPage() {
@@ -10,6 +7,9 @@ class Homepage extends React.Component {
   }
 
   render() {
+    if (this.props.currentUser) {
+      return <Redirect to="/feed" />;
+    }
     return (
       <div className="homepage">
         <nav className="homepage-nav">
