@@ -145,7 +145,7 @@ class SignupForm extends React.Component {
           <br />
           <div className="signup-form">
             <br />
-            {this.props.errors.length !== 2 ? this.pageOne() : this.pageTwo()}
+            {this.props.errors.length !== 2 && this.props.errors.length !== 1 ? this.pageOne() : this.pageTwo()}
             <br />
             {this.page === 1 ? this.renderOneErrors() : this.secondErrors}
           </div>
