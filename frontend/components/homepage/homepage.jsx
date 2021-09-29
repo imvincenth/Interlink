@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from "../../../app/assets/images/namelogo.svg";
 
-
-
-const Greeting = ({ currentUser, logout }) => {
+const Homepage = ({ currentUser, logout }) => {
   const sessionLinks = () => (
-    <nav className="login-signup">
-      <Link to="/login">Login</Link>
-      &nbsp;or&nbsp;
-      <Link to="/signup">Sign up!</Link>
-    </nav>
+    <Link to="/">
+      <img src={Logo} alt="login logo" />
+    </Link>
   );
+
   const personalGreeting = () => (
     <hgroup className="header-group">
       <h2 className="header-name">Hi, {currentUser.first_name}!</h2>
@@ -21,5 +19,4 @@ const Greeting = ({ currentUser, logout }) => {
   return currentUser ? personalGreeting() : sessionLinks();
 };
 
-
-export default Greeting;
+export default Homepage;
