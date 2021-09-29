@@ -14,8 +14,14 @@ class SignupForm extends React.Component {
     // this.handleFirstErrors = this.handleFirstErrors.bind(this);
     this.handleSecondErrors = this.handleSecondErrors.bind(this);
     // this.firstErrors;
+    this.demoLogin = this.demoLogin.bind(this);
     this.secondErrors;
     this.page = 1;
+  }
+
+  demoLogin(e) {
+    e.preventDefault();
+    this.props.demoLogin();
   }
 
   pageOne() {
@@ -45,6 +51,8 @@ class SignupForm extends React.Component {
         <br />
 
         <input className="session-submit" type="submit" value={"Agree & Join"} />
+        <br />
+        <input className="session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
       </div>
     )
   }
@@ -150,7 +158,7 @@ class SignupForm extends React.Component {
             {this.page === 1 ? this.renderOneErrors() : this.secondErrors}
           </div>
         </form>
-        <p>Already on LinkedIn? <Link to="/api/login">Sign In</Link></p>
+        <p>Already on RingIn? <Link to="/login">Sign In</Link></p>
       </div>
     );
   }

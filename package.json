@@ -1,5 +1,5 @@
 {
-  "name": "interlink",
+  "name": "ringin",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.15.5",

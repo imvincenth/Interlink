@@ -38,10 +38,6 @@ class SessionForm extends React.Component {
     return (
       <div className="session-form-container">
         <form onSubmit={this.handleSubmit} className="session-form-box">
-          Welcome to Interlink!
-          <br/>
-          Please {this.props.formType} or {this.props.navLink}
-          {this.renderErrors()}
           <div className="session-form">
             <br/>
 
@@ -50,7 +46,7 @@ class SessionForm extends React.Component {
                 onChange={this.update('email')}
                 className="session-input"
                 placeholder="Email"
-              />
+                />
 
             <br/>
 
@@ -59,11 +55,15 @@ class SessionForm extends React.Component {
                 onChange={this.update('password')}
                 className="session-input"
                 placeholder="Password"
-              />
+                />
 
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
           </div>
+          
+          <br />
+          New to Interlink? {this.props.navLink}
+          {this.renderErrors()}
         </form>
       </div>
     );
