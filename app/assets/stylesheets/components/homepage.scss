@@ -5,7 +5,7 @@
 .homepage-nav {
   max-width: 1128px;
   margin: auto;
-  padding: 5px 0;
+  padding-left: 5px;
   display: flex;
   align-items: bottom;
   position: relative;
@@ -14,8 +14,8 @@
 }
 
 .login-logo {
-  width: 135px;
-  height: 47px;
+  width: 105px;
+  height: 60px;
   @media (max-width: 768px) {
     padding: 0 5px;
   }
@@ -80,6 +80,7 @@
   font-size: 35px;
   font-weight: 300;
   line-height: 60px;
+  padding-left: 5px;
   padding-bottom: 24px;
   color: #8f5849;
   @media (max-width: 769px) {
@@ -92,10 +93,10 @@
 }
 
 .homepage-picture {
-  width: 400px;
+  width: 380px;
   @media (max-width: 769px) {
     margin: auto;
-    height: 240px;
+    height: 220px;
     min-width: 374px;
     min-height: 0px;
   }
