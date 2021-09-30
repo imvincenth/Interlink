@@ -44,7 +44,11 @@ nav, p, small, span {
 }
 
 .error {
-  color: red;
+  color: #d11124;
+}
+
+.input_error {
+  border: 1px solid #d11124;
 }
 
 // Components

@@ -30,41 +30,34 @@ class SignupForm extends React.Component {
   pageOne() {
     this.page = 1;
     return (
-      <div>
+      <div className="signup-form-container">
         <label>Email
-          <br />
           <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
             className="signup-input"
             autoFocus
           />
+          {this.renderEmailError()}
         </label>
-  
-        <br />
-        {this.renderEmailError()}
 
         <br />
         <label>Password (6 of more characters)
-          <br />
           <input type="password"
             value={this.state.password}
             onChange={this.update('password')}
             className="signup-input"
           />
+          {this.renderPasswordError()}
         </label>
 
         <br />
-        {this.renderPasswordError()}
+        <input className="signup-submit" type="submit" value={"Agree & Join"} />
 
-        <br />
-        <input className="session-sumit" type="submit" value={"Agree & Join"} />
+        <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
         
         <br />
-        <input className="session-sumit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
-        
-        <br />
-        Already on RingIn? <Link to="/login">Sign In</Link>
+        <p className="session-redirect">Already on RingIn? <Link className="session-redirect-link" to="/login">Sign In</Link></p>
       </div>
     )
   }
@@ -72,9 +65,8 @@ class SignupForm extends React.Component {
   pageTwo() {
     this.page = 2;
     return (
-      <div>
+      <div className="signup-form-container">
         <label>First name
-          <br />
           <input type="text"
             value={this.state.first_name}
             onChange={this.update('first_name')}
@@ -87,7 +79,6 @@ class SignupForm extends React.Component {
         <br />
   
         <label>Last name
-          <br />
           <input type="text"
             value={this.state.last_name}
             onChange={this.update('last_name')}
@@ -99,7 +90,7 @@ class SignupForm extends React.Component {
         {this.check !== 0 ? this.renderLastNameError() : ""}
         <br />
 
-        <input className="session-sumit" type="submit" value={this.props.formType} onClick={this.flip} />
+        <input className="signup-submit" type="submit" value={this.props.formType} onClick={this.flip} />
       </div>
     )
   }
@@ -189,14 +180,14 @@ class SignupForm extends React.Component {
     return (
       <div className="signup-form">
 
-        <header className="signup-logo">
-          <img src={namelogoURL} alt="name logo" />
-          <p>Make the most of your professional life</p>
+        <header className="signup-header">
+          <img className="header-logo" src={namelogoURL} alt="name logo" />
+          <p class="signup-quote">Make the most of your professional life</p>
         </header>
 
           <form onSubmit={this.handleSubmit} className="signup-form-box">
 
-            <div className="signup-form-container">
+            <div>
               {this.props.errors.length !== 2 && this.props.errors.length !== 1 ? this.pageOne() : this.pageTwo()}
             </div>
             

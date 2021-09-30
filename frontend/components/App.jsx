@@ -14,7 +14,7 @@ import HomepageContainer from './homepage/homepage_container';
 import FeedContainer from './feed/feed_container';
 import PageNotFound from './session_form/404';
 
-import { AuthRoute, LogoutRoute, ProtectedRoute } from '../util/route_util';
+import { AuthRoute, LogoutRoute } from '../util/route_util';
 
 const App = () => (
   <div>
