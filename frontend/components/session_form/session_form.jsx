@@ -9,10 +9,16 @@ class SessionForm extends React.Component {
       password: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
   }
 
   refreshPage() {
     window.location.reload(false);
+  }
+
+  demoLogin(e) {
+    e.preventDefault();
+    this.props.demoLogin();
   }
 
   update(field) {
@@ -46,26 +52,32 @@ class SessionForm extends React.Component {
       }
     })
     return (
-      <div className="session-form-container">
+      <div className="session-form">
 
         <header className="session-form-header">
-          <h1>Sign in</h1>
-          <p>Stay updated on your professional world</p>
+          <Link to="/"><img src={namelogoURL} className="loginpage-logo" alt="name logo" /></Link>
         </header>
 
         <form onSubmit={this.handleSubmit} className="session-form-box">
 
-          <div className="session-form">
-            <br/>
+          <div className="session-form-container">
+
+            <div className="form-header-text">
+              <h1>Sign in</h1>
+              <p>Stay updated on your professional world</p>
+            </div>
+
+            <span>{this.props.errors.length === 1 ? this.renderErrors() : <br />}</span>
 
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
                 className="session-input"
                 placeholder="Email"
+                autoFocus
                 />
 
-            <br/>
+              <br />
 
               <input type="password"
                 value={this.state.password}
@@ -74,14 +86,16 @@ class SessionForm extends React.Component {
                 placeholder="Password"
                 />
 
-            <br/>
+            <br />
+
 
             <input className="session-submit" type="submit" value={this.props.formType} />
+
+            <br />
+            <input className="demo-session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+
           </div>
-          {this.renderErrors()}
-          
-          <br />
-          New to Interlink? <Link to="/signup" >Join Now</Link>
+          <p className="signup-redirect">New to RingIn?<Link className="redirect-link" to="/signup" >Join Now</Link></p>
         </form>
       </div>
     );

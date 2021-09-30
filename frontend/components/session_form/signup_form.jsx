@@ -37,13 +37,14 @@ class SignupForm extends React.Component {
             value={this.state.email}
             onChange={this.update('email')}
             className="signup-input"
+            autoFocus
           />
         </label>
   
         <br />
         {this.renderEmailError()}
+
         <br />
-    
         <label>Password (6 of more characters)
           <br />
           <input type="password"
@@ -55,12 +56,12 @@ class SignupForm extends React.Component {
 
         <br />
         {this.renderPasswordError()}
-        <br />
 
-        <input className="session-submit" type="submit" value={"Agree & Join"} />
+        <br />
+        <input className="session-sumit" type="submit" value={"Agree & Join"} />
         
         <br />
-        <input className="session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+        <input className="session-sumit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
         
         <br />
         Already on RingIn? <Link to="/login">Sign In</Link>
@@ -98,7 +99,7 @@ class SignupForm extends React.Component {
         {this.check !== 0 ? this.renderLastNameError() : ""}
         <br />
 
-        <input className="session-submit" type="submit" value={this.props.formType} onClick={this.flip} />
+        <input className="session-sumit" type="submit" value={this.props.formType} onClick={this.flip} />
       </div>
     )
   }
@@ -186,16 +187,20 @@ class SignupForm extends React.Component {
       }
     })
     return (
-      <div className="signup-form-container">
-        <form onSubmit={this.handleSubmit} className="signup-form-box">
-          Make the most of your professional life
-          <br />
-          <div className="signup-form">
-            <br />
-            {this.props.errors.length !== 2 && this.props.errors.length !== 1 ? this.pageOne() : this.pageTwo()}
-            <br />
-          </div>
-        </form>
+      <div className="signup-form">
+
+        <header className="signup-logo">
+          <img src={namelogoURL} alt="name logo" />
+          <p>Make the most of your professional life</p>
+        </header>
+
+          <form onSubmit={this.handleSubmit} className="signup-form-box">
+
+            <div className="signup-form-container">
+              {this.props.errors.length !== 2 && this.props.errors.length !== 1 ? this.pageOne() : this.pageTwo()}
+            </div>
+            
+          </form>
       </div>
     );
   }

@@ -1,8 +1,129 @@
-.session_form_container {
-  display: grid;
-  place-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 100px;
-  padding-bottom: 100px;
+.session-form {
+  padding: 0;
+  min-height: 400px;
+  flex-direction: column;
+}
+
+.session-form-header {
+  width: 1128px;
+  margin-left: 45px;
+  display: flex;
+  align-items: bottom;
+  position: relative;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.loginpage-logo {
+  display: relative;
+  width: 115px;
+  height: 80px;
+  @media (max-width: 768px) {
+    padding: 0 5px;
+  }
+}
+
+.session-form-box {
+}
+
+.session-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 22px;
+  border-radius: 8px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  margin-right: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.session-input {
+  font-size: 18px;
+  height: 48px;
+  padding: 0 16px 0 16px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+}
+
+.form-header-text > h1 {
+  line-height: 1.25;
+  font-weight: 600;
+  color: black;
+  font-size: 32px;
+  padding: 0 0 4px 0;
+}
+
+.form-header-text > p {
+  color: black;
+  font-size: 14px;
+}
+
+.session-submit {
+  font-size: 17px;
+  font-weight: 550;
+  font-family: inherit;
+  height: 48px;
+  background-color: #0a66c2;
+  color: white;
+  padding: 10px;
+  border-radius: 25em;
+  text-align: center;
+  border: none;
+}
+
+.session-submit:hover {
+  background-color: #004182;
+}
+
+.demo-session-submit {
+  font-size: 17px;
+  font-weight: 550;
+  font-family: inherit;
+  height: 48px;
+  background-color: #FFFFFF;
+  color: #0a66c2;
+  padding: 10px;
+  border-radius: 25em;
+  text-align: center;
+  border: 1px solid #0a66c2;
+}
+
+.demo-session-submit:hover {
+  background-color: #0a66c22f;
+  border: 2px solid #0a66c2;
+  text-decoration: underline;
+}
+
+.signup-redirect {
+  font-family: inherit;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 73%;
+  left: 50%;
+  margin-right: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.redirect-link {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0a66c2;
+  padding: 8px 8px;
+  transition-duration: 167ms;
+}
+
+.redirect-link:hover {
+  text-decoration: underline;
+  border: none;
+  background-color: #0a66c22f;
+  padding: 8px 8px;
+  border-radius: 25em;
 }

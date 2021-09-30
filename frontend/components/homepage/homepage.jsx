@@ -9,6 +9,8 @@ class Homepage extends React.Component {
   render() {
     if (this.props.currentUser) {
       return <Redirect to="/feed" />;
+    } else if (this.props.errors.length !== 0) {
+      this.refreshPage();
     }
     return (
       <div className="homepage">
