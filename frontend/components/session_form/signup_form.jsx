@@ -173,7 +173,7 @@ class SignupForm extends React.Component {
 
   render() {
     this.props.errors.forEach(error => {
-      if (error.includes("email")) {
+      if (error.includes("simply")) {
         this.refreshPage();
       }
     })

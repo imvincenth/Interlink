@@ -6,7 +6,7 @@ class Feed extends React.Component {
     const { currentUser, logout } = this.props;
     return (
       <div className="header-group">
-        <img src={namelogoURL} className="login-logo" alt="login logo" />
+        <img src={logoURL} className="login-logo" alt="login logo" />
         <h2 className="header-name">Hi, {currentUser.first_name} {currentUser.last_name}!</h2>
         <button className="header-button" onClick={logout}>Log Out</button>
     </div>
