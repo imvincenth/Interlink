@@ -24,6 +24,10 @@ class Sidebar extends React.Component {
           </div>
         </div>
 
+        <div className="sidebar-tail">
+          <p className="sidebar-tail-header">Best scenes</p>
+        </div>
+
       </div>
     )
   }
