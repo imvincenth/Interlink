@@ -9,7 +9,7 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render "api/users/show"
     else
-      render json: ["One does not simply sign in..."], status: 401
+      render json: ["You shall not pass"], status: 401
     end
   end
 

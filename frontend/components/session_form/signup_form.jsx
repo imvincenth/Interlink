@@ -173,7 +173,7 @@ class SignupForm extends React.Component {
 
   render() {
     this.props.errors.forEach(error => {
-      if (error.includes("simply")) {
+      if (error.includes("You shall not pass")) {
         this.refreshPage();
       }
     })
@@ -182,7 +182,7 @@ class SignupForm extends React.Component {
 
         <header className="signup-header">
           <img className="header-logo" src={namelogoURL} alt="name logo" />
-          <p class="signup-quote">Make the most of your professional life</p>
+          <p className="signup-quote">Make the most of your professional life</p>
         </header>
 
           <form onSubmit={this.handleSubmit} className="signup-form-box">

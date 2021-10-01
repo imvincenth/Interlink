@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import Navbar from './navbar';
+import NavbarContainer from './navbar/navbar_container';
+import SidebarContainer from './sidebar/sidebar_container';
 
 class Feed extends React.Component {
   render() {
@@ -9,10 +10,11 @@ class Feed extends React.Component {
       <div className="feed-page">
         <div>
           <header>
-            <Navbar />
+            <NavbarContainer />
           </header>
+          <SidebarContainer />
         </div>
-        <h2 className="header-name">Hi, {currentUser.first_name} {currentUser.last_name}!</h2>
+        
         <button className="header-button" onClick={logout}>Log Out</button>
       </div>
     )
