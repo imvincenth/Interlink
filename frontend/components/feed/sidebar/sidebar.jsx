@@ -25,7 +25,15 @@ class Sidebar extends React.Component {
         </div>
 
         <div className="sidebar-tail">
-          <p className="sidebar-tail-header">Best scenes</p>
+          <div className="sidebar-tail-header">
+            <p className="sidebar-tail-header-text">Discover more</p>
+          </div>
+          <div className="sidebar-tail-bottom">
+            <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=_pGaz_qN0cw" target="_blank">Soundtrack of Life</a></p>
+            <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=wvK-iKtkV70" target="_blank">One does not simply walk into Mordor...</a></p>
+            <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=UHzF5KnoN20" target="_blank">If I take one more step, it'll be the farthest away from home I've even been</a></p>
+            <p className="sidebar-tail-last-item"><a href="https://www.youtube.com/watch?v=rBtzudk40pE" target="_blank">You bow to no one</a></p>
+          </div>
         </div>
 
       </div>

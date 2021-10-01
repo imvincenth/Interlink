@@ -39,15 +39,16 @@ class Navbar extends React.Component {
             </a>
           </div>
 
-          <li className="navbar-item">
+          <div className="navbar-item">
             <a className="navbar-link" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/">
               <img className="navbar-icon" src={window.linkedinURL} alt="feed url" />
               <h5>LinkedIn</h5>
             </a>
-          </li>
+          </div>
 
-          <div className="navbar-profile">
+          <div className="navbar-item">
             <Link className="navbar-link" to="/">
+              <img className="navbar-icon" src={window.profileURL} alt="feed url" />
               <h5>Me</h5>
             </Link>
           </div>

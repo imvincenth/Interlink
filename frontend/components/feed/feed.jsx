@@ -13,7 +13,7 @@ class Feed extends React.Component {
             <NavbarContainer />
           </header>
 
-          <div className="sidebar-body">
+          <div className="content-body">
             <SidebarContainer />
           </div>
         </div>

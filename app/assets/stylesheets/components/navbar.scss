@@ -4,7 +4,6 @@
   width: 100vw;
   top: 0;
   left: 0;
-  padding: 0 24px;
   z-index: 999;
   position: sticky;
   padding-top: 9px;
@@ -55,7 +54,20 @@
   position: relative;
 }
 
+.navbar-profile {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  min-width: 80px;
+  cursor: pointer;
+  position: relative;
+}
+
 .navbar-link {
+  // display: flex;
+  // flex-direction: column;
+  // text-align: center;
+  // align-content: center;
   text-decoration: none;
   color: gray;
 }
@@ -82,9 +94,4 @@
 a:hover {
   opacity: 1;
   color: black;
-}
-
-a:active {
-  transition-duration: 20ms;
-  border-bottom: 2px solid black;
 }
