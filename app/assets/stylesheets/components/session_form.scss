@@ -92,13 +92,13 @@
   padding: 10px;
   border-radius: 25em;
   text-align: center;
+  transition-duration: 41ms;
   border: 1px solid #0a66c2;
 }
 
 .demo-session-submit:hover {
   background-color: #0a66c22f;
   border: 2px solid #0a66c2;
-  text-decoration: underline;
   cursor: pointer;
 }
 

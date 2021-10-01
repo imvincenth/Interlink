@@ -7,17 +7,21 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar-container">
         
-        <div>
-          <div></div>
-          <h2>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
-          <h4>{this.props.currentUser.email}</h4>
+        <div className="sidebar-header">
+          <img src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" alt="sidebar banner" />
+          <div className="sidebar-avatar"></div>
+          <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
+          <h4 className="sidebar-email">{this.props.currentUser.email}</h4>
         </div>
 
-        <div>
-          <Link to="/">
-            <span>Connections</span>
-            <span>Grow your network</span>
-          </Link>
+        <div className="sidebar-info-wrap">
+          <div className="sidebar-info-item">
+            <p className="sidebar-connection">Connections</p>
+            <span>10</span>
+          </div>
+          <div>
+            <p className="sidebar-growyournetwork">Grow your network</p>
+          </div>
         </div>
 
         <div>

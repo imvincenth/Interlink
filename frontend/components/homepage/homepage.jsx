@@ -20,8 +20,8 @@ class Homepage extends React.Component {
           </a>
 
           <div>
-            <Link className="joinnow-nav" to="/signup" >Join Now</Link>
-            <Link className="signup-nav" to="/login" >Sign In</Link>
+            <Link className="joinnow-nav" to="/signup" >Join now</Link>
+            <Link className="signin-nav" to="/login" >Sign in</Link>
           </div>
         </nav>
 

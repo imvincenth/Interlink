@@ -25,10 +25,10 @@ body,
 html {
   background-color: #ffffff;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans'
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans';
 }
 
-h5, span {
+h2, h4, h5, span {
   margin: 0;
   padding: 0;
   border: 0;
@@ -37,6 +37,10 @@ h5, span {
   vertical-align: baseline;
   background: transparent;
   font-weight: normal;
+}
+
+a {
+  text-decoration: none;
 }
 
 .error {
