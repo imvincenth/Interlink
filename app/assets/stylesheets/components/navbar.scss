@@ -16,10 +16,6 @@
   margin: 0 auto;
   max-width: 1128px;
   justify-content: space-between;
-
-  @media (max-width: 769px) {
-    padding-right: 150px;
-  }
 }
 
 .navbar-logo-box {
@@ -27,11 +23,16 @@
 }
 
 .navbar-logo {
+  margin: auto;
   padding-bottom: 5px;
   margin-right: 20px;
   font-size: 0;
   height: 35px;
   width: 35px;
+
+  @media (max-width: 1128px) {
+    padding-left: 24px;
+  }
 }
 
 .navbar-list {
@@ -40,6 +41,7 @@
   background: transparent;
   font-weight: 400;
   padding-right: 50px;
+  
   @media (max-width: 769px) {
     min-width: 70px;
   }

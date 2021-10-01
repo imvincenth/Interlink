@@ -1,11 +1,11 @@
 .sidebar-container {
   flex-direction: column;
   position: sticky;
-  flex: 0.2;
   border-radius: 10px;
   height: fit-content;
   max-width: 225px;
   min-width: 203px;
+  flex: 20%;
 }
 
 .sidebar-header > img {
@@ -98,6 +98,11 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: white;
+}
+
+.sidebar-tail-header {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .sidebar-tail-header-text {

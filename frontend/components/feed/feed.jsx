@@ -15,6 +15,18 @@ class Feed extends React.Component {
 
           <div className="content-body">
             <SidebarContainer />
+
+            <div className="feed">
+
+              <div className="feed-input-container">
+                <div className="feed-input">
+                  <img src={window.quillURL} alt="quill" />
+                  <form action=""></form>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
         

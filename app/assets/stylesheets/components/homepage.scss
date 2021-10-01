@@ -1,23 +1,25 @@
 .homepage {
   padding: 0px;
+  padding-left: 16px;
 }
 
 .homepage-nav {
   max-width: 1128px;
   margin: auto;
-  padding-left: 5px;
   display: flex;
   align-items: bottom;
   position: relative;
   justify-content: space-between;
   flex-wrap: nowrap;
+  padding-top: 10px;
 }
 
 .login-logo {
-  width: 115px;
-  height: 60px;
+  width: 110px;
+  height: 50px;
   @media (max-width: 768px) {
     padding: 0 5px;
+    max-width: 75px;
   }
 }
 
@@ -41,6 +43,7 @@
   color: #0a66c2;
   border-radius: 25px;
   padding: 7px 15px;
+  margin-right: 16px;
   font-size: 1rem;
   font-weight: 600;
   line-height: 40px;
