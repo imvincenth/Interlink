@@ -12,7 +12,10 @@ class Feed extends React.Component {
           <header>
             <NavbarContainer />
           </header>
-          <SidebarContainer />
+
+          <div className="sidebar-body">
+            <SidebarContainer />
+          </div>
         </div>
         
         <button className="header-button" onClick={logout}>Log Out</button>

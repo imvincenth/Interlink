@@ -6,8 +6,9 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar-container">
+        
         <div>
-          <div>avatar</div>
+          <div></div>
           <h2>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
           <h4>{this.props.currentUser.email}</h4>
         </div>
