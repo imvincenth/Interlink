@@ -18,27 +18,39 @@ class Navbar extends React.Component {
         </div>
 
         <div className="navbar-list">
-
-          <div className="navbar-home-box">
-            <Link to="/feed">feed</Link>
+          <div className="navbar-item">
+            <Link to="/feed">
+              <img src={window.feedURL} alt="feed url" />
+              <span>Home</span>
+            </Link>
           </div>
 
-          <div className="navbar-network-box">
-            <span>network</span>
+          <div className="navbar-item">
+            <Link to="/">
+              <img src={window.networkURL} alt="feed url" />
+              <span>Network</span>
+            </Link>
           </div>
 
-          <div className="navbar-github-box">
-            <span>github</span>
+          <div className="navbar-item">
+            <a href="https://github.com/imvincenth">
+              <img src={window.githubURL} alt="feed url" />
+              <span>Github</span>
+            </a>
           </div>
 
-          <div className="navbar-linkedin-box">
-            <span>linkedin</span>
+          <div className="navbar-item">
+            <a href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/">
+              <img src={window.linkedinURL} alt="feed url" />
+              <span>Real Linkedin</span>
+            </a>
           </div>
 
           <div className="navbar-profile">
-            <span>me</span>
+            <Link to="/">
+              <span>Me</span>
+            </Link>
           </div>
-
         </div>
 
         </div>

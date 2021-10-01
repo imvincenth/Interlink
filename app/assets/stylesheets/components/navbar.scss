@@ -5,8 +5,8 @@
   top: 0;
   left: 0;
   padding: 0 24px;
-  // position: fixed;
   z-index: 100;
+  // position: fixed;
 }
 
 .navbar-content {
@@ -17,6 +17,11 @@
   max-width: 1128px;
 }
 
+.bi {
+  height: 100px;
+  width: 100px;
+}
+
 .navbar-logo {
   margin-right: 8px;
   font-size: 0;
@@ -24,14 +29,10 @@
   width: 35px;
 }
 
-.navbar-list {
-  margin-left: auto;
-  display: block;
-  @media (max-width: 769px) {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    background: white;
-    width: 100%;
-  }
+.feed-navbar-icon {
+
+}
+
+.network-navbar-icon {
+  
 }
