@@ -17,15 +17,11 @@ class Sidebar extends React.Component {
         <div className="sidebar-info-wrap">
           <div className="sidebar-info-item">
             <p className="sidebar-connection">Connections</p>
-            <span>10</span>
+            <p className="sidebar-number">10</p>
           </div>
-          <div>
+          <div className="sidebar-info-item">
             <p className="sidebar-growyournetwork">Grow your network</p>
           </div>
-        </div>
-
-        <div>
-          stats
         </div>
 
       </div>
