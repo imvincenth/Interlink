@@ -21,7 +21,10 @@ class Feed extends React.Component {
               <div className="feed-input-container">
                 <div className="feed-input">
                   <img src={window.quillURL} alt="quill" />
-                  <form action=""></form>
+                  <form>
+                    <input type="text" />
+                    <button>Start a post</button>
+                  </form>
                 </div>
               </div>
 
