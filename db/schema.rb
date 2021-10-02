@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_01_235448) do
+ActiveRecord::Schema.define(version: 2021_10_02_003452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "comment_id"
+    t.integer "post_id"
+    t.string "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_comments_on_comment_id"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "connections", force: :cascade do |t|
     t.string "status", null: false
@@ -54,6 +66,26 @@ ActiveRecord::Schema.define(version: 2021_10_01_235448) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_experiences_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "reactor_id", null: false
+    t.integer "comment_id"
+    t.integer "post_id"
+    t.string "react_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_reactions_on_comment_id"
+    t.index ["post_id"], name: "index_reactions_on_post_id"
+    t.index ["reactor_id"], name: "index_reactions_on_reactor_id"
   end
 
   create_table "users", force: :cascade do |t|
