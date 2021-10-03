@@ -52,7 +52,7 @@ class SignupForm extends React.Component {
         </label>
 
         <br />
-        <input className="signup-submit" type="submit" value={"Agree & Join"} />
+        <input onClick={this.changeBoxTwo} className="signup-submit" type="submit" value={"Agree & Join"} />
 
         <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
         
@@ -60,6 +60,10 @@ class SignupForm extends React.Component {
         <p className="session-redirect">Already on RingIn? <Link className="session-redirect-link" to="/login">Sign In</Link></p>
       </div>
     )
+  }
+
+  changeBoxTwo() {
+    document.getElementsByClassName("signup-form-box")[0].classList.add("box-two");
   }
 
   pageTwo() {

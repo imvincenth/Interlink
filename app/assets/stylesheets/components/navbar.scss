@@ -7,7 +7,7 @@
   z-index: 999;
   position: sticky;
   padding-top: 9px;
-  // padding-bottom: 6px;
+  padding-bottom: 3px;
 }
 
 .navbar-content {
@@ -16,6 +16,7 @@
   margin: 0 auto;
   max-width: 1128px;
   justify-content: space-between;
+  margin-bottom: -2px;
 }
 
 .navbar-logo-box {
@@ -79,6 +80,14 @@
   height: 22px;
 }
 
+.navbar-arrow {
+  width: 9px;
+}
+
+.navbar-link {
+  height: 40px;
+}
+
 .navbar-icon.active,
 .navbar-link.active {
   opacity: 1;
@@ -86,10 +95,12 @@
 }
 
 .navbar-link.active {
+  margin-bottom: -1px;
   border-bottom: 2px solid black;
 }
 
 .navbar-item > a {
+  // margin-bottom: 2px;
   opacity: 0.6;
 }
 

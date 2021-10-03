@@ -30,9 +30,9 @@ class Sidebar extends React.Component {
           </div>
           <div className="sidebar-tail-bottom">
             <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=_pGaz_qN0cw" target="_blank">Soundtrack of Life</a></p>
-            <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=wvK-iKtkV70" target="_blank">One does not simply walk into Mordor...</a></p>
-            <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=UHzF5KnoN20" target="_blank">If I take one more step, it'll be the farthest away from home I've even been</a></p>
-            <p className="sidebar-tail-last-item"><a href="https://www.youtube.com/watch?v=rBtzudk40pE" target="_blank">You bow to no one</a></p>
+            <p className="sidebar-tail-item"><a href="https://youtu.be/wvK-iKtkV70?t=67" target="_blank">One does not simply walk into Mordor...</a></p>
+            <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=mJZZNHekEQw" target="_blank">Balrog</a></p>
+            <p className="sidebar-tail-last-item"><a href="https://www.youtube.com/watch?v=EOA1wBw_Jt4" target="_blank">Rohan</a></p>
           </div>
         </div>
 
