@@ -2,17 +2,14 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import Feed from './feed';
 
-const mapStateToProps = ({ session, entities: { users } }) => {
+const mSTP = ({ session, entities: { users } }) => {
   return {
     currentUser: users[session.id]
   };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mDTP = dispatch => ({
   logout: () => dispatch(logout())
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Feed);
+export default connect(mSTP, mDTP)(Feed);

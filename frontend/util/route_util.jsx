@@ -7,7 +7,7 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 // conditionally render either the component or a 'Redirect' based on whether a user is logged in.
 
 
-const mapStateToProps = state => {
+const mSTP = state => {
   return { loggedIn: Boolean(state.session.id ) };
 };
 
@@ -21,9 +21,9 @@ const LogoutAuth = ({ component: Component, path, loggedIn, exact }) => (
 );
 
 export const AuthRoute = withRouter(
-  connect(mapStateToProps, null)(LoginAuth)
+  connect(mSTP, null)(LoginAuth)
 );
 
 export const LogoutRoute = withRouter(
-  connect(mapStateToProps, null)(LogoutAuth)
+  connect(mSTP, null)(LogoutAuth)
 );

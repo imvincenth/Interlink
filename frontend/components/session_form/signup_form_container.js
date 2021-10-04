@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { signup, login } from '../../actions/session_actions';
 import SignupForm from './signup_form';
 
-const mapStateToProps = ({ errors }) => {
+const mSTP = ({ errors }) => {
   return {
     errors: errors.session,
     formType: 'Continue',
@@ -12,11 +12,11 @@ const mapStateToProps = ({ errors }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mDTP = dispatch => {
   return {
     processForm: (user) => dispatch(signup(user)),
     demoLogin: () => dispatch(login({ email: "gandalf@the.grey", password: "password" }))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+export default connect(mSTP, mDTP)(SignupForm);

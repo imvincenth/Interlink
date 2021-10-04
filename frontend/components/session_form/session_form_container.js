@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { login } from '../../actions/session_actions';
 import SessionForm from './session_form';
 
-const mapStateToProps = ({ errors }) => {
+const mSTP = ({ errors }) => {
   return {
     errors: errors.session,
     formType: 'Sign in',
@@ -12,11 +12,11 @@ const mapStateToProps = ({ errors }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mDTP = dispatch => {
   return {
     processForm: (user) => dispatch(login(user)),
     demoLogin: () => dispatch(login({ email: "gandalf@the.grey", password: "password" }))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SessionForm);
+export default connect(mSTP, mDTP)(SessionForm);
