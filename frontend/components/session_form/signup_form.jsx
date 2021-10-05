@@ -16,13 +16,14 @@ class SignupForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
-    
+
     this.pageCheck = this.pageCheck.bind(this);
     this.visibleCheck = this.visibleCheck.bind(this);
 
     this.changeBoxTwo = this.changeBoxTwo.bind(this);
 
     this.checkErrorPlus = this.checkErrorPlus.bind(this);
+    this.checkErrorPlusTwo = this.checkErrorPlusTwo.bind(this);
     this.checkErrors = 0;
   }
 
@@ -111,8 +112,8 @@ class SignupForm extends React.Component {
 
   pageThree() {
     return (
-      <div className="signup-form-container-three">
-        
+      <div className="signup-form-container">
+        <h1>Welcome {this.state.first_name}</h1>
 
         <label>Country/Region *
           <input type="text"
@@ -123,7 +124,7 @@ class SignupForm extends React.Component {
         </label>
   
         <br />
-        {this.checkErrors === 0 ? "" : this.renderCountryRegionError()}
+        {this.checkErrors === 1 ? "" : this.renderCountryRegionError()}
         <br />
   
         <label>City/District *
@@ -135,42 +136,37 @@ class SignupForm extends React.Component {
         </label>
 
         <br />
-        {this.checkErrors === 0 ? "" : this.renderCityDistrictError()}
+        {this.checkErrors === 1 ? "" : this.renderCityDistrictError()}
         <br />
 
-        <input className="signup-submit" type="submit" value={"Next"} onClick={this.checkErrorPlus} />
+        <input className="signup-submit" type="submit" value={"Next"} onClick={this.checkErrorPlusTwo} />
       </div>
     )
   }
 
+  checkErrorPlusTwo() {
+    this.checkErrors = 2;
+  }
+
   pageFour() {
     return (
-      <div className="signup-form-container-three">
+      <div className="signup-form-container">
+        <h1>Welcome {this.state.first_name}</h1>
+
         <label>What is your most current job title? *
           <input type="text"
-            value={this.state.country_region}
-            onChange={this.update('country_region')}
+            value={this.state.headline}
+            onChange={this.update('headline')}
             className="signup-input"
           />
         </label>
   
         <br />
-        {this.checkErrors === 0 ? "" : this.renderCountryRegionError()}
-        <br />
-  
-        <label>City/District *
-          <input type="text"
-            value={this.state.city_district}
-            onChange={this.update('city_district')}
-            className="signup-input"
-          />
-        </label>
-
-        <br />
-        {this.check === 0 ? "" : this.renderCityDistrictError()}
+        {this.checkErrors === 2 ? "" : this.renderHeadlineError()}
         <br />
 
-        <input className="signup-submit" type="submit" value={"Next"} onClick={this.checkErrorPlus} />
+
+        <input className="signup-submit" type="submit" value={"Join"} />
       </div>
     )
   }

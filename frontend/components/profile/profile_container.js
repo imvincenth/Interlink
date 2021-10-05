@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-
+import { fetchExperiences } from '../../actions/experience_actions'
+import { fetchEducations } from '../../actions/education_actions';
+import Profile from './profile';
 
 const mSTP = (state, ownProps) => ({
   educations: state.entities.educations,
@@ -8,7 +10,8 @@ const mSTP = (state, ownProps) => ({
 });
 
 const mDTP = dispatch => ({
-  fetchUsers: () => dispatch (fetchUsers())
+  fetchExperiences: () => dispatch(fetchExperiences()),
+  fetchEducations: () => dispatch(fetchEducations())
 });
 
 export default connect(mSTP, mDTP)(Profile);
