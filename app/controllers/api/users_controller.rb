@@ -22,6 +22,7 @@ class Api::UsersController < ApplicationController
       render :show
     else
       render json: ["There is no user with that id"], status: 404
+    end
   end
 
   def update
@@ -34,8 +35,15 @@ class Api::UsersController < ApplicationController
   end
 
   private
-
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :password)
+    params.require(:user).permit(
+      :email, 
+      :first_name, 
+      :last_name, 
+      :headline, 
+      :country_region, 
+      :city_district, 
+      :password
+    )
   end
 end

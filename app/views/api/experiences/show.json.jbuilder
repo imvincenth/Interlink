@@ -1,1 +1,1 @@
-json.extract! job, :id, :user_id, 
+json.partial! "api/experiences/experience", experience: @experience

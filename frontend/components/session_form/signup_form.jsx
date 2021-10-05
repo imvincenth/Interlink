@@ -11,11 +11,11 @@ class SignupForm extends React.Component {
       last_name: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.firstErrors;
     this.demoLogin = this.demoLogin.bind(this);
     this.flip = this.flip.bind(this);
     this.check = 0;
     this.page = 1;
+    this.pageCheck = this.pageCheck.bind(this);
   }
 
   refreshPage() {
@@ -99,6 +99,39 @@ class SignupForm extends React.Component {
     )
   }
 
+  pageThree() {
+    this.page = 3;
+    return (
+      <div className="signup-form-container">
+        <label>Country/Region *
+          <input type="text"
+            value={this.state.country_region}
+            onChange={this.update('country_region')}
+            className="signup-input"
+          />
+        </label>
+  
+        <br />
+        {this.check !== 0 ? this.renderCountryRegionError() : ""}
+        <br />
+  
+        <label>City/District
+          <input type="text"
+            value={this.state.city_district}
+            onChange={this.update('city_district')}
+            className="signup-input"
+          />
+        </label>
+
+        <br />
+        {this.check !== 0 ? this.renderCityDistrictError() : ""}
+        <br />
+
+        <input className="signup-submit" type="submit" value={this.props.formType} onClick={this.flip} />
+      </div>
+    )
+  }
+
   flip() {
     this.check++;
   }
@@ -175,12 +208,71 @@ class SignupForm extends React.Component {
     }
   }
 
+  renderCountryRegionError() {
+    let pageThreeErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Last")) {
+          pageThreeErrors.push(error);
+        }
+      })
+      return(
+        <span className="error">
+          {pageThreeErrors}
+        </span>
+      );
+    }
+  }
+
+  renderCityDistrictError() {
+    let pageThreeErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Last")) {
+          pageThreeErrors.push(error);
+        }
+      })
+      return(
+        <span className="error">
+          {pageThreeErrors}
+        </span>
+      );
+    }
+  }
+
+  renderHeadlineError() {
+    let pageFourErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Headline")) {
+          pageFourErrors.push(error);
+        }
+      })
+      return(
+        <span className="error">
+          {pageFourErrors}
+        </span>
+      );
+    }
+  }
+
+  pageCheck() {
+    if (this.props.errors.length === 7 || this.props.errors.length === 6) {
+      this.page = 1;
+    } else if (this.props.errors.length === 5 || this.props.errors.length === 4) {
+      this.page = 2;
+    } else if (this.props.errors.length === 3 || this.props.errors.length === 2) {
+      this.page = 3;
+    } else 
+  }
+
   render() {
     this.props.errors.forEach(error => {
       if (error.includes("You shall not pass")) {
         this.refreshPage();
       }
     })
+    
     return (
       <div className="signup-form">
 

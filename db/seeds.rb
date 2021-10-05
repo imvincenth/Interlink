@@ -8,4 +8,4 @@
 
 User.destroy_all
 
-demo_user = User.create(email: 'gandalf@the.grey', password: 'password', first_name: 'Gandalf', last_name: 'the Grey')
+demo_user = User.create(email: 'gandalf@the.grey', password: 'password', first_name: 'Gandalf', last_name: 'the Grey', headline: 'the Wandering Wizard', country_region: 'Middle-earth', city_district: 'The Shire')

@@ -1,0 +1,1 @@
+json.extract! education, :id, :user_id, :school, :degree, :subject, :start_date, :end_date, :grade, :extracurriculars

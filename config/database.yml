@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: Interlink_development
+  database: RingIn_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: Interlink_test
+  database: RingIn_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: Interlink_production
-  username: Interlink
-  password: <%= ENV['INTERLINK_DATABASE_PASSWORD'] %>
+  database: RingIn_production
+  username: RingIn
+  password: <%= ENV['RINGIN_DATABASE_PASSWORD'] %>

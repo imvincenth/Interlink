@@ -3,8 +3,11 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
+#  city_district   :string           not null
+#  country_region  :string           not null
 #  email           :string           not null
 #  first_name      :string           not null
+#  headline        :string           not null
 #  last_name       :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null

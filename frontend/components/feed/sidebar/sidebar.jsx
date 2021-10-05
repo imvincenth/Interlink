@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 class Sidebar extends React.Component {
 
   render() {
+    console.log(this.props.currentUser)
     return (
       <div className="sidebar-container">
         
@@ -11,7 +12,7 @@ class Sidebar extends React.Component {
           <img src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" alt="sidebar banner" />
           <div className="sidebar-avatar"></div>
           <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
-          <h4 className="sidebar-email">{this.props.currentUser.email}</h4>
+          <h4 className="sidebar-email">{this.props.currentUser.headline}</h4>
         </div>
 
         <div className="sidebar-info-wrap">
