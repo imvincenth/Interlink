@@ -23,7 +23,9 @@
 #
 class Experience < ApplicationRecord
   validates :user_id, :company, :title, :industry, :start_date, :end_date, presence: true
-  validates :current_role, inclusion: [true, false], presence: true
+  validates :current_role, inclusion: [true, false]
 
-  belongs_to :user
+  belongs_to :user,
+    foreign_key: :user_id,
+    class_name: :User
 end

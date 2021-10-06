@@ -3,7 +3,7 @@ import { RECEIVE_EDUCATIONS, RECEIVE_EDUCATION, REMOVE_EDUCATION } from "../acti
 const educationsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   let newState = Object.assign({}, oldState);
-
+  
   switch (action.type) {
     case RECEIVE_EDUCATIONS:
       return action.educations;

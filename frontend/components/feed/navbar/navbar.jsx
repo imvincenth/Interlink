@@ -47,7 +47,7 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-item">
-            <Link className="navbar-link" to="/">
+            <Link className="navbar-link" to="/users/1">
               <img className="navbar-icon" src={window.profileURL} alt="feed url" />
               <h5>Me<img className="navbar-arrow" src={window.downarrowURL} alt="down arrow" /></h5>
             </Link>

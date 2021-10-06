@@ -11,7 +11,7 @@ class Api::ExperiencesController < ApplicationController
   end
 
   def index
-    @experiences = Experience.where(user_id: params[:user_id])
+    @experiences = Experience.all
     render :index
   end
 
@@ -34,13 +34,17 @@ class Api::ExperiencesController < ApplicationController
   private
   def experience_params
     params.require(:experience).permit(
-      :company, 
+      :user_id, 
       :title, 
-      :industry, 
+      :employment_type,
+      :company, 
+      :location, 
       :start_date, 
-      :end_date, 
       :current_role,
-      :user_id
+      :end_date, 
+      :industry, 
+      :headline,
+      :description
     )
   end
 end

@@ -7,5 +7,29 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Experience.destroy_all
+Education.destroy_all
 
-demo_user = User.create(email: 'gandalf@the.grey', password: 'password', first_name: 'Gandalf', last_name: 'the Grey', headline: 'the Wandering Wizard', country_region: 'Middle-earth', city_district: 'The Shire')
+demo_user = User.create(
+  email: 'gandalf@the.grey', 
+  password: 'password', 
+  first_name: 'Gandalf', 
+  last_name: 'the Grey', 
+  headline: 'the Wandering Wizard', 
+  country_region: 'Middle-earth', 
+  city_district: 'The Shire'
+)
+
+demo_exp = Experience.create(
+  user_id: 1,
+  title: 'Guide',
+  employment_type: 'Full-time',
+  company: 'Fellowship of the Ring', 
+  location: 'Middle-earth',
+  start_date: "May 2014", 
+  current_role: false, 
+  end_date: "May 2020", 
+  industry: 'Hero',
+  headline: 'Wizard',
+  description: 'Protect Frodo'
+)

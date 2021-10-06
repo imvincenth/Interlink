@@ -1,8 +1,8 @@
-import { RECEIVE_EXPERIENCES, RECEIVE_EXPERIENCE, REMOVE_EXPERIENCE } from "../actions/experience_actions";
+import { RECEIVE_EXPERIENCES, RECEIVE_EXPERIENCE, REMOVE_EXPERIENCE } from '../actions/experience_actions';
 
 const experiencesReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
-  let newState = Object.assign({}, oldState);
+  let newState = Object.assign({}, oldState)
 
   switch (action.type) {
     case RECEIVE_EXPERIENCES:
@@ -16,6 +16,6 @@ const experiencesReducer = (oldState = {}, action) => {
     default:
       return oldState;
   }
-}
+};
 
 export default experiencesReducer;
