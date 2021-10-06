@@ -1,6 +1,10 @@
 import React from 'react';
 
 class Profile extends React.Component {
+  componentDidMount() {
+    this.props.fetchExperiences();
+  }
+
   render() {
     const { currentUser, fetchExperiences, fetchEducations } = this.props;
     return (
@@ -11,7 +15,7 @@ class Profile extends React.Component {
 
         <div>
          <h1>Experience</h1>
-         {/* {this.props.experiences.map(experience => <h2>{experience.title}</h2>)} */}
+         {this.props.experiences.map(experience => <h2 key={experience.id}>{experience.title}</h2>)}
          {this.props.openCreateExperienceModal}
         </div>
 

@@ -7,7 +7,7 @@ import Profile from './profile';
 
 const mSTP = (state, ownProps) => ({
   educations: state.entities.educations,
-  experiences: state.entities.experiences,
+  experiences: Object.values(state.entities.experiences),
   currentUser: state.entities.users[state.session.id]
 });
 
