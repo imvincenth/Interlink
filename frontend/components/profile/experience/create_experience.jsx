@@ -40,6 +40,7 @@ class CreateExperienceForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.action(...this.state);
+    this.props.closeModal();
   }
 
   render() {
@@ -49,12 +50,12 @@ class CreateExperienceForm extends React.Component {
 
           <div>
             <label>Title*</label>
-            <input type="text" value={this.state.title} onChange={this.forceUpdate("title")} />
+            {/* <input type="text" value={this.state.title} onChange={this.forceUpdate("title")} /> */}
           </div>
 
           <div>
             <label>Employment</label>
-            <select onChange={this.forceUpdate("employment_type")}></select>
+            {/* <select onChange={this.forceUpdate("employment_type")}></select> */}
           </div>
 
           <div>

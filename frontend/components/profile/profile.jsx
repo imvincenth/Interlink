@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../modal/modal';
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -9,6 +10,7 @@ class Profile extends React.Component {
     const { currentUser, fetchExperiences, fetchEducations } = this.props;
     return (
       <div>
+        <Modal />
         <div className="profile-picture"></div>
         <h1>{currentUser.first_name} {currentUser.last_name}</h1>
         <h2>{currentUser.headline}</h2>
