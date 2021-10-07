@@ -12,7 +12,8 @@ class Profile extends React.Component {
     const { currentUser, experiences, fetchExperiences, fetchEducations } = this.props;
     return (
       <div>
-        <Modal />
+        
+        <Modal experiences={experiences} />
         <div className="profile-picture"></div>
         <h1>{currentUser.first_name} {currentUser.last_name}</h1>
         <h2>{currentUser.headline} {this.props.openEditProfileModal}</h2>
@@ -20,7 +21,8 @@ class Profile extends React.Component {
 
         <div>
          <h1>Experience</h1>
-         {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
+            {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
+
          {this.props.openCreateExperienceModal}
         </div>
 

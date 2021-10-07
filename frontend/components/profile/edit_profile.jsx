@@ -42,8 +42,8 @@ class EditProfileForm extends React.Component {
             Last name*
             <input 
               type="text" 
-              value={this.state.first_name} 
-              onChange={this.update("first_name")} 
+              value={this.state.last_name} 
+              onChange={this.update("last_name")} 
             />
           </label>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from '../../modal/modal';
 
 class Experience extends React.Component {
   render() {

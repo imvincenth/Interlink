@@ -15,6 +15,7 @@ const mSTP = state => ({
 const mDTP = dispatch => ({
   action: experience => dispatch(updateExperience(experience)),
   closeModal: () => dispatch(closeModal()),
+  deleteExperience: experienceId => dispatch(deleteExperience(experienceId)),
   removeErrors: () => dispatch(removeErrors())
 });
 
