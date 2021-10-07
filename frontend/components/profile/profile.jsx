@@ -2,10 +2,12 @@ import React from 'react';
 import Modal from '../modal/modal';
 
 import ExperienceItemContainer from './experience/experience_item_container';
+import EducationItemContainer from './education/education_item_container';
 
 class Profile extends React.Component {
   componentDidMount() {
     this.props.fetchExperiences();
+    this.props.fetchEducations();
   }
 
   render() {
@@ -20,13 +22,13 @@ class Profile extends React.Component {
 
         <div>
          <h1>Experience</h1>
-            {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
-
-         {this.props.openCreateExperienceModal}
+          {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
+          {this.props.openCreateExperienceModal}
         </div>
 
         <div>
           <h1>Education</h1>
+          {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
         </div>
 
       </div>

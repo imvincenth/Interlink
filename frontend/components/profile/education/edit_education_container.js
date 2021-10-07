@@ -1,22 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateExperience, deleteExperience } from '../../../actions/experience_actions';
+import { updateEducation, deleteEducation } from '../../../actions/education_actions';
 import { closeModal } from '../../../actions/modal_actions';
-import { removeErrors } from '../../../actions/experience_actions';
-import EditExperienceForm from './edit_experience';
+import { removeErrors } from '../../../actions/education_actions';
+import EditEducationForm from './edit_Education';
 
 const mSTP = (state, ownProps) => {
-  return {experience: state.ui.modalParamsReducer,
+  return {education: state.ui.modalParamsReducer,
   currentUser: state.entities.users[state.session.id],
-  errors: state.errors.experiences,
-  formType: "Edit experience"}
+  errors: state.errors.educations,
+  formType: "Edit Education"}
 };
 
 const mDTP = dispatch => ({
-  action: experience => dispatch(updateExperience(experience)),
+  action: education => dispatch(updateEducation(education)),
   closeModal: () => dispatch(closeModal()),
-  deleteExperience: experienceId => dispatch(deleteExperience(experienceId)),
+  deleteEducation: educationId => dispatch(deleteEducation(educationId)),
   removeErrors: () => dispatch(removeErrors())
 });
 
-export default connect(mSTP, mDTP)(EditExperienceForm);
+export default connect(mSTP, mDTP)(EditEducationForm);

@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect }  from 'react-redux';
-import { fetchExperiences } from '../../../actions/experience_actions';
+import { fetchEducation } from '../../../actions/education_actions';
 import { openModal } from '../../../actions/modal_actions';
-import Experience from './experience_item.jsx';
+import Education from './education_item.jsx';
 
 const mSTP = (state, ownProps) => {
   return {currentUser: state.entities.users[state.session.currentUser],}
 };
 
 const mDTP = dispatch => ({
-  fetchExperiences: () => dispatch(fetchExperiences()),
-  openEditExperienceModal: (experience) => dispatch(openModal("editExperience", experience)),
+  fetchEducation: () => dispatch(fetchEducation()),
+  openEditEducationModal: (education) => dispatch(openModal("editEducation", education)),
 });
 
-export default connect(mSTP, mDTP)(Experience);
+export default connect(mSTP, mDTP)(Education);
