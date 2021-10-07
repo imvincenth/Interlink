@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect }  from 'react-redux';
 import { fetchExperiences } from '../../../actions/experience_actions';
-import { Experience } from './experience_item.jsx';
+import { openModal } from '../../../actions/modal_actions';
+import Experience from './experience_item.jsx';
 
 const mSTP = (state, ownProps) => ({
   experience: state.entities.experiences[state.entities.users[state.session.id].id],

@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '../modal/modal';
-// import ExperienceItemContainer from './experience/experience_item_container';
+import ExperienceItemContainer from './experience/experience_item_container';
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -18,7 +18,7 @@ class Profile extends React.Component {
 
         <div>
          <h1>Experience</h1>
-         {this.props.experiences.map(experience => <h2 key={experience.id}>{experience.title}</h2>)}
+         {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} />)}
          {this.props.openCreateExperienceModal}
         </div>
 

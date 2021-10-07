@@ -2,7 +2,7 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import CreateExperienceFormContainer from '../profile/experience/create_experience_container';
-// import EditExperienceFormContainer from '../edit_profile_container.js]/experience/edit_experience_container';
+import EditExperienceFormContainer from '../profile/experience/edit_experience_container';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
