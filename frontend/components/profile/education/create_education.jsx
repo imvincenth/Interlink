@@ -10,16 +10,13 @@ class CreateEducationForm extends React.Component {
 
     this.state = {
       user_id: this.props.currentUser.id,
-      title: "",
-      employment_type: "",
-      company: "",
-      location: "",
+      school: "",
+      degree: "",
+      subject: "",
       start_date: "",
-      current_role: true,
       end_date: "",
-      headline: this.props.currentUser.headline, 
-      industry: this.props.education.industry,
-      description: "",
+      grade: "",
+      extracurriculars: "",
 
       startMon: "",
       startYr: "",
@@ -28,7 +25,6 @@ class CreateEducationForm extends React.Component {
     };
 
     this.createOptions = this.createOptions.bind(this);
-    this.flipRole = this.flipRole.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.setStartTime = this.setStartTime.bind(this);
@@ -39,10 +35,6 @@ class CreateEducationForm extends React.Component {
   createOptions(str) {
     let options = str.split(",");
     return options.map((option, i) => <option key={i} value={option}>{option}</option>)
-  }
-
-  flipRole() {
-    this.setState({ current_role: !this.state.current_role });
   }
 
   update(field) {
@@ -82,50 +74,10 @@ class CreateEducationForm extends React.Component {
     } else {
       return (
         <div>
-          <select onChange={this.update("endMon")}>
-            <option>Month</option>
-            {this.createOptions(months)}
-          </select>
-          <select onChange={this.update("endYr")}>
-            <option>Year</option>
-            {this.createOptions(years)}
-          </select>
+          
         </div>
       )
     }
-  }
-
-  headline() {
-    if (!this.state.current_role) {
-      return null;
-    } else {
-      return (
-        <div>
-          <label>Headline
-            <input type="text" value={this.state.headline} onChange={this.update("headline")} />
-          </label>
-        </div>
-      )
-    }
-  }
-
-  industry() {
-    if (!this.state.current_role) {
-      return null;
-    } else {
-      return (
-        <div>
-          <label>Industry*
-            <input type="text" value={this.state.industry} onChange={this.update("industry")} />
-          </label>
-          {this.industryErrors()}
-        </div>
-      )
-    }
-  }
-
-  handleErrors() {
-
   }
 
   setTimes() {
@@ -134,33 +86,17 @@ class CreateEducationForm extends React.Component {
     this.setEndTime();
   }
 
-  titleErrors() {
-    let titleErrors = [];
+  schoolErrors() {
+    let schoolErrors = [];
     if (this.props.errors.length !== 0) {
       this.props.errors.forEach(error => {
-        if (error.includes("Title")) {
-          titleErrors.push(error);
+        if (error.includes("School")) {
+          schoolErrors.push(error);
         }
       })
       return (
         <span className="error">
-          {titleErrors}
-        </span>
-      );
-    }
-  }
-
-  companyErrors() {
-    let companyErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("Company")) {
-          companyErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {companyErrors}
+          {schoolErrors}
         </span>
       );
     }
@@ -198,22 +134,6 @@ class CreateEducationForm extends React.Component {
     }
   }
 
-  industryErrors() {
-    let industryErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("Industry")) {
-          industryErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {industryErrors}
-        </span>
-      );
-    }
-  }
-
   componentWillUnmount() {
     this.props.removeErrors();
   }
@@ -228,20 +148,20 @@ class CreateEducationForm extends React.Component {
           </header>
 
           <div>
-            <label>Title*
+            <label>School*
               <input 
                 type="text" 
-                placeholder="Ex: Dwarven Blacksmith"
-                value={this.state.title} 
-                onChange={this.update("title")}
+                placeholder="Ex: Hogwarts School of Witchcraft and Wizardry"
+                value={this.state.school} 
+                onChange={this.update("school")}
               />
             </label>
-            {this.titleErrors()}
+            {this.schoolErrors()}
           </div>
 
           <div>
-            <label>Employment
-              <select value={this.state.employment_type} onChange={this.update("employment_type")}>
+            <label>Degree
+              <select value={this.state.degree} onChange={this.update("degree")}>
                 <option>Please select</option>
                 {this.createOptions(positions)}
               </select>
@@ -249,35 +169,18 @@ class CreateEducationForm extends React.Component {
           </div>
 
           <div>
-            <label>Company name*
+            <label>Field of study
               <input 
                 placeholder="Ex: Fellowship of the Ring"
                 type="text" 
-                value={this.state.company} 
-                onChange={this.update("company")} 
-              />
-            </label>
-            {this.companyErrors()}
-          </div>
-
-          <div>
-            <label>Location
-              <input 
-                placeholder="Ex: Rivendell"
-                type="text" 
-                value={this.state.location} 
-                onChange={this.update("location")} 
+                value={this.state.subject} 
+                onChange={this.update("subject")} 
               />
             </label>
           </div>
 
           <div>
-            <input type="checkbox" checked={this.state.current_role ? true : false} onChange={this.flipRole} />
-            <label>I am currently working in this role</label>
-          </div>
-
-          <div>
-            <label>Start date*
+            <label>Start date
               <div>
                 <select onChange={this.update("startMon")}>
                   <option>Month</option>
@@ -289,27 +192,32 @@ class CreateEducationForm extends React.Component {
                 </select>
               </div>
             </label>
-            {this.startDateErrors()}
           </div>
 
           <div>
-            <label>End date*
-              {this.endDate()}
+            <label>End date (or expected)
+              <div>
+                <select onChange={this.update("endMon")}>
+                  <option>Month</option>
+                  {this.createOptions(months)}
+                </select>
+                <select onChange={this.update("endYr")}>
+                  <option>Year</option>
+                  {this.createOptions(years)}
+                </select>
+              </div>
             </label>
-            {this.endDateErrors()}
           </div>
 
           <div>
-            {this.headline()}
+            <label>Grade
+              <input type="text" value={this.state.grade} onChange={this.update("grade")} />
+            </label>
           </div>
 
           <div>
-            {this.industry()}
-          </div>
-
-          <div>
-            <label>Description</label>
-            <textarea value={this.state.description} onChange={this.update("description")}></textarea>
+            <label>Activities and societies</label>
+            <textarea value={this.state.extracurriculars} onChange={this.update("extracurriculars")} placeholder="Ex: "></textarea>
           </div>
 
           <input type="submit" onClick={this.setTimes} onSubmit={this.handleSubmit} value="Save" />

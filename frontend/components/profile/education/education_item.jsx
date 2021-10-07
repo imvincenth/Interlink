@@ -8,12 +8,12 @@ class Education extends React.Component {
       <div>
         <div>
         
-          <h1>{education.title}</h1>
-          <h2>{education.company} {education.employment_type}</h2>
+          <h1>{education.school}</h1>
+          <h2>{education.degree} {education.subject}</h2>
           <h2>{education.start_date} - {education.end_date}
-          <button className="open-modal" onClick={() => this.props.openEditEducationModal(education)}>
-            Edit education
-          </button>
+            <button className="open-modal" onClick={() => this.props.openEditEducationModal(education)}>
+              Edit education
+            </button>
           </h2>
         </div>
       </div>

@@ -9,7 +9,7 @@ const mSTP = state => ({
   education: state.entities.educations[state.entities.users[state.session.id].id],
   currentUser: state.entities.users[state.session.id],
   errors: state.errors.educations,
-  formType: "Add Education"
+  formType: "Add education"
 });
 
 const mDTP = dispatch => ({

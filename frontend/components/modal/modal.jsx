@@ -3,6 +3,7 @@ import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import CreateExperienceFormContainer from '../profile/experience/create_experience_container';
 import EditExperienceFormContainer from '../profile/experience/edit_experience_container';
+import CreateEducationFormContainer from '../profile/education/create_education_container';
 import EditProfileFormContainer from '../profile/edit_profile_container';
 
 function Modal(props) {
@@ -19,7 +20,7 @@ function Modal(props) {
       component = <EditExperienceFormContainer />;
       break;
     case 'createEducation':
-      component = <CreateEducationForm />
+      component = <CreateEducationFormContainer />;
       break;
     case 'editExperience':
       component = <EditEducationForm />

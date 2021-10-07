@@ -29,6 +29,7 @@ class Profile extends React.Component {
         <div>
           <h1>Education</h1>
           {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
+          {this.props.openCreateEducationModal}
         </div>
 
       </div>

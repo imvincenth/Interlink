@@ -1,17 +1,17 @@
 import { 
-  RECEIVE_EXPERIENCE_ERRORS,
-  REMOVE_EXPERIENCE_ERRORS,
+  RECEIVE_EDUCATION_ERRORS,
+  REMOVE_EDUCATION_ERRORS,
   REMOVE_ERRORS
-} from "../actions/experience_actions"
+} from "../actions/education_actions"
 
-const experienceErrorsReducer = (oldState = [], action) => {
+const EducationErrorsReducer = (oldState = [], action) => {
   Object.freeze(oldState);
 
   switch(action.type) {
-    case RECEIVE_EXPERIENCE_ERRORS:
+    case RECEIVE_EDUCATION_ERRORS:
       return action.errors
 
-    case REMOVE_EXPERIENCE_ERRORS:
+    case REMOVE_EDUCATION_ERRORS:
       return []
 
     case REMOVE_ERRORS:
@@ -22,4 +22,4 @@ const experienceErrorsReducer = (oldState = [], action) => {
   }
 }
 
-export default experienceErrorsReducer;
+export default EducationErrorsReducer;
