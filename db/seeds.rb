@@ -33,3 +33,14 @@ demo_exp = Experience.create(
   headline: 'Wizard',
   description: 'Protect Frodo'
 )
+
+demo_edu = Education.create(
+  user_id: 1,
+  school: "Hogwarts",
+  degree: "Auror",
+  subject: "Magic",
+  start_date: "August 2014",
+  end_date: "October 2020",
+  grade: "A",
+  extracurriculars: "Quidditch"
+)
