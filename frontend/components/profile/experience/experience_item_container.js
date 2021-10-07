@@ -1,3 +1,4 @@
+import React from 'react';
 import { connect }  from 'react-redux';
 import { fetchExperiences } from '../../../actions/experience_actions';
 import { Experience } from './experience_item.jsx';
