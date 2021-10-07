@@ -20,3 +20,21 @@ export const logout = () => (
     url: '/api/session'
   })
 );
+
+export const update = user => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/users/${user.id}`,
+    data: { user }
+  })
+);
+
+export const udpateImg = (formData, id) => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/users/${id}`,
+    data: formData,
+    contentType: false,
+    processData: false
+  })
+)

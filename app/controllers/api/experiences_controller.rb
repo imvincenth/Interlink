@@ -20,7 +20,7 @@ class Api::ExperiencesController < ApplicationController
     if @experience && @experience.update(experience_params)
       render :show
     else
-      rendern json: @experience.errors.full_messages, status: 422
+      render json: @experience.errors.full_messages, status: 422
     end
   end
 

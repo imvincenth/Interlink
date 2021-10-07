@@ -19,6 +19,11 @@ const mDTP = dispatch => ({
       Add Experience
     </button>
   ),
+  openEditProfileModal: (
+    <button className="open-modal" onClick={() => dispatch(openModal('editProfile'))}>
+      Edit Profile
+    </button>
+  ),
 });
 
 export default connect(mSTP, mDTP)(Profile);

@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from '../modal/modal';
+
 import ExperienceItemContainer from './experience/experience_item_container';
 
 class Profile extends React.Component {
@@ -14,7 +15,8 @@ class Profile extends React.Component {
         <Modal />
         <div className="profile-picture"></div>
         <h1>{currentUser.first_name} {currentUser.last_name}</h1>
-        <h2>{currentUser.headline}</h2>
+        <h2>{currentUser.headline} {this.props.openEditProfileModal}</h2>
+        <h2>{currentUser.city_district}, {currentUser.country_region}</h2>
 
         <div>
          <h1>Experience</h1>

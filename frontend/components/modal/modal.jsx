@@ -3,6 +3,7 @@ import { closeModal } from '../../actions/modal_actions';
 import { connect } from 'react-redux';
 import CreateExperienceFormContainer from '../profile/experience/create_experience_container';
 import EditExperienceFormContainer from '../profile/experience/edit_experience_container';
+import EditProfileFormContainer from '../profile/edit_profile_container';
 
 function Modal({modal, closeModal}) {
   if (!modal) {
@@ -23,8 +24,8 @@ function Modal({modal, closeModal}) {
     case 'editExperience':
       component = <EditEducationForm />
       break;
-    case 'editAbout':
-      component = <EditAboutForm />
+    case 'editProfile':
+      component = <EditProfileFormContainer />
       break;
     default:
       return null;

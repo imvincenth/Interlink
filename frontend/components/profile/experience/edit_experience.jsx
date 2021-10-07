@@ -12,11 +12,6 @@ class EditExperienceForm extends React.Component {
       ...this.props.experience
     };
 
-    this.startMon = this.props.experience.start_date.split(" ")[0];
-    this.startYr = this.props.experience.start_date.split(" ")[1];
-    this.endMon = this.props.experience.end_date.split(" ")[0];
-    this.endYr = this.props.experience.end_date.split(" ")[1];
-
     this.createOptions = this.createOptions.bind(this);
     this.flipRole = this.flipRole.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,14 +44,12 @@ class EditExperienceForm extends React.Component {
   }
 
   setStartTime() {
-    if (!this.state.startMon || !this.state.startYr) throw "Month/Year required";
     this.setState({ 
       start_date: `${this.state.startMon} ${this.state.startYr}`
     });
   }
 
   setEndTime() {
-    if (!this.state.startMon || !this.state.startYr) throw "Month/Year required";
     if (this.state.current_role) {
       this.setState({
         end_date: "Present"
@@ -74,12 +67,12 @@ class EditExperienceForm extends React.Component {
     } else {
       return (
         <div>
-          <select onChange={this.update("endMon")} defaultValue={this.endMon}>
-            <option value="">Month</option>
+          <select onChange={this.update("endMon")}>
+            <option>Month</option>
             {this.createOptions(months)}
           </select>
-          <select onChange={this.update("endYr")} defaultValue={this.endYr}>
-            <option value="">Year</option>
+          <select onChange={this.update("endYr")}>
+            <option>Year</option>
             {this.createOptions(years)}
           </select>
         </div>
@@ -93,8 +86,9 @@ class EditExperienceForm extends React.Component {
     } else {
       return (
         <div>
-          <label>Headline</label>
-          <input type="text" value={this.state.headline} onChange={this.update("headline")} />
+          <label>Headline
+            <input type="text" value={this.state.headline} onChange={this.update("headline")} />
+          </label>
         </div>
       )
     }
@@ -106,8 +100,10 @@ class EditExperienceForm extends React.Component {
     } else {
       return (
         <div>
-          <label>Industry*</label>
-          <input type="text" value={this.state.industry} onChange={this.update("industry")} />
+          <label>Industry*
+            <input type="text" value={this.state.industry} onChange={this.update("industry")} />
+          </label>
+          {this.industryErrors()}
         </div>
       )
     }
@@ -122,6 +118,90 @@ class EditExperienceForm extends React.Component {
     this.setEndTime();
   }
 
+  titleErrors() {
+    let titleErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Title")) {
+          titleErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {titleErrors}
+        </span>
+      );
+    }
+  }
+
+  companyErrors() {
+    let companyErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Company")) {
+          companyErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {companyErrors}
+        </span>
+      );
+    }
+  }
+
+  startDateErrors() {
+    let startDateErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Start")) {
+          startDateErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {startDateErrors}
+        </span>
+      );
+    }
+  }
+
+  endDateErrors() {
+    let endDateErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("End")) {
+          endDateErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {endDateErrors}
+        </span>
+      );
+    }
+  }
+
+  industryErrors() {
+    let industryErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Industry")) {
+          industryErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {industryErrors}
+        </span>
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.removeErrors();
+  }
+
   render() {
     return (
       <div>
@@ -132,41 +212,47 @@ class EditExperienceForm extends React.Component {
           </header>
 
           <div>
-            <label>Title*</label>
-            <input 
-              type="text" 
-              placeholder="Ex: Dwarven Blacksmith"
-              value={this.state.title} 
-              onChange={this.update("title")}
-            />
+            <label>Title*
+              <input 
+                type="text" 
+                placeholder="Ex: Dwarven Blacksmith"
+                value={this.state.title} 
+                onChange={this.update("title")}
+              />
+            </label>
+            {this.titleErrors()}
           </div>
 
           <div>
-            <label>Employment type</label>
-            <select value={this.state.employment_type} onChange={this.update("employment_type")}>
-              <option value="">Please select</option>
-              {this.createOptions(positions)}
-            </select>
+            <label>Employment
+              <select value={this.state.employment_type} onChange={this.update("employment_type")}>
+                <option>Please select</option>
+                {this.createOptions(positions)}
+              </select>
+            </label>
           </div>
 
           <div>
-            <label>Company name*</label>
-            <input 
-              placeholder="Ex: Fellowship of the Ring"
-              type="text" 
-              value={this.state.company} 
-              onChange={this.update("company")} 
-            />
+            <label>Company name*
+              <input 
+                placeholder="Ex: Fellowship of the Ring"
+                type="text" 
+                value={this.state.company} 
+                onChange={this.update("company")} 
+              />
+            </label>
+            {this.companyErrors()}
           </div>
 
           <div>
-            <label>Location</label>
-            <input 
-              placeholder="Ex: Rivendell"
-              type="text" 
-              value={this.state.location} 
-              onChange={this.update("location")} 
-            />
+            <label>Location
+              <input 
+                placeholder="Ex: Rivendell"
+                type="text" 
+                value={this.state.location} 
+                onChange={this.update("location")} 
+              />
+            </label>
           </div>
 
           <div>
@@ -175,22 +261,26 @@ class EditExperienceForm extends React.Component {
           </div>
 
           <div>
-            <label>Start date*</label>
-            <div>
-              <select onChange={this.update("startMon")} defaultValue={this.startMon}>
-                <option value="">Month</option>
-                {this.createOptions(months)}
-              </select>
-              <select onChange={this.update("startYr")} defaultValue={this.startYr}>
-                <option value="">Year</option>
-                {this.createOptions(years)}
-              </select>
-            </div>
+            <label>Start date*
+              <div>
+                <select onChange={this.update("startMon")}>
+                  <option>Month</option>
+                  {this.createOptions(months)}
+                </select>
+                <select onChange={this.update("startYr")}>
+                  <option>Year</option>
+                  {this.createOptions(years)}
+                </select>
+              </div>
+            </label>
+            {this.startDateErrors()}
           </div>
 
           <div>
-            <label>End date*</label>
-            {this.endDate()}
+            <label>End date*
+              {this.endDate()}
+            </label>
+            {this.endDateErrors()}
           </div>
 
           <div>
