@@ -5,13 +5,13 @@ import CreateExperienceFormContainer from '../profile/experience/create_experien
 import EditExperienceFormContainer from '../profile/experience/edit_experience_container';
 import EditProfileFormContainer from '../profile/edit_profile_container';
 
-function Modal({modal, closeModal}) {
-  if (!modal) {
+function Modal(props) {
+  if (!props.modal) {
     return null;
   }
   let component;
 
-  switch (modal) {
+  switch (props.modal) {
     case 'createExperience':
       component = <CreateExperienceFormContainer />;
       break;

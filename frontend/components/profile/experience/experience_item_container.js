@@ -4,17 +4,13 @@ import { fetchExperiences } from '../../../actions/experience_actions';
 import { openModal } from '../../../actions/modal_actions';
 import Experience from './experience_item.jsx';
 
-const mSTP = (state, ownProps) => ({
-  currentUser: state.entities.users[state.session.currentUser],
-});
+const mSTP = (state, ownProps) => {
+  return {currentUser: state.entities.users[state.session.currentUser],}
+};
 
 const mDTP = dispatch => ({
   fetchExperiences: () => dispatch(fetchExperiences()),
-  openEditExperienceModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('editExperience'))}>
-      Edit Experience
-    </button>
-  ),
+  openEditExperienceModal: (experience) => dispatch(openModal("editExperience", experience)),
 });
 
 export default connect(mSTP, mDTP)(Experience);

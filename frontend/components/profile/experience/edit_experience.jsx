@@ -8,9 +8,8 @@ class EditExperienceForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...this.props.experience
-    };
+    this.state = this.props.experience;
+    
     this.oldStartMon = this.props.experience.start_date.split(" ")[0];
     this.oldStartYr = this.props.experience.start_date.split(" ")[1];
     this.oldEndMon = this.oldEndMon ? this.props.experience.end_date.split(" ")[0] : "";
@@ -208,7 +207,7 @@ class EditExperienceForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.state)
+    console.log(this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
