@@ -2,7 +2,8 @@ import React from 'react';
 
 class Experience extends React.Component {
   render() {
-    const { experience } = this.props;
+    const { experience, key } = this.props;
+    console.log(key);
     return (
       <div>
         <div>

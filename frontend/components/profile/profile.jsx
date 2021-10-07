@@ -20,7 +20,7 @@ class Profile extends React.Component {
 
         <div>
          <h1>Experience</h1>
-         {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} />)}
+         {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
          {this.props.openCreateExperienceModal}
         </div>
 

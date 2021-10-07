@@ -12,6 +12,11 @@ class EditExperienceForm extends React.Component {
       ...this.props.experience
     };
 
+    this.startMon = this.props.experience.start_date.split(" ")[0];
+    this.startYr = this.props.experience.start_date.split(" ")[1];
+    this.endMon = this.props.experience.end_date.split(" ")[0];
+    this.endYr = this.props.experience.end_date.split(" ")[1];
+
     this.createOptions = this.createOptions.bind(this);
     this.flipRole = this.flipRole.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,11 +72,11 @@ class EditExperienceForm extends React.Component {
     } else {
       return (
         <div>
-          <select onChange={this.update("endMon")}>
+          <select onChange={this.update("endMon")} defaultValue={this.endMon}>
             <option>Month</option>
             {this.createOptions(months)}
           </select>
-          <select onChange={this.update("endYr")}>
+          <select onChange={this.update("endYr")} defaultValue={this.endYr}>
             <option>Year</option>
             {this.createOptions(years)}
           </select>
@@ -203,6 +208,7 @@ class EditExperienceForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.errors)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -263,11 +269,11 @@ class EditExperienceForm extends React.Component {
           <div>
             <label>Start date*
               <div>
-                <select onChange={this.update("startMon")}>
+                <select onChange={this.update("startMon")} defaultValue={this.startMon}>
                   <option>Month</option>
                   {this.createOptions(months)}
                 </select>
-                <select onChange={this.update("startYr")}>
+                <select onChange={this.update("startYr")} defaultValue={this.startYr}>
                   <option>Year</option>
                   {this.createOptions(years)}
                 </select>
