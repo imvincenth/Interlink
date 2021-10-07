@@ -9,7 +9,7 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { currentUser, fetchExperiences, fetchEducations } = this.props;
+    const { currentUser, experiences, fetchExperiences, fetchEducations } = this.props;
     return (
       <div>
         <Modal />
