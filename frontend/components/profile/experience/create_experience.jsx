@@ -17,8 +17,8 @@ class CreateExperienceForm extends React.Component {
       start_date: "",
       current_role: true,
       end_date: "Present",
-      industry: "",
-      headline: "",
+      headline: this.props.currentUser.headline, 
+      industry: this.props.experience.industry,
       description: ""
     };
 
@@ -98,7 +98,12 @@ class CreateExperienceForm extends React.Component {
 
           <div>
             <label>Title*</label>
-            <input type="text" value={this.state.title} onChange={this.update("title")} />
+            <input 
+              type="text" 
+              placeholder="Ex: Dwarven Blacksmith"
+              value={this.state.title} 
+              onChange={this.update("title")}
+            />
           </div>
 
           <div>
@@ -110,12 +115,22 @@ class CreateExperienceForm extends React.Component {
 
           <div>
             <label>Company name*</label>
-            <input type="text" value={this.state.company} onChange={this.update("company")} />
+            <input 
+              placeholder="Ex: Fellowship of the Ring"
+              type="text" 
+              value={this.state.company} 
+              onChange={this.update("company")} 
+            />
           </div>
 
           <div>
             <label>Location</label>
-            <input type="text" value={this.state.location} onChange={this.update("location")} />
+            <input 
+              placeholder="Ex: Rivendell"
+              type="text" 
+              value={this.state.location} 
+              onChange={this.update("location")} 
+            />
           </div>
 
           <div>

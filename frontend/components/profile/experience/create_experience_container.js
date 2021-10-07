@@ -5,6 +5,7 @@ import { closeModal } from '../../../actions/modal_actions';
 import CreateExperienceForm from './create_experience';
 
 const mSTP = state => ({
+  experience: state.entities.experiences[state.entities.users[state.session.id].id],
   currentUser: state.entities.users[state.session.id],
   formType: "Add experience"
 });

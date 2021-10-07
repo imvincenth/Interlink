@@ -4,7 +4,7 @@ import { createExperience } from '../../../actions/experience_actions';
 import CreateExperienceForm from './create_experience';
 
 const mSTP = state => ({
-  experience: state.entities.experiences[state.entities.users[state.session.currentUser].id],
+  experience: state.entities.experiences[state.entities.users[state.session.id].id],
   formType: "Add experience"
 });
 
