@@ -16,7 +16,7 @@ class CreateExperienceForm extends React.Component {
       location: "",
       start_date: "",
       current_role: true,
-      end_date: "Present",
+      end_date: "",
       headline: this.props.currentUser.headline, 
       industry: this.props.experience.industry,
       description: "",
@@ -33,6 +33,7 @@ class CreateExperienceForm extends React.Component {
 
     this.setStartTime = this.setStartTime.bind(this);
     this.setEndTime = this.setEndTime.bind(this);
+    this.setTimes = this.setTimes.bind(this);
   }
 
   createOptions(str) {
@@ -52,9 +53,6 @@ class CreateExperienceForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    this.setStartTime();
-    this.setEndTime();
 
     this.props.action({...this.state})
       .then(() => this.props.closeModal());
@@ -127,10 +125,19 @@ class CreateExperienceForm extends React.Component {
 
   }
 
+  setTimes() {
+    this.setStartTime();
+    this.setEndTime();
+  }
+
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+
+          <header>
+            <h2>{this.props.formType}</h2>
+          </header>
 
           <div>
             <label>Title*</label>
@@ -207,7 +214,7 @@ class CreateExperienceForm extends React.Component {
             <textarea value={this.state.description} onChange={this.update("description")}></textarea>
           </div>
 
-          <input type="submit" onSubmit={this.handleSubmit} value="Save" />
+          <input type="submit" onClick={this.setTimes} onSubmit={this.handleSubmit} value="Save" />
         </form>
       </div>
     )

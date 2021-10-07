@@ -5,7 +5,7 @@ import CreateExperienceForm from './create_experience';
 
 const mSTP = state => ({
   experience: state.entities.experiences[state.entities.users[state.session.id].id],
-  formType: "Add experience"
+  formType: "Edit experience"
 });
 
 const mDTP = dispatch => ({
