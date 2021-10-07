@@ -129,6 +129,7 @@ class CreateExperienceForm extends React.Component {
   }
 
   setTimes() {
+    if (this.state.start_date === "Month" || this.state.end_date === "Year") throw "Start and end dates are required";
     this.setStartTime();
     this.setEndTime();
   }

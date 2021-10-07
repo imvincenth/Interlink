@@ -8,17 +8,19 @@ class EditExperienceForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = this.props.experience;
+    this.state = {
+      ...this.props.experience,
+
+      startMon: "",
+      startYr: "",
+      endMon: "",
+      endYr: ""
+    };
 
     this.oldStartMon = this.props.experience.start_date.split(" ")[0];
     this.oldStartYr = this.props.experience.start_date.split(" ")[1];
     this.oldEndMon = this.oldEndMon ? this.props.experience.end_date.split(" ")[0] : "";
     this.oldEndYr = this.oldEndYr ? this.props.experience.end_date.split(" ")[1] : "";
-
-    this.startMon;
-    this.startYr;
-    this.endMon;
-    this.endYr;
 
     this.createOptions = this.createOptions.bind(this);
     this.flipRole = this.flipRole.bind(this);
@@ -52,12 +54,14 @@ class EditExperienceForm extends React.Component {
   }
 
   setStartTime() {
+    if (!this.state.start_date) return this.setState({ start_date: `${this.props.experience.start_date}` })
     this.setState({ 
       start_date: `${this.state.startMon} ${this.state.startYr}`
     });
   }
 
   setEndTime() {
+    if (!this.state.end_date) return this.setState({ end_date: `${this.props.experience.end_date}` })
     if (this.state.current_role) {
       this.setState({
         end_date: "Present"
@@ -118,8 +122,13 @@ class EditExperienceForm extends React.Component {
   }
 
   setTimes() {
-    this.setStartTime();
-    this.setEndTime();
+    if (this.state.start_date === "Month" || this.state.end_date === "Year") throw "Start and end dates are required";
+    if (!this.state.start_date || !this.state.end_date) {
+      this.setStartTime();
+      this.setEndTime();
+    } else {
+      return null;
+    }
   }
 
   titleErrors() {
