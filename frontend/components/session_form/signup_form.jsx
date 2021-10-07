@@ -283,7 +283,7 @@ class SignupForm extends React.Component {
           pageFourErrors.push(error);
         }
       })
-      return(
+      return (
         <span className="error">
           {pageFourErrors}
         </span>
