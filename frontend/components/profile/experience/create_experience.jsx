@@ -29,7 +29,7 @@ class CreateExperienceForm extends React.Component {
 
   createOptions(str) {
     let options = str.split(",");
-    return options.map(option => <select key={option.id} value={option}>{option}</select>);
+    return options.map((option, i) => <option key={i} value={option}>{option}</option>)
   }
 
   flipRole(e) {
@@ -37,10 +37,59 @@ class CreateExperienceForm extends React.Component {
     this.setState({ current_role: !this.state.current_role });
   }
 
+  update(field) {
+    return e => {
+      this.setState({[field]: e.currentTarget.value});
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    this.props.action(...this.state);
+    this.props.action({...this.state});
     this.props.closeModal();
+  }
+
+  endDate() {
+    if (this.state.current_role) {
+      return null;
+    } else {
+      return (
+        <div>
+          <select value={this.state.end_date} onChange={this.update("end_date")}>
+            {this.createOptions(months)}
+          </select>
+          <select value={this.state.end_date} onChange={this.update("end_date")}>
+            {this.createOptions(years)}
+          </select>
+        </div>
+      )
+    }
+  }
+
+  headline() {
+    if (!this.state.current_role) {
+      return null;
+    } else {
+      return (
+        <div>
+          <label>Headline</label>
+          <input type="text" value={this.state.headline} onChange={this.update("headline")} />
+        </div>
+      )
+    }
+  }
+
+  industry() {
+    if (!this.state.current_role) {
+      return null;
+    } else {
+      return (
+        <div>
+          <label>Industry*</label>
+          <input type="text" value={this.state.industry} onChange={this.update("industry")} />
+        </div>
+      )
+    }
   }
 
   render() {
@@ -50,42 +99,62 @@ class CreateExperienceForm extends React.Component {
 
           <div>
             <label>Title*</label>
-            {/* <input type="text" value={this.state.title} onChange={this.forceUpdate("title")} /> */}
+            <input type="text" value={this.state.title} onChange={this.update("title")} />
           </div>
 
           <div>
             <label>Employment</label>
-            {/* <select onChange={this.forceUpdate("employment_type")}></select> */}
+            <select value={this.state.employment_type} onChange={this.update("employment_type")}>
+              {this.createOptions(positions)}
+            </select>
           </div>
 
           <div>
             <label>Company name*</label>
+            <input type="text" value={this.state.company} onChange={this.update("company")} />
           </div>
 
           <div>
             <label>Location</label>
+            <input type="text" value={this.state.location} onChange={this.update("location")} />
+          </div>
+
+          <div>
+            <input type="checkbox" onChange={this.flipRole} />
+            <label>I am currently working in this role</label>
           </div>
 
           <div>
             <label>Start date*</label>
+            <div>
+              <select value={this.state.start_date} onChange={this.update("start_date")}>
+                {this.createOptions(months)}
+              </select>
+              <select value={this.state.start_date} onChange={this.update("start_date")}>
+                {this.createOptions(years)}
+              </select>
+            </div>
           </div>
 
           <div>
             <label>End date*</label>
+            {this.endDate()}
           </div>
 
           <div>
-            <label>Headline</label>
+            {this.headline()}
           </div>
 
           <div>
-            <label>Industry</label>
+            {this.industry()}
           </div>
 
           <div>
             <label>Description</label>
+            <textarea value={this.state.description} onChange={this.update("description")}></textarea>
           </div>
 
+          <input type="submit" onSubmit={this.handleSubmit} value="Save" />
         </form>
       </div>
     )
