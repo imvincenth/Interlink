@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createExperience } from '../../../util/experience_api_util';
+import { createExperience } from '../../../actions/experience_actions';
 import CreateExperienceForm from './create_experience';
 
 const mSTP = state => ({
-  currentUser: state.entities.users[state.session.id],
+  experience: state.entities.experiences[state.entities.users[state.session.currentUser].id],
   formType: "Add experience"
 });
 
 const mDTP = dispatch => ({
-  action: experience => dispatch(createExperience(experience)),
+  action: experience => dispatch(editExperience(experience)),
   closeModal: () => dispatch(closeModal())
 });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createExperience } from '../../../util/experience_api_util';
+import { createExperience } from '../../../actions/experience_actions';
 import { closeModal } from '../../../actions/modal_actions';
 import CreateExperienceForm from './create_experience';
 
