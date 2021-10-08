@@ -46,7 +46,7 @@ class SessionForm extends React.Component {
   }
   
   render() {
-    if (!this.props.errors) {
+    if (this.props.errors) {
       this.props.errors.forEach(error => {
         if (error.includes("First") || error.includes("Last") || error.includes("Country") || error.includes("City") || error.includes("Headline")) {
           this.refreshPage();
