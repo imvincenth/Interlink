@@ -25,11 +25,10 @@ class Profile extends React.Component {
             </div>
             <div className="profile-card-main">
               <div className="profile-info">
-                <h1>{currentUser.first_name} {currentUser.last_name}</h1>
-                <h2>{currentUser.headline}</h2>
-                <h2>{currentUser.city_district}, {currentUser.country_region}</h2>
-              </div>
-              <div className="profile-info-edit">
+                <h1 className="profile-name">{currentUser.first_name} {currentUser.last_name}</h1>
+                <br />
+                <h2 className="profile-headline">{currentUser.headline}</h2>
+                <h3 className="profile-location">{currentUser.city_district}, {currentUser.country_region}</h3>
                 {this.props.openEditProfileModal}
               </div>
             </div>
@@ -37,15 +36,17 @@ class Profile extends React.Component {
 
           <div className="stat-wrap">
             <div className="stat-wrap-header">
-              <h1>Experience</h1>
-              <div>
+              <h1 className="experience-header">Experience</h1>
+              <br />
+              <div className="experience-item">
                 {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
                 {this.props.openCreateExperienceModal}
               </div>
             </div>
 
             <div className="stat-wrap-tail">
-              <h1>Education</h1>
+              <h1 className="education-header">Education</h1>
+              <br />
               <div>
                 {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
                 {this.props.openCreateEducationModal}

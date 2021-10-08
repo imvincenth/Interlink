@@ -6,13 +6,15 @@ class Experience extends React.Component {
     const { experience, key } = this.props;
     return (
       <div>
-        <div> 
-          <h1>{experience.title}</h1>
+        <div className="experience-item-wrap">
+          <div className="experience-item-head">
+            <h1>{experience.title}</h1>
+            <button className="open-modal" onClick={() => this.props.openEditExperienceModal(experience)}>
+              <img src={window.vectorURL} alt="pen" />
+            </button>
+          </div>
           <h2>{experience.company} {experience.employment_type}</h2>
           <h2>{experience.start_date} - {experience.end_date}
-          <button className="open-modal" onClick={() => this.props.openEditExperienceModal(experience)}>
-            <img src={window.vectorURL} alt="pen" />
-          </button>
           </h2>
         </div>
       </div>
