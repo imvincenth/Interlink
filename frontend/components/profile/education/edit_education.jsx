@@ -69,19 +69,19 @@ class EditEducationForm extends React.Component {
   }
 
   schoolErrors() {
-    // let schoolErrors = [];
-    // if (this.props.errors.length !== 0) {
-    //   this.props.errors.forEach(error => {
-    //     if (error.includes("School")) {
-    //       schoolErrors.push(error);
-    //     }
-    //   })
-    //   return (
-    //     <span className="error">
-    //       {schoolErrors}
-    //     </span>
-    //   );
-    // }
+    let schoolErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("School")) {
+          schoolErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {schoolErrors}
+        </span>
+      );
+    }
   }
 
   componentWillUnmount() {

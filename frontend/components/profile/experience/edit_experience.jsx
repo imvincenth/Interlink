@@ -132,83 +132,83 @@ class EditExperienceForm extends React.Component {
   }
 
   titleErrors() {
-    // let titleErrors = [];
-    // if (this.props.errors.length !== 0) {
-    //   this.props.errors.forEach(error => {
-    //     if (error.includes("Title")) {
-    //       titleErrors.push(error);
-    //     }
-    //   })
-    //   return (
-    //     <span className="error">
-    //       {titleErrors}
-    //     </span>
-    //   );
-    // }
+    let titleErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Title")) {
+          titleErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {titleErrors}
+        </span>
+      );
+    }
   }
 
   companyErrors() {
-    // let companyErrors = [];
-    // if (this.props.errors.length !== 0) {
-    //   this.props.errors.forEach(error => {
-    //     if (error.includes("Company")) {
-    //       companyErrors.push(error);
-    //     }
-    //   })
-    //   return (
-    //     <span className="error">
-    //       {companyErrors}
-    //     </span>
-    //   );
-    // }
+    let companyErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Company")) {
+          companyErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {companyErrors}
+        </span>
+      );
+    }
   }
 
   startDateErrors() {
-    // let startDateErrors = [];
-    // if (this.props.errors.length !== 0) {
-    //   this.props.errors.forEach(error => {
-    //     if (error.includes("Start")) {
-    //       startDateErrors.push(error);
-    //     }
-    //   })
-    //   return (
-    //     <span className="error">
-    //       {startDateErrors}
-    //     </span>
-    //   );
-    // }
+    let startDateErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Start")) {
+          startDateErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {startDateErrors}
+        </span>
+      );
+    }
   }
 
   endDateErrors() {
-    // let endDateErrors = [];
-    // if (this.props.errors.length !== 0) {
-    //   this.props.errors.forEach(error => {
-    //     if (error.includes("End")) {
-    //       endDateErrors.push(error);
-    //     }
-    //   })
-    //   return (
-    //     <span className="error">
-    //       {endDateErrors}
-    //     </span>
-    //   );
-    // }
+    let endDateErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("End")) {
+          endDateErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {endDateErrors}
+        </span>
+      );
+    }
   }
 
   industryErrors() {
-    // let industryErrors = [];
-    // if (this.props.errors.length !== 0) {
-    //   this.props.errors.forEach(error => {
-    //     if (error.includes("Industry")) {
-    //       industryErrors.push(error);
-    //     }
-    //   })
-    //   return (
-    //     <span className="error">
-    //       {industryErrors}
-    //     </span>
-    //   );
-    // }
+    let industryErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Industry")) {
+          industryErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {industryErrors}
+        </span>
+      );
+    }
   }
 
   componentWillUnmount() {
