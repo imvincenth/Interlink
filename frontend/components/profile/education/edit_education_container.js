@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { updateEducation, deleteEducation } from '../../../actions/education_actions';
 import { closeModal } from '../../../actions/modal_actions';
 import { removeErrors } from '../../../actions/education_actions';
-import EditEducationForm from './edit_Education';
+import EditEducationForm from './edit_education';
 
 const mSTP = (state, ownProps) => {
   return {education: state.ui.modalParamsReducer,

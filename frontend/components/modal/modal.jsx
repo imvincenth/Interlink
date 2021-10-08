@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CreateExperienceFormContainer from '../profile/experience/create_experience_container';
 import EditExperienceFormContainer from '../profile/experience/edit_experience_container';
 import CreateEducationFormContainer from '../profile/education/create_education_container';
+import EditEducationFormContainer from '../profile/education/edit_education_container';
 import EditProfileFormContainer from '../profile/edit_profile_container';
 
 function Modal(props) {
@@ -22,8 +23,8 @@ function Modal(props) {
     case 'createEducation':
       component = <CreateEducationFormContainer />;
       break;
-    case 'editExperience':
-      component = <EditEducationForm />
+    case 'editEducation':
+      component = <EditEducationFormContainer />
       break;
     case 'editProfile':
       component = <EditProfileFormContainer />

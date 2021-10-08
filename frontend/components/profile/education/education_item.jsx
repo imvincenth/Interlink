@@ -10,7 +10,7 @@ class Education extends React.Component {
         
           <h1>{education.school}</h1>
           <h2>{education.degree} {education.subject}</h2>
-          <h2>{education.start_date} - {education.end_date}
+          <h2>{education.start_date.split(" ")[1]} - {education.end_date.split(" ")[1]}
             <button className="open-modal" onClick={() => this.props.openEditEducationModal(education)}>
               Edit education
             </button>
