@@ -1,6 +1,6 @@
 import { 
   RECEIVE_EDUCATION_ERRORS,
-  REMOVE_EDUCATION_ERRORS,
+  REMOVE_EDUCATION,
   REMOVE_ERRORS
 } from "../actions/education_actions"
 
@@ -11,7 +11,7 @@ const EducationErrorsReducer = (oldState = [], action) => {
     case RECEIVE_EDUCATION_ERRORS:
       return action.errors
 
-    case REMOVE_EDUCATION_ERRORS:
+    case REMOVE_EDUCATION:
       return []
 
     case REMOVE_ERRORS:

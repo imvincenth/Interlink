@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '../modal/modal';
-
+import Navbar from '../feed/navbar/navbar';
 import ExperienceItemContainer from './experience/experience_item_container';
 import EducationItemContainer from './education/education_item_container';
 
@@ -15,6 +15,8 @@ class Profile extends React.Component {
     return (
       <div>
         <Modal />
+        <Navbar />
+
         <div className="profile-picture"></div>
         <h1>{currentUser.first_name} {currentUser.last_name}</h1>
         <h2>{currentUser.headline} {this.props.openEditProfileModal}</h2>

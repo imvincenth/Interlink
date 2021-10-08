@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect }  from 'react-redux';
-import { fetchEducation } from '../../../actions/education_actions';
+import { fetchEducations } from '../../../actions/education_actions';
 import { openModal } from '../../../actions/modal_actions';
 import Education from './education_item.jsx';
 
@@ -9,7 +9,7 @@ const mSTP = (state, ownProps) => {
 };
 
 const mDTP = dispatch => ({
-  fetchEducation: () => dispatch(fetchEducation()),
+  fetchEducations: () => dispatch(fetchEducations()),
   openEditEducationModal: (education) => dispatch(openModal("editEducation", education)),
 });
 
