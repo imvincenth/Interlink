@@ -183,113 +183,113 @@ class SignupForm extends React.Component {
     this.props.processForm(user)
   }
 
-  renderEmailError() {
-    let pageOneErrors = [];
-    this.props.errors.forEach(error => {
-      if (error.includes("Email")) {
-        pageOneErrors.push(error);
-      }
-    })
-    return(
-      <span className="error">
-        {pageOneErrors}
-      </span>
-    );
-  }
+  // renderEmailError() {
+  //   let pageOneErrors = [];
+  //   this.props.errors.forEach(error => {
+  //     if (error.includes("Email")) {
+  //       pageOneErrors.push(error);
+  //     }
+  //   })
+  //   return(
+  //     <span className="error">
+  //       {pageOneErrors}
+  //     </span>
+  //   );
+  // }
 
-  renderPasswordError() {
-    let pageOneErrors = [];
-    this.props.errors.forEach(error => {
-      if (error.includes("Password")) {
-        pageOneErrors.push(error);
-      }
-    })
-    return(
-      <span className="error">
-        {pageOneErrors}
-      </span>
-    );
-  }
+  // renderPasswordError() {
+  //   let pageOneErrors = [];
+  //   this.props.errors.forEach(error => {
+  //     if (error.includes("Password")) {
+  //       pageOneErrors.push(error);
+  //     }
+  //   })
+  //   return(
+  //     <span className="error">
+  //       {pageOneErrors}
+  //     </span>
+  //   );
+  // }
 
-  renderFirstNameError() {
-    let pageTwoErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("First")) {
-          pageTwoErrors.push(error);
-        }
-      })
-      return(
-        <span className="error">
-          {pageTwoErrors}
-        </span>
-      );
-    }
-  }
+  // renderFirstNameError() {
+  //   let pageTwoErrors = [];
+  //   if (this.props.errors.length !== 0) {
+  //     this.props.errors.forEach(error => {
+  //       if (error.includes("First")) {
+  //         pageTwoErrors.push(error);
+  //       }
+  //     })
+  //     return(
+  //       <span className="error">
+  //         {pageTwoErrors}
+  //       </span>
+  //     );
+  //   }
+  // }
 
-  renderLastNameError() {
-    let pageTwoErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("Last")) {
-          pageTwoErrors.push(error);
-        }
-      })
-      return(
-        <span className="error">
-          {pageTwoErrors}
-        </span>
-      );
-    }
-  }
+  // renderLastNameError() {
+  //   let pageTwoErrors = [];
+  //   if (this.props.errors.length !== 0) {
+  //     this.props.errors.forEach(error => {
+  //       if (error.includes("Last")) {
+  //         pageTwoErrors.push(error);
+  //       }
+  //     })
+  //     return(
+  //       <span className="error">
+  //         {pageTwoErrors}
+  //       </span>
+  //     );
+  //   }
+  // }
 
-  renderCountryRegionError() {
-    let pageThreeErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("Country")) {
-          pageThreeErrors.push(error);
-        }
-      })
-      return(
-        <span className="error">
-          {pageThreeErrors}
-        </span>
-      );
-    }
-  }
+  // renderCountryRegionError() {
+  //   let pageThreeErrors = [];
+  //   if (this.props.errors.length !== 0) {
+  //     this.props.errors.forEach(error => {
+  //       if (error.includes("Country")) {
+  //         pageThreeErrors.push(error);
+  //       }
+  //     })
+  //     return(
+  //       <span className="error">
+  //         {pageThreeErrors}
+  //       </span>
+  //     );
+  //   }
+  // }
 
-  renderCityDistrictError() {
-    let pageThreeErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("City")) {
-          pageThreeErrors.push(error);
-        }
-      })
-      return(
-        <span className="error">
-          {pageThreeErrors}
-        </span>
-      );
-    }
-  }
+  // renderCityDistrictError() {
+  //   let pageThreeErrors = [];
+  //   if (this.props.errors.length !== 0) {
+  //     this.props.errors.forEach(error => {
+  //       if (error.includes("City")) {
+  //         pageThreeErrors.push(error);
+  //       }
+  //     })
+  //     return(
+  //       <span className="error">
+  //         {pageThreeErrors}
+  //       </span>
+  //     );
+  //   }
+  // }
 
-  renderHeadlineError() {
-    let pageFourErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
-        if (error.includes("Headline")) {
-          pageFourErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {pageFourErrors}
-        </span>
-      );
-    }
-  }
+  // renderHeadlineError() {
+  //   let pageFourErrors = [];
+  //   if (this.props.errors.length !== 0) {
+  //     this.props.errors.forEach(error => {
+  //       if (error.includes("Headline")) {
+  //         pageFourErrors.push(error);
+  //       }
+  //     })
+  //     return (
+  //       <span className="error">
+  //         {pageFourErrors}
+  //       </span>
+  //     );
+  //   }
+  // }
 
   pageCheck() {
     if (this.props.errors.length === 7 || this.props.errors.length === 6 || this.props.errors.length === 0) {
@@ -322,11 +322,11 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    this.props.errors.forEach(error => {
-      if (error.includes("You shall not pass")) {
-        this.refreshPage();
-      }
-    })
+    // this.props.errors.forEach(error => {
+    //   if (error.includes("You shall not pass")) {
+    //     this.refreshPage();
+    //   }
+    // })
     return (
       <div className="signup-form">
 
