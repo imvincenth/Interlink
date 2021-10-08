@@ -6,8 +6,7 @@ class Experience extends React.Component {
     const { experience, key } = this.props;
     return (
       <div>
-        <div>
-        
+        <div> 
           <h1>{experience.title}</h1>
           <h2>{experience.company} {experience.employment_type}</h2>
           <h2>{experience.start_date} - {experience.end_date}

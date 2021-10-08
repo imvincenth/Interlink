@@ -50,7 +50,7 @@ class SessionForm extends React.Component {
       if (error.includes("First") || error.includes("Last") || error.includes("Country") || error.includes("City") || error.includes("Headline")) {
         this.refreshPage();
       }
-    })
+    });
     return (
       <div className="session-form">
 
