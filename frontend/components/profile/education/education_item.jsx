@@ -11,7 +11,7 @@ class Education extends React.Component {
           <h2>{education.degree} {education.subject}</h2>
           <h2>{education.start_date.split(" ")[1]} - {education.end_date.split(" ")[1]}
             <button className="open-modal" onClick={() => this.props.openEditEducationModal(education)}>
-              Edit education
+              <img src={window.vectorURL} alt="pen" />
             </button>
           </h2>
         </div>

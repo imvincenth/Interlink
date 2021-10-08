@@ -11,7 +11,7 @@ class Experience extends React.Component {
           <h2>{experience.company} {experience.employment_type}</h2>
           <h2>{experience.start_date} - {experience.end_date}
           <button className="open-modal" onClick={() => this.props.openEditExperienceModal(experience)}>
-            Edit Experience
+            <img src={window.vectorURL} alt="pen" />
           </button>
           </h2>
         </div>

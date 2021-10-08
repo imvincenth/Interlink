@@ -27,19 +27,21 @@ class Profile extends React.Component {
           <h2>{currentUser.city_district}, {currentUser.country_region}</h2>
         </div>
 
-        <div>
-          <h1>Experience</h1>
-          <div>
-            {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
-            {this.props.openCreateExperienceModal}
+        <div className="stat-wrap">
+          <div className="stat-wrap-header">
+            <h1>Experience</h1>
+            <div>
+              {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
+              {this.props.openCreateExperienceModal}
+            </div>
           </div>
-        </div>
 
-        <div>
-          <h1>Education</h1>
-          <div>
-            {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
-            {this.props.openCreateEducationModal}
+          <div className="stat-wrap-tail">
+            <h1>Education</h1>
+            <div>
+              {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
+              {this.props.openCreateEducationModal}
+            </div>
           </div>
         </div>
 
