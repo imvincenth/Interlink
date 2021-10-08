@@ -322,11 +322,11 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    this.props.errors.forEach(error => {
-      if (error.includes("You shall not pass")) {
-        this.refreshPage();
-      }
-    })
+    // this.props.errors.forEach(error => {
+    //   if (error.includes("You shall not pass")) {
+    //     this.refreshPage();
+    //   }
+    // })
     return (
       <div className="signup-form">
 
