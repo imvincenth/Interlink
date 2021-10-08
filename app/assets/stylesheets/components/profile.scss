@@ -1,9 +1,26 @@
 .profile-container {
-  border-radius: 10px;
-  height: fit-content;
+  background-color: #F3F2EF;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 144px;
   max-width: 782px;
-  min-width: 396px;
-  flex: 80%;
+  padding-left: 24px;
+  margin-right: 24px;
+}
+
+.profile-card-main {
+  display: flex;
+  justify-content: space-between;
 }
 
 .profile-avatar {
@@ -27,7 +44,6 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: white;
-  padding-bottom: 10px;
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
@@ -44,4 +60,27 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
+}
+
+.profile-info {
+  padding: 6px 12px 6px 12px;
+}
+
+.stat-wrap-header {
+  padding: 6px 12px 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top: 0;
+  background-color: white;
+}
+
+.stat-wrap-tail {
+  padding: 6px 12px 6px 12px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: 0;
+  background-color: white;
 }

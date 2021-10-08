@@ -16,17 +16,17 @@ const mDTP = dispatch => ({
   fetchEducations: () => dispatch(fetchEducations()),
   openEditProfileModal: (
     <button className="open-modal" onClick={() => dispatch(openModal('editProfile'))}>
-      Edit Profile
+      <img src={window.vectorURL} />
     </button>
   ),
   openCreateExperienceModal: (
     <button className="open-modal" onClick={() => dispatch(openModal('createExperience'))}>
-      Add Experience
+      <img src={window.plusURL} />
     </button>
   ),
   openCreateEducationModal: (
     <button className="open-modal" onClick={() => dispatch(openModal('createEducation'))}>
-      Add Education
+      <img src={window.plusURL} />
     </button>
   ),
 });
