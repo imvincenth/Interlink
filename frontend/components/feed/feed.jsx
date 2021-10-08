@@ -35,7 +35,7 @@ class Feed extends React.Component {
           </div>
         </div>
         
-        <button className="header-button" onClick={logout}>Log Out</button>
+        
       </div>
     )
   }

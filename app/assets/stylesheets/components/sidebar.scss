@@ -6,6 +6,7 @@
   max-width: 225px;
   min-width: 203px;
   flex: 20%;
+  padding-left: 24px;
 }
 
 .sidebar-header > img {
@@ -15,16 +16,26 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   object-fit: cover;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  // display: inline-block;
+  margin-bottom: 10px;
 }
 
 .sidebar-avatar {
-  height: 68px;
-  width: 68px;
-  background-color: black;
+  flex: 1;
+  padding: 10px;
+  margin: -60px;
+  margin-bottom: 15px;
+  height: 70px;
+  width: 70px;
+}
+
+.sidebar-avatar > img {
+  width: 100%;
   border-radius: 50%;
   border: 2px solid white;
-  display: inline-block;
-  margin-bottom: 10px;
 }
 
 .sidebar-header {
@@ -41,6 +52,7 @@
 .sidebar-name {
   font-size: 16px;
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .sidebar-email {

@@ -9,7 +9,9 @@ class Sidebar extends React.Component {
         
         <div className="sidebar-header">
           <img src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" alt="sidebar banner" />
-          <div className="sidebar-avatar"></div>
+          <div className="sidebar-avatar">
+            <img src={window.gandalfURL} alt="gandalf smiling" />
+          </div>
           <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
           <h4 className="sidebar-email">{this.props.currentUser.headline}</h4>
         </div>
@@ -34,6 +36,7 @@ class Sidebar extends React.Component {
             <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=mJZZNHekEQw" target="_blank">Balrog</a></p>
             <p className="sidebar-tail-last-item"><a href="https://www.youtube.com/watch?v=EOA1wBw_Jt4" target="_blank">Rohan</a></p>
           </div>
+          <button className="header-button" onClick={this.props.logout}>Log Out</button>
         </div>
 
       </div>

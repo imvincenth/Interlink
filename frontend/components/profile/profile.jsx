@@ -13,12 +13,15 @@ class Profile extends React.Component {
   render() {
     const { currentUser, experiences, fetchExperiences, fetchEducations } = this.props;
     return (
-      <div>
+      <div className="profile-container">
         <Modal />
         <Navbar />
 
         <div className="profile-card">
-          <div className="profile-avatar"></div>
+        <img src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" alt="sidebar banner" />
+          <div className="profile-avatar">
+            <img src={window.gandalfURL} alt="gandalf smiling" />
+          </div>
           <h1>{currentUser.first_name} {currentUser.last_name}</h1>
           <h2>{currentUser.headline} {this.props.openEditProfileModal}</h2>
           <h2>{currentUser.city_district}, {currentUser.country_region}</h2>

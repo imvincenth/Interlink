@@ -1,9 +1,36 @@
+.profile-container {
+  border-radius: 10px;
+  height: fit-content;
+  max-width: 782px;
+  min-width: 396px;
+  flex: 80%;
+}
+
 .profile-avatar {
+  flex: 1;
+  padding: 10px;
   height: 150px;
   width: 150px;
-  background-color: black;
-  border-radius: 50%;
-  border: 2px solid white;
-  display: inline-block;
   margin-bottom: 10px;
 }
+
+.profile-avatar > img {
+  width: 100%;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.profile-card {
+  align-items: flex-start;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
