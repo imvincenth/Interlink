@@ -84,8 +84,19 @@ class EditEducationForm extends React.Component {
     }
   }
 
+  noChangeCheck() {
+    if (!this.state.startMon) this.setState({ startMon: this.oldStartMon });
+    if (!this.state.startYr) this.setState({ startYr: this.oldStartYr });
+    if (!this.state.endMon) this.setState({ endMon: this.oldEndMon });
+    if (!this.state.endYr) this.setState({ endYr: this.oldEndYr });
+  }
+
   componentWillUnmount() {
     this.props.removeErrors();
+  }
+
+  componentDidMount() {
+    this.noChangeCheck()
   }
 
   render() {

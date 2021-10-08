@@ -18,6 +18,8 @@ class Feed extends React.Component {
 
             <div className="feed">
 
+              <h1>UNDER CONSTRUCTION NOTHING TO SEE HERE MOVE ALONG FOLKS</h1>
+
               <div className="feed-input-container">
                 <div className="feed-input">
                   <img src={window.quillURL} alt="quill" />
