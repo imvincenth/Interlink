@@ -45,6 +45,8 @@ a {
 
 .error {
   color: #d11124;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .input_error {
@@ -53,4 +55,3 @@ a {
 
 // Components
 @import "components/*";
-

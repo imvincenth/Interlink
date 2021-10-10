@@ -39,7 +39,7 @@ class SignupForm extends React.Component {
   pageOne() {
     return (
       <div className="signup-form-container">
-        <label>Email
+        <label className="signup-label">Email
           <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
@@ -48,9 +48,10 @@ class SignupForm extends React.Component {
           />
           {this.renderEmailError()}
         </label>
+        <br />
 
         <br />
-        <label>Password (6 of more characters)
+        <label className="signup-label">Password (6 of more characters)
           <input type="password"
             value={this.state.password}
             onChange={this.update('password')}
@@ -77,7 +78,7 @@ class SignupForm extends React.Component {
   pageTwo() {
     return (
       <div className="signup-form-container">
-        <label>First name
+        <label className="signup-label">First name
           <input type="text"
             value={this.state.first_name}
             onChange={this.update('first_name')}
@@ -89,7 +90,7 @@ class SignupForm extends React.Component {
         {this.checkErrors === 0 ? "" : this.renderFirstNameError()}
         <br />
   
-        <label>Last name
+        <label className="signup-label">Last name
           <input type="text"
             value={this.state.last_name}
             onChange={this.update('last_name')}
@@ -113,9 +114,9 @@ class SignupForm extends React.Component {
   pageThree() {
     return (
       <div className="signup-form-container">
-        <h1>Welcome {this.state.first_name}</h1>
+        <h1 className="signup-label">Welcome {this.state.first_name}</h1>
 
-        <label>Country/Region *
+        <label className="signup-label">Country/Region *
           <input type="text"
             value={this.state.country_region}
             onChange={this.update('country_region')}
@@ -127,7 +128,7 @@ class SignupForm extends React.Component {
         {this.checkErrors === 1 ? "" : this.renderCountryRegionError()}
         <br />
   
-        <label>City/District *
+        <label className="signup-label">City/District *
           <input type="text"
             value={this.state.city_district}
             onChange={this.update('city_district')}
@@ -151,9 +152,9 @@ class SignupForm extends React.Component {
   pageFour() {
     return (
       <div className="signup-form-container">
-        <h1>Welcome {this.state.first_name}</h1>
+        <h1 className="signup-label">Welcome {this.state.first_name}</h1>
 
-        <label>What is your most current job title? *
+        <label className="signup-label">What is your most current job title? *
           <input type="text"
             value={this.state.headline}
             onChange={this.update('headline')}
