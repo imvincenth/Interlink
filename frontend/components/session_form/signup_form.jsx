@@ -73,6 +73,7 @@ class SignupForm extends React.Component {
 
   changeBoxTwo() {
     document.getElementsByClassName("signup-form-box")[0].classList.add("box-two");
+    
   }
 
   pageTwo() {
