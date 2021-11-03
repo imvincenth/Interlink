@@ -95,7 +95,11 @@ class SessionForm extends React.Component {
             <input className="demo-session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
 
           </div>
-          <p className="signup-redirect">New to RingIn?<Link className="redirect-link" to="/signup" >Join Now</Link></p>
+          
+          <div>
+            <p className="signup-redirect">New to RingIn?<Link className="redirect-link" to="/signup" >Join Now</Link></p>
+          </div>
+
         </form>
       </div>
     );
