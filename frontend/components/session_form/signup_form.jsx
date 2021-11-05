@@ -337,7 +337,7 @@ class SignupForm extends React.Component {
           <p className="signup-quote">Make the most of your professional life</p>
         </header>
 
-          <form onSubmit={this.handleSubmit} className="signup-form-box">
+          <form onSubmit={this.handleSubmit} className={this.state.visiblePage === 2 ? "signup-form-box signup-form-box-two" : "signup-form-box"}>
 
             <div>
               {this.visibleCheck()}
