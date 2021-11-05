@@ -44,7 +44,6 @@ class SignupForm extends React.Component {
             value={this.state.email}
             onChange={this.update('email')}
             className="signup-input"
-            autoFocus
           />
           {this.renderEmailError()}
         </label>
@@ -114,34 +113,39 @@ class SignupForm extends React.Component {
 
   pageThree() {
     return (
-      <div className="signup-form-container">
-        <h1 className="signup-label">Welcome {this.state.first_name}</h1>
+      <div className="signup-form-container-three">
+        <header>
+          <h1 className="signup-greeting">Welcome, {this.state.first_name}!</h1>
+          <p className="signup-message">Let’s start your profile, connect to people you know, and engage with them on topics you care about.</p>
+        </header>
 
-        <label className="signup-label">Country/Region *
-          <input type="text"
-            value={this.state.country_region}
-            onChange={this.update('country_region')}
-            className="signup-input"
-          />
-        </label>
-  
-        <br />
-        {this.checkErrors === 1 ? "" : this.renderCountryRegionError()}
-        <br />
-  
-        <label className="signup-label">City/District *
-          <input type="text"
-            value={this.state.city_district}
-            onChange={this.update('city_district')}
-            className="signup-input"
-          />
-        </label>
+        <div className="signup-form-box-three">
+          <label className="signup-label">Country/Region <span className="blue-star">*</span>
+            <input type="text"
+              value={this.state.country_region}
+              onChange={this.update('country_region')}
+              className="signup-input"
+            />
+          </label>
+    
+          <br />
+          {this.checkErrors === 1 ? "" : this.renderCountryRegionError()}
+          <br />
+    
+          <label className="signup-label">City/District <span className="blue-star">*</span>
+            <input type="text"
+              value={this.state.city_district}
+              onChange={this.update('city_district')}
+              className="signup-input"
+            />
+          </label>
 
-        <br />
-        {this.checkErrors === 1 ? "" : this.renderCityDistrictError()}
-        <br />
+          <br />
+          {this.checkErrors === 1 ? "" : this.renderCityDistrictError()}
+          <br />
 
-        <input className="signup-submit" type="submit" value={"Next"} onClick={this.checkErrorPlusTwo} />
+          <input className="signup-submit" type="submit" value={"Next"} onClick={this.checkErrorPlusTwo} />
+        </div>
       </div>
     )
   }
@@ -153,9 +157,9 @@ class SignupForm extends React.Component {
   pageFour() {
     return (
       <div className="signup-form-container">
-        <h1 className="signup-label">Welcome {this.state.first_name}</h1>
+        <h1 className="signup-greeting">Your profile helps you discover new people and opportunities</h1>
 
-        <label className="signup-label">What is your most current job title? *
+        <label className="signup-label">Most recent job title? <span className="blue-star">*</span>
           <input type="text"
             value={this.state.headline}
             onChange={this.update('headline')}
@@ -168,7 +172,7 @@ class SignupForm extends React.Component {
         <br />
 
 
-        <input className="signup-submit" type="submit" value={"Join"} />
+        <input className="signup-submit" type="submit" value={"Continue"} />
       </div>
     )
   }
@@ -323,6 +327,23 @@ class SignupForm extends React.Component {
     }
   }
 
+  headerOne() {
+    return (
+      <header className="signup-header">
+        <img className="header-logo" src={namelogoURL} alt="name logo" />
+        <p className="signup-quote">Make the most of your professional life</p>
+      </header>
+    )
+  }
+
+  headerTwo() {
+    return (
+      <header className="signup-header-two">
+        <img src={namelogoURL} className="signup-logo" alt="name logo" />
+      </header>
+    )
+  }
+
   render() {
     this.props.errors.forEach(error => {
       if (error.includes("You shall not pass")) {
@@ -330,20 +351,17 @@ class SignupForm extends React.Component {
       }
     })
     return (
-      <div className="signup-form">
+      <div className={this.state.visiblePage === 3 || this.state.visiblePage === 4 ? "signup-form-three" : "signup-form"}>
 
-        <header className="signup-header">
-          <img className="header-logo" src={namelogoURL} alt="name logo" />
-          <p className="signup-quote">Make the most of your professional life</p>
-        </header>
+        {this.state.visiblePage === 1 || this.state.visiblePage === 2 ? this.headerOne() : this.headerTwo() }
 
-          <form onSubmit={this.handleSubmit} className={this.state.visiblePage === 2 ? "signup-form-box signup-form-box-two" : "signup-form-box"}>
+        <form onSubmit={this.handleSubmit} className={this.state.visiblePage === 2 ? "signup-form-box signup-form-box-two" : "signup-form-box"}>
 
-            <div>
-              {this.visibleCheck()}
-            </div>
-            
-          </form>
+          <div>
+            {this.visibleCheck()}
+          </div>
+          
+        </form>
       </div>
     );
   }

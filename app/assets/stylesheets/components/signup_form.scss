@@ -12,6 +12,29 @@
   z-index: -1;
 }
 
+.signup-form-three {
+  overflow: scroll;
+  padding: 18px 26px;
+  font-size: 14px;
+  color: rgb(134, 134, 134);
+  background-color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.signup-logo {
+  display: relative;
+  width: 145px;
+  height: 26px;
+  @media (max-width: 768px) {
+    padding: 0 5px;
+  }
+}
+
 .signup-quote {
   font-size: 30px;
   color: black;
@@ -19,12 +42,44 @@
 }
 
 .signup-form-container {
-  align-items: center;
-  justify-content: space-around;
   // display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
+  align-items: center;
+}
+
+.signup-form-container-three {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signup-form-container-three header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+}
+
+.signup-greeting {
+  font-size: 22px;
+  color: black;
+  font-weight: 600;
+  line-height: 30px;
+  padding-bottom: 12px;
+  padding-top: 32px;
+}
+
+.signup-message {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  padding-bottom: 16px;
+  overflow-wrap: break-word;
+  text-align: center;
 }
 
 .signup-form-box {
@@ -59,6 +114,9 @@
   padding-left: 10px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.6);
+  transition-duration: 0.33s;
+  transition-property: border-color, box-shadow;
+  line-height: 20px;
 }
 
 .signup-input:focus {
@@ -115,6 +173,15 @@
   text-align: center;
 }
 
+.signup-header-two {
+  width: 1128px;
+  display: flex;
+  align-items: bottom;
+  position: relative;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
 .header-logo {
   width: 150px;
   margin-bottom: 22px;
@@ -146,4 +213,12 @@
   margin-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.signup-form-box-three {
+  width: 408px;
+}
+
+.blue-star {
+  color: #0a66c2;
 }
