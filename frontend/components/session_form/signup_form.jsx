@@ -15,7 +15,7 @@ class SignupForm extends React.Component {
       visiblePage: 1,
       student: false,
 
-
+      currentUser: this.props.currentUser
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
@@ -215,7 +215,7 @@ class SignupForm extends React.Component {
           </header>
 
 
-          <button onClick={this.notStudent}>I’m not a student</button>
+          <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
         </div>
       )
     }
@@ -231,6 +231,12 @@ class SignupForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user)
+  }
+
+  handleEduSubmit(e) {
+    e.preventDefault();
+    const education = Object.assign({}, this.state);
+    this.props.createEducation(education);
   }
 
   renderEmailError() {
@@ -388,6 +394,28 @@ class SignupForm extends React.Component {
     )
   }
 
+  userForm() {
+    return (
+      <form onSubmit={this.handleSubmit} className={this.state.visiblePage === 2 ? "signup-form-box signup-form-box-two" : "signup-form-box"}>
+
+        <div>
+          {this.visibleCheck()}
+        </div>
+        
+      </form>
+    )
+  }
+
+  educationForm() {
+    return (
+      <form onSubmit={this.handleEduSubmit} className="signup-form-box signup-form-box-two">
+
+        
+
+      </form>
+    )
+  }
+
   render() {
     this.props.errors.forEach(error => {
       if (error.includes("You shall not pass")) {
@@ -399,13 +427,7 @@ class SignupForm extends React.Component {
 
         {this.state.visiblePage === 1 || this.state.visiblePage === 2 ? this.headerOne() : this.headerTwo() }
 
-        <form onSubmit={this.handleSubmit} className={this.state.visiblePage === 2 ? "signup-form-box signup-form-box-two" : "signup-form-box"}>
-
-          <div>
-            {this.visibleCheck()}
-          </div>
-          
-        </form>
+        {!this.state.currentUser ? this.userForm() : null}
       </div>
     );
   }

@@ -8,7 +8,8 @@ const mSTP = state => {
   return {
     errors: state.errors.session,
     formType: 'Sign in',
-    navLink: <Link to='/signup'>Join Now</Link>
+    navLink: <Link to='/signup'>Join Now</Link>,
+    currentUser: state.entities.users[state.session.id]
   };
 };
 

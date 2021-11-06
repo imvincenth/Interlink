@@ -9,7 +9,8 @@ import SignupForm from './signup_form';
 const mSTP = state => {
   return {
     errors: state.errors.session,
-    navLink: <Link to="/login">Join Now</Link>
+    navLink: <Link to="/login">Join Now</Link>,
+    currentUser: state.entities.users[state.session.id]
   };
 };
 

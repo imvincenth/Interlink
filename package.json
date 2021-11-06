@@ -42,13 +42,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imvincenth/Interlink.git"
+    "url": "git+https://github.com/imvincenth/RingIn.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/imvincenth/Interlink/issues"
+    "url": "https://github.com/imvincenth/RingIn/issues"
   },
-  "homepage": "https://github.com/imvincenth/Interlink#readme"
+  "homepage": "https://github.com/imvincenth/RingIn#readme"
 }
