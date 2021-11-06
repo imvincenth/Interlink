@@ -12,7 +12,7 @@
   z-index: -1;
 }
 
-.signup-form-three {
+.signup-form-clear {
   overflow: scroll;
   padding: 18px 26px;
   font-size: 14px;
@@ -29,7 +29,7 @@
 .signup-logo {
   display: relative;
   width: 145px;
-  height: 26px;
+  height: 35px;
   @media (max-width: 768px) {
     padding: 0 5px;
   }
@@ -64,8 +64,53 @@
   width: 600px;
 }
 
+.signup-form-container-four {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-form-container-four header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 600px;
+}
+
+.student-switch {
+  width: 100%;
+  font-size: 20px;
+  font-stretch: 100%;
+  font-weight: 600;
+  font-family: inherit;
+  height: 48px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  border: none;
+  margin-top: 13px;
+}
+
+.student-switch:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
 .signup-greeting {
   font-size: 22px;
+  color: black;
+  font-weight: 600;
+  line-height: 30px;
+  padding-bottom: 12px;
+  padding-top: 32px;
+}
+
+.signup-greeting-two {
+  font-size: 24px;
   color: black;
   font-weight: 600;
   line-height: 30px;
@@ -90,28 +135,20 @@
   border-radius: 8px;
 }
 
-.signup-form-box.box-two {
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 24px 24px 6px 24px;
-  background-color: white;
-  border-radius: 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-.singup-label {
-  margin-top: 15px;
-  margin-bottom: 15px;
+.signup-label {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 3px;
 }
 
 .signup-input {
   text-align: start;
-  width: 97%;
-  height: 32px;
-  margin-top: 12px;
+  width: 96%;
+  height: 30px;
+  margin-top: 5px;
   margin-bottom: 5px;
-  padding-left: 10px;
+  padding-left: 2%;
+  padding-right: 2%;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.6);
   transition-duration: 0.33s;
@@ -122,7 +159,7 @@
 .signup-input:focus {
   outline: none !important;
   border: 2px solid rgb(105, 105, 105);
-  height: 30px;
+  height: 28px;
 }
 
 .signup-submit {
@@ -144,6 +181,27 @@
 .signup-submit:hover {
   background-color: #004182;
   cursor: pointer;
+}
+
+.signup-submit-grey {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: inherit;
+  height: 48px;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 25em;
+  text-align: center;
+  border: none;
+  margin-bottom: 13px;
+  margin-top: 18px;
+  cursor: not-allowed;
+}
+
+.signup-submit-grey:hover {
+  
 }
 
 .demo-signup-submit {
@@ -219,6 +277,14 @@
   width: 408px;
 }
 
+.signup-form-box-four {
+  width: 408px;
+}
+
 .blue-star {
   color: #0a66c2;
+}
+
+.signup-spacing {
+  height: 16px;
 }

@@ -12,7 +12,10 @@ class SignupForm extends React.Component {
       headline: '',
       country_region: '',
       city_district: '',
-      visiblePage: 1
+      visiblePage: 1,
+      student: false,
+
+
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
@@ -25,6 +28,9 @@ class SignupForm extends React.Component {
     this.checkErrorPlus = this.checkErrorPlus.bind(this);
     this.checkErrorPlusTwo = this.checkErrorPlusTwo.bind(this);
     this.checkErrors = 0;
+
+    this.yesStudent = this.yesStudent.bind(this);
+    this.notStudent = this.notStudent.bind(this);
   }
 
   refreshPage() {
@@ -40,24 +46,24 @@ class SignupForm extends React.Component {
     return (
       <div className="signup-form-container">
         <label className="signup-label">Email
+        </label>
           <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
             className="signup-input"
           />
           {this.renderEmailError()}
-        </label>
         <br />
 
         <br />
         <label className="signup-label">Password (6 of more characters)
+        </label>
           <input type="password"
             value={this.state.password}
             onChange={this.update('password')}
             className="signup-input"
           />
           {this.renderPasswordError()}
-        </label>
 
         <br />
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
@@ -154,27 +160,65 @@ class SignupForm extends React.Component {
     this.checkErrors = 2;
   }
 
-  pageFour() {
+  yesStudent() {
+    this.setState({ student: true, headline: "Student" });
+  }
+
+  notStudent() {
+    this.setState({ student: false, headline: "" });
+  }
+
+  cantContinue() {
     return (
-      <div className="signup-form-container">
-        <h1 className="signup-greeting">Your profile helps you discover new people and opportunities</h1>
-
-        <label className="signup-label">Most recent job title? <span className="blue-star">*</span>
-          <input type="text"
-            value={this.state.headline}
-            onChange={this.update('headline')}
-            className="signup-input"
-          />
-        </label>
-  
-        <br />
-        {this.checkErrors === 2 ? "" : this.renderHeadlineError()}
-        <br />
-
-
-        <input className="signup-submit" type="submit" value={"Continue"} />
-      </div>
+      <input className="signup-submit-grey" type="submit" value={"Continue"} disabled />
     )
+  }
+
+  canContinue() {
+    return (
+      <input className="signup-submit" type="submit" value={"Continue"} />
+    )
+  }
+
+  pageFour() {
+    if (!this.state.student) {
+      return (
+        <div className="signup-form-container-four">
+          <header>
+            <h1 className="signup-greeting-two">Your profile helps you discover new people and opportunities</h1>
+          </header>
+          <div className="signup-spacing"></div>
+  
+          <div className="signup-form-box-four">
+            <label className="signup-label">Most recent job title? <span className="blue-star">*</span>
+              <input type="text"
+                value={this.state.headline}
+                onChange={this.update('headline')}
+                className="signup-input"
+              />
+            </label>
+      
+            <br />
+            {this.checkErrors === 2 ? "" : this.renderHeadlineError()}
+            <br />
+  
+            <button className="student-switch" onClick={this.yesStudent}>I’m a student</button>
+            {this.state.headline.length > 0 ? this.canContinue() : this.cantContinue()}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className="signup-form-container-four">
+          <header>
+            <h1 className="signup-greeting-two">Your profile helps you discover new people and opportunities</h1>
+          </header>
+
+
+          <button onClick={this.notStudent}>I’m not a student</button>
+        </div>
+      )
+    }
   }
 
   update(field) {
@@ -351,7 +395,7 @@ class SignupForm extends React.Component {
       }
     })
     return (
-      <div className={this.state.visiblePage === 3 || this.state.visiblePage === 4 ? "signup-form-three" : "signup-form"}>
+      <div className={this.state.visiblePage === 3 || this.state.visiblePage === 4 ? "signup-form-clear" : "signup-form"}>
 
         {this.state.visiblePage === 1 || this.state.visiblePage === 2 ? this.headerOne() : this.headerTwo() }
 
