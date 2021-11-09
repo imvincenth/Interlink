@@ -67,7 +67,7 @@ class SessionForm extends React.Component {
               <p>Stay updated on your professional world</p>
             </div>
 
-            <span>{this.props.errors.length === 1 ? this.renderErrors() : <br />}</span>
+            <span>{this.props.errors.length === 1 ? this.renderErrors() : null}</span>
 
               <input type="text"
                 value={this.state.email}

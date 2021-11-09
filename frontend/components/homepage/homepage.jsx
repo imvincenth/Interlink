@@ -19,7 +19,7 @@ class Homepage extends React.Component {
             <img src={window.namelogoURL} className="login-logo" alt="login logo" />
           </a>
 
-          <div>
+          <div className="homepage-nav-right">
             <Link className="joinnow-nav" to="/signup" >Join now</Link>
             <Link className="signin-nav" to="/login" >Sign in</Link>
           </div>

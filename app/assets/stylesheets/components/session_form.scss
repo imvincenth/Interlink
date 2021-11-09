@@ -29,13 +29,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  // Temp
+  height: 468px;
+  overflow-y: hidden;
 }
 
 .session-form-container {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 300px;
+  width: 300px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 22px;
   border-radius: 8px;
@@ -45,6 +48,11 @@
   // left: 50%;
   // margin-right: 50%;
   // transform: translate(-50%, -50%)
+
+  @media (max-width: 780px) {
+    box-shadow: none;
+    width: 352px;
+  }
 }
 
 .signup-form-container > label {
@@ -55,15 +63,14 @@
   font-size: 18px;
   height: 48px;
   padding: 0 16px 0 16px;
-  border: 1px solid lightgrey;
+  border: 1px solid black;
   border-radius: 4px;
-  margin-top: 10px;
+  margin-top: 22px;
 }
 
-.session-input:hover {
-  outline: none !important;
-  border: 2px solid rgb(105, 105, 105);
-  height: 30px;
+.session-input:focus {
+  border: 1px solid #0a66c2;
+  outline: 1px solid #0a66c2;
 }
 
 .form-header-text > h1 {
@@ -84,15 +91,15 @@
   font-size: 17px;
   font-weight: 500;
   font-family: inherit;
-  height: 48px;
+  height: 52px;
   background-color: #0a66c2;
   color: white;
   padding: 10px;
   border-radius: 25em;
   text-align: center;
   border: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 16px;
+  margin-bottom: 12px;
 }
 
 .session-submit:hover {
@@ -104,7 +111,7 @@
   font-size: 17px;
   font-weight: 500;
   font-family: inherit;
-  height: 48px;
+  height: 52px;
   background-color: #FFFFFF;
   color: #0a66c2;
   padding: 10px;
@@ -147,4 +154,8 @@
   background-color: #0a66c22f;
   padding: 8px 8px;
   border-radius: 25em;
+}
+
+.form-header-text p {
+  padding-bottom: 7px;
 }

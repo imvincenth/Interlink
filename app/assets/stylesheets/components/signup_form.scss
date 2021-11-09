@@ -180,6 +180,12 @@
   transition-duration: 0.084s;
   transition-property: border-color, box-shadow;
   line-height: 20px;
+
+  @media (max-width: 1160px) {
+    width: 95%;
+    padding-left: 2%;
+    padding-right: 2%;
+  }
 }
 
 .signup-input:focus {
