@@ -189,7 +189,7 @@ class SignupForm extends React.Component {
   }
 
   notStudent() {
-    this.setState({ student: false, headline: "" });
+    this.setState({ student: false, headline: "", company: "" });
   }
 
   cantContinue() {

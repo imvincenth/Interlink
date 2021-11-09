@@ -10,6 +10,20 @@
   bottom: 0;
   left: 0;
   z-index: -1;
+
+  @media (max-width: 1160px) {
+    overflow: scroll;
+    padding: 18px 26px;
+    font-size: 14px;
+    color: rgb(134, 134, 134);
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
 }
 
 .signup-form-clear {
@@ -134,6 +148,10 @@
   padding: 24px;
   background-color: white;
   border-radius: 8px;
+
+  @media (max-width: 1160px) {
+    max-width: 600px;
+  }
 }
 
 .signup-label {
@@ -164,8 +182,7 @@
   line-height: 20px;
 }
 
-.signup-input:focus,
-.signup-input:hover {
+.signup-input:focus {
   outline: none !important;
   // border: 2px solid rgb(105, 105, 105);
   box-shadow: rgb(105, 105, 105) 0px 0px 0px 1px inset;
@@ -211,7 +228,7 @@
 }
 
 .signup-dropdown:focus,
-.signup-dropdown:hover {
+.signup-dropdown:active {
   // outline: none !important;
   // border: 2px solid rgb(105, 105, 105);
   // height: 30px;
