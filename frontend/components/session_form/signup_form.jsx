@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const positions = "Full-time,Part-time,Self-employed,Freelance,Contract,Internship,Apprenticeship,Seasonal";
+
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,24 @@ class SignupForm extends React.Component {
       visiblePage: 1,
       student: false,
 
-      currentUser: this.props.currentUser
+      currentUser: this.props.currentUser,
+      
+      user_id: "",
+      title: "",
+      employment_type: "",
+      company: "",
+      location: "",
+      start_date: "",
+      current_role: true,
+      end_date: "",
+      headline: "", 
+      industry: "",
+      description: "",
+
+      startMon: "",
+      startYr: "",
+      endMon: "",
+      endYr: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
@@ -31,6 +50,11 @@ class SignupForm extends React.Component {
 
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
+  }
+
+  createOptions(str) {
+    let options = str.split(",");
+    return options.map((option, i) => <option key={i} value={option}>{option}</option>)
   }
 
   refreshPage() {
@@ -180,6 +204,76 @@ class SignupForm extends React.Component {
     )
   }
 
+  typeCompanyForms() {
+    return (
+      <div>
+        <div className="signup-form-spacing">
+          <label className="signup-label">Employment type
+            <select value={this.state.employment_type} onChange={this.update("employment_type")} className="signup-dropdown">
+              <option>Select one</option>
+              {this.createOptions(positions)}
+            </select>
+          </label>
+        </div>
+        
+        <div className="signup-form-spacing">
+          <label className="signup-label">Most recent company <span className="blue-star">*</span>
+            <input 
+              type="text" 
+              value={this.state.company} 
+              onChange={this.update("company")} 
+              className="signup-input"
+            />
+          </label>
+          {this.companyErrors()}
+        </div>
+      </div>
+    )
+  }
+
+  industryForms() {
+    return (
+      <div className="signup-form-spacing">
+        <label className="signup-label">Industry <span className="blue-star">*</span>
+          <input type="text" value={this.state.industry} onChange={this.update("industry")} className="signup-input" />
+        </label>
+        {this.industryErrors()}
+      </div>
+    )
+  }
+
+  companyErrors() {
+    let companyErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Company")) {
+          companyErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {companyErrors}
+        </span>
+      );
+    }
+  }
+
+  industryErrors() {
+    let industryErrors = [];
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Industry")) {
+          industryErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {industryErrors}
+        </span>
+      );
+    }
+  }
+
   pageFour() {
     if (!this.state.student) {
       return (
@@ -190,20 +284,23 @@ class SignupForm extends React.Component {
           <div className="signup-spacing"></div>
   
           <div className="signup-form-box-four">
-            <label className="signup-label">Most recent job title? <span className="blue-star">*</span>
-              <input type="text"
-                value={this.state.headline}
-                onChange={this.update('headline')}
-                className="signup-input"
-              />
-            </label>
-      
-            <br />
-            {this.checkErrors === 2 ? "" : this.renderHeadlineError()}
-            <br />
-  
+
+            <div className="signup-form-spacing">
+              <label className="signup-label">Most recent job title? <span className="blue-star">*</span>
+                <input type="text"
+                  value={this.state.headline}
+                  onChange={this.update('headline')}
+                  className="signup-input"
+                />
+              </label>
+              {this.checkErrors === 2 ? "" : this.renderHeadlineError()}
+            </div>
+
+            {this.state.headline.length > 0 ? this.typeCompanyForms() : null}
+            {this.state.company.length > 0 ? this.industryForms() : null}
+
             <button className="student-switch" onClick={this.yesStudent}>I’m a student</button>
-            {this.state.headline.length > 0 ? this.canContinue() : this.cantContinue()}
+            {this.state.headline.length > 0 && this.state.industry.length > 0 ? this.canContinue() : this.cantContinue()}
           </div>
         </div>
       )
@@ -230,7 +327,7 @@ class SignupForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user)
+    this.props.processForm(user);
   }
 
   handleEduSubmit(e) {
