@@ -7,19 +7,21 @@ class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      first_name: '',
-      last_name: '',
-      headline: '',
-      country_region: '',
-      city_district: '',
+      // User
+      email: "",
+      password: "",
+      first_name: "",
+      last_name: "",
+      headline: "",
+      country_region: "",
+      city_district: "",
       visiblePage: 1,
       student: false,
 
       currentUser: this.props.currentUser,
-      
       user_id: "",
+
+      // Experience
       title: "",
       employment_type: "",
       company: "",
@@ -27,9 +29,17 @@ class SignupForm extends React.Component {
       start_date: "",
       current_role: true,
       end_date: "",
-      headline: "", 
       industry: "",
       description: "",
+
+      // Education
+      school: "",
+      degree: "",
+      subject: "",
+      start_date: "",
+      end_date: "",
+      grade: "",
+      extracurriculars: "",
 
       startMon: "",
       startYr: "",
@@ -70,24 +80,23 @@ class SignupForm extends React.Component {
     return (
       <div className="signup-form-container">
         <label className="signup-label">Email
-        </label>
           <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
             className="signup-input"
-          />
+            />
           {this.renderEmailError()}
+        </label>
         <br />
-
         <br />
         <label className="signup-label">Password (6 of more characters)
-        </label>
           <input type="password"
             value={this.state.password}
             onChange={this.update('password')}
             className="signup-input"
-          />
+            />
           {this.renderPasswordError()}
+        </label>
 
         <br />
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
@@ -185,11 +194,11 @@ class SignupForm extends React.Component {
   }
 
   yesStudent() {
-    this.setState({ student: true, headline: "Student" });
+    this.setState({ student: true });
   }
 
   notStudent() {
-    this.setState({ student: false, headline: "", company: "" });
+    this.setState({ student: false, headline: this.state.headline, company: this.state.company });
   }
 
   cantContinue() {
@@ -297,7 +306,7 @@ class SignupForm extends React.Component {
             </div>
 
             {this.state.headline.length > 0 ? this.typeCompanyForms() : null}
-            {this.state.company.length > 0 ? this.industryForms() : null}
+            {this.state.company.length > 0 && this.state.headline.length > 0 ? this.industryForms() : null}
 
             <button className="student-switch" onClick={this.yesStudent}>I’m a student</button>
             {this.state.headline.length > 0 && this.state.industry.length > 0 ? this.canContinue() : this.cantContinue()}
