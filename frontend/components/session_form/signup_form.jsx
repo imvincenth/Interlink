@@ -30,7 +30,7 @@ class SignupForm extends React.Component {
       location: "",
       start_date: "",
       current_role: true,
-      end_date: "",
+      end_date: "Present",
       industry: "",
       description: "",
 
@@ -47,6 +47,8 @@ class SignupForm extends React.Component {
       endYr: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdusubmit = this.handleEduSubmit.bind(this);
+    this.handleExpSubmit = this.handleExpSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
 
     this.pageCheck = this.pageCheck.bind(this);
@@ -60,6 +62,8 @@ class SignupForm extends React.Component {
 
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
+
+    this.studentReqCheck = this.studentReqCheck.bind(this);
   }
 
   createOptions(str) {
@@ -207,9 +211,16 @@ class SignupForm extends React.Component {
     )
   }
 
-  canContinue() {
+  canContinueEducation() {
     return (
-      <input className="signup-submit" type="submit" value={"Continue"} />
+      <input className="signup-submit" type="submit" value={"Continue"} onSubmit={this.handleEduSubmit} />
+    )
+  }
+
+  canContinueExperience() {
+    this.setState({ headline: this.state.title + " at " + this.state.company });
+    return (
+      <input className="signup-submit" type="submit" value={"Continue"} onSubmit={this.handleExpSubmit} />
     )
   }
 
@@ -275,10 +286,27 @@ class SignupForm extends React.Component {
     this.setEndTime();
   }
 
+  titleErrors() {
+    let titleErrors = [];
+    if (this.props.expErrors.length !== 0) {
+      this.props.expErrors.forEach(error => {
+        if (error.includes("Title")) {
+          titleErrors.push(error);
+        }
+      })
+      return (
+        <span className="error">
+          {titleErrors}
+        </span>
+      );
+    }
+  }
+
   companyErrors() {
+    if (!this.props.expErrors) return null;
     let companyErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
+    if (this.props.expErrors.length !== 0) {
+      this.props.expErrors.forEach(error => {
         if (error.includes("Company")) {
           companyErrors.push(error);
         }
@@ -292,9 +320,10 @@ class SignupForm extends React.Component {
   }
 
   industryErrors() {
+    if (!this.props.expErrors) return null;
     let industryErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
+    if (this.props.expErrors.length !== 0) {
+      this.props.expErrors.forEach(error => {
         if (error.includes("Industry")) {
           industryErrors.push(error);
         }
@@ -308,9 +337,10 @@ class SignupForm extends React.Component {
   }
 
   schoolErrors() {
+    if (!this.props.eduErrors) return null;
     let schoolErrors = [];
-    if (this.props.errors.length !== 0) {
-      this.props.errors.forEach(error => {
+    if (this.props.eduErrors.length !== 0) {
+      this.props.eduErrors.forEach(error => {
         if (error.includes("School")) {
           schoolErrors.push(error);
         }
@@ -321,6 +351,19 @@ class SignupForm extends React.Component {
         </span>
       );
     }
+  }
+
+  studentReqCheck() {
+    if (this.state.student) {
+      if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
+        if (this.state.startYr !== "-" && this.state.endYr !== "-") {
+          if (Number(this.state.endYr) > Number(this.state.startYr)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   pageFour() {
@@ -336,19 +379,19 @@ class SignupForm extends React.Component {
               <div className="signup-form-spacing">
                 <label className="signup-label">Most recent job title? <span className="blue-star">*</span>
                   <input type="text"
-                    value={this.state.headline}
-                    onChange={this.update('headline')}
+                    value={this.state.title}
+                    onChange={this.update('title')}
                     className="signup-input"
                   />
                 </label>
-                {this.checkErrors === 2 ? "" : this.renderHeadlineError()}
+                {this.checkErrors === 2 ? "" : this.titleErrors()}
               </div>
 
-              {this.state.headline.length > 0 ? this.typeCompanyForms() : null}
-              {this.state.company.length > 0 && this.state.headline.length > 0 ? this.industryForms() : null}
+              {this.state.title.length > 0 ? this.typeCompanyForms() : null}
+              {this.state.company.length > 0 && this.state.title.length > 0 ? this.industryForms() : null}
 
               <button className="student-switch" onClick={this.yesStudent}>I’m a student</button>
-              {this.state.headline.length > 0 && this.state.industry.length > 0 ? this.canContinue() : this.cantContinue()}
+              {this.state.title.length > 0 && this.state.industry.length > 0 ? this.canContinueExperience() : this.cantContinue()}
             </div>
   
         </div>
@@ -360,68 +403,71 @@ class SignupForm extends React.Component {
             <h1 className="signup-greeting-two">Your profile helps you discover new people and opportunities</h1>
           </header>
 
-            <div className="signup-form-box-four">
+          <div className="signup-spacing"></div>
 
-              <div>
-                <label className="signup-label">School or College/University <span className="blue-star">*</span>
-                  <input 
-                    type="text" 
-                    value={this.state.school} 
-                    onChange={this.update("school")} 
-                    className="signup-input"
-                  />
-                </label>
-                {this.schoolErrors()}
-              </div>
+          <div className="signup-form-box-four">
 
-              <div>
-                <label className="signup-label">Degree <span className="blue-star">*</span>
-                  <input 
-                    value={this.state.degree} 
-                    onChange={this.update("degree")} 
-                    className="signup-input"
-                  />
-                </label>
-              </div>
-
-              <div>
-                <label className="signup-label">Specialization <span className="blue-star">*</span>
-                  <input 
-                    type="text" 
-                    value={this.state.subject} 
-                    onChange={this.update("subject")} 
-                    className="signup-input"
-                  />
-                </label>
-              </div>
-
-              <div className="signup-student-dates">
-                <div>
-                  <label className="signup-label">Start date <span className="blue-star">*</span>
-                    <div>
-                      <select onChange={this.update("startYr")}  className="signup-dropdown">
-                        <option> - </option>
-                        {this.createOptions(years)}
-                      </select>
-                    </div>
-                  </label>
-                </div>
-
-                <div>
-                  <label className="signup-label">End date (or expected) <span className="blue-star">*</span>
-                    <div>
-                      <select onChange={this.update("endYr")}  className="signup-dropdown">
-                        <option> - </option>
-                        {this.createOptions(years)}
-                      </select>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
+            <div className="signup-student-section">
+              <label className="signup-label">School or College/University <span className="blue-star">*</span>
+                <input 
+                  type="text" 
+                  value={this.state.school} 
+                  onChange={this.update("school")} 
+                  className="signup-input"
+                />
+              </label>
+              {this.schoolErrors()}
             </div>
 
-          <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
+            <div className="signup-student-section">
+              <label className="signup-label">Degree <span className="blue-star">*</span>
+                <input 
+                  value={this.state.degree} 
+                  onChange={this.update("degree")} 
+                  className="signup-input"
+                />
+              </label>
+            </div>
+
+            <div className="signup-student-section">
+              <label className="signup-label">Specialization <span className="blue-star">*</span>
+                <input 
+                  type="text" 
+                  value={this.state.subject} 
+                  onChange={this.update("subject")} 
+                  className="signup-input"
+                />
+              </label>
+            </div>
+
+            <div className="signup-student-dates">
+              <div className="signup-date-dropdown">
+                <label className="signup-label">Start date <span className="blue-star">*</span>
+                  <div>
+                    <select onChange={this.update("startYr")}  className="signup-dropdown">
+                      <option> - </option>
+                      {this.createOptions(years)}
+                    </select>
+                  </div>
+                </label>
+              </div>
+
+              <div>
+                <label className="signup-label">End date (or expected) <span className="blue-star">*</span>
+                  <div className="signup-date-dropdown">
+                    <select onChange={this.update("endYr")}  className="signup-dropdown">
+                      <option> - </option>
+                      {this.createOptions(years)}
+                    </select>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
+            {this.studentReqCheck() ? this.canContinueStudent() : this.cantContinue()}
+          </div>
+
         </div>
       )
     }
@@ -441,8 +487,15 @@ class SignupForm extends React.Component {
 
   handleEduSubmit(e) {
     e.preventDefault();
-    const education = Object.assign({}, this.state);
-    this.props.createEducation(education);
+    const user = Object.assign({}, this.state);
+    this.props.processForm(user).then(this.props.createEducation(user));
+  }
+
+  handleExpSubmit(e) {
+    e.preventDefault();
+
+    const user = Object.assign({}, this.state);
+    this.props.processForm(user).then(this.props.createExperience(user));
   }
 
   renderEmailError() {
@@ -623,11 +676,12 @@ class SignupForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.errors.length);
     this.props.errors.forEach(error => {
       if (error.includes("You shall not pass")) {
         this.refreshPage();
       }
-    })
+    });
     return (
       <div className={this.state.visiblePage === 3 || this.state.visiblePage === 4 ? "signup-form-clear" : "signup-form"}>
 

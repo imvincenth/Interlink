@@ -50,25 +50,20 @@ class CreateEducationForm extends React.Component {
   }
 
   setStartTime() {
+    if (this.state.startMon === "Month" && this.state.startYr === "Year") return null;
+    
     this.setState({ 
       start_date: `${this.state.startMon} ${this.state.startYr}`
     });
   }
 
   setEndTime() {
-    if (this.state.current_role) {
-      this.setState({
-        end_date: "Present"
-      });
-    } else {
-      this.setState({
-        end_date: `${this.state.endMon} ${this.state.endYr}`
-      });
-    }
+    this.setState({
+      end_date: `${this.state.endMon} ${this.state.endYr}`
+    });
   }
 
   setTimes() {
-    if (this.state.start_date === "Month" || this.state.end_date === "Year") throw "Start and end dates are required";
     this.setStartTime();
     this.setEndTime();
   }

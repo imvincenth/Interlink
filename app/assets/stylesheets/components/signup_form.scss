@@ -239,6 +239,10 @@
   box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 1px inset;
 }
 
+.signup-date-dropdown {
+  min-width: 192px;
+}
+
 .signup-submit {
   width: 100%;
   font-size: 17px;
@@ -369,6 +373,13 @@
 
 .signup-student-dates {
   display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+}
+
+.signup-student-section {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .invalid-field {

@@ -44,6 +44,10 @@
   text-decoration: none;
 }
 
+.joinnow-nav:active {
+  box-shadow: #0a66c2 0px 0px 0px 2px inset;
+}
+
 .signin-nav {
   margin-left: 0.5rem;
   color: #0a66c2;
