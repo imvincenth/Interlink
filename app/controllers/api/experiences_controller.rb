@@ -17,7 +17,7 @@ class Api::ExperiencesController < ApplicationController
 
   def update
     @experience = Experience.find_by(id: params[:id])
-    if @experience && @experience.update(experience_params, user_id: current_user.id)
+    if @experience && @experience.update(experience_params)
       render :show
     else
       render json: @experience.errors.full_messages, status: 422
@@ -34,6 +34,7 @@ class Api::ExperiencesController < ApplicationController
   private
   def experience_params
     params.require(:experience).permit(
+      :user_id,
       :title, 
       :employment_type,
       :company, 

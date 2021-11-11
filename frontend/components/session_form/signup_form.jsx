@@ -27,21 +27,16 @@ class SignupForm extends React.Component {
       title: "",
       employment_type: "",
       company: "",
-      location: "",
-      start_date: "",
       current_role: true,
-      end_date: "Present",
       industry: "",
-      description: "",
-
+      
       // Education
       school: "",
       degree: "",
       subject: "",
-      start_date: "",
-      end_date: "",
-      grade: "",
-      extracurriculars: "",
+      
+      start_date: "test",
+      end_date: "Present",
 
       startYr: "",
       endYr: ""
@@ -495,7 +490,7 @@ class SignupForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user)
-      .then(this.props.createEducation(user));
+      // .then(() => this.props.createEducation(user));
   }
 
   handleExpSubmit(e) {
@@ -503,7 +498,7 @@ class SignupForm extends React.Component {
     this.createUserHeadline();
     const user = Object.assign({}, this.state);
     this.props.processForm(user)
-      .then(this.props.createExperience(user));
+      // .then(() => this.props.createExperience(user));
   }
 
   renderEmailError() {
@@ -684,7 +679,6 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.errors.length);
     this.props.errors.forEach(error => {
       if (error.includes("You shall not pass")) {
         this.refreshPage();

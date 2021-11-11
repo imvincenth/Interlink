@@ -1,7 +1,7 @@
 class Api::EducationsController < ApplicationController
 
   def create
-    @education = Education.new(education_params, user_id: current_user.id)
+    @education = Education.new(education_params)
 
     if @education.save
       render :show
@@ -36,6 +36,7 @@ class Api::EducationsController < ApplicationController
   private
   def education_params
     params.require(:education).permit(
+      :user_id,
       :school,
       :degree,
       :subject,

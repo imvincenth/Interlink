@@ -4,6 +4,11 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      clone = experience_params.clone
+      clone[:user_id] = @user.id
+      puts clone
+      Experience.create!(clone)
+
       login(@user)
       render :show
     else
@@ -34,7 +39,7 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  private
+  # private
   def user_params
     params.require(:user).permit(
       :email, 
@@ -44,6 +49,35 @@ class Api::UsersController < ApplicationController
       :country_region, 
       :city_district, 
       :password
+    )
+  end
+
+  def experience_params
+    params.require(:user).permit(
+      :user_id,
+      :title, 
+      :employment_type,
+      :company, 
+      :location, 
+      :start_date, 
+      :current_role,
+      :end_date, 
+      :industry, 
+      :headline,
+      :description
+    )
+  end
+
+  def education_params
+    params.require(:user).permit(
+      :user_id,
+      :school,
+      :degree,
+      :subject,
+      :start_date,
+      :end_date,
+      :grade,
+      :extracurriculars
     )
   end
 end

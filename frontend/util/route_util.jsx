@@ -8,16 +8,17 @@ import { Route, Redirect, withRouter } from "react-router-dom";
 
 
 const mSTP = state => {
-  return { loggedIn: Boolean(state.session.id ) };
+  return { 
+    loggedIn: Boolean(state.session.id)
+  };
 };
 
-
 const LoginAuth = ({ component: Component, path, loggedIn, exact }) => (
-  <Route path={path} exact={exact} render={props => loggedIn? <Component {...props} /> : <Redirect to="/login"/>}/>
+  <Route path={path} exact={exact} render={props => loggedIn ? <Component {...props} /> : <Redirect to="/login"/>}/>
 );
 
 const LogoutAuth = ({ component: Component, path, loggedIn, exact }) => (
-  <Route path={path} exact={exact} render={props => !loggedIn? <Component {...props} /> : <Redirect to="/feed"/>}/>
+  <Route path={path} exact={exact} render={props => loggedIn ? <Redirect to="/feed"/> : <Component {...props} />}/>
 );
 
 export const AuthRoute = withRouter(
