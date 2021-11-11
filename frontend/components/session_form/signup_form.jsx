@@ -21,7 +21,7 @@ class SignupForm extends React.Component {
       student: false,
 
       currentUser: this.props.currentUser,
-      user_id: "",
+      user_id: null,
 
       // Experience
       title: "",
@@ -60,9 +60,10 @@ class SignupForm extends React.Component {
     this.checkErrorPlusTwo = this.checkErrorPlusTwo.bind(this);
     this.checkErrors = 0;
 
+    this.createUserHeadline = this.createUserHeadline.bind(this);
+
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
-
     this.studentReqCheck = this.studentReqCheck.bind(this);
   }
 
@@ -218,9 +219,8 @@ class SignupForm extends React.Component {
   }
 
   canContinueExperience() {
-    this.setState({ headline: this.state.title + " at " + this.state.company });
     return (
-      <input className="signup-submit" type="submit" value={"Continue"} onSubmit={this.handleExpSubmit} />
+      <input className="signup-submit" type="submit" value={"Continue"} onClick={this.createUserHeadline} onSubmit={this.handleExpSubmit} />
     )
   }
 
@@ -359,11 +359,17 @@ class SignupForm extends React.Component {
         if (this.state.startYr !== "-" && this.state.endYr !== "-") {
           if (Number(this.state.endYr) > Number(this.state.startYr)) {
             return true;
+          } else {
+            throw "The end date must be after the start date"
           }
         }
       }
     }
     return false;
+  }
+
+  createUserHeadline() {
+    this.setState({ headline: this.state.title + " at " + this.state.company });
   }
 
   pageFour() {
@@ -488,14 +494,16 @@ class SignupForm extends React.Component {
   handleEduSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(this.props.createEducation(user));
+    this.props.processForm(user)
+      .then(this.props.createEducation(user));
   }
 
   handleExpSubmit(e) {
     e.preventDefault();
-
+    this.createUserHeadline();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(this.props.createExperience(user));
+    this.props.processForm(user)
+      .then(this.props.createExperience(user));
   }
 
   renderEmailError() {

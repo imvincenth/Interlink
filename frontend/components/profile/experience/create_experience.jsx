@@ -18,7 +18,7 @@ class CreateExperienceForm extends React.Component {
       current_role: true,
       end_date: "",
       headline: this.props.currentUser.headline, 
-      industry: this.props.experience.industry,
+      industry: "",
       description: "",
 
       startMon: "",
@@ -215,6 +215,7 @@ class CreateExperienceForm extends React.Component {
   }
 
   render() {
+    console.log(this.props.experience)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
