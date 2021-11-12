@@ -36,14 +36,12 @@ class SignupForm extends React.Component {
       subject: "",
       
       start_date: "test",
-      end_date: "Present",
+      end_date: "test",
 
       startYr: "",
       endYr: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleEdusubmit = this.handleEduSubmit.bind(this);
-    this.handleExpSubmit = this.handleExpSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
 
     this.pageCheck = this.pageCheck.bind(this);
@@ -56,6 +54,11 @@ class SignupForm extends React.Component {
     this.checkErrors = 0;
 
     this.createUserHeadline = this.createUserHeadline.bind(this);
+    this.createUserHeadlineTwo = this.createUserHeadlineTwo.bind(this);
+
+    this.setStartTime = this.setStartTime.bind(this);
+    this.setEndTime = this.setEndTime.bind(this);
+    this.setTimes = this.setTimes.bind(this);
 
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
@@ -209,13 +212,13 @@ class SignupForm extends React.Component {
 
   canContinueEducation() {
     return (
-      <input className="signup-submit" type="submit" value={"Continue"} onSubmit={this.handleEduSubmit} />
+      <input className="signup-submit" type="submit" value={"Continue"} onClick={this.createUserHeadlineTwo} onSubmit={this.handleSubmit} />
     )
   }
 
   canContinueExperience() {
     return (
-      <input className="signup-submit" type="submit" value={"Continue"} onClick={this.createUserHeadline} onSubmit={this.handleExpSubmit} />
+      <input className="signup-submit" type="submit" value={"Continue"} onClick={this.createUserHeadline} onSubmit={this.handleSubmit} />
     )
   }
 
@@ -274,11 +277,20 @@ class SignupForm extends React.Component {
       });
     }
   }
-
+  
   setTimes() {
     if (this.state.start_date === "-" || this.state.end_date === "-") throw "Start and end dates are required";
     this.setStartTime();
     this.setEndTime();
+  }
+
+  createUserHeadline() {
+    this.setState({ headline: this.state.title + " at " + this.state.company });
+  }
+
+  createUserHeadlineTwo() {
+    // this.setTimes();
+    this.setState({ headline: "Student at " + this.state.school });
   }
 
   titleErrors() {
@@ -354,8 +366,6 @@ class SignupForm extends React.Component {
         if (this.state.startYr !== "-" && this.state.endYr !== "-") {
           if (Number(this.state.endYr) > Number(this.state.startYr)) {
             return true;
-          } else {
-            throw "The end date must be after the start date"
           }
         }
       }
@@ -363,9 +373,6 @@ class SignupForm extends React.Component {
     return false;
   }
 
-  createUserHeadline() {
-    this.setState({ headline: this.state.title + " at " + this.state.company });
-  }
 
   pageFour() {
     if (!this.state.student) {
@@ -466,7 +473,7 @@ class SignupForm extends React.Component {
             </div>
 
             <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
-            {this.studentReqCheck() ? this.canContinueStudent() : this.cantContinue()}
+            {this.studentReqCheck() ? this.canContinueEducation() : this.cantContinue()}
           </div>
 
         </div>
@@ -484,21 +491,6 @@ class SignupForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user);
-  }
-
-  handleEduSubmit(e) {
-    e.preventDefault();
-    const user = Object.assign({}, this.state);
-    this.props.processForm(user)
-      // .then(() => this.props.createEducation(user));
-  }
-
-  handleExpSubmit(e) {
-    e.preventDefault();
-    this.createUserHeadline();
-    const user = Object.assign({}, this.state);
-    this.props.processForm(user)
-      // .then(() => this.props.createExperience(user));
   }
 
   renderEmailError() {
@@ -670,7 +662,7 @@ class SignupForm extends React.Component {
 
   educationForm() {
     return (
-      <form onSubmit={this.handleEduSubmit} className="signup-form-box signup-form-box-two">
+      <form onSubmit={this.handleSubmit} className="signup-form-box signup-form-box-two">
 
         
 

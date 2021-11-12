@@ -4,10 +4,22 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      clone = experience_params.clone
-      clone[:user_id] = @user.id
-      puts clone
-      Experience.create!(clone)
+      exp_clone = experience_params.clone
+      exp_clone[:user_id] = @user.id
+      edu_clone = education_params.clone
+      edu_clone[:user_id] = @user.id
+
+      # @exp = Experience.create!(exp_clone)
+      # @edu = Education.create!(edu_clone)
+      
+      @exp = Experience.new(exp_clone)
+      @edu = Education.new(edu_clone)
+
+      if @exp
+        @exp.save
+      else
+        @edu.save
+      end
 
       login(@user)
       render :show

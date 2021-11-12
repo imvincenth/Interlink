@@ -5,7 +5,6 @@ import { closeModal } from '../../actions/modal_actions';
 import EditProfileForm from './edit_profile';
 
 const mSTP = state => ({
-  experience: state.entities.experiences[state.entities.users[state.session.id].id],
   currentUser: state.entities.users[state.session.id]
 });
 
