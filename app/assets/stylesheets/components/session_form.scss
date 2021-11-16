@@ -232,9 +232,9 @@
   transition: 0.2s ease all;
 }
 
-.session-input:focus ~ .floating-label {
+.session-input-box .session-input:focus ~ .floating-label,
+.session-input-box .session-input:not([value='']) ~ .floating-label {
   top: 25px;
-  // bottom: 10px;
   left: 12px;
   font-size: 14px;
   color: rgb(0, 0, 0);
