@@ -169,7 +169,7 @@
   width: 93%;
   height: 28px;
   margin-top: 3px;
-  margin-bottom: 3px;
+  // margin-bottom: 3px;
   padding-left: 3%;
   padding-right: 3%;
   border-radius: 4px;
@@ -300,7 +300,6 @@
 .demo-signup-submit:hover {
   background-color: #0a66c22f;
   border: 2px solid #0a66c2;
-  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -391,7 +390,7 @@
   -moz-appearance: none;
   background: transparent;
   position: absolute;
-  right: 7px;
+  right: 6px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
   font-weight: 400;

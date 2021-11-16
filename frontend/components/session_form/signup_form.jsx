@@ -53,8 +53,6 @@ class SignupForm extends React.Component {
     this.pageCheck = this.pageCheck.bind(this);
     this.visibleCheck = this.visibleCheck.bind(this);
 
-    this.changeBoxTwo = this.changeBoxTwo.bind(this);
-
     this.checkErrorPlus = this.checkErrorPlus.bind(this);
     this.checkErrorPlusTwo = this.checkErrorPlusTwo.bind(this);
     this.checkErrors = 0;
@@ -115,6 +113,7 @@ class SignupForm extends React.Component {
         <br />
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
 
+        {/*  OR Spacing */}
         <div className="third-party-spacing-box">
           <div className="third-party-spacing-line"></div>
           <span>
@@ -131,11 +130,6 @@ class SignupForm extends React.Component {
     )
   }
 
-  changeBoxTwo() {
-    document.getElementsByClassName("signup-form-box")[0].classList.add("box-two");
-    
-  }
-
   pageTwo() {
     return (
       <div className="signup-form-container">
@@ -143,7 +137,7 @@ class SignupForm extends React.Component {
           <input type="text"
             value={this.state.first_name}
             onChange={this.update('first_name')}
-            className={this.firstNameFieldCheck() ? "signup-input invalid-field" : "signup-input"}
+            className={this.checkErrors !== 0 && this.firstNameFieldCheck() ? "signup-input invalid-field" : "signup-input"}
           />
         </label>
   
@@ -155,7 +149,7 @@ class SignupForm extends React.Component {
           <input type="text"
             value={this.state.last_name}
             onChange={this.update('last_name')}
-            className={this.lastNameFieldCheck() ? "signup-input invalid-field" : "signup-input"}
+            className={this.checkErrors !== 0 && this.lastNameFieldCheck() ? "signup-input invalid-field" : "signup-input"}
           />
         </label>
 
@@ -185,7 +179,7 @@ class SignupForm extends React.Component {
             <input type="text"
               value={this.state.country_region}
               onChange={this.update('country_region')}
-              className="signup-input"
+              className={this.checkErrors !== 1 && this.countryRegionFieldCheck() ? "signup-input invalid-field" : "signup-input"}
             />
           </label>
     
@@ -197,7 +191,7 @@ class SignupForm extends React.Component {
             <input type="text"
               value={this.state.city_district}
               onChange={this.update('city_district')}
-              className="signup-input"
+              className={this.checkErrors !== 1 && this.cityDistrictFieldCheck() ? "signup-input invalid-field" : "signup-input"}
             />
           </label>
 
@@ -512,11 +506,13 @@ class SignupForm extends React.Component {
 
   firstNameFieldCheck() {
     let errors = false;
-    this.props.errors.forEach(error => {
-      if (error.includes("First")) {
-        errors = true;
-      }
-    })
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("First")) {
+          errors = true;
+        }
+      })
+    }
     return errors;
   }
 
@@ -528,7 +524,7 @@ class SignupForm extends React.Component {
           pageTwoErrors.push(error);
         }
       })
-      return(
+      return (
         <p className="error">
           {pageTwoErrors}
         </p>
@@ -544,16 +540,13 @@ class SignupForm extends React.Component {
           errors = true;
         }
       })
-      return(
-        false
-      );
     }
     return errors;
   }
 
   renderCountryRegionError() {
     let pageThreeErrors = [];
-    if (this.props.errors.length !== 0) {
+    if (this.props.errors.length !== 0) { 
       this.props.errors.forEach(error => {
         if (error.includes("Country")) {
           pageThreeErrors.push(error);
@@ -575,9 +568,6 @@ class SignupForm extends React.Component {
           errors = true;
         }
       })
-      return(
-        false
-      );
     }
     return errors;
   }
@@ -606,9 +596,6 @@ class SignupForm extends React.Component {
           errors = true;
         }
       })
-      return(
-        false
-      );
     }
     return errors;
   }
@@ -637,9 +624,6 @@ class SignupForm extends React.Component {
           errors = true;
         }
       })
-      return(
-        false
-      );
     }
     return errors;
   }

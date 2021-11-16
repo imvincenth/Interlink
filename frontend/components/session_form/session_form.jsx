@@ -7,7 +7,11 @@ class SessionForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+
+      hidden: true
     };
+
+    this.toggleShow = this.toggleShow.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
   }
@@ -19,6 +23,10 @@ class SessionForm extends React.Component {
   demoLogin(e) {
     e.preventDefault();
     this.props.demoLogin();
+  }
+
+  toggleShow() {
+    this.setState({ hidden: !this.state.hidden });
   }
 
   update(field) {
@@ -79,13 +87,13 @@ class SessionForm extends React.Component {
 
               <br />
 
-              <input type="password"
+              <input type={this.state.hidden ? "password" : "text"}
                 value={this.state.password}
                 onChange={this.update('password')}
                 className="session-input"
                 placeholder="Password"
                 />
-
+              <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
             <br />
 
 
