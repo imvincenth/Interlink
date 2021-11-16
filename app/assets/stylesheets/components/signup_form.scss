@@ -256,7 +256,7 @@
   border-radius: 25em;
   text-align: center;
   border: none;
-  margin-bottom: 13px;
+  margin-bottom: 19px;
   margin-top: 18px;
 }
 
@@ -278,7 +278,7 @@
   text-align: center;
   border: none;
   margin-bottom: 13px;
-  margin-top: 18px;
+  margin-top: 20px;
   cursor: not-allowed;
 }
 
@@ -295,6 +295,7 @@
   text-align: center;
   transition-duration: 41ms;
   border: 1px solid #0a66c2;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -409,13 +410,24 @@
   text-decoration: underline;
 }
 
-.third-party-join__line-wrapper {
-  font-size: 16px;
+.third-party-spacing-box {
+  display: flex;
+  height: 24px;
+  width: 100%;
+  justify-content: center;
+}
+
+.third-party-spacing-line {
+  height: 13px;
+  width: 50%;
+  border-bottom: 1.2px solid rgba(0, 0, 0, 0.2);
+}
+
+.third-party-spacing-word {
+  color: rgba(0, 0, 0, 0.9);
   font-weight: 400;
   line-height: 24px;
-  text-align: center;
-  vertical-align: baseline;
-  color: #696c6f;
-  text-align: center;
-  margin-top: 20px;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-size: 16px;
 }

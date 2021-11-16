@@ -114,7 +114,15 @@ class SignupForm extends React.Component {
 
         <br />
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
-        <p><span><span>or</span></span></p>
+
+        <div className="third-party-spacing-box">
+          <div className="third-party-spacing-line"></div>
+          <span>
+            <span className="third-party-spacing-word">or</span>
+          </span>
+          <div className="third-party-spacing-line"></div>
+        </div>
+        
         <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
         
         <br />
