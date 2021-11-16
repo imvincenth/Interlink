@@ -17,6 +17,10 @@ class SignupForm extends React.Component {
       country_region: "",
       city_district: "",
       visiblePage: 1,
+
+      // Password
+      hidden: true,
+
       // Student Check
       student: false,
 
@@ -41,6 +45,8 @@ class SignupForm extends React.Component {
       startYr: "",
       endYr: ""
     };
+
+    this.toggleShow = this.toggleShow.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
 
@@ -79,6 +85,10 @@ class SignupForm extends React.Component {
     this.props.demoLogin();
   }
 
+  toggleShow() {
+    this.setState({ hidden: !this.state.hidden });
+  }
+
   pageOne() {
     return (
       <div className="signup-form-container">
@@ -93,11 +103,12 @@ class SignupForm extends React.Component {
         <br />
         <br />
         <label className="signup-label">Password (6 of more characters)
-          <input type="password"
+          <input type={this.state.hidden ? "password" : "text"}
             value={this.state.password}
             onChange={this.update('password')}
             className="signup-input"
             />
+            <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
           {this.renderPasswordError()}
         </label>
 
@@ -656,16 +667,6 @@ class SignupForm extends React.Component {
           {this.visibleCheck()}
         </div>
         
-      </form>
-    )
-  }
-
-  educationForm() {
-    return (
-      <form onSubmit={this.handleSubmit} className="signup-form-box signup-form-box-two">
-
-        
-
       </form>
     )
   }

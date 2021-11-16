@@ -8,9 +8,6 @@ class Api::UsersController < ApplicationController
       exp_clone[:user_id] = @user.id
       edu_clone = education_params.clone
       edu_clone[:user_id] = @user.id
-
-      # @exp = Experience.create!(exp_clone)
-      # @edu = Education.create!(edu_clone)
       
       @exp = Experience.new(exp_clone)
       @edu = Education.new(edu_clone)

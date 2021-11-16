@@ -56,6 +56,7 @@
 }
 
 .signup-form-container {
+  position: relative;
   // display: flex;
   flex-direction: column;
   width: 100%;
@@ -384,4 +385,26 @@
 
 .invalid-field {
   border: 1px solid #d11124;
+}
+
+.btn {
+  text-decoration:none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  position: absolute;
+  right: 7px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  height: 38px;
+  line-height: 20px;
+}
+
+.btn:hover,
+.btn:active {
+  text-decoration: underline;
 }
