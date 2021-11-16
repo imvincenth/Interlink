@@ -101,7 +101,6 @@ class SignupForm extends React.Component {
           {this.renderEmailError()}
         </label>
         <br />
-        <span>or</span>
         <br />
         <label className="signup-label">Password (6 of more characters)
           <input type={this.state.hidden ? "password" : "text"}
@@ -115,7 +114,7 @@ class SignupForm extends React.Component {
 
         <br />
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
-
+        <p><span><span>or</span></span></p>
         <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
         
         <br />
