@@ -251,6 +251,19 @@
   opacity: 1;
 }
 
+.session-input-box .session-input:focus ~ .floating-label.invalid,
+.session-input-box .session-input:not([value='']) ~ .floating-label.invalid {
+  top: 25px;
+  left: 12px;
+  font-size: 14px;
+  color: #d11124;
+  opacity: 1;
+}
+
+.invalid {
+  color: #d11124;
+}
+
 .session-error {
   color: #d11124;
   margin-top: 3px;
