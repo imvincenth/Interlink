@@ -101,6 +101,7 @@ class SignupForm extends React.Component {
           {this.renderEmailError()}
         </label>
         <br />
+        <span>or</span>
         <br />
         <label className="signup-label">Password (6 of more characters)
           <input type={this.state.hidden ? "password" : "text"}
