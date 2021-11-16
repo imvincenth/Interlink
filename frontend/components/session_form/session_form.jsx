@@ -67,7 +67,7 @@ class SessionForm extends React.Component {
         </header>
 
         <form onSubmit={this.handleSubmit} className="session-form-box">
-
+          
           <div className="session-form-container">
 
             <div className="form-header-text">
@@ -77,6 +77,7 @@ class SessionForm extends React.Component {
 
             <span>{this.props.errors.length === 1 ? this.renderErrors() : null}</span>
 
+            <div className="session-input-box">
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
@@ -84,20 +85,29 @@ class SessionForm extends React.Component {
                 placeholder="Email"
                 autoFocus
                 />
-
+            </div>
               <br />
 
+            <div className="session-input-box">
               <input type={this.state.hidden ? "password" : "text"}
                 value={this.state.password}
                 onChange={this.update('password')}
                 className="session-input"
                 placeholder="Password"
                 />
-              <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
+              <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "show" : "hide"}</button>
+            </div>
             <br />
 
-
             <input className="session-submit" type="submit" value={this.props.formType} />
+
+            <div className="third-party-session-spacing-box">
+              <div className="third-party-session-spacing-line"></div>
+              <span>
+                <span className="third-party-session-spacing-word">or</span>
+              </span>
+              <div className="third-party-session-spacing-line"></div>
+            </div>
 
             <br />
             <input className="demo-session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />

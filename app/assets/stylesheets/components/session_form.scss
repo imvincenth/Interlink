@@ -30,26 +30,23 @@
   align-items: center;
   justify-content: center;
   // Temp
-  height: 468px;
+  height: 628px;
   overflow-y: hidden;
 }
 
 .session-form-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  width: 300px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 308px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px 0px;
   padding: 22px;
   border-radius: 8px;
   background: #FFFFFF;
-  // position: absolute;
-  // top: 47%;
-  // left: 50%;
-  // margin-right: 50%;
-  // transform: translate(-50%, -50%)
+  // margin-top: 60px;
 
   @media (max-width: 780px) {
+    -webkit-box-shadow: none;
     box-shadow: none;
     width: 352px;
   }
@@ -59,10 +56,45 @@
   margin-bottom: 5px;
 }
 
+.session-input-box {
+  position: relative;
+  width: 100%;
+}
+
+.session-input-box button {
+  text-decoration:none;
+  cursor: pointer;
+  border: none;
+  border-radius: 28px;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  position: absolute;
+  top: 35px;
+  right: 4px;
+  color: #0a66c2;
+  font-size: 14px;
+  font-weight: 600;
+  height: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
+  line-height: 24px;
+  outline-color: rgb(10, 102, 194);
+  transition-duration: 0.167s;
+  transition-property: background-color;
+}
+
+.session-input-box button:hover {
+  background-color: rgb(208, 232, 255);
+}
+
 .session-input {
   font-size: 18px;
+  width: calc(100% - 26px);
   height: 48px;
-  padding: 0 12px 0 12px;
+  padding-left: 12px;
+  padding-right: 12px;
   border: 1px solid black;
   border-radius: 4px;
   margin-top: 22px;
@@ -98,7 +130,7 @@
   border-radius: 25em;
   text-align: center;
   border: none;
-  margin-top: 16px;
+  margin-top: 32px;
   margin-bottom: 12px;
 }
 
@@ -119,6 +151,7 @@
   text-align: center;
   transition-duration: 41ms;
   border: 1px solid #0a66c2;
+  margin-top: 10px;
 }
 
 .demo-session-submit:hover {
@@ -130,7 +163,7 @@
 .signup-redirect {
   font-family: inherit;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 32px;
   // text-align: center;
   // position: absolute;
   // top: 70%;
@@ -159,4 +192,26 @@
 
 .form-header-text p {
   padding-bottom: 7px;
+}
+
+.third-party-session-spacing-box {
+  display: flex;
+  height: 24px;
+  width: 100%;
+  justify-content: center;
+}
+
+.third-party-session-spacing-line {
+  height: 9px;
+  width: 43%;
+  border-bottom: 1.2px solid rgba(0, 0, 0, 0.2);
+}
+
+.third-party-session-spacing-word {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 400;
+  line-height: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 14px;
 }
