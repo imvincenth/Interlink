@@ -384,10 +384,6 @@
   padding-bottom: 8px;
 }
 
-.invalid-field {
-  border: 1px solid #d11124;
-}
-
 .btn {
   text-decoration:none;
   cursor: pointer;
@@ -430,4 +426,13 @@
   padding-left: 24px;
   padding-right: 24px;
   font-size: 16px;
+}
+
+.invalid-field {
+  border: 1px solid #d11124;
+}
+
+.invalid-field:active {
+  outline: none !important;
+  box-shadow: #d11124 0px 0px 0px 1px inset;
 }

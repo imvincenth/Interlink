@@ -96,7 +96,7 @@ class SignupForm extends React.Component {
           <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
-            className="signup-input"
+            className={this.props.errors.length >= 2 ? "signup-input invalid-field" : "signup-input"}
             />
           {this.renderEmailError()}
         </label>
@@ -108,7 +108,7 @@ class SignupForm extends React.Component {
             onChange={this.update('password')}
             className="signup-input"
             />
-            <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
+          <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
           {this.renderPasswordError()}
         </label>
 
@@ -122,7 +122,7 @@ class SignupForm extends React.Component {
           </span>
           <div className="third-party-spacing-line"></div>
         </div>
-        
+
         <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
         
         <br />
