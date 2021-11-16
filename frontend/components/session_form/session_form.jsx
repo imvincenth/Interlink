@@ -82,9 +82,9 @@ class SessionForm extends React.Component {
                 value={this.state.email}
                 onChange={this.update('email')}
                 className="session-input"
-                placeholder="Email"
                 autoFocus
                 />
+              <span class="floating-label"></span>
             </div>
               <br />
 
