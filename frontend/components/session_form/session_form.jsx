@@ -84,7 +84,7 @@ class SessionForm extends React.Component {
                 className="session-input"
                 autoFocus
                 />
-              <span class="floating-label"></span>
+              <span class="floating-label">Email</span>
             </div>
               <br />
 
@@ -93,8 +93,8 @@ class SessionForm extends React.Component {
                 value={this.state.password}
                 onChange={this.update('password')}
                 className="session-input"
-                placeholder="Password"
                 />
+              <span class="floating-label">Password</span>
               <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "show" : "hide"}</button>
             </div>
             <br />
