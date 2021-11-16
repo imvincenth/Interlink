@@ -81,10 +81,9 @@ class SessionForm extends React.Component {
                 value={this.state.email}
                 onChange={this.update('email')}
                 className={this.props.errors.length === 1 ? "session-input invalid-session-field" : "session-input"}
-                onkeyup="this.setAttribute('value', this.value);"
                 autoFocus
                 />
-              <span class="floating-label">Email</span>
+              <span className="floating-label">Email</span>
             </div>
             <span>{this.props.errors.length === 1 ? this.renderErrors() : null}</span>
 
@@ -95,9 +94,8 @@ class SessionForm extends React.Component {
                 value={this.state.password}
                 onChange={this.update('password')}
                 className={this.props.errors.length === 1 && this.state.password.length < 6 ? "session-input invalid-session-field" : "session-input"}
-                onkeyup="this.setAttribute('value', this.value);"
                 />
-              <span class="floating-label">Password</span>
+              <span className="floating-label">Password</span>
               <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "show" : "hide"}</button>
             </div>
             <br />
