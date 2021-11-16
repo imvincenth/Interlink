@@ -26,11 +26,28 @@ class Homepage extends React.Component {
         </nav>
 
         <section className="homepage-main">
-          <h3 className="homepage-text">One Ring to rule them all,<br/>
-            One Ring to find them,<br/>
-            One Ring to bring them all<br/>
-            and in the darkness bind them.</h3>
-          <img src={window.ringURL} className="homepage-picture" alt="hero picture" />
+          <div className="homepage-main-right">
+            <h3 className="homepage-text">“All’s well that ends better.”
+            </h3>
+            <div className="homepage-links">
+              <ul className="homepage-list">
+                <li className="homepage-list-item">
+
+                </li>
+                <li className="homepage-list-item">
+
+                </li>
+                <li className="homepage-list-item">
+
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="homepage-main-left">
+            <img src={window.ringURL} className="homepage-picture" alt="hero picture" />
+          </div>
+
           <img src={window.fireURL} className="fire-picture" alt="fire picture" />
         </section>
       </div>
