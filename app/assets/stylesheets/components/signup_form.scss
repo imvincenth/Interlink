@@ -295,6 +295,10 @@
   border: 1px solid #0a66c2;
   margin-top: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: 1160px) {
+    margin-top: 0;
+  }
 }
 
 .demo-signup-submit:hover {
@@ -390,11 +394,12 @@
   -moz-appearance: none;
   background: transparent;
   position: absolute;
+  top: 95px;
   right: 6px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
   font-weight: 400;
-  height: 38px;
+  height: 32px;
   line-height: 20px;
 }
 
@@ -408,12 +413,21 @@
   height: 24px;
   width: 100%;
   justify-content: center;
+
+  @media (max-width: 1160px) {
+    height: 0;
+    visibility: hidden;
+  }
 }
 
 .third-party-spacing-line {
   height: 13px;
   width: 50%;
   border-bottom: 1.2px solid rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 1160px) {
+    visibility: hidden;
+  }
 }
 
 .third-party-spacing-word {
@@ -423,6 +437,10 @@
   padding-left: 24px;
   padding-right: 24px;
   font-size: 16px;
+
+  @media (max-width: 1160px) {
+    visibility: hidden;
+  }
 }
 
 .invalid-field {
