@@ -8,10 +8,12 @@ class SessionForm extends React.Component {
       email: '',
       password: '',
 
-      hidden: true
+      hidden: true,
+      valid: false
     };
 
     this.toggleShow = this.toggleShow.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
   }
@@ -52,6 +54,17 @@ class SessionForm extends React.Component {
       </div>
     );
   }
+
+  validateEmail() {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(this.state.email).toLowerCase())) {
+      this.setState({ valid: true });
+      return true;
+    } else {
+      this.setState({ valid: false });
+      return false;
+    }
+  }
   
   render() {
     this.props.errors.forEach(error => {
@@ -80,12 +93,12 @@ class SessionForm extends React.Component {
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
-                className={this.props.errors.length === 1 ? "session-input invalid-session-field" : "session-input"}
+                className={this.props.errors.length === 1 && !this.state.valid ? "session-input invalid-session-field" : "session-input"}
                 autoFocus
                 />
-              <span className={this.props.errors.length === 1 ? "floating-label invalid" : "floating-label"}>Email</span>
+              <span className={this.props.errors.length === 1 && !this.state.valid ? "floating-label invalid" : "floating-label"}>Email</span>
             </div>
-            <span>{this.props.errors.length === 1 ? this.renderErrors() : null}</span>
+            <span>{this.props.errors.length === 1 && !this.state.valid ? this.renderErrors() : null}</span>
 
             <br />
 
@@ -93,14 +106,16 @@ class SessionForm extends React.Component {
               <input type={this.state.hidden ? "password" : "text"}
                 value={this.state.password}
                 onChange={this.update('password')}
-                className={this.props.errors.length === 1 ? "session-input invalid-session-field" : "session-input"}
+                className={this.props.errors.length === 1 && this.state.valid ? "session-input invalid-session-field" : "session-input"}
                 />
-              <span className="floating-label">Password</span>
+              <span className={this.props.errors.length === 1 && this.state.valid ? "floating-label invalid" : "floating-label"}>Password</span>
               <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "show" : "hide"}</button>
             </div>
+            <span>{this.props.errors.length === 1 && this.state.valid ? <p className="session-error">Please enter a password.</p> : null}</span>
+
             <br />
 
-            <input className="session-submit" type="submit" value={this.props.formType} />
+            <input className="session-submit" type="submit" onClick={this.validateEmail} value={this.props.formType} />
 
             <div className="third-party-session-spacing-box">
               <div className="third-party-session-spacing-line"></div>
