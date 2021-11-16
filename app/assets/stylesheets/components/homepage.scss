@@ -41,14 +41,19 @@
 }
 
 .joinnow-nav:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: black;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.9);
   text-decoration: none;
 }
 
 .joinnow-nav:active {
   background-color: rgba(0, 0, 0, 0.1);
-  box-shadow: #0a66c2 0px 0px 0px 2px inset;
+  outline: 5px auto rgba(0, 150, 255, 1);
+  -webkit-outline: 5px auto rgba(0, 150, 255, 1);
+  -moz-outline: 5px auto rgba(0, 150, 255, 1);
+  -ms-outline: 5px auto rgba(0, 150, 255, 1);
+  -o-outline: 5px auto rgba(0, 150, 255, 1);
+  /* Use a border to apply the outline */
 }
 
 .signin-nav {
@@ -67,8 +72,8 @@
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid #0a66c2;
   // border-color: rgba(0, 0, 0, 0);
-  border-style: solid;
-  border-width: 1px;
+  // border-style: solid;
+  // border-width: 1px;
 
   @media (max-width: 1160px) {
     padding: 5.5px 15px;
@@ -76,13 +81,23 @@
   }
 }
 
-.signin-nav:hover,
+.signin-nav:hover {
+  background-color: rgba(112,181,249,0.15);
+  // background-color: rgba(152,216,244,0.25);
+  color: #0a66c2;
+  box-shadow: #0a66c2 0px 0px 0px 1px inset;
+}
+
 .signin-nav:active {
   background-color: rgba(112, 181, 249, 0.15);
+  box-shadow: none;
   color: #0a66c2;
-  // border: 2px solid #0a66c2;
-  // padding: 6px 14px;
-  box-shadow: #0a66c2 0px 0px 0px 1px inset;
+  outline: 5px auto rgba(0, 150, 255, 1);
+  -webkit-outline: 5px auto rgba(0, 150, 255, 1);
+  -moz-outline: 5px auto rgba(0, 150, 255, 1);
+  -ms-outline: 5px auto rgba(0, 150, 255, 1);
+  -o-outline: 5px auto rgba(0, 150, 255, 1);
+  /* Use a border to apply the outline */
 }
 
 .homepage-main {
