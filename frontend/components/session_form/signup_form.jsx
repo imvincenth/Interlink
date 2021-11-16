@@ -96,21 +96,21 @@ class SignupForm extends React.Component {
           <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
-            className={this.props.errors.length >= 2 ? "signup-input invalid-field" : "signup-input"}
+            className={this.emailErrorFieldCheck() ? "signup-input invalid-field" : "signup-input"}
             />
-          {this.renderEmailError()}
         </label>
-        <br />
+        {this.renderEmailError()}
+
         <br />
         <label className="signup-label">Password (6 of more characters)
           <input type={this.state.hidden ? "password" : "text"}
             value={this.state.password}
             onChange={this.update('password')}
-            className="signup-input"
+            className={this.passwordErrorFieldCheck() ? "signup-input invalid-field" : "signup-input"}
             />
           <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
-          {this.renderPasswordError()}
         </label>
+        {this.renderPasswordError()}
 
         <br />
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
@@ -143,7 +143,7 @@ class SignupForm extends React.Component {
           <input type="text"
             value={this.state.first_name}
             onChange={this.update('first_name')}
-            className="signup-input"
+            className={this.firstNameFieldCheck() ? "signup-input invalid-field" : "signup-input"}
           />
         </label>
   
@@ -155,7 +155,7 @@ class SignupForm extends React.Component {
           <input type="text"
             value={this.state.last_name}
             onChange={this.update('last_name')}
-            className="signup-input"
+            className={this.lastNameFieldCheck() ? "signup-input invalid-field" : "signup-input"}
           />
         </label>
 
@@ -312,73 +312,6 @@ class SignupForm extends React.Component {
     this.setState({ headline: "Student at " + this.state.school });
   }
 
-  titleErrors() {
-    let titleErrors = [];
-    if (this.props.expErrors.length !== 0) {
-      this.props.expErrors.forEach(error => {
-        if (error.includes("Title")) {
-          titleErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {titleErrors}
-        </span>
-      );
-    }
-  }
-
-  companyErrors() {
-    if (!this.props.expErrors) return null;
-    let companyErrors = [];
-    if (this.props.expErrors.length !== 0) {
-      this.props.expErrors.forEach(error => {
-        if (error.includes("Company")) {
-          companyErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {companyErrors}
-        </span>
-      );
-    }
-  }
-
-  industryErrors() {
-    if (!this.props.expErrors) return null;
-    let industryErrors = [];
-    if (this.props.expErrors.length !== 0) {
-      this.props.expErrors.forEach(error => {
-        if (error.includes("Industry")) {
-          industryErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {industryErrors}
-        </span>
-      );
-    }
-  }
-
-  schoolErrors() {
-    if (!this.props.eduErrors) return null;
-    let schoolErrors = [];
-    if (this.props.eduErrors.length !== 0) {
-      this.props.eduErrors.forEach(error => {
-        if (error.includes("School")) {
-          schoolErrors.push(error);
-        }
-      })
-      return (
-        <span className="error">
-          {schoolErrors}
-        </span>
-      );
-    }
-  }
-
   studentReqCheck() {
     if (this.state.student) {
       if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
@@ -512,6 +445,7 @@ class SignupForm extends React.Component {
     this.props.processForm(user);
   }
 
+  // User Errors
   renderEmailError() {
     let pageOneErrors = [];
     this.props.errors.forEach(error => {
@@ -520,10 +454,20 @@ class SignupForm extends React.Component {
       }
     })
     return(
-      <span className="error">
+      <p className="error">
         {pageOneErrors}
-      </span>
+      </p>
     );
+  }
+
+  emailErrorFieldCheck() {
+    let errors = false;
+    this.props.errors.forEach(error => {
+      if (error.includes("Email")) {
+        errors = true;
+      }
+    })
+    return errors;
   }
 
   renderPasswordError() {
@@ -534,10 +478,20 @@ class SignupForm extends React.Component {
       }
     })
     return(
-      <span className="error">
+      <p className="error">
         {pageOneErrors}
-      </span>
+      </p>
     );
+  }
+
+  passwordErrorFieldCheck() {
+    let errors = false;
+    this.props.errors.forEach(error => {
+      if (error.includes("Password")) {
+        errors = true;
+      }
+    })
+    return errors;
   }
 
   renderFirstNameError() {
@@ -549,11 +503,21 @@ class SignupForm extends React.Component {
         }
       })
       return(
-        <span className="error">
+        <p className="error">
           {pageTwoErrors}
-        </span>
+        </p>
       );
     }
+  }
+
+  firstNameFieldCheck() {
+    let errors = false;
+    this.props.errors.forEach(error => {
+      if (error.includes("First")) {
+        errors = true;
+      }
+    })
+    return errors;
   }
 
   renderLastNameError() {
@@ -565,11 +529,26 @@ class SignupForm extends React.Component {
         }
       })
       return(
-        <span className="error">
+        <p className="error">
           {pageTwoErrors}
-        </span>
+        </p>
       );
     }
+  }
+
+  lastNameFieldCheck() {
+    let errors = false;
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Last")) {
+          errors = true;
+        }
+      })
+      return(
+        false
+      );
+    }
+    return errors;
   }
 
   renderCountryRegionError() {
@@ -588,6 +567,21 @@ class SignupForm extends React.Component {
     }
   }
 
+  countryRegionFieldCheck() {
+    let errors = false;
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Country")) {
+          errors = true;
+        }
+      })
+      return(
+        false
+      );
+    }
+    return errors;
+  }
+
   renderCityDistrictError() {
     let pageThreeErrors = [];
     if (this.props.errors.length !== 0) {
@@ -597,11 +591,26 @@ class SignupForm extends React.Component {
         }
       })
       return(
-        <span className="error">
+        <p className="error">
           {pageThreeErrors}
-        </span>
+        </p>
       );
     }
+  }
+
+  cityDistrictFieldCheck() {
+    let errors = false;
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("City")) {
+          errors = true;
+        }
+      })
+      return(
+        false
+      );
+    }
+    return errors;
   }
 
   renderHeadlineError() {
@@ -613,9 +622,92 @@ class SignupForm extends React.Component {
         }
       })
       return (
-        <span className="error">
+        <p className="error">
           {pageFourErrors}
-        </span>
+        </p>
+      );
+    }
+  }
+
+  headlineFieldCheck() {
+    let errors = false;
+    if (this.props.errors.length !== 0) {
+      this.props.errors.forEach(error => {
+        if (error.includes("Headline")) {
+          errors = true;
+        }
+      })
+      return(
+        false
+      );
+    }
+    return errors;
+  }
+
+  titleErrors() {
+    let titleErrors = [];
+    if (this.props.expErrors.length !== 0) {
+      this.props.expErrors.forEach(error => {
+        if (error.includes("Title")) {
+          titleErrors.push(error);
+        }
+      })
+      return (
+        <p className="error">
+          {titleErrors}
+        </p>
+      );
+    }
+  }
+
+  // Experience and Education Errors
+  companyErrors() {
+    if (!this.props.expErrors) return null;
+    let companyErrors = [];
+    if (this.props.expErrors.length !== 0) {
+      this.props.expErrors.forEach(error => {
+        if (error.includes("Company")) {
+          companyErrors.push(error);
+        }
+      })
+      return (
+        <p className="error">
+          {companyErrors}
+        </p>
+      );
+    }
+  }
+
+  industryErrors() {
+    if (!this.props.expErrors) return null;
+    let industryErrors = [];
+    if (this.props.expErrors.length !== 0) {
+      this.props.expErrors.forEach(error => {
+        if (error.includes("Industry")) {
+          industryErrors.push(error);
+        }
+      })
+      return (
+        <p className="error">
+          {industryErrors}
+        </p>
+      );
+    }
+  }
+
+  schoolErrors() {
+    if (!this.props.eduErrors) return null;
+    let schoolErrors = [];
+    if (this.props.eduErrors.length !== 0) {
+      this.props.eduErrors.forEach(error => {
+        if (error.includes("School")) {
+          schoolErrors.push(error);
+        }
+      })
+      return (
+        <p className="error">
+          {schoolErrors}
+        </p>
       );
     }
   }
