@@ -13,13 +13,19 @@
   position: relative;
   justify-content: space-between;
   flex-wrap: nowrap;
+
+  @media (max-width: 780px) {
+    margin-top: 5px;
+    margin-left: 32px;
+  }
 }
 
 .loginpage-logo {
   display: relative;
   width: 115px;
   height: 80px;
-  @media (max-width: 768px) {
+
+  @media (max-width: 780px) {
     padding: 0 5px;
   }
 }
@@ -29,9 +35,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // Temp
   height: 628px;
   overflow-y: hidden;
+
+  @media (max-width: 780px) {
+    justify-content: flex-start;
+  }
 }
 
 .session-form-container {
@@ -124,8 +133,8 @@
 }
 
 .session-submit {
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   font-family: inherit;
   height: 52px;
   background-color: #0a66c2;
@@ -144,23 +153,24 @@
 }
 
 .demo-session-submit {
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   font-family: inherit;
   height: 52px;
   background-color: #FFFFFF;
-  color: #0a66c2;
+  color: rgba(0, 0, 0, 0.6);
   padding: 10px;
   border-radius: 25em;
   text-align: center;
   transition-duration: 41ms;
-  border: 1px solid #0a66c2;
+  border: 1px solid rgba(0, 0, 0, 0.6);
   margin-top: 10px;
 }
 
 .demo-session-submit:hover {
-  background-color: #0a66c22f;
-  border: 2px solid #0a66c2;
+  background-color: rgba(0, 0, 0, 0.06);
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,0.6);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.6);
   cursor: pointer;
 }
 
@@ -239,4 +249,23 @@
   font-size: 14px;
   color: rgb(0, 0, 0);
   opacity: 1;
+}
+
+.session-error {
+  color: #d11124;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+}
+
+.invalid-session-field {
+  border: 1px solid #d11124;
+}
+
+.invalid-session-field:focus {
+  outline: none !important;
+  box-shadow: #d11124 0px 0px 0px 1px inset;
 }

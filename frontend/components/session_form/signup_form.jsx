@@ -100,17 +100,20 @@ class SignupForm extends React.Component {
         {this.renderEmailError()}
 
         <br />
-        <label className="signup-label">Password (6 of more characters)
-          <input type={this.state.hidden ? "password" : "text"}
-            value={this.state.password}
-            onChange={this.update('password')}
-            className={this.passwordErrorFieldCheck() ? "signup-input invalid-field" : "signup-input"}
-            />
-          <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
-        </label>
-        {this.renderPasswordError()}
+        <div className="password-box">
+          <label className="signup-label">Password (6 of more characters)
+            <input type={this.state.hidden ? "password" : "text"}
+              value={this.state.password}
+              onChange={this.update('password')}
+              className={this.passwordErrorFieldCheck() ? "signup-input invalid-field" : "signup-input"}
+              />
+            <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
+          </label>
+          {this.renderPasswordError()}
+        </div>
 
-        <br />
+        <p className="agreement">By clicking Agree & Join, you take one more step. One more step and it'll be the furthest you've ever been from home.</p>
+
         <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
 
         {/*  OR Spacing */}

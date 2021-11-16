@@ -57,7 +57,6 @@
 
 .signup-form-container {
   position: relative;
-  // display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
@@ -244,18 +243,20 @@
 
 .signup-submit {
   width: 100%;
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   font-family: inherit;
   height: 48px;
   background-color: #0a66c2;
-  color: white;
+  color: rgb(255, 255, 255);
   padding: 10px;
   border-radius: 25em;
   text-align: center;
   border: none;
   margin-bottom: 19px;
-  margin-top: 18px;
+  // margin-top: 18px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
 }
 
 .signup-submit:hover {
@@ -295,6 +296,8 @@
   border: 1px solid #0a66c2;
   margin-top: 20px;
   margin-bottom: 20px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
 
   @media (max-width: 1160px) {
     margin-top: 0;
@@ -385,6 +388,10 @@
   padding-bottom: 8px;
 }
 
+.password-box {
+  position: relative;
+}
+
 .btn {
   text-decoration:none;
   cursor: pointer;
@@ -394,7 +401,7 @@
   -moz-appearance: none;
   background: transparent;
   position: absolute;
-  top: 95px;
+  top: 23px;
   right: 6px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
@@ -450,4 +457,15 @@
 .invalid-field:focus {
   outline: none !important;
   box-shadow: #d11124 0px 0px 0px 1px inset;
+}
+
+.agreement {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  vertical-align: baseline;
 }

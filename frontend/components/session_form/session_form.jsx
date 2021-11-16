@@ -45,9 +45,9 @@ class SessionForm extends React.Component {
     return(
       <div>
         {this.props.errors.map((error, i) => (
-          <span key={`error-${i}`} className="error">
+          <p key={`error-${i}`} className="session-error">
             {error}
-          </span>
+          </p>
         ))}
       </div>
     );
@@ -75,25 +75,26 @@ class SessionForm extends React.Component {
               <p>Stay updated on your professional world</p>
             </div>
 
-            <span>{this.props.errors.length === 1 ? this.renderErrors() : null}</span>
 
             <div className="session-input-box">
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
-                className="session-input"
+                className={this.props.errors.length === 1 ? "session-input invalid-session-field" : "session-input"}
                 onkeyup="this.setAttribute('value', this.value);"
                 autoFocus
                 />
               <span class="floating-label">Email</span>
             </div>
-              <br />
+            <span>{this.props.errors.length === 1 ? this.renderErrors() : null}</span>
+
+            <br />
 
             <div className="session-input-box">
               <input type={this.state.hidden ? "password" : "text"}
                 value={this.state.password}
                 onChange={this.update('password')}
-                className="session-input"
+                className={this.props.errors.length === 1 && this.state.password.length < 6 ? "session-input invalid-session-field" : "session-input"}
                 onkeyup="this.setAttribute('value', this.value);"
                 />
               <span class="floating-label">Password</span>
