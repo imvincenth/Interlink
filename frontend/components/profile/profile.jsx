@@ -19,7 +19,7 @@ class Profile extends React.Component {
 
   currentUserCheck() {
     this.props.experiences.forEach(exp => this.props.currentUser.id === exp.user_id ? this.experiences.push(exp) : null);
-    this.props.educations.forEach(edu => this.props.currentUser.id === edu.user_id ? this.eductions.push(exp) : null);
+    this.props.educations.forEach(edu => this.props.currentUser.id === edu.user_id ? this.educations.push(edu) : null);
   }
 
   render() {
@@ -67,7 +67,7 @@ class Profile extends React.Component {
                   <h1 className="education-header">Education</h1>
                   <br />
                   <div>
-                    {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
+                    {this.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
                     {this.props.openCreateEducationModal}
                   </div>
                 </div>

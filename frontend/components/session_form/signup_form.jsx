@@ -140,7 +140,7 @@ class SignupForm extends React.Component {
 
         <input className={!this.state.demoLogged ? "signup-submit" : "signup-cant-submit"} 
           type="submit" 
-          value={!this.state.demoLogged ? "Agree & Join" : "My preci..."} 
+          value={!this.state.demoLogged ? "Agree & Join" : "Signing in..."} 
           onClick={this.pageCheck} 
           disabled={!this.state.demoLogged ? false : true} 
           />
@@ -156,7 +156,7 @@ class SignupForm extends React.Component {
 
         <input className={!this.state.demoLogged ? "demo-signup-submit" : "demo-signup-cant-submit"} 
           type="submit" 
-          value={!this.state.demoLogged ? "Demo Login" : "...oussSSSsssSSSs"} 
+          value={"Demo Login"} 
           onClick={this.demoLogin} 
           disabled={!this.state.demoLogged ? false : true} 
           />

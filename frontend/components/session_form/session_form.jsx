@@ -139,7 +139,7 @@ class SessionForm extends React.Component {
 
             <input className={!this.state.demoLogged ? "session-submit" : "session-cant-submit"} 
               type="submit" onClick={this.validateEmail} 
-              value={!this.state.demoLogged ? this.props.formType : "One does not simply..."} 
+              value={!this.state.demoLogged ? this.props.formType : "Signing in..."} 
               disabled={!this.state.demoLogged ? false : true} 
               />
 
@@ -156,7 +156,7 @@ class SessionForm extends React.Component {
 
               <input className={!this.state.demoLogged ? "demo-session-submit" : "demo-session-cant-submit"} 
                 type="submit" 
-                value={!this.state.demoLogged ? "Demo Login" : "...walk into Mordor"} 
+                value={"Demo Login"} 
                 onClick={this.demoLogin} 
                 disabled={!this.state.demoLogged ? false : true} 
                 />
