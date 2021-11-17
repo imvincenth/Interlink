@@ -124,7 +124,7 @@
 }
 
 .homepage-main-right {
-  width: 50%;
+  width: 40%;
   align-items: flex-start;
   align-content: flex-start;
 }
@@ -138,9 +138,10 @@
 
   @media (max-width: 810px) {
     text-align: center;
-    font-size: 24px;
+    font-size: 32px;
+    font-weight: 300;
     width: 100%;
-    line-height: 2;
+    line-height: 38.4px;
   }
   z-index: 1;
 }
@@ -153,27 +154,43 @@
 
 .homepage-list {
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .homepage-list-item {
   display: flex;
-  justify-content: space-between;
 }
 
 .homepage-card {
-  border: 1px solid rgba(0, 0, 0, 0.9);
+  border: 1px solid #efefef;
+  color: rgba(0, 0, 0, 0.9);
   border-radius: 8px;
   text-align: left;
   min-height: 27px;
-  width: 408px;
+  width: 376px;
   padding: 16px;
   font-size: 20px;
   font-weight: 400;
   line-height: 25px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.homepage-card:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+
+}
+
+.homepage-list-icon {
+  height: 24px;
+  width: 24px;
+  opacity: 0.6;
 }
 
 .homepage-main-left {
-  width: 50%;
+  width: 60%;
   align-items: flex-start;
   align-content: flex-start;
 }
