@@ -328,7 +328,7 @@ class SignupForm extends React.Component {
   }
 
   dateCheck() {
-    if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
+    if (this.state.startYr !== "invalid" && this.state.endYr !== "invalid" && this.state.startYr !== "" && this.state.endYr !== "" ) {
       if (Number(this.state.endYr) >= Number(this.state.startYr)) {
         return false;
       } else {
@@ -417,7 +417,7 @@ class SignupForm extends React.Component {
               <div className="signup-date-dropdown">
                 <label className="signup-label">Start date <span className="blue-star">*</span>
                   <div>
-                    <select onChange={this.update("startYr")} className="signup-dropdown">
+                    <select onChange={this.update("startYr")} className={this.dateCheck() ? "signup-dropdown-invalid" : "signup-dropdown"}>
                       <option onClick={this.dateCheck} value="invalid"> - </option>
                       {this.createOptions(years)}
                     </select>
@@ -428,7 +428,7 @@ class SignupForm extends React.Component {
               <div>
                 <label className="signup-label">End date (or expected) <span className="blue-star">*</span>
                   <div className="signup-date-dropdown">
-                    <select onChange={this.update("endYr")} className="signup-dropdown">
+                    <select onChange={this.update("endYr")} className={this.dateCheck() ? "signup-dropdown-invalid" : "signup-dropdown"}>
                       <option onClick={this.dateCheck} value="invalid"> - </option>
                       {this.createOptions(years)}
                     </select>
