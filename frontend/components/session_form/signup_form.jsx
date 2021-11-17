@@ -161,6 +161,8 @@ class SignupForm extends React.Component {
         <br />
         {this.checkErrors === 0 ? "" : this.renderLastNameError()}
         <br />
+        
+        <br />
 
         <input className="signup-submit" type="submit" value={"Continue"} onClick={this.checkErrorPlus} />
       </div>
