@@ -42,6 +42,7 @@ class SignupForm extends React.Component {
       start_date: "test",
       end_date: "test",
 
+      dateCheck: false,
       startYr: "",
       endYr: ""
     };
@@ -67,6 +68,7 @@ class SignupForm extends React.Component {
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
     this.studentReqCheck = this.studentReqCheck.bind(this);
+    this.timeCheck = this.timeCheck.bind(this);
   }
 
   createOptions(str) {
@@ -202,6 +204,9 @@ class SignupForm extends React.Component {
           {this.checkErrors === 1 ? "" : this.renderCityDistrictError()}
           <br />
 
+          <br />
+          <br />
+
           <input className="signup-submit" type="submit" value={"Next"} onClick={this.checkErrorPlusTwo} />
         </div>
       </div>
@@ -312,7 +317,7 @@ class SignupForm extends React.Component {
   studentReqCheck() {
     if (this.state.student) {
       if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
-        if (this.state.startYr !== "-" && this.state.endYr !== "-") {
+        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
           if (Number(this.state.endYr) >= Number(this.state.startYr)) {
             return true;
           }
@@ -322,6 +327,24 @@ class SignupForm extends React.Component {
     return false;
   }
 
+  timeCheck() {
+    let check = false;
+    if (typeof this.state.startYr === "number" && typeof this.state.endYr === "number") {
+      check = true;
+    } else {
+      check = false;
+    }
+    if (Number(this.state.endYr) >= Number(this.state.startYr)) {
+      check = true;
+    } else {
+      check = false;
+    }
+    if (check) {
+      this.setState({ dateCheck: true });
+    } else {
+      this.setState({ dateCheck: false });
+    }
+  }
 
   pageFour() {
     if (!this.state.student) {
@@ -398,10 +421,11 @@ class SignupForm extends React.Component {
             </div>
 
             <div className="signup-student-dates">
+
               <div className="signup-date-dropdown">
                 <label className="signup-label">Start date <span className="blue-star">*</span>
                   <div>
-                    <select onChange={this.update("startYr")}  className="signup-dropdown">
+                    <select onChange={this.update("startYr")} className="signup-dropdown">
                       <option> - </option>
                       {this.createOptions(years)}
                     </select>
@@ -412,14 +436,16 @@ class SignupForm extends React.Component {
               <div>
                 <label className="signup-label">End date (or expected) <span className="blue-star">*</span>
                   <div className="signup-date-dropdown">
-                    <select onChange={this.update("endYr")}  className="signup-dropdown">
+                    <select onChange={this.update("endYr")} className="signup-dropdown">
                       <option> - </option>
                       {this.createOptions(years)}
                     </select>
                   </div>
                 </label>
               </div>
+
             </div>
+            {!this.timeCheck() ? <p className="error">Your end date can't be earlier than your start date.</p> : null }
 
             <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
             {this.studentReqCheck() ? this.canContinueEducation() : this.cantContinue()}
