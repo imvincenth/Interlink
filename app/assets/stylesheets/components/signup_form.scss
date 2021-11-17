@@ -283,7 +283,7 @@
 .signup-submit {
   width: 100%;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   font-family: inherit;
   height: 48px;
   background-color: #0a66c2;
@@ -296,6 +296,25 @@
   // margin-top: 18px;
   transition-duration: 0.167s;
   transition-property: background-color, box-shadow, color;
+}
+
+.signup-cant-submit {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: inherit;
+  height: 48px;
+  background-color: #004182;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 25em;
+  text-align: center;
+  border: none;
+  margin-bottom: 19px;
+  // margin-top: 18px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  cursor: not-allowed;
 }
 
 .signup-submit:hover {

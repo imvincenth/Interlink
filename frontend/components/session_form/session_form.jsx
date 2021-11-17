@@ -9,7 +9,9 @@ class SessionForm extends React.Component {
       password: '',
 
       hidden: true,
-      valid: false
+      valid: false,
+
+      demoLogged: false
     };
 
     this.toggleShow = this.toggleShow.bind(this);
@@ -24,7 +26,27 @@ class SessionForm extends React.Component {
 
   demoLogin(e) {
     e.preventDefault();
-    this.props.demoLogin();
+
+    this.setState({ email: '', password: '', demoLogged: true });
+    const email = "gandalf@the.grey".split("");
+    let emailInput = "";
+    email.forEach((input, i) => {
+      setTimeout(() => {
+        emailInput += input;
+        this.setState({ email: emailInput });
+      }, 100 * i);
+    });
+
+    const password = 'password'.split('');
+    let passwordInput = "";
+    password.forEach((input, i) => {
+      setTimeout(() => {
+        passwordInput += input;
+        this.setState({ password: passwordInput });
+      }, 100 * i);
+    });
+
+    setTimeout(() => this.props.demoLogin(), 1600);
   }
 
   toggleShow() {
@@ -115,7 +137,11 @@ class SessionForm extends React.Component {
 
             <br />
 
-            <input className="session-submit" type="submit" onClick={this.validateEmail} value={this.props.formType} />
+            <input className={!this.state.demoLogged ? "session-submit" : "session-cant-submit"} 
+              type="submit" onClick={this.validateEmail} 
+              value={!this.state.demoLogged ? this.props.formType : "Signing in..."} 
+              disabled={!this.state.demoLogged ? false : true} 
+              />
 
             <div className="third-party-session-spacing-box">
               <div className="third-party-session-spacing-line"></div>
@@ -127,7 +153,7 @@ class SessionForm extends React.Component {
 
             <br />
             <div className="demo-session-box">
-              
+
               <input className="demo-session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
             </div>
 

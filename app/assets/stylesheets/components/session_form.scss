@@ -147,6 +147,22 @@
   margin-bottom: 12px;
 }
 
+.session-cant-submit {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  height: 52px;
+  background-color: #004182;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 25em;
+  text-align: center;
+  border: none;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  cursor: not-allowed;
+}
+
 .session-submit:hover {
   background-color: #004182;
   cursor: pointer;

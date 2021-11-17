@@ -44,7 +44,9 @@ class SignupForm extends React.Component {
 
       dateError: false,
       startYr: "",
-      endYr: ""
+      endYr: "",
+
+      demoLogged: false
     };
 
     this.toggleShow = this.toggleShow.bind(this);
@@ -82,7 +84,27 @@ class SignupForm extends React.Component {
 
   demoLogin(e) {
     e.preventDefault();
-    this.props.demoLogin();
+
+    this.setState({ email: '', password: '', demoLogged: true });
+    const email = "gandalf@the.grey".split("");
+    let emailInput = "";
+    email.forEach((input, i) => {
+      setTimeout(() => {
+        emailInput += input;
+        this.setState({ email: emailInput });
+      }, 100 * i);
+    });
+
+    const password = 'password'.split('');
+    let passwordInput = "";
+    password.forEach((input, i) => {
+      setTimeout(() => {
+        passwordInput += input;
+        this.setState({ password: passwordInput });
+      }, 100 * i);
+    });
+
+    setTimeout(() => this.props.demoLogin(), 1600);
   }
 
   toggleShow() {
@@ -116,7 +138,12 @@ class SignupForm extends React.Component {
 
         <p className="agreement">By clicking Agree & Join, you take one more step. One more step and it'll be the furthest you've ever been from home.</p>
 
-        <input className="signup-submit" type="submit" value={"Agree & Join"} onClick={this.pageCheck} />
+        <input className={!this.state.demoLogged ? "signup-submit" : "signup-cant-submit"} 
+          type="submit" 
+          value={!this.state.demoLogged ? "Agree & Join" : "Signing in..."} 
+          onClick={this.pageCheck} 
+          disabled={!this.state.demoLogged ? false : true} 
+          />
 
         {/*  OR Spacing */}
         <div className="third-party-spacing-box">
@@ -161,7 +188,7 @@ class SignupForm extends React.Component {
         <br />
         {this.checkErrors === 0 ? "" : this.renderLastNameError()}
         <br />
-        
+
         <br />
 
         <input className="signup-submit" type="submit" value={"Continue"} onClick={this.checkErrorPlus} />
