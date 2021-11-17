@@ -173,8 +173,8 @@ class SignupForm extends React.Component {
     return (
       <div className="signup-form-container-three">
         <header>
-          <h1 className="signup-greeting">Welcome, {this.state.first_name}!</h1>
-          <p className="signup-message">Let’s start your profile, connect to people you know, and engage with them on topics you care about.</p>
+          <h1 className="signup-greeting">Where are you located?</h1>
+          <p className="signup-message">We'll recommend posts and people near you to help you excel.</p>
         </header>
 
         <div className="signup-form-box-three">
@@ -313,7 +313,7 @@ class SignupForm extends React.Component {
     if (this.state.student) {
       if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
         if (this.state.startYr !== "-" && this.state.endYr !== "-") {
-          if (Number(this.state.endYr) > Number(this.state.startYr)) {
+          if (Number(this.state.endYr) >= Number(this.state.startYr)) {
             return true;
           }
         }
