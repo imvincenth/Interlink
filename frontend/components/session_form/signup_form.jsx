@@ -42,7 +42,7 @@ class SignupForm extends React.Component {
       start_date: "test",
       end_date: "test",
 
-      dateCheck: false,
+      dateError: false,
       startYr: "",
       endYr: ""
     };
@@ -329,20 +329,14 @@ class SignupForm extends React.Component {
 
   timeCheck() {
     let check = false;
-    if (typeof this.state.startYr === "number" && typeof this.state.endYr === "number") {
-      check = true;
-    } else {
+    if (typeof Number(this.state.startYr) === "number" && typeof Number(this.state.endYr) === "number") {
       check = false;
-    }
-    if (Number(this.state.endYr) >= Number(this.state.startYr)) {
-      check = true;
-    } else {
-      check = false;
+      if (Number(this.state.endYr) < Number(this.state.startYr)) {
+        check = true;
+      }
     }
     if (check) {
-      this.setState({ dateCheck: true });
-    } else {
-      this.setState({ dateCheck: false });
+      this.setState({ dateError: true });
     }
   }
 
@@ -425,7 +419,7 @@ class SignupForm extends React.Component {
               <div className="signup-date-dropdown">
                 <label className="signup-label">Start date <span className="blue-star">*</span>
                   <div>
-                    <select onChange={this.update("startYr")} className="signup-dropdown">
+                    <select onChange={() => { this.update("startYr"); this.timeCheck() }} className="signup-dropdown">
                       <option> - </option>
                       {this.createOptions(years)}
                     </select>
@@ -436,7 +430,7 @@ class SignupForm extends React.Component {
               <div>
                 <label className="signup-label">End date (or expected) <span className="blue-star">*</span>
                   <div className="signup-date-dropdown">
-                    <select onChange={this.update("endYr")} className="signup-dropdown">
+                    <select onChange={() => { this.update("endYr"); this.timeCheck() }} className="signup-dropdown">
                       <option> - </option>
                       {this.createOptions(years)}
                     </select>
@@ -445,7 +439,8 @@ class SignupForm extends React.Component {
               </div>
 
             </div>
-            {!this.timeCheck() ? <p className="error">Your end date can't be earlier than your start date.</p> : null }
+
+            {this.state.dateError ? <p className="error">Your end date can't be earlier than your start date.</p> : null }
 
             <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
             {this.studentReqCheck() ? this.canContinueEducation() : this.cantContinue()}
