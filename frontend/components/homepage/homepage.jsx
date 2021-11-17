@@ -26,25 +26,26 @@ class Homepage extends React.Component {
         </nav>
 
         <section className="homepage-main">
-          <div className="homepage-main-right">
-            <h3 className="homepage-text">“All’s well that ends better.”
-            </h3>
+
+          <div className="homepage-main-left">
+            <h3 className="homepage-text">Welcome to your professional community</h3>
+            <span className="homepage-subtext">...in Middle-Earth</span>
             <div className="homepage-links">
               <ul className="homepage-list">
                 <li className="homepage-list-item">
-
+                  <a className="homepage-card" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/">The real LinkedIn <img src={window.linkedinURL} alt="linkedin logo" /></a>
                 </li>
                 <li className="homepage-list-item">
-
+                  <a className="homepage-card" href="https://angel.co/vincent-hsu-7">Find me on AngelList <img src={window.angellistURL} alt="angellist logo" /></a>
                 </li>
                 <li className="homepage-list-item">
-
+                  <a className="homepage-card" href="https://github.com/imvincenth">Look at my other projects <img src={window.githubURL} alt="github logo" /></a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="homepage-main-left">
+          <div className="homepage-main-right">
             <img src={window.ringURL} className="homepage-picture" alt="hero picture" />
           </div>
 

@@ -102,7 +102,7 @@
 
 .homepage-main {
   display: flex;
-  align-content: start;
+  align-content: flex-start;
   min-height: 700px;
   padding-top: 40px;
   padding-bottom: 130px;
@@ -110,7 +110,7 @@
   position: relative;
   width: 100%;
   max-width: 1128px;
-  align-items: center;
+  // align-items: center;
   flex-wrap: wrap;
   margin: auto;
 
@@ -122,14 +122,17 @@
 
 .homepage-main-right {
   width: 50%;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .homepage-text {
-  width: 70%;
-  font-size: 40px;
-  font-weight: 300;
-  line-height: 40px;
-  color: #8f5849;
+  width: 100%;
+  font-size: 56px;
+  font-weight: 200;
+  line-height: 67.2px;
+  color: rgb(143, 88, 73);
+
   @media (max-width: 810px) {
     text-align: center;
     font-size: 24px;
@@ -139,8 +142,37 @@
   z-index: 1;
 }
 
+.homepage-subtext {
+  font-size: 12px;
+  color: rgb(143, 88, 73);
+  justify-content: flex-end;
+}
+
+.homepage-list {
+  list-style-type: none;
+}
+
+.homepage-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.homepage-card {
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  text-align: left;
+  min-height: 23px;
+  width: 408px;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 25px;
+}
+
 .homepage-main-left {
   width: 50%;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .homepage-picture {
