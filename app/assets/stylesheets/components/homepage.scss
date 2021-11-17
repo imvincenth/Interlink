@@ -1,6 +1,9 @@
 .homepage {
   padding: 0px;
-  padding-left: 16px;
+  
+  @media (max-width: 1160px) {
+    padding-left: 28px;
+  }
 }
 
 .homepage-nav {
@@ -161,7 +164,7 @@
   border: 1px solid rgba(0, 0, 0, 0.9);
   border-radius: 8px;
   text-align: left;
-  min-height: 23px;
+  min-height: 27px;
   width: 408px;
   padding: 16px;
   font-size: 20px;
