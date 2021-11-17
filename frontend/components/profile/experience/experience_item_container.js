@@ -5,7 +5,7 @@ import { openModal } from '../../../actions/modal_actions';
 import Experience from './experience_item.jsx';
 
 const mSTP = (state, ownProps) => {
-  return {currentUser: state.entities.users[state.session.currentUser],}
+  return {currentUser: state.entities.users[state.session.currentUser]}
 };
 
 const mDTP = dispatch => ({

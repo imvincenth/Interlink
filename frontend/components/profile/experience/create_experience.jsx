@@ -215,7 +215,6 @@ class CreateExperienceForm extends React.Component {
   }
 
   render() {
-    console.log(this.props.experience)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

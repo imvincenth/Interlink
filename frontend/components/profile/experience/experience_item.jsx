@@ -14,8 +14,7 @@ class Experience extends React.Component {
             </button>
           </div>
           <h2>{experience.company} {experience.employment_type}</h2>
-          <h2>{experience.start_date} - {experience.end_date}
-          </h2>
+          {experience.start_date !== "invalid" ? <h2>{experience.start_date} - {experience.end_date}</h2> : null}
         </div>
       </div>
     )

@@ -39,8 +39,8 @@ class SignupForm extends React.Component {
       degree: "",
       subject: "",
       
-      start_date: "test",
-      end_date: "test",
+      start_date: "invalid",
+      end_date: "invalid",
 
       dateError: false,
       startYr: "",

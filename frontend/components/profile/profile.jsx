@@ -5,12 +5,28 @@ import ExperienceItemContainer from './experience/experience_item_container';
 import EducationItemContainer from './education/education_item_container';
 
 class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.experiences = [];
+    this.educations = [];
+  }
+
   componentDidMount() {
     this.props.fetchExperiences();
     this.props.fetchEducations();
   }
 
+  currentUserCheck() {
+    this.props.experiences.forEach(exp => this.props.currentUser.id === exp.user_id ? this.experiences.push(exp) : null);
+    this.props.educations.forEach(edu => this.props.currentUser.id === edu.user_id ? this.eductions.push(exp) : null);
+  }
+
   render() {
+    this.experiences = [];
+    this.educations = [];
+    this.currentUserCheck();
+
     const { currentUser, experiences, fetchExperiences, fetchEducations } = this.props;
     return (
       <div className="profile-background">
@@ -42,7 +58,7 @@ class Profile extends React.Component {
                   <h1 className="experience-header">Experience</h1>
                   <br />
                   <div className="experience-item">
-                    {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
+                    {this.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
                     {this.props.openCreateExperienceModal}
                   </div>
                 </div>
