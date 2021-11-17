@@ -73,7 +73,7 @@ class SignupForm extends React.Component {
 
   createOptions(str) {
     let options = str.split(",");
-    return options.map((option, i) => <option onClick={this.dateCheck} key={i} value={option}>{option}</option>)
+    return options.map((option, i) => <option key={i} value={option}>{option}</option>)
   }
 
   refreshPage() {
@@ -328,16 +328,12 @@ class SignupForm extends React.Component {
   }
 
   dateCheck() {
-    if (this.state.student) {
-      if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
-        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
-          if (Number(this.state.endYr) >= Number(this.state.startYr)) {
-            this.setState({ dateError: false });
-          }
-        }
+    if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
+      if (Number(this.state.endYr) >= Number(this.state.startYr)) {
+        return false;
       }
     }
-    this.setState({ dateError: true });
+    return true;
   }
 
   pageFour() {
@@ -440,7 +436,7 @@ class SignupForm extends React.Component {
 
             </div>
 
-            {this.state.dateError ? <p className="error">Your end date can't be earlier than your start date.</p> : null }
+            {this.dateCheck() ? <p className="error">Your end date can't be earlier than your start date.</p> : null }
 
             <button className="student-switch" onClick={this.notStudent}>I’m not a student</button>
             {this.studentReqCheck() ? this.canContinueEducation() : this.cantContinue()}
