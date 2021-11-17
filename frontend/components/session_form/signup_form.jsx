@@ -154,7 +154,11 @@ class SignupForm extends React.Component {
           <div className="third-party-spacing-line"></div>
         </div>
 
-        <input className="demo-signup-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+        <input className="demo-signup-submit" 
+          type="submit" 
+          value={"Demo Login"} 
+          onClick={this.demoLogin} 
+          />
         
         <br />
         <p className="session-redirect">Already on RingIn? <Link className="session-redirect-link" to="/login">Sign In</Link></p>

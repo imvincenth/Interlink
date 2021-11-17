@@ -46,7 +46,7 @@ class SessionForm extends React.Component {
       }, 100 * i);
     });
 
-    setTimeout(() => this.props.demoLogin(), 1600);
+    setTimeout(() => this.props.demoLogin(), 1700);
   }
 
   toggleShow() {
@@ -139,7 +139,7 @@ class SessionForm extends React.Component {
 
             <input className={!this.state.demoLogged ? "session-submit" : "session-cant-submit"} 
               type="submit" onClick={this.validateEmail} 
-              value={!this.state.demoLogged ? this.props.formType : "Signing in..."} 
+              value={!this.state.demoLogged ? this.props.formType : "One does not simply..."} 
               disabled={!this.state.demoLogged ? false : true} 
               />
 
@@ -154,7 +154,12 @@ class SessionForm extends React.Component {
             <br />
             <div className="demo-session-box">
 
-              <input className="demo-session-submit" type="submit" value={"Demo Login"} onClick={this.demoLogin} />
+              <input className={!this.state.demoLogged ? "demo-session-submit" : "demo-session-cant-submit"} 
+                type="submit" 
+                value={!this.state.demoLogged ? "Demo Login" : "...walk into Mordor"} 
+                onClick={this.demoLogin} 
+                disabled={!this.state.demoLogged ? false : true} 
+                />
             </div>
 
           </div>
