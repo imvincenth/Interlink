@@ -28,7 +28,7 @@ export const receiveErrors = errors => ({
 
 export const removeErrors = () => ({
   type: REMOVE_ERRORS
-})
+});
 
 export const fetchExperiences = userId => dispatch => (
   ExperienceAPIUtil.fetchExperiences(userId)
