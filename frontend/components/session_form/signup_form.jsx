@@ -68,12 +68,12 @@ class SignupForm extends React.Component {
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
     this.studentReqCheck = this.studentReqCheck.bind(this);
-    this.timeCheck = this.timeCheck.bind(this);
+    this.dateCheck = this.dateCheck.bind(this);
   }
 
   createOptions(str) {
     let options = str.split(",");
-    return options.map((option, i) => <option key={i} value={option}>{option}</option>)
+    return options.map((option, i) => <option onClick={this.dateCheck} key={i} value={option}>{option}</option>)
   }
 
   refreshPage() {
@@ -327,17 +327,17 @@ class SignupForm extends React.Component {
     return false;
   }
 
-  timeCheck() {
-    let check = false;
-    if (typeof Number(this.state.startYr) === "number" && typeof Number(this.state.endYr) === "number") {
-      check = false;
-      if (Number(this.state.endYr) < Number(this.state.startYr)) {
-        check = true;
+  dateCheck() {
+    if (this.state.student) {
+      if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
+        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
+          if (Number(this.state.endYr) >= Number(this.state.startYr)) {
+            this.setState({ dateError: false });
+          }
+        }
       }
     }
-    if (check) {
-      this.setState({ dateError: true });
-    }
+    this.setState({ dateError: true });
   }
 
   pageFour() {
@@ -419,8 +419,8 @@ class SignupForm extends React.Component {
               <div className="signup-date-dropdown">
                 <label className="signup-label">Start date <span className="blue-star">*</span>
                   <div>
-                    <select onChange={() => { this.update("startYr"); this.timeCheck() }} className="signup-dropdown">
-                      <option> - </option>
+                    <select onChange={this.update("startYr")} className="signup-dropdown">
+                      <option onClick={this.dateCheck} value="invalid"> - </option>
                       {this.createOptions(years)}
                     </select>
                   </div>
@@ -430,8 +430,8 @@ class SignupForm extends React.Component {
               <div>
                 <label className="signup-label">End date (or expected) <span className="blue-star">*</span>
                   <div className="signup-date-dropdown">
-                    <select onChange={() => { this.update("endYr"); this.timeCheck() }} className="signup-dropdown">
-                      <option> - </option>
+                    <select onChange={this.update("endYr")} className="signup-dropdown">
+                      <option onClick={this.dateCheck} value="invalid"> - </option>
                       {this.createOptions(years)}
                     </select>
                   </div>
