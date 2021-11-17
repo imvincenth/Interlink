@@ -331,9 +331,11 @@ class SignupForm extends React.Component {
     if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
       if (Number(this.state.endYr) >= Number(this.state.startYr)) {
         return false;
+      } else {
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   pageFour() {
