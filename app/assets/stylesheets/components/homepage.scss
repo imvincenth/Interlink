@@ -1,8 +1,18 @@
 .homepage {
   padding: 0px;
-  
-  @media (max-width: 1160px) {
-    padding-left: 28px;
+  -webkit-transition: 0.25s all ease-in-out;
+	-moz-transition: 0.25s all ease-in-out;
+	-o-transition: 0.25s all ease-in-out;
+	transition: 0.25s all ease-in-out;
+
+  @media (max-height: 730px) {
+    .fire-picture {
+      -webkit-transition: 0.25s all ease-in-out;
+      -moz-transition: 0.25s all ease-in-out;
+      -o-transition: 0.25s all ease-in-out;
+      transition: 0.25s all ease-in-out;
+      opacity: 0.5;
+    }
   }
 }
 
@@ -17,14 +27,28 @@
   padding-top: 11px;
   padding-bottom: 10px;
 
+  @media (max-width: 1160px) {
+    padding-top: 8px;
+  }
+}
+
+.homepage-spacing {
+  background-color: transparent;
+  height: 16px;
+  
+  @media (max-width: 1160px) {
+    height: 0;
+  }
 }
 
 .login-logo {
   width: 110px;
   height: 50px;
   @media (max-width: 1160px) {
-    padding: 0 5px;
+    // padding: 0 5px;
     max-width: 75px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 }
 
@@ -117,16 +141,31 @@
   flex-wrap: wrap;
   margin: auto;
 
-  @media (max-width: 810px) {
+  @media (max-width: 775px) {
+    display: flex;
+    flex-wrap: wrap;
     margin: auto;
     min-height: 0px;
+  }
+
+  @media (max-width: 1160px) {
+    width: 93%;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
 .homepage-main-right {
   width: 40%;
-  align-items: flex-start;
-  align-content: flex-start;
+  align-items: center;
+  align-content: center;
+
+  @media (max-width: 775px) {
+    width: 100%;
+    // flex-direction: column;
+    // margin: auto;
+    // min-height: 0px;
+  }
 }
 
 .homepage-text {
@@ -136,7 +175,7 @@
   line-height: 67.2px;
   color: rgb(143, 88, 73);
 
-  @media (max-width: 810px) {
+  @media (max-width: 775px) {
     text-align: center;
     font-size: 32px;
     font-weight: 300;
@@ -176,6 +215,10 @@
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 775px) {
+    width: 100%;
+  }
 }
 
 .homepage-card:hover {
@@ -193,11 +236,15 @@
   width: 60%;
   align-items: flex-start;
   align-content: flex-start;
+
+  @media (max-width: 775px) {
+    width: 100%;
+  }
 }
 
 .homepage-picture {
   width: 350px;
-  @media (max-width: 810px) {
+  @media (max-width: 775px) {
     margin: auto;
     height: 220px;
     min-width: 374px;
@@ -207,9 +254,12 @@
 
 .fire-picture {
   width: 100%;
+  pointer-events: none;
   position: fixed;
   right: 0%;
   bottom: 0px;
+
+
 }
 
 .homepage-nav-right {

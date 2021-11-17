@@ -31,9 +31,7 @@ class Homepage extends React.Component {
             <h3 className="homepage-text">Welcome to your professional community</h3>
             <span className="homepage-subtext">...in Middle-Earth</span>
 
-            <br />
-            <br />
-            <br />
+            <div className="homepage-spacing"></div>
 
             <div className="homepage-links">
               <ul className="homepage-list">
