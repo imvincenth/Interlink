@@ -9,16 +9,16 @@ const experienceErrorsReducer = (oldState = [], action) => {
 
   switch(action.type) {
     case RECEIVE_EXPERIENCE_ERRORS:
-      return action.errors
+      return action.errors;
 
     case REMOVE_EXPERIENCE:
-      return []
+      return [];
 
     case REMOVE_ERRORS:
-      return []
+      return [];
 
     default:
-      return oldState
+      return oldState;
   }
 }
 
