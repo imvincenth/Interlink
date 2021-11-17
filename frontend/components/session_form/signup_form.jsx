@@ -140,7 +140,7 @@ class SignupForm extends React.Component {
 
         <input className={!this.state.demoLogged ? "signup-submit" : "signup-cant-submit"} 
           type="submit" 
-          value={!this.state.demoLogged ? "Agree & Join" : "Signing in..."} 
+          value={!this.state.demoLogged ? "Agree & Join" : "My preci..."} 
           onClick={this.pageCheck} 
           disabled={!this.state.demoLogged ? false : true} 
           />
@@ -154,10 +154,11 @@ class SignupForm extends React.Component {
           <div className="third-party-spacing-line"></div>
         </div>
 
-        <input className="demo-signup-submit" 
+        <input className={!this.state.demoLogged ? "demo-signup-submit" : "demo-signup-cant-submit"} 
           type="submit" 
-          value={"Demo Login"} 
+          value={!this.state.demoLogged ? "Demo Login" : "...oussSSSsssSSSs"} 
           onClick={this.demoLogin} 
+          disabled={!this.state.demoLogged ? false : true} 
           />
         
         <br />

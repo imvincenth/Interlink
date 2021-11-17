@@ -362,6 +362,30 @@
   }
 }
 
+.demo-signup-cant-submit {
+  width: 100%;
+  font-size: 17px;
+  font-weight: 550;
+  font-family: inherit;
+  height: 48px;
+  background-color: #0a66c22f;
+  color: #0a66c2;
+  padding: 10px;
+  border-radius: 25em;
+  text-align: center;
+  transition-duration: 41ms;
+  border: 1px solid #0a66c2;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  cursor: not-allowed;
+
+  @media (max-width: 1160px) {
+    margin-top: 0;
+  }
+}
+
 .demo-signup-submit:hover {
   background-color: #0a66c22f;
   border: 2px solid #0a66c2;
