@@ -3,6 +3,7 @@ import Modal from '../../modal/modal';
 
 class Experience extends React.Component {
   render() {
+    console.log(this.props.experience);
     const { experience, key } = this.props;
     return (
       <div>
@@ -11,6 +12,9 @@ class Experience extends React.Component {
             <h1>{experience.title}</h1>
             <button className="open-modal" onClick={() => this.props.openEditExperienceModal(experience)}>
               <img src={window.vectorURL} alt="pen" />
+            </button>
+            <button onClick={() => this.props.deleteExperience(experience.id)}>
+              Delete
             </button>
           </div>
           <h2>{experience.company} {experience.employment_type}</h2>
