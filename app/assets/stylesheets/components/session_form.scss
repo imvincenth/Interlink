@@ -343,6 +343,10 @@
   padding-left: 86px;
   width: 28px;
   opacity: 0.75;
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
 
   @media (max-width: 780px) {
     padding-left: 110px;

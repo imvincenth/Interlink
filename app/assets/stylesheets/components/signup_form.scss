@@ -559,9 +559,13 @@
 
 .robot-signup-icon {
   position: absolute;
-  padding-top: 27px;
+  padding-top: 28px;
   padding-left: 104px;
   width: 28px;
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
 
   @media (max-width: 1160px) {
     padding-top: 8px;
