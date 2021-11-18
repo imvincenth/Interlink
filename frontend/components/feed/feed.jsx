@@ -17,17 +17,10 @@ class Feed extends React.Component {
             <SidebarContainer />
 
             <div className="feed">
-              <img src={window.hammerURL} alt="hammer" />
               <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
 
               <div className="feed-input-container">
-                <div className="feed-input">
-                  
-                  <form>
-                    <input type="text" />
-                    <button>Start a post</button>
-                  </form>
-                </div>
+
               </div>
 
             </div>
