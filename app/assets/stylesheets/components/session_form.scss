@@ -336,3 +336,15 @@
   border: 1px solid #d11124;
   box-shadow: #d11124 0px 0px 0px 1px inset;
 }
+
+.robot-icon {
+  position: absolute;
+  padding-top: 20px;
+  padding-left: 86px;
+  width: 28px;
+  opacity: 0.75;
+
+  @media (max-width: 780px) {
+    padding-left: 110px;
+  }
+}

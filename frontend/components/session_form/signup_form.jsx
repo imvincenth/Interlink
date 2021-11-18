@@ -154,12 +154,15 @@ class SignupForm extends React.Component {
           <div className="third-party-spacing-line"></div>
         </div>
 
-        <input className={!this.state.demoLogged ? "demo-signup-submit" : "demo-signup-cant-submit"} 
-          type="submit" 
-          value={"Demo Login"} 
-          onClick={this.demoLogin} 
-          disabled={!this.state.demoLogged ? false : true} 
-          />
+        <div className="demo-signup-box">
+          {this.state.demoLogged ? <img className="robot-signup-icon" src={happyRobotSignupURL} alt="happy robot" /> : <img className="robot-signup-icon" src={neutralRobotSignupURL} alt="neutral robot" />}
+          <input className={!this.state.demoLogged ? "demo-signup-submit" : "demo-signup-cant-submit"} 
+            type="submit" 
+            value={"     Demo Login"} 
+            onClick={this.demoLogin} 
+            disabled={!this.state.demoLogged ? false : true} 
+            />
+        </div>
         
         <br />
         <p className="session-redirect">Already on RingIn? <Link className="session-redirect-link" to="/login">Sign In</Link></p>

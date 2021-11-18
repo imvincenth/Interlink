@@ -153,10 +153,10 @@ class SessionForm extends React.Component {
 
             <br />
             <div className="demo-session-box">
-
+              {this.state.demoLogged ? <img className="robot-icon" src={happyRobotURL} alt="happy robot" /> : <img className="robot-icon" src={neutralRobotURL} alt="neutral robot" />}
               <input className={!this.state.demoLogged ? "demo-session-submit" : "demo-session-cant-submit"} 
                 type="submit" 
-                value={"Demo Login"} 
+                value={"     Demo Login"} 
                 onClick={this.demoLogin} 
                 disabled={!this.state.demoLogged ? false : true} 
                 />
