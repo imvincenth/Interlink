@@ -28,13 +28,13 @@ class Sidebar extends React.Component {
 
         <div className="sidebar-tail">
           <div className="sidebar-tail-header">
-            <p className="sidebar-tail-header-text">Discover more</p>
-          </div>
-          <div className="sidebar-tail-bottom">
             <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=_pGaz_qN0cw" target="_blank">Soundtrack of Life</a></p>
             <p className="sidebar-tail-item"><a href="https://youtu.be/wvK-iKtkV70?t=67" target="_blank">One does not simply walk into Mordor...</a></p>
             <p className="sidebar-tail-item"><a href="https://www.youtube.com/watch?v=mJZZNHekEQw" target="_blank">Balrog</a></p>
             <p className="sidebar-tail-last-item"><a href="https://www.youtube.com/watch?v=EOA1wBw_Jt4" target="_blank">Rohan</a></p>
+          </div>
+          <div className="sidebar-tail-bottom">
+            <p className="sidebar-tail-header-text">Discover more</p>
           </div>
           <button className="header-button" onClick={this.props.logout}>Log Out</button>
         </div>
