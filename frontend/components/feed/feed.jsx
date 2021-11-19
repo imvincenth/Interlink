@@ -14,18 +14,20 @@ class Feed extends React.Component {
           </header>
 
           <div className="content-body">
-            <SidebarContainer />
+            <div className="content-main-wrapper">
+              <SidebarContainer />
 
-            <div className="feed">
-              <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
+              <div className="feed">
+                <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
 
-              <div className="feed-input-container">
+                <div className="feed-input-container">
+
+                </div>
 
               </div>
-
             </div>
-
           </div>
+
         </div>
         
         
