@@ -5,21 +5,29 @@ export default class Post extends Component {
     super(props);
 
     this.state = {
-      user_id: "",
+      user_id: this.props.currentUser.id,
       body: ""
     }
     
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
+    this.props.createPost({...this.state});
+  }
+
+  update(field) {
+    return e => this.setState({ [field]: e.currentValue.target });
   }
 
   render() {
     return (
       <div>
-        <form ></form>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.body} onChange={this.update("body")} />
+        </form>
       </div>
     )
   }
