@@ -11,10 +11,15 @@ export default class Post extends Component {
     
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+  }
+
   render() {
     return (
       <div>
-        
+        <form ></form>
       </div>
     )
   }
