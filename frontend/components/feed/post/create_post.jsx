@@ -27,6 +27,7 @@ export default class Post extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
+          <input type="submit" onSubmit={this.handleSubmit} />
         </form>
       </div>
     )
