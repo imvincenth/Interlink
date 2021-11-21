@@ -13,7 +13,7 @@ function Modal(props) {
     return null;
   }
   let component;
-
+  
   switch (props.modal) {
     case 'createExperience':
       component = <CreateExperienceFormContainer />;

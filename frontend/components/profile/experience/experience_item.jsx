@@ -3,7 +3,6 @@ import Modal from '../../modal/modal';
 
 class Experience extends React.Component {
   render() {
-    console.log(this.props.experience);
     const { experience, key } = this.props;
     return (
       <div>

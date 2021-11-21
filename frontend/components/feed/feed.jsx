@@ -18,6 +18,7 @@ class Feed extends React.Component {
               <SidebarContainer />
 
               <div className="feed">
+                {this.props.openCreatePostModal}
                 <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
 
                 <div className="feed-input-container">

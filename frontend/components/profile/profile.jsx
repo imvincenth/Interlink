@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from '../modal/modal';
 import Navbar from '../feed/navbar/navbar';
 import ExperienceItemContainer from './experience/experience_item_container';
 import EducationItemContainer from './education/education_item_container';
@@ -31,7 +30,6 @@ class Profile extends React.Component {
     return (
       <div className="profile-background">
         <div className="profile-container">
-          <Modal />
           <Navbar />
 
           <div className="profile-main-wrapper">

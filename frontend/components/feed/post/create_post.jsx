@@ -19,7 +19,9 @@ export default class Post extends Component {
   }
 
   update(field) {
-    return e => this.setState({ [field]: e.currentValue.target });
+    return e => {
+      this.setState({[field]: e.currentTarget.value});
+    }
   }
 
   render() {
@@ -27,7 +29,7 @@ export default class Post extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" onSubmit={this.handleSubmit} />
+          <input type="submit" value="Post" onSubmit={this.handleSubmit} />
         </form>
       </div>
     )
