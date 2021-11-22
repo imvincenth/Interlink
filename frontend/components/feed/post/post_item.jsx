@@ -9,6 +9,9 @@ export default class Post extends Component {
         <button className="open-modal" onClick={() => this.props.openEditPostModal(post)}>
           <img src={window.vectorURL} alt="pen" />
         </button>
+        <button onClick={() => this.props.deletePost(post.id)}>
+          Delete
+        </button>
       </div>
     )
   }

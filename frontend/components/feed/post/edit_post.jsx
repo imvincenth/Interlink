@@ -5,7 +5,9 @@ export default class PostEdit extends Component {
     super(props);
 
     this.state = {
-      ...this.props.post
+      id: this.props.post.id,
+      user_id: this.props.post.user_id,
+      body: ""
     }
     
     this.handleSubmit = this.handleSubmit.bind(this);
