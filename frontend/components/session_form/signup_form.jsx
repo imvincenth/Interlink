@@ -63,10 +63,6 @@ class SignupForm extends React.Component {
     this.createUserHeadline = this.createUserHeadline.bind(this);
     this.createUserHeadlineTwo = this.createUserHeadlineTwo.bind(this);
 
-    this.setStartTime = this.setStartTime.bind(this);
-    this.setEndTime = this.setEndTime.bind(this);
-    this.setTimes = this.setTimes.bind(this);
-
     this.yesStudent = this.yesStudent.bind(this);
     this.notStudent = this.notStudent.bind(this);
     this.studentReqCheck = this.studentReqCheck.bind(this);
@@ -317,44 +313,21 @@ class SignupForm extends React.Component {
       </div>
     )
   }
-  
-  setStartTime() {
-    this.setState({ 
-      start_date: `${this.state.startYr}`
-    });
-  }
-
-  setEndTime() {
-    if (!this.state.student) {
-      this.setState({
-        end_date: "Present"
-      });
-    } else {
-      this.setState({
-        end_date: `${this.state.endYr}`
-      });
-    }
-  }
-  
-  setTimes() {
-    if (this.state.start_date === "-" || this.state.end_date === "-") throw "Start and end dates are required";
-    this.setStartTime();
-    this.setEndTime();
-  }
 
   createUserHeadline() {
     this.setState({ headline: this.state.title + " at " + this.state.company });
   }
 
   createUserHeadlineTwo() {
-    // this.setTimes();
-    this.setState({ headline: "Student at " + this.state.school });
+    this.setState((state) => {
+      return { headline: `Student at ${state.school}`, start_date: state.startYr, end_date: state.endYr }
+    });
   }
 
   studentReqCheck() {
     if (this.state.student) {
       if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
-        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" ) {
+        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "") {
           if (Number(this.state.endYr) >= Number(this.state.startYr)) {
             return true;
           }

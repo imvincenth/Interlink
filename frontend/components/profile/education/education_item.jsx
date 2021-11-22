@@ -16,7 +16,7 @@ class Education extends React.Component {
             </button>
           </div>
           <h2>{education.degree} {education.subject}</h2>
-          <h2>{education.start_date.split(" ")[1]} - {education.end_date.split(" ")[1]}</h2>
+          <h2>{education.start_date} - {education.end_date}</h2>
         </div>
       </div>
     )

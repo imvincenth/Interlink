@@ -11,13 +11,10 @@ class Api::UsersController < ApplicationController
       
       @exp = Experience.new(exp_clone)
       @edu = Education.new(edu_clone)
-
-      if @exp
-        @exp.save
-      else
-        @edu.save
+      if @exp.save
+      else @edu.save
       end
-
+      
       login(@user)
       render :show
     else

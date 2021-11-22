@@ -172,13 +172,21 @@ class EditEducationForm extends React.Component {
 
           <div>
             <label>Grade
-              <input type="text" value={this.state.grade} onChange={this.update("grade")} />
+              <input 
+                type="text" 
+                value={this.state.grade ? this.state.grade : ""} 
+                onChange={this.update("grade")} 
+              />
             </label>
           </div>
 
           <div>
             <label>Activities and societies</label>
-            <textarea value={this.state.extracurriculars} onChange={this.update("extracurriculars")} placeholder="Ex: "></textarea>
+            <textarea 
+              value={this.state.extracurriculars ? this.state.extracurriculars : ""} 
+              onChange={this.update("extracurriculars")} 
+              placeholder="Ex: "
+            ></textarea>
           </div>
 
           <input type="submit" onClick={this.setTimes} onSubmit={this.handleSubmit} value="Save" />
