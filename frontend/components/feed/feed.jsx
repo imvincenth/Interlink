@@ -2,10 +2,17 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import NavbarContainer from './navbar/navbar_container';
 import SidebarContainer from './sidebar/sidebar_container';
+import PostItemContainer from './post/post_item_container';
 
 class Feed extends React.Component {
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+
   render() {
-    const { currentUser, logout } = this.props;
+    if (!this.props.posts) return null;
+
+    const { currentUser } = this.props;
     return (
       <div className="feed-page">
         <div>
@@ -20,6 +27,7 @@ class Feed extends React.Component {
               <div className="feed">
                 {this.props.openCreatePostModal}
                 <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
+                {this.props.posts.map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
 
                 <div className="feed-input-container">
 
