@@ -7,33 +7,52 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props.userId);
+    // this.state = {
+    //   user: ""
+    // }
+
+    this.user = "";
     this.experiences = [];
     this.educations = [];
   }
 
-  findUser() {
-    // this.props.users.forEach(user => user.id === this.props.userId)
-  }
-
   componentDidMount() {
-    this.props.fetchExperiences();
-    this.props.fetchEducations();
+    console.log("mount");
+    this.props.fetchUsers()
+      .then(this.props.fetchExperiences())
+      .then(this.props.fetchEducations())
+      .then(this.userCheck());
   }
 
-  currentUserCheck() {
-    this.props.experiences.forEach(exp => this.props.userId === exp.user_id ? this.experiences.push(exp) : null);
-    this.props.educations.forEach(edu => this.props.userId === edu.user_id ? this.educations.push(edu) : null);
+  componentDidUpdate(prevProps, prevState) {
+    console.log("update")
+    this.user = "";
+    if (prevProps.userId !== this.props.userId) {
+      this.props.fetchUsers()
+      .then(this.props.fetchExperiences())
+      .then(this.props.fetchEducations())
+      .then(this.userCheck());
+    }
+  }
+
+  userCheck() {
+    // this.props.users.forEach(user => Number(this.props.userId) === user.id ? this.setState({ user: user }) : null);
+    this.props.users.forEach(user => Number(this.props.userId) === user.id ? this.user = user : null);
+  }
+  
+  profileCheck() {
+    this.props.experiences.forEach(exp => Number(this.props.userId) === exp.user_id ? this.experiences.push(exp) : null);
+    this.props.educations.forEach(edu => Number(this.props.userId) === edu.user_id ? this.educations.push(edu) : null);
   }
 
   render() {
     this.experiences = [];
     this.educations = [];
-    this.currentUserCheck();
+    this.profileCheck();
 
-    // if (!this.props.experiences || !this.props.educations) return null;
+    if (!this.props.experiences || !this.props.educations || !this.props.users) return null;
 
-    const { currentUser, experiences, fetchExperiences, fetchEducations } = this.props;
+    // const { currentUser } = this.props;
     return (
       <div className="profile-background">
         <div className="profile-container">
@@ -48,10 +67,10 @@ class Profile extends React.Component {
                 </div>
                 <div className="profile-card-main">
                   <div className="profile-info">
-                    <h1 className="profile-name">{currentUser.first_name} {currentUser.last_name}</h1>
+                    <h1 className="profile-name">{this.user.first_name} {this.user.last_name}</h1>
                     <br />
-                    <h2 className="profile-headline">{currentUser.headline}</h2>
-                    <h3 className="profile-location">{currentUser.city_district}, {currentUser.country_region}</h3>
+                    <h2 className="profile-headline">{this.user.headline}</h2>
+                    <h3 className="profile-location">{this.user.city_district}, {this.user.country_region}</h3>
                     <div>
                       {this.props.openEditProfileModal}
                     </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchExperiences } from '../../actions/experience_actions'
 import { fetchEducations } from '../../actions/education_actions';
+import { fetchUsers } from '../../actions/user_actions';
 import { openModal } from '../../actions/modal_actions';
 import Profile from './profile';
 
@@ -16,6 +17,7 @@ const mSTP = (state, ownProps) => ({
 const mDTP = dispatch => ({
   fetchExperiences: () => dispatch(fetchExperiences()),
   fetchEducations: () => dispatch(fetchEducations()),
+  fetchUsers: () => dispatch(fetchUsers()),
   openEditProfileModal: (
     <button className="open-modal" onClick={() => dispatch(openModal('editProfile'))}>
       <img src={window.vectorURL} />

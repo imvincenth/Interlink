@@ -29,6 +29,21 @@ export const update = user => (
   })
 );
 
+export const fetchUsers = userId => (
+  $.ajax({
+    url: `/api/users`,
+    method: "GET",
+    data: { userId }
+  })
+);
+
+export const deleteUser = userId => (
+  $.ajax({
+    url: `/api/users/${userId}`,
+    method: "DELETE"
+  })
+);
+
 export const udpateImg = (formData, id) => (
   $.ajax({
     method: 'PATCH',
@@ -37,4 +52,4 @@ export const udpateImg = (formData, id) => (
     contentType: false,
     processData: false
   })
-)
+);
