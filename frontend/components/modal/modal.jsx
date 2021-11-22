@@ -6,6 +6,7 @@ import EditExperienceFormContainer from '../profile/experience/edit_experience_c
 import CreateEducationFormContainer from '../profile/education/create_education_container';
 import EditEducationFormContainer from '../profile/education/edit_education_container';
 import CreatePostFormContainer from '../feed/post/create_post_container';
+import EditPostFormContainer from '../feed/post/edit_post_container';
 import EditProfileFormContainer from '../profile/edit_profile_container';
 
 function Modal(props) {
@@ -29,6 +30,9 @@ function Modal(props) {
       break;
     case 'createPost':
       component = <CreatePostFormContainer />;
+      break;
+    case 'editPost':
+      component = <EditPostFormContainer />;
       break;
     case 'editProfile':
       component = <EditProfileFormContainer />;

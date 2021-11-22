@@ -15,7 +15,8 @@ export default class Post extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.createPost({...this.state});
+    this.props.createPost({...this.state})
+      .then(() => this.props.closeModal());
   }
 
   update(field) {
