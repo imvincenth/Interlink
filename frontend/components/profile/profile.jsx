@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../feed/navbar/navbar';
+import Navbar from '../feed/navbar/navbar_container';
 import ExperienceItemContainer from './experience/experience_item_container';
 import EducationItemContainer from './education/education_item_container';
 
@@ -7,8 +7,13 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props.userId);
     this.experiences = [];
     this.educations = [];
+  }
+
+  findUser() {
+    // this.props.users.forEach(user => user.id === this.props.userId)
   }
 
   componentDidMount() {
@@ -17,14 +22,16 @@ class Profile extends React.Component {
   }
 
   currentUserCheck() {
-    this.props.experiences.forEach(exp => this.props.currentUser.id === exp.user_id ? this.experiences.push(exp) : null);
-    this.props.educations.forEach(edu => this.props.currentUser.id === edu.user_id ? this.educations.push(edu) : null);
+    this.props.experiences.forEach(exp => this.props.userId === exp.user_id ? this.experiences.push(exp) : null);
+    this.props.educations.forEach(edu => this.props.userId === edu.user_id ? this.educations.push(edu) : null);
   }
 
   render() {
     this.experiences = [];
     this.educations = [];
     this.currentUserCheck();
+
+    // if (!this.props.experiences || !this.props.educations) return null;
 
     const { currentUser, experiences, fetchExperiences, fetchEducations } = this.props;
     return (

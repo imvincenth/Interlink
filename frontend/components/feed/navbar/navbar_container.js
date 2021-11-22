@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Navbar from './navbar';
 
 const mSTP = (state, ownProps) => ({
-  user: state.entities.users[state.session.currentUserId],
+  currentUserId: state.session.id
 });
 
 const mDTP = dispatch => ({

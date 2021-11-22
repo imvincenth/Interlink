@@ -129,7 +129,7 @@ class SessionForm extends React.Component {
                 value={this.state.password}
                 onChange={this.update('password')}
                 className={this.props.errors.length === 1 && this.state.valid ? "session-input invalid-session-field" : "session-input"}
-                />
+              />
               <span className={this.props.errors.length === 1 && this.state.valid ? "floating-label invalid" : "floating-label"}>Password</span>
               <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "show" : "hide"}</button>
             </div>
@@ -141,7 +141,7 @@ class SessionForm extends React.Component {
               type="submit" onClick={this.validateEmail} 
               value={!this.state.demoLogged ? this.props.formType : "Signing in..."} 
               disabled={!this.state.demoLogged ? false : true} 
-              />
+            />
 
             <div className="third-party-session-spacing-box">
               <div className="third-party-session-spacing-line"></div>
@@ -159,7 +159,7 @@ class SessionForm extends React.Component {
                 value={"     Demo Login"} 
                 onClick={this.demoLogin} 
                 disabled={!this.state.demoLogged ? false : true} 
-                />
+              />
             </div>
 
           </div>

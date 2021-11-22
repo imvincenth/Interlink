@@ -6,9 +6,11 @@ import { openModal } from '../../actions/modal_actions';
 import Profile from './profile';
 
 const mSTP = (state, ownProps) => ({
+  users: Object.values(state.entities.users),
   educations: Object.values(state.entities.educations),
   experiences: Object.values(state.entities.experiences),
-  currentUser: state.entities.users[state.session.id]
+  currentUser: state.entities.users[state.session.id],
+  userId: ownProps.match.params.userId
 });
 
 const mDTP = dispatch => ({
