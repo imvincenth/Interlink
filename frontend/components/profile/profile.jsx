@@ -7,37 +7,33 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   user: ""
-    // }
+    this.state = {
+      user: ""
+    }
 
-    this.user = "";
     this.experiences = [];
     this.educations = [];
   }
 
   componentDidMount() {
-    console.log("mount");
-    this.props.fetchUsers()
-      .then(this.props.fetchExperiences())
-      .then(this.props.fetchEducations())
-      .then(this.userCheck());
+    this.props.fetchUser(this.props.userId)
+    .then(() => this.setState({ user: this.props.user }))
+    .then(this.props.fetchExperiences())
+    .then(this.props.fetchEducations());
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log("update")
-    this.user = "";
+    if (this.props.errors.length > 0) this.props.history.replace("/404");
     if (prevProps.userId !== this.props.userId) {
-      this.props.fetchUsers()
+      this.props.fetchUser(this.props.userId)
+      .then(this.setState({ user: this.props.user }))
       .then(this.props.fetchExperiences())
-      .then(this.props.fetchEducations())
-      .then(this.userCheck());
+      .then(this.props.fetchEducations());
     }
   }
 
-  userCheck() {
-    // this.props.users.forEach(user => Number(this.props.userId) === user.id ? this.setState({ user: user }) : null);
-    this.props.users.forEach(user => Number(this.props.userId) === user.id ? this.user = user : null);
+  userCheck(action) {
+    this.setState({ user: action })
   }
   
   profileCheck() {
@@ -50,9 +46,8 @@ class Profile extends React.Component {
     this.educations = [];
     this.profileCheck();
 
-    if (!this.props.experiences || !this.props.educations || !this.props.users) return null;
+    if (!this.props.experiences || !this.props.educations || !this.props.users || !this.state.user) return null;
 
-    // const { currentUser } = this.props;
     return (
       <div className="profile-background">
         <div className="profile-container">
@@ -67,10 +62,10 @@ class Profile extends React.Component {
                 </div>
                 <div className="profile-card-main">
                   <div className="profile-info">
-                    <h1 className="profile-name">{this.user.first_name} {this.user.last_name}</h1>
+                    <h1 className="profile-name">{this.state.user.first_name} {this.state.user.last_name}</h1>
                     <br />
-                    <h2 className="profile-headline">{this.user.headline}</h2>
-                    <h3 className="profile-location">{this.user.city_district}, {this.user.country_region}</h3>
+                    <h2 className="profile-headline">{this.state.user.headline}</h2>
+                    <h3 className="profile-location">{this.state.user.city_district}, {this.state.user.country_region}</h3>
                     <div>
                       {this.props.openEditProfileModal}
                     </div>

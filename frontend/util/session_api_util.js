@@ -37,6 +37,14 @@ export const fetchUsers = userId => (
   })
 );
 
+export const fetchUser = userId => (
+  $.ajax({
+    url: `/api/users/${userId}`,
+    method: "GET",
+    data: { userId }
+  })
+);
+
 export const deleteUser = userId => (
   $.ajax({
     url: `/api/users/${userId}`,
