@@ -9,24 +9,19 @@ class Feed extends React.Component {
     super(props);
 
     this.state = {
-      posts: [],
-      comments: [],
-      replies: []
+      posts: []
     }
 
-    
+
   }
 
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchPosts()
+      .then(() => this.fillPosts());
   }
 
   fillPosts() {
     this.props.posts.forEach(post => post.parent_id === -1 ? this.setState({ posts: [...this.state.posts, post] }) : null);
-  }
-
-  fillReplies(parent) {
-    this.props.posts.forEach(reply => reply.parent_id = parent.id ? this.setState({ replies: [...this.state.replies, reply] }) : null);
   }
 
   render() {
@@ -46,7 +41,7 @@ class Feed extends React.Component {
               <div className="feed">
                 {this.props.openCreatePostModal}
                 <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
-                {this.props.posts.map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
+                {this.state.posts.map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
 
                 <div className="feed-input-container">
 
