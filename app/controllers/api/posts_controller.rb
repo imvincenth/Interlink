@@ -11,7 +11,7 @@ class Api::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.where(parent_id: "").includes()
     render :index
   end
 
@@ -33,6 +33,6 @@ class Api::PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:user_id, :body)
+    params.require(:post).permit(:user_id, :parent_id, :body)
   end
 end
