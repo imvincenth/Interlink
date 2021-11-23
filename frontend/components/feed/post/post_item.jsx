@@ -12,6 +12,9 @@ export default class Post extends Component {
         <button onClick={() => this.props.deletePost(post.id)}>
           Delete
         </button>
+        <button>
+          
+        </button>
       </div>
     )
   }
