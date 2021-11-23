@@ -6,7 +6,7 @@ export default class Post extends Component {
 
     this.state = {
       user_id: this.props.currentUser.id,
-      parent_id: "",
+      parent_id: this.props.post.id ? this.props.post.id : "-1",
       body: "",
 
       openReply: false
@@ -19,7 +19,7 @@ export default class Post extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.createComment({...this.state});
+    this.props.createPost({...this.state});
   }
 
   update(field) {

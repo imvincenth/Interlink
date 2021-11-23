@@ -7,6 +7,7 @@ export default class PostEdit extends Component {
     this.state = {
       id: this.props.post.id,
       user_id: this.props.post.user_id,
+      parent_id: this.props.post.parent_id,
       body: ""
     }
     

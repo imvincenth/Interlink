@@ -11,7 +11,7 @@ class Api::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.where(parent_id: "").includes()
+    @posts = Post.all
     render :index
   end
 
