@@ -5,14 +5,33 @@ import SidebarContainer from './sidebar/sidebar_container';
 import PostItemContainer from './post/post_item_container';
 
 class Feed extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      posts: [],
+      comments: [],
+      replies: []
+    }
+
+    
+  }
+
   componentDidMount() {
     this.props.fetchPosts();
+  }
+
+  fillPosts() {
+    this.props.posts.forEach(post => post.parent_id === -1 ? this.setState({ posts: [...this.state.posts, post] }) : null);
+  }
+
+  fillReplies(parent) {
+    this.props.posts.forEach(reply => reply.parent_id = parent.id ? this.setState({ replies: [...this.state.replies, reply] }) : null);
   }
 
   render() {
     if (!this.props.posts) return null;
 
-    const { currentUser } = this.props;
     return (
       <div className="feed-page">
         <div>
