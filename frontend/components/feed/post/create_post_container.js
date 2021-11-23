@@ -9,7 +9,6 @@ const mSTP = ({ session, entities: { users } }) => ({
 });
 
 const mDTP = dispatch => ({
-  fetchUser: userId => dispatch(fetchUser(userId)),
   createPost: post => dispatch(createPost(post)),
   closeModal: () => dispatch(closeModal()),
 });
