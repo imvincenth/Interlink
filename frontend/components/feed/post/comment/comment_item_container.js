@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchComments, updateComment, deleteComment } from '../../../../actions/comment_actions';
+import { fetchComments, createComment, updateComment, deleteComment } from '../../../../actions/comment_actions';
 import Comment from './comment_item';
 
 const mSTP = state => ({
@@ -9,6 +9,7 @@ const mSTP = state => ({
 
 const mDTP = dispatch => ({
   fetchComments: () => dispatch(fetchComments()),
+  createComment: comment => dispatch(createComment(comment)),
   updateComment: comment => dispatch(updateComment(comment)),
   deleteComment: comment => dispatch(deleteComment(comment))
 });
