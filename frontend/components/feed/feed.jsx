@@ -11,7 +11,8 @@ class Feed extends React.Component {
     this.state = {
       posts: []
     }
-  
+
+    
   }
 
   componentDidMount() {
@@ -19,13 +20,11 @@ class Feed extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.posts !== this.props.posts || prevState.posts !== this.state.posts) {
-      this.fillPosts();
-    };
+    
   }
 
   fillPosts() {
-    this.props.posts.forEach(post => post.parent_id === -1 && !this.state.posts.includes(post) ? this.setState({ posts: [...this.state.posts, post] }) : null);
+    this.props.posts.forEach(post => post.parent_id === -1 ? this.setState({ posts: [...this.state.posts, post] }) : null);
   }
 
   render() {
