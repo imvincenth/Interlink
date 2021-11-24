@@ -8,7 +8,6 @@ export default class Post extends Component {
       user_id: this.props.currentUser.id,
       parent_id: this.props.post.id ? this.props.post.id : "-1",
       body: "",
-      replies: [],
 
       openReply: false
     }
@@ -31,10 +30,6 @@ export default class Post extends Component {
 
   toggleReply() {
     this.setState({ openReply: !this.state.openReply });
-  }
-
-  fillReplies(parent) {
-    this.props.posts.forEach(reply => reply.parent_id = parent.id ? this.setState({ replies: [...this.state.replies, reply] }) : null);
   }
 
   replyForm() {
