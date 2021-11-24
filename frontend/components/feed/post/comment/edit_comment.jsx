@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 
-export default class Post extends Component {
+export default class CommentEdit extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user_id: this.props.currentUser.id,
-      body: ""
+      ...this.props.comment
     }
-    
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.createPost({...this.state})
-      .then(() => this.props.closeModal());
+    this.props.action({...this.state});
   }
 
   update(field) {
@@ -30,7 +28,7 @@ export default class Post extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" value="Post" onSubmit={this.handleSubmit} />
+          <input type="submit" value="Save Changes" onSubmit={this.handleSubmit} />
         </form>
       </div>
     )
