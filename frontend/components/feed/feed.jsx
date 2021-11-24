@@ -11,7 +11,7 @@ class Feed extends React.Component {
     this.state = {
       posts: []
     }
-
+  
     this.fillPosts();
   }
 
