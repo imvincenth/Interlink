@@ -12,15 +12,12 @@ class Feed extends React.Component {
       posts: []
     }
 
-    
+
   }
 
   componentDidMount() {
-    this.props.fetchPosts();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    
+    this.props.fetchPosts()
+      .then(() => this.fillPosts());
   }
 
   fillPosts() {
