@@ -11,9 +11,8 @@ export default class Comment extends Component {
       replyField: false
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
-    this.toggleReply = this.toggleReply.bind(this);
+    this.handleEditSubmit = this.handleEditSubmit.bind(this);
+    this.handleReplySubmit = this.handleReplySubmit.bind(this);
   }
 
   componentDidMount() {
@@ -27,30 +26,29 @@ export default class Comment extends Component {
   //   };
   // }
 
-  handleSubmit(e) {
+  handleEditSubmit(e) {
     e.preventDefault();
 
     this.props.updateComment({...this.state});
+  }
+
+  handleReplySubmit(e) {
+    e.preventDefault();
+
+    this.props.createComment({...this.state});
   }
 
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
 
-  toggleEdit() {
-    this.setState({ editField: !this.state.editField });
-  }
-
-  toggleReply() {
-    this.setState({ replyField: !this.state.replyField });
-  }
-
   editForm() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleEditSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" value="Edit reply" />
+          <input type="submit" value="Save Changes" />
+          <button onClick={() => this.setState({ editField: false })}>Cancel</button>
         </form>
       </div>
     )
@@ -59,9 +57,8 @@ export default class Comment extends Component {
   replyForm() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleReplySubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" value="Edit reply" />
         </form>
       </div>
     )
@@ -71,17 +68,18 @@ export default class Comment extends Component {
     const { comment } = this.props;
     return (
       <div className="comment-box">
-        reply: {comment.body}
-        <button onClick={this.toggleEdit}>
+        {this.props.currentUser.first_name} {this.props.currentUser.last_name}:reply: {comment.body}
+        <button onClick={() => this.setState({ body: this.props.comment.body, editField: true })}>
           <img src={window.vectorURL} alt="pen" />
         </button>
         {this.state.editField ? this.editForm() : null}
         <button onClick={() => this.props.deleteComment(comment.id)}>
           Delete
         </button>
-        <button>
+        <button onClick={() => this.setState({ body: "", replyField: true })}>
           Reply
         </button>
+        {this.state.replyField ? this.replyForm() : null}
       </div>
     )
   }

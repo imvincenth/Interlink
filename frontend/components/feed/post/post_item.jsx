@@ -11,11 +11,10 @@ export default class Post extends Component {
       post_id: this.props.post.id,
       body: "",
 
-      replyField: false
+      commentField: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleReply = this.toggleReply.bind(this);
   }
 
   componentDidMount() {
@@ -26,23 +25,18 @@ export default class Post extends Component {
     e.preventDefault();
 
     this.props.createComment({...this.state})
-      .then(() => this.toggleReply());
+      .then(() => this.setState({ commentField: false }));
   }
 
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
 
-  toggleReply() {
-    this.setState({ replyField: !this.state.replyField });
-  }
-
-  replyForm() {
+  commentForm() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" value="Reply" />
         </form>
       </div>
     )
@@ -52,17 +46,17 @@ export default class Post extends Component {
     const { post } = this.props;
     return (
       <div>
-        {post.body}
+        {this.props.currentUser.first_name} {this.props.currentUser.last_name}:post: {post.body}
         <button className="open-modal" onClick={() => this.props.openEditPostModal(post)}>
           <img src={window.vectorURL} alt="pen" />
         </button>
         <button onClick={() => this.props.deletePost(post.id)}>
           Delete
         </button>
-        <button onClick={this.toggleReply}>
-          Reply
+        <button onClick={() => this.setState({ commentField: true })}>
+          Comment
         </button>
-        {this.state.replyField ? this.replyForm() : null}
+        {this.state.commentField ? this.commentForm() : null}
         {this.props.comments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} comment={comment} /> : null)}
       </div>
     )
