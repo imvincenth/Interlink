@@ -12,6 +12,7 @@ class Feed extends React.Component {
       posts: []
     }
   
+    this.fillPosts();
   }
 
   componentDidMount() {
