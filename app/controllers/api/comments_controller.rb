@@ -11,8 +11,13 @@ class Api::CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.all
-    render :index
+    @comments = Comment.where(post_id: params[:post_id])
+
+    if @comments
+      render :index
+    else
+      render json: @comments.errors.full_messages, status: 404
+    end
   end
 
   def update
@@ -33,6 +38,6 @@ class Api::CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:user_id, :body, :comment_id, :post_id)
+    params.require(:comment).permit(:user_id, :body, :reply_id, :post_id)
   end
 end

@@ -6,15 +6,15 @@
 #  body       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  comment_id :integer
 #  post_id    :integer
+#  reply_id   :integer
 #  user_id    :integer          not null
 #
 # Indexes
 #
-#  index_comments_on_comment_id  (comment_id)
-#  index_comments_on_post_id     (post_id)
-#  index_comments_on_user_id     (user_id)
+#  index_comments_on_post_id   (post_id)
+#  index_comments_on_reply_id  (reply_id)
+#  index_comments_on_user_id   (user_id)
 #
 
 # This model initially had no columns defined. If you add columns to the

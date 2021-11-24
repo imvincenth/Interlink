@@ -6,7 +6,7 @@ export default class Comment extends Component {
 
     this.state = {
       user_id: this.props.currentUser.id,
-      comment_id: "",
+      reply_id: "",
       post_id: "",
       body: ""
     }

@@ -20,6 +20,6 @@ class Post < ApplicationRecord
     class_name: :User
 
   has_many :comments,
-    foreign_key: :comment_id,
+    foreign_key: :reply_id,
     class_name: :Comment
 end

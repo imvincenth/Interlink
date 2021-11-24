@@ -27,7 +27,7 @@ class Feed extends React.Component {
               <div className="feed">
                 {this.props.openCreatePostModal}
                 <h1 id="construction">UNDER CONSTRUCTION NOTHING TO SEE HERE</h1>
-                {this.props.posts.map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
+                {this.props.posts.reverse().map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
 
                 <div className="feed-input-container">
 

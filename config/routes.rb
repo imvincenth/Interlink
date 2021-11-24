@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :index, :update]
     resources :experiences, only: [:create, :index, :update, :destroy]
     resources :educations, only: [:create, :index, :update, :destroy]
-    resources :posts, only: [:create, :index, :update, :destroy]
-    resources :comments, only: [:create, :index, :update, :destroy]
+    resources :posts, only: [:create, :index, :update, :destroy] do 
+      resources :comments, only: [:create, :index, :update, :destroy]
+    end
     resource :session, only: [:create, :destroy]
   end
 

@@ -30,8 +30,8 @@ export const removeErrors = () => ({
   type: REMOVE_ERRORS
 });
 
-export const fetchComments = userId => dispatch => (
-  CommentAPIUtil.fetchComments(userId)
+export const fetchComments = postId => dispatch => (
+  CommentAPIUtil.fetchComments(postId)
     .then(comments => (dispatch(receiveComments(comments))), 
     err => (dispatch(receiveErrors(err.responseJSON))))
 );
