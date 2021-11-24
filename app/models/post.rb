@@ -17,12 +17,6 @@
 class Post < ApplicationRecord
   validates :user_id, :body, presence: true
 
-  after_initialize :set_parent_null
-
-  def set_parent_null
-    self.parent_id ||= -1
-  end
-
   belongs_to :user,
     foreign_key: :user_id,
     class_name: :User

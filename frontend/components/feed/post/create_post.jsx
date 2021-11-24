@@ -6,7 +6,7 @@ export default class Post extends Component {
 
     this.state = {
       user_id: this.props.currentUser.id,
-      parent_id: "-1",
+      parent_id: "",
       body: ""
     }
     
