@@ -9,7 +9,9 @@ export default class Comment extends Component {
       ...this.props.comment,
 
       editField: false,
-      replyField: false
+      replyField: false,
+
+      deleteEvent: false
     }
 
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
@@ -23,8 +25,8 @@ export default class Comment extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.comments !== this.props.comments) {
-      console.log("sik k you got me?");
+    if (prevProps.comments.length !== this.props.comments.length) {
+      this.setState({ body: "" });
     }
   }
 
@@ -38,8 +40,7 @@ export default class Comment extends Component {
   handleEditSubmit(e) {
     e.preventDefault();
 
-    this.props.updateComment({...this.state})
-      // .then(() => this.setState({ editField: false }));
+    this.props.updateComment({...this.state});
   }
 
   handleReplySubmit(e) {
@@ -96,8 +97,13 @@ export default class Comment extends Component {
     )
   }
 
-  deleteTree() {
-
+  deleteReply(commentId) {
+    this.props.deleteComment(commentId);
+    const deleteQueue = [];
+    this.props.comments.forEach(comment => comment.reply_id === commentId ? deleteQueue.push(comment) : null);
+    for (let comment of deleteQueue) {
+      this.props.deleteComment(comment.id);
+    }
   }
 
   render() {
@@ -109,7 +115,7 @@ export default class Comment extends Component {
           <img src={window.vectorURL} alt="pen" />
         </button>
         {this.state.editField ? this.editForm() : null}
-        <button onClick={() => this.props.deleteComment(comment.id)}>
+        <button onClick={() => this.deleteReply(comment.id)}>
           Delete
         </button>
         <button onClick={() => this.setState({ body: "", replyField: true })}>
