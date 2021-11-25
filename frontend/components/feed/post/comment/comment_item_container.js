@@ -5,7 +5,8 @@ import Comment from './comment_item';
 
 const mSTP = state => ({
   currentUser: state.entities.users[state.session.id],
-  users: Object.values(state.entities.users)
+  users: Object.values(state.entities.users),
+  comments: Object.values(state.entities.comments)
 });
 
 const mDTP = dispatch => ({

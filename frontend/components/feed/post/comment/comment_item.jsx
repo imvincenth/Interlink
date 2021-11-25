@@ -22,6 +22,12 @@ export default class Comment extends Component {
     this.props.fetchComments(this.state.post_id);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.comments !== this.props.comments) {
+      console.log("sik k you got me?");
+    }
+  }
+
   // componentWillUnmount() {
   //   // Fixing the memory leak error in console
   //   this.setState = (state,callback)=>{
@@ -88,6 +94,10 @@ export default class Comment extends Component {
         </form>
       </div>
     )
+  }
+
+  deleteTree() {
+
   }
 
   render() {
