@@ -4,7 +4,8 @@ import { fetchComments, createComment, updateComment, deleteComment } from '../.
 import Comment from './comment_item';
 
 const mSTP = state => ({
-  currentUser: state.entities.users[state.session.id]
+  currentUser: state.entities.users[state.session.id],
+  users: Object.values(state.entities.users)
 });
 
 const mDTP = dispatch => ({
