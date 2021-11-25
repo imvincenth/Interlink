@@ -48,6 +48,11 @@ class User < ApplicationRecord
     class_name: :Comment,
     dependent: :destroy
 
+  has_many :reactions,
+    foreign_key: :reactor_id,
+    class_name: :User,
+    dependent: :destroy
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     return nil unless user

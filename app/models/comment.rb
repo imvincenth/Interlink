@@ -37,4 +37,9 @@ class Comment < ApplicationRecord
     foreign_key: :reply_id,
     dependent: :destroy,
     class_name: :Comment
+
+  has_many :reactions,
+    foreign_key: :comment_id,
+    dependent: :destroy,
+    class_name: :Reaction
 end
