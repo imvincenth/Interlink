@@ -74,11 +74,7 @@ export default class Comment extends Component {
 
   replyTarget() {
     let target = "";
-    for (let i = 0; i < this.props.users.length; i++) {
-      if (this.props.users[i].id === this.props.comment.user_id) {
-        target = this.props.users[i];
-      }
-    }
+    this.props.users.forEach(user => user.id === this.props.comment.user_id ? target = user : null);
     return (
       <div>
         <Link to={`/users/${target.id}`}>{target.first_name} {target.last_name}</Link>
