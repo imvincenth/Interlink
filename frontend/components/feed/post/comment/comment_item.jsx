@@ -46,7 +46,7 @@ export default class Comment extends Component {
     e.preventDefault();
     let newState = {
       user_id: this.props.comment.user_id,
-      reply_id: this.props.comment.id,
+      reply_id: !this.props.comment.reply_id ? this.props.comment.id : this.props.comment.reply_id,
       post_id: this.props.comment.post_id,
       body: this.state.body,
     };
