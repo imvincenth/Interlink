@@ -25,7 +25,7 @@ export default class Post extends Component {
     e.preventDefault();
 
     this.props.createComment({...this.state})
-      .then(() => this.setState({ commentField: false }));
+      .then(() => this.setState({ body: "", commentField: false }));
   }
 
   update(field) {
