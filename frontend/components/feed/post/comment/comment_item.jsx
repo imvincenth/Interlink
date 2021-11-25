@@ -33,7 +33,7 @@ export default class Comment extends Component {
     e.preventDefault();
 
     this.props.updateComment({...this.state})
-      .then(() => this.setState({ editField: false }));
+      // .then(() => this.setState({ editField: false }));
   }
 
   handleReplySubmit(e) {
