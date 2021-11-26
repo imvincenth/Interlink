@@ -10,7 +10,8 @@
   margin-left: 45px;
   display: flex;
   align-items: bottom;
-  position: relative;
+  // position: relative;
+  position: absolute;
   justify-content: space-between;
   flex-wrap: nowrap;
 
@@ -40,14 +41,31 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  top: 50%;
   height: 628px;
   overflow-y: hidden;
 
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+
   @media (max-width: 780px) {
+    position: static;
+    left: 0;
+    right: 0;
+    padding-top: 60px;
+    transform: none;
     justify-content: flex-start;
   }
 
   @media (max-height: 700px) {
+    position: static;
+    left: 0;
+    right: 0;
+    padding-top: 60px;
+    transform: none;
     justify-content: flex-start;
   }
 }
@@ -63,7 +81,7 @@
   background: #FFFFFF;
   // margin-top: 60px;
 
-  @media (max-width: 780px) {
+  @media (max-width: 782px) {
     -webkit-box-shadow: none;
     box-shadow: none;
     width: 352px;
