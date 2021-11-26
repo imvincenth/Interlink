@@ -3,6 +3,12 @@
   min-height: 400px;
   flex-direction: column;
   display: flex;
+
+  @media (max-height: 700px) {
+    .session_form_container {
+      padding-top: 0;
+    }
+  }
 }
 
 .session-form-header {
@@ -15,6 +21,11 @@
   flex-wrap: nowrap;
 
   @media (max-width: 780px) {
+    margin-top: 5px;
+    margin-left: 32px;
+  }
+
+  @media (max-height: 700px) {
     margin-top: 5px;
     margin-left: 32px;
   }
@@ -343,10 +354,10 @@
   padding-left: 86px;
   width: 28px;
   opacity: 0.75;
-  -webkit-transition: all 1s linear;
-  -moz-transition: all 1s linear;
-  -o-transition: all 1s linear;
-  transition: all 1s linear;
+  // -webkit-transition: all 1s linear;
+  // -moz-transition: all 1s linear;
+  // -o-transition: all 1s linear;
+  // transition: all 1s linear;
 
   @media (max-width: 780px) {
     padding-left: 110px;
