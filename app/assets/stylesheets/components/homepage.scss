@@ -14,6 +14,17 @@
       opacity: 0.5;
     }
   }
+
+  @media (max-height: 700px) {
+    .fire-picture {
+      -webkit-transition: 0.25s all ease-in-out;
+      -moz-transition: 0.25s all ease-in-out;
+      -o-transition: 0.25s all ease-in-out;
+      transition: 0.25s all ease-in-out;
+      opacity: 0.5;
+      bottom: -300px;
+    }
+  }
 }
 
 .homepage-nav {
@@ -268,8 +279,6 @@
   position: fixed;
   right: 0%;
   bottom: -40px;
-
-
 }
 
 .homepage-nav-right {
