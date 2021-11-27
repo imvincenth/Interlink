@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_111600) do
+ActiveRecord::Schema.define(version: 2021_11_27_012428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,13 +78,11 @@ ActiveRecord::Schema.define(version: 2021_11_24_111600) do
 
   create_table "reactions", force: :cascade do |t|
     t.integer "reactor_id", null: false
-    t.integer "comment_id"
-    t.integer "post_id"
     t.string "react_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_reactions_on_comment_id"
-    t.index ["post_id"], name: "index_reactions_on_post_id"
+    t.integer "reactable_id", null: false
+    t.index ["reactable_id"], name: "index_reactions_on_reactable_id"
     t.index ["reactor_id"], name: "index_reactions_on_reactor_id"
   end
 

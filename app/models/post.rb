@@ -25,7 +25,6 @@ class Post < ApplicationRecord
     dependent: :destroy
 
   has_many :reactions,
-    foreign_key: :post_id,
-    class_name: :Reaction,
+    as: :reactable,
     dependent: :destroy
 end
