@@ -4,7 +4,7 @@ import {
   REMOVE_ERRORS
 } from "../actions/reaction_actions";
 
-const reactionErrorsReducer = (oldState = [], action) => {
+const ReactionErrorsReducer = (oldState = [], action) => {
   Object.freeze(oldState);
 
   switch(action.type) {
@@ -21,3 +21,5 @@ const reactionErrorsReducer = (oldState = [], action) => {
       return oldState;
   }
 }
+
+export default ReactionErrorsReducer;
