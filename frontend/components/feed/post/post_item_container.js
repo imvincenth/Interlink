@@ -16,10 +16,10 @@ const mSTP = state => ({
 const mDTP = dispatch => ({
   fetchPosts: () => dispatch(fetchPosts()),
   fetchComments: postId => dispatch(fetchComments(postId)),
-  fetchPostReactions: postId => dispatch(fetchPostReactions(postId)),
   openEditPostModal: post => dispatch(openModal("editPost", post)),
   deletePost: post => dispatch(deletePost(post)),
   createComment: comment => dispatch(createComment(comment)),
+  fetchPostReactions: postId => dispatch(fetchPostReactions(postId)),
   createPostReaction: reaction => dispatch(createPostReaction(reaction)),
   updatePostReaction: reaction => dispatch(updatePostReaction(reaction)),
   deletePostReaction: reactionId => dispatch(deletePostReaction(reactionId))

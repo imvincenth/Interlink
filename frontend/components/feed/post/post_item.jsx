@@ -11,7 +11,9 @@ export default class Post extends Component {
       post_id: this.props.post.id,
       body: "",
 
-      commentField: false
+      commentField: false,
+
+      
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);

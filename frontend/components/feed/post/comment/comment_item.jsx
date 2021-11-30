@@ -94,12 +94,12 @@ export default class Comment extends Component {
   }
 
   deleteReply(commentId) {
-    this.props.deleteComment(commentId);
     const deleteQueue = [];
     this.props.comments.forEach(comment => comment.reply_id === commentId ? deleteQueue.push(comment) : null);
     for (let comment of deleteQueue) {
       this.props.deleteComment(comment.id);
     }
+    this.props.deleteComment(commentId);
   }
 
   render() {
