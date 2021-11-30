@@ -13,7 +13,10 @@ export default class Post extends Component {
 
       commentField: false,
 
-      
+      reactor_id: this.props.sessionId,
+      react_type: "like",
+      reactable_type: "Post",
+      reactable_id: this.props.post.id
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
