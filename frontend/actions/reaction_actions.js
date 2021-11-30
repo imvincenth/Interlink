@@ -55,3 +55,52 @@ export const removeErrors = () => {
   }
 }
 
+// Post Reactions
+export const fetchPostReactions = postId => dispatch => (
+  ReactionAPIUtil.fetchPostReactions(postId)
+    .then(reactions => (dispatch(receiveReactions(reactions))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+export const createPostReaction = reaction => dispatch => (
+  ReactionAPIUtil.createPostReaction(reaction)
+    .then(reaction => (dispatch(receiveReaction(reaction))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+export const updatePostReaction = reaction => dispatch => (
+  ReactionAPIUtil.updatePostReaction(reaction)
+    .then(reaction => (dispatch(receiveReaction(reaction))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+export const deletePostReaction = reactionId => dispatch => (
+  ReactionAPIUtil.deletePostReaction(reactionId)
+    .then(() => (dispatch(removeReaction(reactionId))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+// Comment Reactions
+export const fetchCommentReactions = commentId => dispatch => (
+  ReactionAPIUtil.fetchCommentReactions(commentId)
+    .then(reactions => (dispatch(receiveReactions(reactions))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+export const createCommentReaction = reaction => dispatch => (
+  ReactionAPIUtil.createCommentReaction(reaction)
+    .then(reaction => (dispatch(receiveReaction(reaction))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+export const updateCommentReaction = reaction => dispatch => (
+  ReactionAPIUtil.updateCommentReaction(reaction)
+    .then(reaction => (dispatch(receiveReaction(reaction))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
+
+export const deleteCommentReaction = reactionId => dispatch => (
+  ReactionAPIUtil.deleteCommentReaction(reactionId)
+    .then(() => (dispatch(receiveRomove(reactionId))),
+    err => (dispatch(receiveReactionErrors(err.responseJSON))))
+);
