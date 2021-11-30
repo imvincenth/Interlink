@@ -11,11 +11,11 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     
     resources :posts, only: [:show] do
-      resources :reactions, only: [:create, :index, :update, :destroy]
+      resources :reactions, only: [:create, :show, :index, :update, :destroy]
     end
 
     resources :comments, only: [:show] do
-      resources :reactions, only: [:create, :index, :update, :destroy]
+      resources :reactions, only: [:create, :show, :index, :update, :destroy]
     end
   end
 
