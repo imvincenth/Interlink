@@ -14,12 +14,15 @@ export default class Post extends Component {
       commentField: false,
 
       reactor_id: this.props.sessionId,
-      react_type: "like",
+      react_type: "Like",
       reactable_type: "Post",
-      reactable_id: this.props.post.id
+      reactable_id: this.props.post.id,
+
+      testToggle: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.reply = this.reply.bind(this);
   }
 
   componentDidMount() {
@@ -47,6 +50,46 @@ export default class Post extends Component {
     )
   }
 
+  react(reaction) {
+    this.setState({ react_type: reaction });
+    this.props.createPostReaction({...this.state});
+  }
+
+  unReact() {
+    this.setState({ react_type: "" });
+    this.props.deletePostReaction();
+  }
+
+  reactDeck() {
+    return (
+      <div>
+        <button onClick={() => this.react("Like")}>
+          Like
+        </button>
+
+        <button onClick={() => this.react("Celebrate")}>
+          Celebrate
+        </button>
+
+        <button onClick={() => this.react("Support")}>
+          Support
+        </button>
+
+        <button onClick={() => this.react("Love")}>
+          Love
+        </button>
+
+        <button onClick={() => this.react("Insightful")}>
+          Insightful
+        </button>
+
+        <button onClick={() => this.react("Curious")}>
+          Curious
+        </button>
+      </div>
+    )
+  }
+
   render() {
     const { post } = this.props;
     return (
@@ -62,6 +105,9 @@ export default class Post extends Component {
           Comment
         </button>
         {this.state.commentField ? this.commentForm() : null}
+        <button>
+          Like
+        </button>
         {this.props.comments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} comment={comment} /> : null)}
       </div>
     )
