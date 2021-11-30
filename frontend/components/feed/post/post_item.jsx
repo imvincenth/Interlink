@@ -13,16 +13,16 @@ export default class Post extends Component {
 
       commentField: false,
 
-      reactor_id: this.props.sessionId,
-      react_type: "Like",
+      reactor_id: this.props.sessionId, // need to match
+      react_type: "", // needs to inherit
       reactable_type: "Post",
-      reactable_id: this.props.post.id,
+      reactable_id: this.props.post.id, // need to match
 
       testToggle: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.reply = this.reply.bind(this);
+    this.react = this.react.bind(this);
   }
 
   componentDidMount() {
@@ -90,6 +90,14 @@ export default class Post extends Component {
     )
   }
 
+  tempLikeButton() {
+    return (
+      <button onClick={() => this.react("Like")}>
+        Like
+      </button>
+    )
+  }
+
   render() {
     const { post } = this.props;
     return (
@@ -105,9 +113,10 @@ export default class Post extends Component {
           Comment
         </button>
         {this.state.commentField ? this.commentForm() : null}
-        <button>
-          Like
-        </button>
+        <div>
+          REACTION: {this.state.react_type}
+        </div>
+        {this.state.react_type.length === 0 ? this.tempLikeButton() : null}
         {this.props.comments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} comment={comment} /> : null)}
       </div>
     )

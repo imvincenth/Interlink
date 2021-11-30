@@ -5,11 +5,13 @@ import experiences from './experiences_reducer';
 import educations from './educations_reducer';
 import posts from './posts_reducer';
 import comments from './comments_reducer';
+import reactions from './reactions_reducer';
 
 export default combineReducers({
   users,
   experiences,
   educations,
   posts,
-  comments
+  comments,
+  reactions
 });
