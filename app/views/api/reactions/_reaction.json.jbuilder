@@ -1,0 +1,1 @@
+json.extract! reaction, :id, :reactor_id, :react_type, :reactable_type, :reactable_id
