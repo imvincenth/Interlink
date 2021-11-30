@@ -17,6 +17,7 @@
 #
 class Reaction < ApplicationRecord
   validates :reactor_id, :reactable_id, :reactable_type, presence: true
+  validates :reactable_id, uniqueness: {scope: :reactor_id}
 
   belongs_to :user,
     foreign_key: :reactor_id,

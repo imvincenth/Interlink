@@ -1,6 +1,6 @@
 export const createPostReaction = reaction => (
   $.ajax({
-    url: `/api/posts/${reaction.post_id}/reactions`,
+    url: `/api/posts/${reaction.reactable_id}/reactions`,
     method: "POST",
     data: { reaction }
   })
@@ -30,7 +30,7 @@ export const deletePostReaction = reactionId => (
 
 export const createCommentReaction = reaction => (
   $.ajax({
-    url: `/api/comments/${reaction.comment_id}/reactions`,
+    url: `/api/comments/${reaction.reactable_id}/reactions`,
     method: "POST",
     data: { reaction }
   })

@@ -18,7 +18,7 @@ export default class Post extends Component {
       reactable_type: "Post",
       reactable_id: this.props.post.id, // need to match
 
-      testToggle: false
+      
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +27,7 @@ export default class Post extends Component {
 
   componentDidMount() {
     this.props.fetchComments(this.props.post.id);
+    this.props.fetchPostReactions(this.props.post.id);
   }
 
   handleSubmit(e) {

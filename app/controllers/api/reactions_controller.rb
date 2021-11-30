@@ -14,7 +14,7 @@ class Api::ReactionsController < ApplicationController
   end
 
   def show
-    @reaction = Reaction.find_by(id: params[:id])
+    @reaction = Reaction.find_by(reactor_id: params[:reactor_id], reactable_id: params[:reactable_id])
     if @reaction
       render :show
     else
