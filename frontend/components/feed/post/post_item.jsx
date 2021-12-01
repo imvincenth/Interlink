@@ -18,10 +18,11 @@ export default class Post extends Component {
       reactable_type: "Post",
       reactable_id: this.props.post.id, // need to match
 
-      
+
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+    this.handleReactionSubmit = this.handleReactionSubmit.bind(this);
     this.react = this.react.bind(this);
   }
 
@@ -30,11 +31,17 @@ export default class Post extends Component {
     this.props.fetchPostReactions(this.props.post.id);
   }
 
-  handleSubmit(e) {
+  handleCommentSubmit(e) {
     e.preventDefault();
 
     this.props.createComment({...this.state})
       .then(() => this.setState({ body: "", commentField: false }));
+  }
+
+  handleReactionSubmit(e) {
+    e.preventDefault();
+
+    this.props.createPostReaction({...this.state});
   }
 
   update(field) {
@@ -44,56 +51,57 @@ export default class Post extends Component {
   commentForm() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleCommentSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
         </form>
       </div>
     )
   }
 
-  react(reaction) {
-    this.setState({ react_type: reaction });
-    this.props.createPostReaction({...this.state});
-  }
-
-  unReact() {
-    this.setState({ react_type: "" });
-    this.props.deletePostReaction();
-  }
-
-  reactDeck() {
+  reactionForm() {
     return (
       <div>
-        <button onClick={() => this.react("Like")}>
-          Like
-        </button>
+        <form>
+          <button onClick={() => this.react("Like")} onSubmit={this.handleReactionSubmit}>
+            Like
+          </button>
 
-        <button onClick={() => this.react("Celebrate")}>
-          Celebrate
-        </button>
+          <button onClick={() => this.react("Celebrate")} onSubmit={this.handleReactionSubmit}>
+            Celebrate
+          </button>
 
-        <button onClick={() => this.react("Support")}>
-          Support
-        </button>
+          <button onClick={() => this.react("Support")} onSubmit={this.handleReactionSubmit}>
+            Support
+          </button>
 
-        <button onClick={() => this.react("Love")}>
-          Love
-        </button>
+          <button onClick={() => this.react("Love")} onSubmit={this.handleReactionSubmit}>
+            Love
+          </button>
 
-        <button onClick={() => this.react("Insightful")}>
-          Insightful
-        </button>
+          <button onClick={() => this.react("Insightful")} onSubmit={this.handleReactionSubmit}>
+            Insightful
+          </button>
 
-        <button onClick={() => this.react("Curious")}>
-          Curious
-        </button>
+          <button onClick={() => this.react("Curious")} onSubmit={this.handleReactionSubmit}>
+            Curious
+          </button>
+        </form>
       </div>
     )
   }
 
+  react(reaction) {
+    this.setState({ react_type: reaction });;
+  }
+
+  removeReaction() {
+    this.setState({ react_type: "" });
+    this.props.deletePostReaction();
+  }
+
   tempLikeButton() {
     return (
-      <button onClick={() => this.react("Like")}>
+      <button onClick={() => this.react("Like")} onSubmit={this.handleReactionSubmit}>
         Like
       </button>
     )
