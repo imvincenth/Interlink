@@ -101,6 +101,6 @@ export const updateCommentReaction = reaction => dispatch => (
 
 export const deleteCommentReaction = reactionId => dispatch => (
   ReactionAPIUtil.deleteCommentReaction(reactionId)
-    .then(() => (dispatch(receiveRomove(reactionId))),
+    .then(() => (dispatch(removeReaction(reactionId))),
     err => (dispatch(receiveReactionErrors(err.responseJSON))))
 );

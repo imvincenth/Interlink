@@ -11,7 +11,7 @@ export default class Comment extends Component {
       editField: false,
       replyField: false,
 
-      reactor_id: this.props.sessionId,
+      reactor_id: this.props.currentUser.id,
       react_type: "",
       reactable_type: "Comment",
       reactable_id: this.props.comment.id,
@@ -29,7 +29,7 @@ export default class Comment extends Component {
 
   setCurrentReaction() {
     for (let reaction of this.props.reactions) {
-      if (reaction.reactor_id === this.props.sessionId && reaction.reactable_id === this.props.comment.id) {
+      if (reaction.reactor_id === this.props.currentUser.id && reaction.reactable_id === this.props.comment.id) {
         this.setState({ currentReaction: reaction, react_type: reaction.react_type });
       }
     }
@@ -38,7 +38,7 @@ export default class Comment extends Component {
   componentDidMount() {
     this.props.fetchComments(this.state.post_id)
     this.props.fetchCommentReactions(this.props.comment.id)
-      // .then(() => this.setCurrentReaction());
+      .then(() => this.setCurrentReaction());
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -126,7 +126,7 @@ export default class Comment extends Component {
   }
 
   react(reaction) {
-    this.props.createPostReaction({...this.state, react_type: reaction})
+    this.props.createCommentReaction({...this.state, react_type: reaction})
       .then(() => this.setCurrentReaction());
   }
 
@@ -151,6 +151,11 @@ export default class Comment extends Component {
     )
   }
 
+  removeReaction() {
+    this.props.deleteCommentReaction(this.state.currentReaction.id)
+      .then(() => this.setState({ react_type: "", currentReaction: "" }));
+  }
+
   deleteReply(commentId) {
     const deleteQueue = [];
     this.props.comments.forEach(comment => comment.reply_id === commentId ? deleteQueue.push(comment) : null);
@@ -158,6 +163,14 @@ export default class Comment extends Component {
       this.props.deleteComment(comment.id);
     }
     this.props.deleteComment(commentId);
+  }
+
+  tempDislikeButton() {
+    return (
+      <button onClick={() => this.removeReaction()}>
+        {this.state.react_type}
+      </button>
+    )
   }
 
   render() {
@@ -175,6 +188,8 @@ export default class Comment extends Component {
         <button onClick={() => this.setState({ body: "", replyField: true })}>
           Reply
         </button>
+        reaction: {this.state.react_type}
+        {this.state.currentReaction ? this.tempDislikeButton() : this.reactionForm()}
         {this.state.replyField ? this.replyForm() : null}
       </div>
     )

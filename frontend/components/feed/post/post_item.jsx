@@ -30,7 +30,6 @@ export default class Post extends Component {
     for (let reaction of this.props.reactions) {
       if (reaction.reactor_id === this.props.sessionId && reaction.reactable_id === this.props.post.id) {
         this.setState({ currentReaction: reaction, react_type: reaction.react_type });
-        console.log(this.state.currentReaction);
       }
     }
   }
