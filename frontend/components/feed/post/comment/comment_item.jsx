@@ -11,17 +11,34 @@ export default class Comment extends Component {
       editField: false,
       replyField: false,
 
-      deleteEvent: false
+      reactor_id: this.props.sessionId,
+      react_type: "",
+      reactable_type: "Comment",
+      reactable_id: this.props.comment.id,
+
+      currentReaction: ""
     }
 
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleReplySubmit = this.handleReplySubmit.bind(this);
+    this.handleReactionSubmit = this.handleReactionSubmit.bind(this);
+    this.react = this.react.bind(this);
 
     this.replyTarget = this.replyTarget.bind(this);
   }
 
+  setCurrentReaction() {
+    for (let reaction of this.props.reactions) {
+      if (reaction.reactor_id === this.props.sessionId && reaction.reactable_id === this.props.comment.id) {
+        this.setState({ currentReaction: reaction, react_type: reaction.react_type });
+      }
+    }
+  }
+
   componentDidMount() {
-    this.props.fetchComments(this.state.post_id);
+    this.props.fetchComments(this.state.post_id)
+    this.props.fetchCommentReactions(this.props.comment.id)
+      // .then(() => this.setCurrentReaction());
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -56,6 +73,12 @@ export default class Comment extends Component {
       .then(() => this.setState({ replyField: false }));
   }
 
+  handleReactionSubmit(e) {
+    e.preventDefault();
+
+    this.props.createCommentReaction({...this.state});
+  }
+
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
@@ -70,6 +93,41 @@ export default class Comment extends Component {
         </form>
       </div>
     )
+  }
+
+  reactionForm() {
+    return (
+      <div>
+        <button onClick={() => this.react("Like")}>
+          Like
+        </button>
+
+        <button onClick={() => this.react("Celebrate")}>
+          Celebrate
+        </button>
+
+        <button onClick={() => this.react("Support")}>
+          Support
+        </button>
+
+        <button onClick={() => this.react("Love")}>
+          Love
+        </button>
+
+        <button onClick={() => this.react("Insightful")}>
+          Insightful
+        </button>
+
+        <button onClick={() => this.react("Curious")}>
+          Curious
+        </button>
+      </div>
+    )
+  }
+
+  react(reaction) {
+    this.props.createPostReaction({...this.state, react_type: reaction})
+      .then(() => this.setCurrentReaction());
   }
 
   replyTarget() {
