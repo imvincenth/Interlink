@@ -21,8 +21,6 @@ export default class Comment extends Component {
 
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleReplySubmit = this.handleReplySubmit.bind(this);
-    this.handleReactionSubmit = this.handleReactionSubmit.bind(this);
-    this.handleReactionEdit = this.handleReactionEdit.bind(this);
     this.react = this.react.bind(this);
 
     this.replyTarget = this.replyTarget.bind(this);
@@ -74,18 +72,6 @@ export default class Comment extends Component {
       .then(() => this.setState({ replyField: false }));
   }
 
-  handleReactionSubmit(e) {
-    e.preventDefault();
-
-    this.props.createCommentReaction({...this.state});
-  }
-
-  handleReactionEdit(e) {
-    e.preventDefault();
-
-    this.props.createCommentReaction({...this.state.currentReaction, react_type: this.state.react_type});
-  }
-
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
   }
@@ -132,8 +118,43 @@ export default class Comment extends Component {
     )
   }
 
+  reactionEditForm() {
+    return (
+      <div>
+        <button onClick={() => this.reactEdit("Like")}>
+          Like
+        </button>
+
+        <button onClick={() => this.reactEdit("Celebrate")}>
+          Celebrate
+        </button>
+
+        <button onClick={() => this.reactEdit("Support")}>
+          Support
+        </button>
+
+        <button onClick={() => this.reactEdit("Love")}>
+          Love
+        </button>
+
+        <button onClick={() => this.reactEdit("Insightful")}>
+          Insightful
+        </button>
+
+        <button onClick={() => this.reactEdit("Curious")}>
+          Curious
+        </button>
+      </div>
+    )
+  }
+
   react(reaction) {
     this.props.createCommentReaction({...this.state, react_type: reaction})
+      .then(() => this.setCurrentReaction());
+  }
+
+  reactEdit(reaction) {
+    this.props.updateCommentReaction({...this.state.currentReaction, react_type: reaction})
       .then(() => this.setCurrentReaction());
   }
 
@@ -174,9 +195,12 @@ export default class Comment extends Component {
 
   tempDislikeButton() {
     return (
-      <button onClick={() => this.removeReaction()}>
-        {this.state.react_type}
-      </button>
+      <div>
+        <button onClick={() => this.removeReaction()}>
+          {this.state.react_type}
+        </button>
+        edit: {this.reactionEditForm()}
+      </div>
     )
   }
 

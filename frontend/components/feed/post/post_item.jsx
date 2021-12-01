@@ -22,8 +22,6 @@ export default class Post extends Component {
     }
 
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
-    this.handleReactionSubmit = this.handleReactionSubmit.bind(this);
-    this.handleReactionEdit = this.handleReactionEdit.bind(this);
     this.react = this.react.bind(this);
   }
 
@@ -46,18 +44,6 @@ export default class Post extends Component {
 
     this.props.createComment({...this.state})
       .then(() => this.setState({ body: "", commentField: false }));
-  }
-
-  handleReactionSubmit(e) {
-    e.preventDefault();
-
-    this.props.createPostReaction({...this.state});
-  }
-
-  handleReactionEdit(e) {
-    e.preventDefault();
-
-    this.props.updatePostReaction({...this.state.currentReaction, react_type: this.state.react_type});
   }
 
   update(field) {
@@ -104,8 +90,43 @@ export default class Post extends Component {
     )
   }
 
+  reactionEditForm() {
+    return (
+      <div>
+        <button onClick={() => this.reactEdit("Like")}>
+          Like
+        </button>
+
+        <button onClick={() => this.reactEdit("Celebrate")}>
+          Celebrate
+        </button>
+
+        <button onClick={() => this.reactEdit("Support")}>
+          Support
+        </button>
+
+        <button onClick={() => this.reactEdit("Love")}>
+          Love
+        </button>
+
+        <button onClick={() => this.reactEdit("Insightful")}>
+          Insightful
+        </button>
+
+        <button onClick={() => this.reactEdit("Curious")}>
+          Curious
+        </button>
+      </div>
+    )
+  }
+
   react(reaction) {
     this.props.createPostReaction({...this.state, react_type: reaction})
+      .then(() => this.setCurrentReaction());
+  }
+
+  reactEdit(reaction) {
+    this.props.updatePostReaction({...this.state.currentReaction, react_type: reaction})
       .then(() => this.setCurrentReaction());
   }
 
@@ -116,9 +137,12 @@ export default class Post extends Component {
 
   tempDislikeButton() {
     return (
-      <button onClick={() => this.removeReaction()}>
-        {this.state.react_type}
-      </button>
+      <div>
+        <button onClick={() => this.removeReaction()}>
+          {this.state.react_type}
+        </button>
+        edit: {this.reactionEditForm()}
+      </div>
     )
   }
 
