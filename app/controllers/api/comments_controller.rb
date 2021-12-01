@@ -11,7 +11,8 @@ class Api::CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comment.where(post_id: params[:post_id])
+    # @comments = Comment.where(post_id: params[:post_id]) -- n + 1 --
+    @comments = Comment.all
 
     if @comments
       render :index

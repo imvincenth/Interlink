@@ -13,12 +13,12 @@ export default class Post extends Component {
 
       commentField: false,
 
-      reactor_id: this.props.sessionId, // need to match
-      react_type: "", // needs to inherit
+      reactor_id: this.props.sessionId,
+      react_type: "Like",
       reactable_type: "Post",
-      reactable_id: this.props.post.id, // need to match
+      reactable_id: this.props.post.id,
 
-
+      currentReaction: ""
     }
 
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
@@ -26,6 +26,14 @@ export default class Post extends Component {
     this.react = this.react.bind(this);
   }
 
+  setCurrentReaction() {
+    for (let reaction of this.props.reactions) {
+      if (reaction.reactor_id === this.props.sessionId && reaction.reactable_id === this.props.post.id) {
+        this.setState({ currentReaction: reaction });
+      }
+    };
+  }
+  
   componentDidMount() {
     this.props.fetchComments(this.props.post.id);
     this.props.fetchPostReactions(this.props.post.id);
@@ -62,47 +70,38 @@ export default class Post extends Component {
     return (
       <div>
         <form>
-          <button onClick={() => this.react("Like")} onSubmit={this.handleReactionSubmit}>
-            Like
-          </button>
-
-          <button onClick={() => this.react("Celebrate")} onSubmit={this.handleReactionSubmit}>
-            Celebrate
-          </button>
-
-          <button onClick={() => this.react("Support")} onSubmit={this.handleReactionSubmit}>
-            Support
-          </button>
-
-          <button onClick={() => this.react("Love")} onSubmit={this.handleReactionSubmit}>
-            Love
-          </button>
-
-          <button onClick={() => this.react("Insightful")} onSubmit={this.handleReactionSubmit}>
-            Insightful
-          </button>
-
-          <button onClick={() => this.react("Curious")} onSubmit={this.handleReactionSubmit}>
-            Curious
-          </button>
+          <input type="submit" value="Like" onClick={this.react("Like")} />
+          <input type="submit" value="Celebrate" onClick={this.react("Celebrate")} />
+          <input type="submit" value="Support" onClick={this.react("Support")} />
+          <input type="submit" value="Love" onClick={this.react("Love")} />
+          <input type="submit" value="Insightful" onClick={this.react("Insightful")} />
+          <input type="submit" value="Curious" onClick={this.react("Curious")} />
         </form>
       </div>
     )
   }
 
   react(reaction) {
-    this.setState({ react_type: reaction });;
+    this.props.createPostReaction({...this.state, react_type: reaction});
   }
 
   removeReaction() {
-    this.setState({ react_type: "" });
-    this.props.deletePostReaction();
+    this.props.deletePostReaction(this.state.currentReaction.id)
+      .then(() => this.setState({ react_type: "Like" }));
   }
 
   tempLikeButton() {
     return (
-      <button onClick={() => this.react("Like")} onSubmit={this.handleReactionSubmit}>
+      <button onClick={() => this.react("Like")}>
         Like
+      </button>
+    )
+  }
+
+  tempDislikeButton() {
+    return (
+      <button onClick={() => this.removeReaction()}>
+        Dislike
       </button>
     )
   }
@@ -123,9 +122,9 @@ export default class Post extends Component {
         </button>
         {this.state.commentField ? this.commentForm() : null}
         <div>
-          REACTION: {this.state.react_type}
+          reaction: {this.state.react_type}
         </div>
-        {this.state.react_type.length === 0 ? this.tempLikeButton() : null}
+        {!this.state.currentReaction ? this.tempLikeButton() : this.tempDislikeButton()}
         {this.props.comments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} comment={comment} /> : null)}
       </div>
     )
