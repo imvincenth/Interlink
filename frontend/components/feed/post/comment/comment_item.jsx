@@ -22,6 +22,7 @@ export default class Comment extends Component {
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
     this.handleReplySubmit = this.handleReplySubmit.bind(this);
     this.handleReactionSubmit = this.handleReactionSubmit.bind(this);
+    this.handleReactionEdit = this.handleReactionEdit.bind(this);
     this.react = this.react.bind(this);
 
     this.replyTarget = this.replyTarget.bind(this);
@@ -77,6 +78,12 @@ export default class Comment extends Component {
     e.preventDefault();
 
     this.props.createCommentReaction({...this.state});
+  }
+
+  handleReactionEdit(e) {
+    e.preventDefault();
+
+    this.props.createCommentReaction({...this.state.currentReaction, react_type: this.state.react_type});
   }
 
   update(field) {

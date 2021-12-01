@@ -23,6 +23,7 @@ export default class Post extends Component {
 
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.handleReactionSubmit = this.handleReactionSubmit.bind(this);
+    this.handleReactionEdit = this.handleReactionEdit.bind(this);
     this.react = this.react.bind(this);
   }
 
@@ -51,6 +52,12 @@ export default class Post extends Component {
     e.preventDefault();
 
     this.props.createPostReaction({...this.state});
+  }
+
+  handleReactionEdit(e) {
+    e.preventDefault();
+
+    this.props.updatePostReaction({...this.state.currentReaction, react_type: this.state.react_type});
   }
 
   update(field) {
