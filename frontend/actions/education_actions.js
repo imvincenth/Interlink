@@ -30,8 +30,8 @@ export const removeErrors = () => ({
   type: REMOVE_ERRORS
 })
 
-export const fetchEducations = () => dispatch => (
-  EducationAPIUtil.fetchEducations()
+export const fetchEducations = userId => dispatch => (
+  EducationAPIUtil.fetchEducations(userId)
     .then(educations => (dispatch(receiveEducations(educations))), 
     err => (dispatch(receiveErrors(err.responseJSON))))
 );

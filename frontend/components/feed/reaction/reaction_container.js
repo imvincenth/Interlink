@@ -11,3 +11,5 @@ const mDTP = dipatch => ({
 });
 
 export default connect(mSTP, mDTP)(Reaction);
+
+// REACTION MODAL PLACEHOLDER CODE

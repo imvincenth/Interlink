@@ -17,9 +17,9 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.props.fetchUser(this.props.userId)
-    .then(() => this.setState({ user: this.props.user }))
-    .then(this.props.fetchExperiences())
-    .then(this.props.fetchEducations());
+      .then(() => this.setState({ user: this.props.user }))
+      .then(this.props.fetchExperiences(this.props.userId))
+      .then(this.props.fetchEducations(this.props.userId));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -27,8 +27,8 @@ class Profile extends React.Component {
     if (prevProps.userId !== this.props.userId) {
       this.props.fetchUser(this.props.userId)
       .then(this.setState({ user: this.props.user }))
-      .then(this.props.fetchExperiences())
-      .then(this.props.fetchEducations());
+      .then(this.props.fetchExperiences(this.props.userId))
+      .then(this.props.fetchEducations(this.props.userId));
     }
   }
 

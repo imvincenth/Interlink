@@ -11,7 +11,9 @@ class Api::ExperiencesController < ApplicationController
   end
 
   def index
-    @experiences = Experience.all
+    # @experiences = Experience.all
+    user = User.find_by(id: params[:user_id])
+    @experiences = Experience.where(user_id: user.id)
     render :index
   end
 
