@@ -13,14 +13,14 @@ class Api::ReactionsController < ApplicationController
     render :index
   end
 
-  def show
-    @reaction = Reaction.find_by(reactor_id: params[:reactor_id], reactable_id: params[:reactable_id])
-    if @reaction
-      render :show
-    else
-      render json: @reaction.errors.full_messages, status: 404
-    end
-  end
+  # def show
+  #   @reaction = Reaction.find_by(reactor_id: params[:reactor_id], reactable_id: params[:reactable_id])
+  #   if @reaction
+  #     render :show
+  #   else
+  #     render json: @reaction.errors.full_messages, status: 404
+  #   end
+  # end
 
   def create
     if params[:comment_id]
