@@ -26,7 +26,7 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-item">
-            <Link className="navbar-link" to="/">
+            <Link className="navbar-link" to="/network">
               <img className="navbar-icon" src={window.networkURL} alt="feed url" />
               <h5>Network</h5>
             </Link>
