@@ -15,4 +15,13 @@
 #  index_connections_on_connector_id  (connector_id)
 #
 class Connection < ApplicationRecord
+  validates :status, :connectee_id, :connector_id, presence: true
+
+  belongs_to :connector,
+    foreign_key: :connector_id,
+    class_name: :User,
+
+  belongs_to :connectee,
+    foreign_key: :connectee_id,
+    class_name: :User
 end

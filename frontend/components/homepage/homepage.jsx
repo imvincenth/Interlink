@@ -36,7 +36,7 @@ class Homepage extends React.Component {
             <div className="homepage-links">
               <ul className="homepage-list">
                 <li className="homepage-list-item">
-                  <a target="_blank" rel="noopener noreferrer" className="homepage-card" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/">The real LinkedIn <img className="homepage-list-icon" src={window.linkedinURL} alt="linkedin logo" /></a>
+                  <a target="_blank" rel="noopener noreferrer" className="homepage-card" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/">The real LinkedIn here<img className="homepage-list-icon" src={window.linkedinURL} alt="linkedin logo" /></a>
                 </li>
                 <li className="homepage-list-item">
                   <a target="_blank" rel="noopener noreferrer" className="homepage-card" href="https://angel.co/vincent-hsu-7">Find me on AngelList <img className="homepage-list-icon" src={window.angellistURL} alt="angellist logo" /></a>
