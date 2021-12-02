@@ -11,6 +11,7 @@ class Api::ConnectionsController < ApplicationController
   end
 
   def index
+    # @connections = Connection.find_by(connectee_id: params[:connectee_id], connector_id: params[:connector_id])
     @connections = Connection.all
     render :index
   end
