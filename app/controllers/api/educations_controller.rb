@@ -11,9 +11,12 @@ class Api::EducationsController < ApplicationController
   end
 
   def index
-    # @educations = Education.all
-    user = User.find_by(id: params[:user_id])
-    @educations = Education.where(user_id: user.id)
+    if params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      @educations = Education.where(user_id: user.id)
+    else
+      @educations = Education.all
+    end
     render :index
   end
 

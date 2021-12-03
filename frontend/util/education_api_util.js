@@ -6,9 +6,9 @@ export const createEducation = education => (
   })
 );
 
-export const fetchEducations = () => (
+export const fetchEducations = userId => (
   $.ajax({
-    url: `/api/educations`,
+    url: `/api/users/${userId}/educations`,
     method: "GET"
   })
 );

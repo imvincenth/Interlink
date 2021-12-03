@@ -11,9 +11,12 @@ class Api::ExperiencesController < ApplicationController
   end
 
   def index
-    # @experiences = Experience.all
-    user = User.find_by(id: params[:user_id])
-    @experiences = Experience.where(user_id: user.id)
+    if params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      @experiences = Experience.where(user_id: user.id)
+    else
+      @experiences = Experience.all
+    end
     render :index
   end
 

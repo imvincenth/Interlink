@@ -17,8 +17,8 @@ const mSTP = (state, ownProps) => ({
 });
 
 const mDTP = dispatch => ({
-  fetchExperiences: () => dispatch(fetchExperiences()),
-  fetchEducations: () => dispatch(fetchEducations()),
+  fetchExperiences: userId => dispatch(fetchExperiences(userId)),
+  fetchEducations: userId => dispatch(fetchEducations(userId)),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: user => dispatch(fetchUser(user)),
   openEditProfileModal: (

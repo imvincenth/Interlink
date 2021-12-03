@@ -8,9 +8,8 @@ export const createExperience = experience => (
 
 export const fetchExperiences = userId => (
   $.ajax({
-    url: `/api/experiences`,
-    method: "GET",
-    data: { userId }
+    url: `/api/users/${userId}/experiences`,
+    method: "GET"
   })
 );
 

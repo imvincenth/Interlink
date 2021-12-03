@@ -6,20 +6,13 @@ import EducationItemContainer from './education/education_item_container';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      user: ""
-    }
-
-    this.experiences = [];
-    this.educations = [];
   }
 
   componentDidMount() {
     this.props.fetchUser(this.props.userId)
       .then(() => this.setState({ user: this.props.user }))
-      .then(this.props.fetchExperiences(this.props.userId))
-      .then(this.props.fetchEducations(this.props.userId));
+        .then(this.props.fetchExperiences(this.props.userId))
+        .then(this.props.fetchEducations(this.props.userId));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -32,21 +25,10 @@ class Profile extends React.Component {
     }
   }
 
-  userCheck(action) {
-    this.setState({ user: action })
-  }
-  
-  profileCheck() {
-    this.props.experiences.forEach(exp => Number(this.props.userId) === exp.user_id ? this.experiences.push(exp) : null);
-    this.props.educations.forEach(edu => Number(this.props.userId) === edu.user_id ? this.educations.push(edu) : null);
-  }
 
   render() {
-    this.experiences = [];
-    this.educations = [];
-    this.profileCheck();
 
-    if (!this.props.experiences || !this.props.educations || !this.props.users || !this.state.user) return null;
+    if (!this.props.user) return null;
 
     return (
       <div className="profile-background">
@@ -62,10 +44,10 @@ class Profile extends React.Component {
                 </div>
                 <div className="profile-card-main">
                   <div className="profile-info">
-                    <h1 className="profile-name">{this.state.user.first_name} {this.state.user.last_name}</h1>
+                    <h1 className="profile-name">{this.props.user.first_name} {this.props.user.last_name}</h1>
                     <br />
-                    <h2 className="profile-headline">{this.state.user.headline}</h2>
-                    <h3 className="profile-location">{this.state.user.city_district}, {this.state.user.country_region}</h3>
+                    <h2 className="profile-headline">{this.props.user.headline}</h2>
+                    <h3 className="profile-location">{this.props.user.city_district}, {this.props.user.country_region}</h3>
                     <div>
                       {this.props.openEditProfileModal}
                     </div>
@@ -77,7 +59,7 @@ class Profile extends React.Component {
                   <h1 className="experience-header">Experience</h1>
                   <br />
                   <div className="experience-item">
-                    {this.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
+                    {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
                     {this.props.openCreateExperienceModal}
                   </div>
                 </div>
@@ -86,7 +68,7 @@ class Profile extends React.Component {
                   <h1 className="education-header">Education</h1>
                   <br />
                   <div>
-                    {this.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
+                    {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
                     {this.props.openCreateEducationModal}
                   </div>
                 </div>
