@@ -11,7 +11,7 @@ import {
 import LogInFormContainer from './session_form/session_form_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import HomepageContainer from './homepage/homepage_container';
-import FeedContainer from './feed/feed_container';
+// import FeedContainer from './feed/feed_container';
 // import NetworkContainer from './network/network_container';
 import PageNotFound from './session_form/404';
 import ProfileContainer from './profile/profile_container';
@@ -24,8 +24,8 @@ const App = () => (
     <Modal />
     <Switch>
       <AuthRoute exact path="/users/:userId" component={ProfileContainer} />
-      {/* <AuthRoute exact path="/network" component={NetworkContainer} /> */}
-      <AuthRoute exact path="/feed" component={FeedContainer} />
+      {/* <AuthRoute exact path="/network" component={NetworkContainer} />
+      <AuthRoute exact path="/feed" component={FeedContainer} /> */}
       <LogoutRoute exact path="/login" component={LogInFormContainer} />
       <LogoutRoute exact path="/signup" component={SignUpFormContainer} />
       <Route exact path="/" component={HomepageContainer} />
