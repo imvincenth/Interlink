@@ -52,16 +52,14 @@ class User < ApplicationRecord
     foreign_key: :reactor_id,
     class_name: :User,
     dependent: :destroy
-    
-  has_many :connectees,
-    foreign_key: :connectee_id,
-    class_name: :Connection,
-    dependent: :destroy
-    
-  has_many :connectors,
+
+  has_many :sent_connects,
     foreign_key: :connector_id,
-    class_name: :Connection,
-    dependent: :destroy
+    class_name: :Connection
+
+  has_many :inc_connects,
+    foreign_key: :connectee_id,
+    class_name: :Connection
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
