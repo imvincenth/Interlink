@@ -8,6 +8,7 @@ class SignupForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      valid: false,
       // User
       email: "",
       password: "",
@@ -53,6 +54,7 @@ class SignupForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
 
+    this.validateEmail = this.validateEmail.bind(this);
     this.pageCheck = this.pageCheck.bind(this);
     this.visibleCheck = this.visibleCheck.bind(this);
 
@@ -111,13 +113,14 @@ class SignupForm extends React.Component {
     return (
       <div className="signup-form-container">
         <label className="signup-label">Email
-          <input type="email"
+          <input type="text"
             value={this.state.email}
             onChange={this.update('email')}
-            className={this.emailErrorFieldCheck() ? "signup-input invalid-field" : "signup-input"}
+            className={(this.props.errors.length === 7 || this.props.errors.length === 6 ) && !this.state.valid ? "signup-input invalid-field" : "signup-input"}
             />
         </label>
         {this.renderEmailError()}
+        {(this.props.errors.length === 7 || this.props.errors.length === 6 ) && !this.state.valid ? this.renderInvalidEmailError() : null}
 
         <br />
         <div className="password-box">
@@ -472,6 +475,17 @@ class SignupForm extends React.Component {
   }
 
   // User Errors
+  validateEmail() {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(String(this.state.email).toLowerCase())) {
+      this.setState({ valid: true });
+      return true;
+    } else {
+      this.setState({ valid: false });
+      return false;
+    }
+  }
+
   renderEmailError() {
     let pageOneErrors = [];
     this.props.errors.forEach(error => {
@@ -482,6 +496,14 @@ class SignupForm extends React.Component {
     return(
       <p className="error">
         {pageOneErrors}
+      </p>
+    );
+  }
+
+  renderInvalidEmailError() {
+    return(
+      <p className="error">
+        You must enter a valid email
       </p>
     );
   }
@@ -730,6 +752,7 @@ class SignupForm extends React.Component {
 
   pageCheck() {
     if (this.props.errors.length === 7 || this.props.errors.length === 6 || this.props.errors.length === 0) {
+      this.validateEmail();
       this.setState({ visiblePage: 1});
     } else if (this.props.errors.length === 5 || this.props.errors.length === 4) {
       this.setState({ visiblePage: 2 });
