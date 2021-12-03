@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: RingIn_production
-  username: RingIn
+  database: Interlink_production
+  username: Interlink
   password: <%= ENV['RINGIN_DATABASE_PASSWORD'] %>
