@@ -38,7 +38,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Removing SameSite error
-# gem 'rails_same_site_cookie'
+gem 'rails_same_site_cookie'
 
 gem 'rack',  '~> 2.1'
 
