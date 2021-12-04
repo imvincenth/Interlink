@@ -6,16 +6,19 @@
   bottom: 0;
   left: 0;
   z-index: -1;
+  overflow: scroll;
 }
 
 .content-body {
   display: flex;
   align-items: center;
   justify-content: center;
+  // overflow: scroll;
 }
 
 .content-main-wrapper {
   width: 1128px;
+  height: 100%;
 }
 
 .feed-input > img {
