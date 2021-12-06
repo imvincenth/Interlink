@@ -103,7 +103,7 @@ class SessionForm extends React.Component {
       <div className="session-form">
 
         <header className="session-form-header">
-          <Link to="/"><img src={namelogoURL} className="loginpage-logo" alt="name logo" /></Link>
+          <Link to="/"><img src={namelogoURL} className="loginpage-logo" alt="name logo" fill="#0a66c2" /></Link>
         </header>
 
         <form onSubmit={this.handleSubmit} className="session-form-box">

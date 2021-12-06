@@ -8,28 +8,39 @@ class Profile extends React.Component {
     super(props);
 
     this.state = {
-      currentUser: false,
+      currentUserStatus: false,
       alreadyConnected: false,
       pendingConnection: false,
-      connection: "",
+      connectionContainer: "",
 
       pending: true,
       connector_id: this.props.currentUser.id,
       connectee_id: ""
     }
+
+    this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
+    this.handleEditConnect = this.handleEditConnect.bind(this);
+  }
+
+  currentUserCheck() {
+    if (!this.props.user || !this.props.currentUser) return null;
+    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUserStatus: true }) : null;
   }
 
   connectionStatusCheck() {
     let alreadyConnectedBool = false;
     let pendingConnectionBool = false;
     let connectionContainer = "";
+    console.log(this.props.connections.length)
     for (let i = 0; i < this.props.connections.length; i++) {
-      if (this.props.connections[i].connector_id === this.props.user.id || this.props.connections[i].connectee_id === this.props.user.id) {
+      console.log("forfororesiofjdoisafjodisaj")
+      console.log(this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id);
+      if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
         if (this.props.connections[i].pending) {
-          connectionContainer = this.props.connection[i];
+          connectionContainer = this.props.connections[i];
           pendingConnectionBool = true;
         } else {
-          connectionContainer = this.props.connection[i];
+          connectionContainer = this.props.connections[i];
           alreadyConnectedBool = true;
         }
       }
@@ -43,33 +54,36 @@ class Profile extends React.Component {
 
   componentDidMount() {
     this.props.fetchUser(this.props.userId)
-      .then(() => this.setState({ user: this.props.user, connectee_id: this.props.user.id }))
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
-      .then(() => this.connectionStatusCheck());
+      .then(this.currentUserCheck())
+      .then(this.connectionStatusCheck());
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
     if (prevProps.userId !== this.props.userId) {
       this.props.fetchUser(this.props.userId)
-      .then(this.setState({ 
-        user: this.props.user, 
-        connectee_id: this.props.user.id, 
-        currentUser: this.props.currentUser.id === this.props.user.id 
-      }))
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
-      .then(() => this.connectionStatusCheck());
+      .then(this.setState({ currentUserStatus: false }))
+      .then(this.currentUserCheck())
+      .then(this.connectionStatusCheck());
     }
   }
 
   handleConnectSubmit(e) {
     e.preventDefault();
 
-    this.props.createConnection({...this.state});
+    this.props.createConnection({...this.state, connectee_id: this.props.userId});
+  }
+
+  handleEditConnect(e) {
+    e.preventDefault();
+
+    this.props.updateConnection({...this.state.connection, pending: false});
   }
 
   connectButton() {
@@ -81,10 +95,10 @@ class Profile extends React.Component {
   }
 
   updateConnectButton() {
-    if (this.state.connection.connector_id === this.props.currentUser.id) {
+    if (this.state.currentUserStatus) {
       return (
         <div>
-          <button>
+          <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>
             Pending
           </button>
         </div>
@@ -92,10 +106,10 @@ class Profile extends React.Component {
     } else {
       return (
         <div>
-          <button>
+          <button onClick={this.handleEditConnect}>
             Accept
           </button>
-          <button>
+          <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>
             Ignore
           </button>
         </div>
@@ -112,7 +126,7 @@ class Profile extends React.Component {
   }
 
   render() {
-
+    console.log(this.state);
     if (!this.props.user) return null;
 
     return (
@@ -135,8 +149,9 @@ class Profile extends React.Component {
                     <h3 className="profile-location">{this.props.user.city_district}, {this.props.user.country_region}</h3>
                     <div>
                       {/* Connections Logic */}
-                      {this.state.currentUserCheck ? this.props.openEditProfileModal : null}
-                      {!this.state.alreadyConnected ? this.connectButton() : null}
+                      {this.state.currentUserStatus ? this.props.openEditProfileModal : null}
+                      {!this.state.currentUserStatus ? this.connectButton() : null}
+
                       {this.state.alreadyConnected && this.state.pendingConnection ? this.updateConnectButton() : null}
                       {this.state.alreadyConnected && !this.state.pendingConnection ? this.tempDeleteConnect() : null}
                     </div>
@@ -148,8 +163,8 @@ class Profile extends React.Component {
                   <h1 className="experience-header">Experience</h1>
                   <br />
                   <div className="experience-item">
-                    {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
-                    {this.state.currentUserCheck ? this.props.openCreateExperienceModal : null}
+                    {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} user={this.props.user} />)}
+                    {this.state.currentUserStatus ? this.props.openCreateExperienceModal : null}
                   </div>
                 </div>
 
@@ -157,8 +172,8 @@ class Profile extends React.Component {
                   <h1 className="education-header">Education</h1>
                   <br />
                   <div>
-                    {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
-                    {this.state.currentUserCheck ? this.props.openCreateEducationModal : null}
+                    {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} user={this.props.user} />)}
+                    {this.state.currentUserStatus ? this.props.openCreateEducationModal : null}
                   </div>
                 </div>
               </div>

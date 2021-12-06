@@ -786,7 +786,7 @@ class SignupForm extends React.Component {
   headerOne() {
     return (
       <header className="signup-header">
-        <img className="header-logo" src={namelogoURL} alt="name logo" />
+        <img className="header-logo" src={namelogoURL} alt="name logo" fill="#0a66c2" />
         <p className="signup-quote">Make the most of your professional life</p>
       </header>
     )
@@ -795,7 +795,7 @@ class SignupForm extends React.Component {
   headerTwo() {
     return (
       <header className="signup-header-two">
-        <img src={namelogoURL} className="signup-logo" alt="name logo" />
+        <img src={namelogoURL} className="signup-logo" alt="name logo" fill="#0a66c2"  />
       </header>
     )
   }

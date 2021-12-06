@@ -10,11 +10,11 @@ import Profile from './profile';
 const mSTP = (state, ownProps) => ({
   users: Object.values(state.entities.users),
   user: state.entities.users[ownProps.match.params.userId],
+  userId: ownProps.match.params.userId,
+  currentUser: state.entities.users[state.session.id],
   educations: Object.values(state.entities.educations),
   experiences: Object.values(state.entities.experiences),
   errors: state.errors.users,
-  currentUser: state.entities.users[state.session.id],
-  userId: ownProps.match.params.userId,
   connections: Object.values(state.entities.connections)
 });
 
@@ -41,7 +41,7 @@ const mDTP = dispatch => ({
   ),
   createConnection: connection => dispatch(createConnection(connection)),
   updateConnection: connection => dispatch(updateConnection(connection)),
-  deleteConnection: connection => dispatch(deleteConnection(connection)),
+  deleteConnection: connectionId => dispatch(deleteConnection(connectionId)),
 });
 
 export default connect(mSTP, mDTP)(Profile);

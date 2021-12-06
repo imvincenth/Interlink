@@ -5,15 +5,22 @@ class Education extends React.Component {
     super(props);
 
     this.state = {
-      currentUserCheck: false
+      currentUser: false
     }
   }
 
+  currentUserCheck() {
+    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUser: true }) : null;
+  }
+
+  componentDidMount() {
+    this.props.fetchUser(this.props.education.user_id);
+  }
+
   componentDidUpdate(prevProps, prevState) {
+    if (!prevProps.user) return null;
     if (prevProps.user.id !== this.props.user.id) {
-      this.props.fetchUser(this.props.user.id)
-      .then(this.setState({ user: this.props.user }))
-      .then(this.setState({ currentUserCheck: this.props.currentUser.id === this.props.user.id }));
+      this.props.fetchUser(this.props.user.id);
     }
   }
 
@@ -34,14 +41,17 @@ class Education extends React.Component {
   }
 
   render() {
+
+    // if (!this.props.user) return null;
+
     const { education, key } = this.props;
     return (
       <div>
         <div className="education-item-wrap">
           <div className="education-item-head">
             <h1>{education.school}</h1>
-            {this.state.currentUserCheck ? this.editEducationButton() : null}
-            {this.state.currentUserCheck ? this.deleteEducationButton() : null}
+            {this.state.currentUser ? this.editEducationButton() : null}
+            {this.state.currentUser ? this.deleteEducationButton() : null}
           </div>
           <h2>{education.degree} {education.subject}</h2>
           <h2>{education.start_date} - {education.end_date}</h2>
