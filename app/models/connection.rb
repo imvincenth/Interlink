@@ -3,7 +3,7 @@
 # Table name: connections
 #
 #  id           :bigint           not null, primary key
-#  status       :string           not null
+#  pending      :boolean          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  connectee_id :integer          not null
@@ -15,7 +15,7 @@
 #  index_connections_on_connector_id  (connector_id)
 #
 class Connection < ApplicationRecord
-  validates :status, :connectee_id, :connector_id, presence: true
+  validates :pending, :connectee_id, :connector_id, presence: true
 
   belongs_to :connector,
     foreign_key: :connector_id,

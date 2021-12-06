@@ -3,7 +3,7 @@
 # Table name: connections
 #
 #  id           :bigint           not null, primary key
-#  status       :string           not null
+#  pending      :boolean          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  connectee_id :integer          not null
