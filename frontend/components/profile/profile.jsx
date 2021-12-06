@@ -6,25 +6,110 @@ import EducationItemContainer from './education/education_item_container';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentUser: false,
+      alreadyConnected: false,
+      pendingConnection: false,
+      connection: "",
+
+      pending: true,
+      connector_id: this.props.currentUser.id,
+      connectee_id: ""
+    }
+  }
+
+  connectionStatusCheck() {
+    let alreadyConnectedBool = false;
+    let pendingConnectionBool = false;
+    let connectionContainer = "";
+    for (let i = 0; i < this.props.connections.length; i++) {
+      if (this.props.connections[i].connector_id === this.props.user.id || this.props.connections[i].connectee_id === this.props.user.id) {
+        if (this.props.connections[i].pending) {
+          connectionContainer = this.props.connection[i];
+          pendingConnectionBool = true;
+        } else {
+          connectionContainer = this.props.connection[i];
+          alreadyConnectedBool = true;
+        }
+      }
+    }
+    this.setState({ 
+      alreadyConnected: alreadyConnectedBool, 
+      pendingConnection: pendingConnectionBool, 
+      connection: connectionContainer 
+    });
   }
 
   componentDidMount() {
     this.props.fetchUser(this.props.userId)
-      .then(() => this.setState({ user: this.props.user }))
-        .then(this.props.fetchExperiences(this.props.userId))
-        .then(this.props.fetchEducations(this.props.userId));
+      .then(() => this.setState({ user: this.props.user, connectee_id: this.props.user.id }))
+      .then(this.props.fetchExperiences(this.props.userId))
+      .then(this.props.fetchEducations(this.props.userId))
+      .then(this.props.fetchConnections(this.props.userId))
+      .then(() => this.connectionStatusCheck());
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
     if (prevProps.userId !== this.props.userId) {
       this.props.fetchUser(this.props.userId)
-      .then(this.setState({ user: this.props.user }))
+      .then(this.setState({ 
+        user: this.props.user, 
+        connectee_id: this.props.user.id, 
+        currentUser: this.props.currentUser.id === this.props.user.id 
+      }))
       .then(this.props.fetchExperiences(this.props.userId))
-      .then(this.props.fetchEducations(this.props.userId));
+      .then(this.props.fetchEducations(this.props.userId))
+      .then(this.props.fetchConnections(this.props.userId))
+      .then(() => this.connectionStatusCheck());
     }
   }
 
+  handleConnectSubmit(e) {
+    e.preventDefault();
+
+    this.props.createConnection({...this.state});
+  }
+
+  connectButton() {
+    return (
+      <button onClick={this.handleConnectSubmit}>
+        Connect
+      </button>
+    )
+  }
+
+  updateConnectButton() {
+    if (this.state.connection.connector_id === this.props.currentUser.id) {
+      return (
+        <div>
+          <button>
+            Pending
+          </button>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <button>
+            Accept
+          </button>
+          <button>
+            Ignore
+          </button>
+        </div>
+      )
+    }
+  }
+
+  tempDeleteConnect() {
+    return (
+      <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>
+        Disconnect
+      </button>
+    )
+  }
 
   render() {
 
@@ -49,7 +134,11 @@ class Profile extends React.Component {
                     <h2 className="profile-headline">{this.props.user.headline}</h2>
                     <h3 className="profile-location">{this.props.user.city_district}, {this.props.user.country_region}</h3>
                     <div>
-                      {this.props.openEditProfileModal}
+                      {/* Connections Logic */}
+                      {this.state.currentUserCheck ? this.props.openEditProfileModal : null}
+                      {!this.state.alreadyConnected ? this.connectButton() : null}
+                      {this.state.alreadyConnected && this.state.pendingConnection ? this.updateConnectButton() : null}
+                      {this.state.alreadyConnected && !this.state.pendingConnection ? this.tempDeleteConnect() : null}
                     </div>
                   </div>
                 </div>
@@ -60,7 +149,7 @@ class Profile extends React.Component {
                   <br />
                   <div className="experience-item">
                     {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} />)}
-                    {this.props.openCreateExperienceModal}
+                    {this.state.currentUserCheck ? this.props.openCreateExperienceModal : null}
                   </div>
                 </div>
 
@@ -69,7 +158,7 @@ class Profile extends React.Component {
                   <br />
                   <div>
                     {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} />)}
-                    {this.props.openCreateEducationModal}
+                    {this.state.currentUserCheck ? this.props.openCreateEducationModal : null}
                   </div>
                 </div>
               </div>

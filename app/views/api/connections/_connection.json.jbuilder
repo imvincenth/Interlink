@@ -1,1 +1,1 @@
-json.extract! connection, :id, :pending, :connectee_id, :connector_id
+json.extract! connection, :id, :pending, :connectee_id, :connector_id, :created_at

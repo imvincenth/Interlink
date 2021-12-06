@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchUsers } from '../../actions/user_actions';
 import Network from './network';
 
 const mSTP = state => ({
@@ -7,7 +8,7 @@ const mSTP = state => ({
 });
 
 const mDTP = dispatch => ({
-
+  fetchUsers: () => dispatch(fetchUsers())
 });
 
 export default connect(mSTP, mDTP)(Network);

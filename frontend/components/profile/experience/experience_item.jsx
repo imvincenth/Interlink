@@ -2,6 +2,22 @@ import React from 'react';
 import Modal from '../../modal/modal';
 
 class Experience extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUserCheck: false
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.props.fetchUser(this.props.user.id)
+      .then(this.setState({ user: this.props.user }))
+      .then(this.setState({ currentUserCheck: this.props.currentUser.id === this.props.user.id }));
+    }
+  }
+
   render() {
     const { experience, key } = this.props;
     return (

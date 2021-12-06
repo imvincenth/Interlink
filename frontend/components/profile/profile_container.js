@@ -4,6 +4,7 @@ import { fetchExperiences } from '../../actions/experience_actions'
 import { fetchEducations } from '../../actions/education_actions';
 import { fetchUsers, fetchUser } from '../../actions/user_actions';
 import { openModal } from '../../actions/modal_actions';
+import { createConnection, fetchConnections, updateConnection, deleteConnection } from '../../actions/connection_actions';
 import Profile from './profile';
 
 const mSTP = (state, ownProps) => ({
@@ -14,11 +15,13 @@ const mSTP = (state, ownProps) => ({
   errors: state.errors.users,
   currentUser: state.entities.users[state.session.id],
   userId: ownProps.match.params.userId,
+  connections: Object.values(state.entities.connections)
 });
 
 const mDTP = dispatch => ({
   fetchExperiences: userId => dispatch(fetchExperiences(userId)),
   fetchEducations: userId => dispatch(fetchEducations(userId)),
+  fetchConnections: userId => dispatch(fetchConnections(userId)),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: user => dispatch(fetchUser(user)),
   openEditProfileModal: (
@@ -36,6 +39,9 @@ const mDTP = dispatch => ({
       <img src={window.plusURL} />
     </button>
   ),
+  createConnection: connection => dispatch(createConnection(connection)),
+  updateConnection: connection => dispatch(updateConnection(connection)),
+  deleteConnection: connection => dispatch(deleteConnection(connection)),
 });
 
 export default connect(mSTP, mDTP)(Profile);
