@@ -121,6 +121,7 @@ class SessionForm extends React.Component {
                 value={this.state.email}
                 onChange={this.update('email')}
                 className={this.props.errors.length === 1 && !this.state.valid ? "session-input invalid-session-field" : "session-input"}
+                disabled={!this.state.demoLogged ? false : true} 
                 autoFocus
                 />
               <span className={this.props.errors.length === 1 && !this.state.valid ? "floating-label invalid" : "floating-label"}>Email</span>
@@ -134,6 +135,7 @@ class SessionForm extends React.Component {
                 value={this.state.password}
                 onChange={this.update('password')}
                 className={this.props.errors.length === 1 && this.state.valid ? "session-input invalid-session-field" : "session-input"}
+                disabled={!this.state.demoLogged ? false : true} 
               />
               <span className={this.props.errors.length === 1 && this.state.valid ? "floating-label invalid" : "floating-label"}>Password</span>
               <button type="button" onClick={this.toggleShow}>{this.state.hidden ? "show" : "hide"}</button>
