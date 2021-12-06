@@ -35,4 +35,4 @@ bundle.js.map
 npm-debug.log
 
 # Ignore samesite error fix for development
-/config/initializers/session_store.rb
+config/initializers/session_store.rb
