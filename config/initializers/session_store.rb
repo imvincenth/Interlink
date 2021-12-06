@@ -1,1 +1,1 @@
-# Rails.application.config.session_store :cookie_store, key: 'myKey', same_site: :strict
+Rails.application.config.session_store :cookie_store, key: 'myKey', same_site: :strict
