@@ -11,7 +11,12 @@ class Api::ConnectionsController < ApplicationController
   end
 
   def index
-    @connections = Connection.all
+    # @connections = Connection.all
+    if params[:user_id]
+      @connections = Connection.where("connector_id = ? OR connectee_id = ?", params[:user_id], params[:user_id])
+    else
+      render json: @connections.errors.full_messages, status: 404 
+    end
     
     render :index
   end

@@ -30,8 +30,8 @@ export const removeErrors = () => ({
   type: REMOVE_ERRORS
 });
 
-export const fetchConnections = () => dispatch => (
-  ConnectionAPIUtil.fetchConnections()
+export const fetchConnections = userId => dispatch => (
+  ConnectionAPIUtil.fetchConnections(userId)
     .then(connections => (dispatch(receiveConnections(connections))), 
     err => (dispatch(receiveErrors(err.responseJSON))))
 );

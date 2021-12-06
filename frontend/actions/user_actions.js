@@ -30,8 +30,8 @@ export const removeErrors = () => ({
   type: REMOVE_ERRORS
 });
 
-export const fetchUsers = userId => dispatch => (
-  UserAPIUtil.fetchUsers(userId)
+export const fetchUsers = () => dispatch => (
+  UserAPIUtil.fetchUsers()
     .then(users => (dispatch(receiveUsers(users))), 
     err => (dispatch(receiveErrors(err.responseJSON))))
 );

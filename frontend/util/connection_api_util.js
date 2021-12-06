@@ -8,7 +8,7 @@ export const createConnection = connection => (
 
 export const fetchConnections = userId => (
   $.ajax({
-    url: `/api/posts/${userId}/connections`,
+    url: `/api/users/${userId}/connections`,
     method: "GET"
   })
 );
