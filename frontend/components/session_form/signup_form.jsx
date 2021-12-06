@@ -117,6 +117,7 @@ class SignupForm extends React.Component {
             value={this.state.email}
             onChange={this.update('email')}
             className={(this.props.errors.length === 7 || this.props.errors.length === 6 ) && !this.state.valid ? "signup-input invalid-field" : "signup-input"}
+            disabled={!this.state.demoLogged ? false : true} 
             />
         </label>
         {this.renderEmailError()}
@@ -129,6 +130,7 @@ class SignupForm extends React.Component {
               value={this.state.password}
               onChange={this.update('password')}
               className={this.passwordErrorFieldCheck() ? "signup-input invalid-field" : "signup-input"}
+              disabled={!this.state.demoLogged ? false : true} 
               />
             <button type="button" className="btn" onClick={this.toggleShow}>{this.state.hidden ? "Show" : "Hide"}</button>
           </label>

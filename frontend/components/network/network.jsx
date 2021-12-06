@@ -5,7 +5,7 @@ import ConnectionCardContainer from './connection/connection_card_container';
 export default class Network extends Component {
   render() {
     return (
-      <div>
+      <div className="network-background">
         <NavbarContainer />
         {this.props.users.map(user => <ConnectionCardContainer user={user} />)}
       </div>

@@ -376,6 +376,7 @@
   // -moz-transition: all 1s linear;
   // -o-transition: all 1s linear;
   // transition: all 1s linear;
+  pointer-events: none;
 
   @media (max-width: 780px) {
     padding-left: 110px;

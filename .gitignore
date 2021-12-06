@@ -33,3 +33,6 @@ bundle.js.map
 .byebug_history
 .DS_Store
 npm-debug.log
+
+# Ignore samesite error fix for development
+/config/initializers/session_store.rb
