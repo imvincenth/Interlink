@@ -6,7 +6,7 @@ import educations from './educations_reducer';
 import posts from './posts_reducer';
 import comments from './comments_reducer';
 import reactions from './reactions_reducer';
-// import connections from './connections_reducer';
+import connections from './connections_reducer';
 
 export default combineReducers({
   users,
@@ -15,5 +15,5 @@ export default combineReducers({
   posts,
   comments,
   reactions,
-  // connections
+  connections
 });

@@ -5,7 +5,7 @@ import educationErrorsReducer from './educations_errors_reducer';
 import postErrorsReducer from './posts_errors_reducer';
 import commentErrorsReducer from './comments_errors_reducer';
 import reactionErrorsReducer from './reactions_errors_reducer';
-// import connectionErrorsReducer from './connections_errors_reducer';
+import connectionErrorsReducer from './connections_errors_reducer';
 import userErrorsReducer from './user_errors_reducer';
 
 export default combineReducers({
@@ -16,5 +16,5 @@ export default combineReducers({
   posts: postErrorsReducer,
   comments: commentErrorsReducer,
   reactions: reactionErrorsReducer,
-  // connections: connectionErrorsReducer
+  connections: connectionErrorsReducer
 });
