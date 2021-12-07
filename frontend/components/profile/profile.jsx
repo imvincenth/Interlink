@@ -9,8 +9,6 @@ class Profile extends React.Component {
 
     this.state = {
       currentUserStatus: false,
-      alreadyConnected: false,
-      pendingConnection: false,
       connections: [],
 
       pending: true,
@@ -18,6 +16,7 @@ class Profile extends React.Component {
       connectee_id: ""
     }
 
+    this.connection;
     this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
     this.handleEditConnect = this.handleEditConnect.bind(this);
   }
@@ -25,17 +24,12 @@ class Profile extends React.Component {
   connectionStatusCheck() {
     if (!this.props.user || !this.props.currentUser) return null;
 
-    let alreadyConnectedBool = false;
-    let pendingConnectionBool = false;
-    let connectionContainer = "";
     let currentUserBool = false;
 
     if (this.props.currentUser.id === this.props.user.id) {
       currentUserBool = true;
       this.setState({ 
         currentUserStatus: currentUserBool,
-        alreadyConnected: false, 
-        pendingConnection: false, 
       });
       return;
     }
@@ -43,19 +37,14 @@ class Profile extends React.Component {
     for (let i = 0; i < this.props.connections.length; i++) {
       if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
         if (this.props.connections[i].pending) {
-          connectionContainer = this.props.connections[i];
           pendingConnectionBool = true;
         } else {
-          connectionContainer = this.props.connections[i];
           alreadyConnectedBool = true;
         }
       }
     }
     this.setState({ 
       currentUserStatus: currentUserBool,
-      alreadyConnected: alreadyConnectedBool, 
-      pendingConnection: pendingConnectionBool, 
-      connection: connectionContainer 
     });
   }
 
@@ -70,7 +59,7 @@ class Profile extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
-    if (prevProps.userId !== this.props.userId || (prevState.alreadyConnected !== this.state.alreadyConnected || prevState.pendingConnection !== this.state.pendingConnection)) {
+    if (prevProps.userId !== this.props.userId || prevState.connections.length !== this.state.connections.length) {
       this.props.fetchUser(this.props.userId)
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
@@ -89,8 +78,8 @@ class Profile extends React.Component {
 
   handleEditConnect(e) {
     e.preventDefault();
-
-    this.props.updateConnection({...this.state.connection, pending: false});
+    let newState = Object.assign(this.state, this.connection)
+    this.props.updateConnection({...newState, pending: false});
   }
 
   connectButton() {
@@ -101,53 +90,81 @@ class Profile extends React.Component {
     )
   }
 
-  updateConnectButton() {
-    if (this.state.currentUserStatus) {
-      return (
-        <div>
-          <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>
-            Pending
-          </button>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <button onClick={this.handleEditConnect}>
-            Accept
-          </button>
-          <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>
-            Ignore
-          </button>
-        </div>
-      )
-    }
-  }
-
-  tempDeleteConnect() {
+  tempDeleteButton(connectionId) {
     return (
-      <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>
+      <button onClick={() => this.props.deleteConnection(connectionId)}>
         Disconnect
       </button>
     )
   }
 
-  render() {
-    if (!this.props.user) return null;
-    console.log(this.state);
-
-    let connection;
-    for (let i = 0; i < this.props.connections.length; i++) {
-      if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
-        if (this.props.connections[i].pending) {
-          connection = this.props.connections[i];
-          pendingConnectionBool = true;
-        } else {
-          connection = this.props.connections[i];
-          alreadyConnectedBool = true;
+  displayConnection(connections) {
+    for (let i = 0; i < connections.length; i++) {
+      if (connections[i].connector_id === this.props.currentUser.id || connections[i].connectee_id === this.props.currentUser.id) {
+        if (connections[i].pending) {
+          this.connection = connections[i];
         }
       }
     };
+
+    if (this.connection && this.connection.pending) {
+      return (
+        <div>
+          <button onClick={() => this.props.deleteConnection(this.connection.id)}>
+            Pending
+          </button>
+        </div>
+      )
+    } else if (this.connection && !this.connection.pending) {
+      return (
+        <div>
+          <button onClick={this.handleEditConnect}>
+            Accept
+          </button>
+          <button onClick={() => this.props.deleteConnection(this.connection.id)}>
+            Ignore
+          </button>
+        </div>
+      )
+    } else if (!this.connection) {
+      return (
+        <button onClick={this.handleConnectSubmit}>
+          Connect
+        </button>
+      )
+    }
+  }
+
+  render() {
+    if (!this.props.user) return null;
+
+    for (let i = 0; i < this.props.connections.length; i++) {
+      if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
+        if (this.props.connections[i].pending) {
+          this.connection = this.props.connections[i];
+        }
+      }
+    };
+
+    let existingConnection;
+    let pendingConnection;
+    let alreadyConnected;
+
+    if (this.connection) {
+      if (this.connection.pending) {
+        existingConnection = true;
+        pendingConnection = true;
+        alreadyConnected = false;
+      } else {
+        existingConnection = true;
+        pendingConnection = false;
+        alreadyConnected = true;
+      }
+    } else {
+      existingConnection = false;
+    }
+
+    console.log(this.props.connections.length);
 
     return (
       <div className="profile-background">
@@ -170,10 +187,11 @@ class Profile extends React.Component {
                     <div>
                       {/* Connections Logic */}
                       {this.state.currentUserStatus ? this.props.openEditProfileModal : null}
-                      {!this.state.currentUserStatus && !this.state.pendingConnection && !this.alreadyConnected ? this.connectButton() : null}
+                      {/* {!existingConnection ? this.connectButton() : null} */}
 
-                      {!this.state.alreadyConnected && this.state.pendingConnection ? this.updateConnectButton() : null}
-                      {this.state.alreadyConnected && !this.state.pendingConnection ? this.tempDeleteConnect() : null}
+                      {/* {this.displayConnection(this.props.connections)} */}
+                      {this.props.connections.length === 0 ? this.connectButton() : this.tempDeleteButton(this.connection.id)}
+                      {alreadyConnected ? this.tempDeleteButton(this.connection.id) : null}
                     </div>
                   </div>
                 </div>

@@ -34,6 +34,7 @@ class Api::ConnectionsController < ApplicationController
     @connection = Connection.find_by(id: params[:id])
     if @connection
       @connection.destroy
+      render :show
     end
   end
 
