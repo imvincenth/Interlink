@@ -11,7 +11,7 @@ class Profile extends React.Component {
       currentUserStatus: false,
       alreadyConnected: false,
       pendingConnection: false,
-      connectionContainer: "",
+      connections: [],
 
       pending: true,
       connector_id: this.props.currentUser.id,
@@ -29,7 +29,16 @@ class Profile extends React.Component {
     let pendingConnectionBool = false;
     let connectionContainer = "";
     let currentUserBool = false;
-    this.props.currentUser.id === this.props.user.id ? currentUserBool = true : null;
+
+    if (this.props.currentUser.id === this.props.user.id) {
+      currentUserBool = true;
+      this.setState({ 
+        currentUserStatus: currentUserBool,
+        alreadyConnected: false, 
+        pendingConnection: false, 
+      });
+      return;
+    }
 
     for (let i = 0; i < this.props.connections.length; i++) {
       if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
@@ -55,17 +64,19 @@ class Profile extends React.Component {
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
+      .then(this.setState({ connections: [...this.props.connections] }))
       .then(this.connectionStatusCheck());
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
-    if (prevProps.userId !== this.props.userId) {
+    if (prevProps.userId !== this.props.userId || (prevState.alreadyConnected !== this.state.alreadyConnected || prevState.pendingConnection !== this.state.pendingConnection)) {
       this.props.fetchUser(this.props.userId)
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
-      // .then(this.setState({ currentUserStatus: false }))
+      .then(this.setState({ connections: [...this.props.connections] }))
+      .then(this.setState({ currentUserStatus: false }))
       .then(this.connectionStatusCheck());
     }
   }
@@ -124,6 +135,20 @@ class Profile extends React.Component {
   render() {
     if (!this.props.user) return null;
     console.log(this.state);
+
+    let connection;
+    for (let i = 0; i < this.props.connections.length; i++) {
+      if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
+        if (this.props.connections[i].pending) {
+          connection = this.props.connections[i];
+          pendingConnectionBool = true;
+        } else {
+          connection = this.props.connections[i];
+          alreadyConnectedBool = true;
+        }
+      }
+    };
+
     return (
       <div className="profile-background">
         <div className="profile-container">

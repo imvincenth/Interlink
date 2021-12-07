@@ -13,6 +13,13 @@ export const fetchConnections = userId => (
   })
 );
 
+export const fetchConnection = connectionId => (
+  $.ajax({
+    url: `/api/connections/${connectionId}`,
+    method: "GET"
+  })
+);
+
 export const updateConnection = connection => (
   $.ajax({
     url: `/api/connections/${connection.id}`,
