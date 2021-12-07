@@ -22,19 +22,16 @@ class Profile extends React.Component {
     this.handleEditConnect = this.handleEditConnect.bind(this);
   }
 
-  currentUserCheck() {
-    if (!this.props.user || !this.props.currentUser) return null;
-    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUserStatus: true }) : null;
-  }
-
   connectionStatusCheck() {
+    if (!this.props.user || !this.props.currentUser) return null;
+
     let alreadyConnectedBool = false;
     let pendingConnectionBool = false;
     let connectionContainer = "";
-    console.log(this.props.connections.length)
+    let currentUserBool = false;
+    this.props.currentUser.id === this.props.user.id ? currentUserBool = true : null;
+
     for (let i = 0; i < this.props.connections.length; i++) {
-      console.log("forfororesiofjdoisafjodisaj")
-      console.log(this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id);
       if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
         if (this.props.connections[i].pending) {
           connectionContainer = this.props.connections[i];
@@ -46,6 +43,7 @@ class Profile extends React.Component {
       }
     }
     this.setState({ 
+      currentUserStatus: currentUserBool,
       alreadyConnected: alreadyConnectedBool, 
       pendingConnection: pendingConnectionBool, 
       connection: connectionContainer 
@@ -57,7 +55,6 @@ class Profile extends React.Component {
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
-      .then(this.currentUserCheck())
       .then(this.connectionStatusCheck());
   }
 
@@ -68,8 +65,7 @@ class Profile extends React.Component {
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
-      .then(this.setState({ currentUserStatus: false }))
-      .then(this.currentUserCheck())
+      // .then(this.setState({ currentUserStatus: false }))
       .then(this.connectionStatusCheck());
     }
   }
@@ -126,9 +122,8 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     if (!this.props.user) return null;
-
+    console.log(this.state);
     return (
       <div className="profile-background">
         <div className="profile-container">
@@ -150,9 +145,9 @@ class Profile extends React.Component {
                     <div>
                       {/* Connections Logic */}
                       {this.state.currentUserStatus ? this.props.openEditProfileModal : null}
-                      {!this.state.currentUserStatus ? this.connectButton() : null}
+                      {!this.state.currentUserStatus && !this.state.pendingConnection && !this.alreadyConnected ? this.connectButton() : null}
 
-                      {this.state.alreadyConnected && this.state.pendingConnection ? this.updateConnectButton() : null}
+                      {!this.state.alreadyConnected && this.state.pendingConnection ? this.updateConnectButton() : null}
                       {this.state.alreadyConnected && !this.state.pendingConnection ? this.tempDeleteConnect() : null}
                     </div>
                   </div>

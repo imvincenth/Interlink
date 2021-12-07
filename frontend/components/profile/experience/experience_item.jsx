@@ -23,7 +23,7 @@ class Experience extends React.Component {
 
     if (prevProps.user.id !== this.props.user.id) {
       this.props.fetchUser(this.props.user.id)
-      .then(() => this.currentUserCheck());
+      // .then(() => this.currentUserCheck());
     }
   }
 
