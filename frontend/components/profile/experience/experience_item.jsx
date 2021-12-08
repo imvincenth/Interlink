@@ -15,7 +15,8 @@ class Experience extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.experience.user_id);
+    this.props.fetchUser(this.props.experience.user_id)
+      .then(this.currentUserCheck());
   }
 
   componentDidUpdate(prevProps, prevState) {

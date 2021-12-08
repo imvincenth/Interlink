@@ -14,7 +14,8 @@ class Education extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.education.user_id);
+    this.props.fetchUser(this.props.education.user_id)
+      .then(this.currentUserCheck());
   }
 
   componentDidUpdate(prevProps, prevState) {
