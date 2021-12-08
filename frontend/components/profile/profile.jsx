@@ -17,6 +17,7 @@ class Profile extends React.Component {
     }
 
     this.connection;
+    this.connectionCount = this.props.connections.length;
     this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
     this.handleEditConnect = this.handleEditConnect.bind(this);
   }
@@ -142,6 +143,7 @@ class Profile extends React.Component {
       if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
         if (this.props.connections[i].pending) {
           this.connection = this.props.connections[i];
+          this.connectionCount = this.props.connections.length;
         }
       }
     };
@@ -163,9 +165,7 @@ class Profile extends React.Component {
     } else {
       existingConnection = false;
     }
-
-    console.log(this.props.connections.length);
-
+    console.log(this.connectionCount);
     return (
       <div className="profile-background">
         <div className="profile-container">
