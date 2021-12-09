@@ -29,7 +29,7 @@ class Api::ConnectionsController < ApplicationController
       @connection = @sent_connection || @inc_connection 
       render :show 
     else  
-      render json: { accepted: nil }
+      render json: { error: nil }
     end
 
   end

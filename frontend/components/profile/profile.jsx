@@ -104,6 +104,8 @@ class Profile extends React.Component {
     //   }
     // }
 
+    console.log(this.props.connection)
+
     return (
       <div className="profile-background">
         <div className="profile-container">
@@ -125,9 +127,9 @@ class Profile extends React.Component {
                     <div>
                       {/* Connections Logic */}
                       {/* If profile is NOT current user and NOT connected, render CONNECT*/}
-                      {!this.state.currentUserStatus && this.props.connection.length === 1 ? this.tempConnectButton() : null}
+                      {!this.state.currentUserStatus && this.props.connection.error === null ? this.tempConnectButton() : null}
                       {/* If profile is NOT curent user and CONNECTED, render DISCONNECT */}
-                      {!this.state.currentUserStatus && this.props.connection.length !== 1 ? this.tempDeleteButton(this.props.connection.id) : null}
+                      {!this.state.currentUserStatus && this.props.connection.error !== null ? this.tempDeleteButton(this.props.connection.id) : null}
                       {/* If profile is NOT current user and SENT REQUEST, render PENDING */}
 
                     </div>
