@@ -36,6 +36,12 @@ export const fetchConnections = userId => dispatch => (
     err => (dispatch(receiveErrors(err.responseJSON))))
 );
 
+export const fetchConnection = (connecteeId, connectorId) => dispatch => (
+  ConnectionAPIUtil.fetchConnection(connecteeId, connectorId)
+    .then(connection => (dispatch(receiveConnection(connection))), 
+    err => (dispatch(receiveErrors(err.responseJSON))))
+);
+
 export const createConnection = connection => dispatch => (
   ConnectionAPIUtil.createConnection(connection)
     .then(connection => (dispatch(receiveConnection(connection))), 

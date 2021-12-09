@@ -21,6 +21,19 @@ class Api::ConnectionsController < ApplicationController
     render :index
   end
 
+  def show
+    @sent_connection = Connection.find_by(connector_id: params[:id], connectee_id: params[:user_id])
+    @inc_connection = Connection.find_by(connectee_id: params[:id], connector_id: params[:user_id])
+
+    if @sent_connection || @inc_connection 
+      @connection = @sent_connection || @inc_connection 
+      render :show 
+    else  
+      render json: { accepted: nil }
+    end
+
+  end
+
   def update
     @connection = Connection.find_by(id: params[:id])
     if @connection && @connection.update(connection_params)

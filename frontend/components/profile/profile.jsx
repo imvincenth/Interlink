@@ -15,7 +15,6 @@ class Profile extends React.Component {
       connectee_id: ""
     }
 
-    this.connection;
     this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
   }
 
@@ -42,7 +41,7 @@ class Profile extends React.Component {
       // .then(this.currentUserCheck())
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
-      .then(this.props.fetchConnections(this.props.userId))
+      .then(this.props.fetchConnection(this.props.userId, this.props.currentUser.id))
       .then(this.connectionStatusCheck());
   }
 
@@ -53,7 +52,7 @@ class Profile extends React.Component {
         // .then(this.currentUserCheck())
         .then(this.props.fetchExperiences(this.props.userId))
         .then(this.props.fetchEducations(this.props.userId))
-        .then(this.props.fetchConnections(this.props.userId))
+        .then(this.props.fetchConnection(this.props.userId, this.props.currentUser.id))
         .then(this.setState({ currentUserStatus: false }))
         .then(this.connectionStatusCheck());
     }
@@ -74,7 +73,6 @@ class Profile extends React.Component {
   }
 
   tempDeleteButton(connectionId) {
-    console.log(connectionId);
     return (
       <button onClick={() => this.props.deleteConnection(connectionId)}>
         Disconnect
@@ -83,30 +81,28 @@ class Profile extends React.Component {
   }
 
   render() {
-    if (!this.props.user) return null;
+    if (!this.props.user || !this.props.connection) return null;
 
-    for (let i = 0; i < this.props.connections.length; i++) {
-      if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
-        if (this.props.connections[i].pending) {
-          this.connection = this.props.connections[i];
-        }
-      }
-    };
+    // for (let i = 0; i < this.props.connections.length; i++) {
+    //   if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
+    //     if (this.props.connections[i].pending) {
+    //       this.connection = this.props.connections[i];
+    //     }
+    //   }
+    // };
 
-    let existingConnection;
-    let pendingConnection;
+    // let existingConnection;
+    // let pendingConnection;
 
-    if (this.connection) {
-      if (this.connection.pending) {
-        existingConnection = true;
-        pendingConnection = true;
-      } else {
-        existingConnection = true;
-        pendingConnection = false;
-      }
-    } else {
-      // return null;
-    }
+    // if (this.connection) {
+    //   if (this.connection.pending) {
+    //     existingConnection = true;
+    //     pendingConnection = true;
+    //   } else {
+    //     existingConnection = true;
+    //     pendingConnection = false;
+    //   }
+    // }
 
     return (
       <div className="profile-background">
@@ -129,9 +125,9 @@ class Profile extends React.Component {
                     <div>
                       {/* Connections Logic */}
                       {/* If profile is NOT current user and NOT connected, render CONNECT*/}
-                      {!this.state.currentUserStatus && this.props.connections.length === 0 ? this.tempConnectButton() : null}
+                      {!this.state.currentUserStatus && this.props.connection.length === 1 ? this.tempConnectButton() : null}
                       {/* If profile is NOT curent user and CONNECTED, render DISCONNECT */}
-                      {!this.state.currentUserStatus && this.props.connections.length !== 0 ? this.tempDeleteButton(this.connection.id) : null}
+                      {!this.state.currentUserStatus && this.props.connection.length !== 1 ? this.tempDeleteButton(this.props.connection.id) : null}
                       {/* If profile is NOT current user and SENT REQUEST, render PENDING */}
 
                     </div>

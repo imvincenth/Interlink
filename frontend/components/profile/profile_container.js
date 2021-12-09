@@ -4,7 +4,7 @@ import { fetchExperiences } from '../../actions/experience_actions'
 import { fetchEducations } from '../../actions/education_actions';
 import { fetchUsers, fetchUser } from '../../actions/user_actions';
 import { openModal } from '../../actions/modal_actions';
-import { createConnection, fetchConnections, updateConnection, deleteConnection } from '../../actions/connection_actions';
+import { createConnection, fetchConnection, updateConnection, deleteConnection } from '../../actions/connection_actions';
 import Profile from './profile';
 
 const mSTP = (state, ownProps) => ({
@@ -15,13 +15,13 @@ const mSTP = (state, ownProps) => ({
   educations: Object.values(state.entities.educations),
   experiences: Object.values(state.entities.experiences),
   errors: state.errors.users,
-  connections: Object.values(state.entities.connections)
+  connection: Object.values(state.entities.connections)[0]
 });
 
 const mDTP = dispatch => ({
   fetchExperiences: userId => dispatch(fetchExperiences(userId)),
   fetchEducations: userId => dispatch(fetchEducations(userId)),
-  fetchConnections: userId => dispatch(fetchConnections(userId)),
+  fetchConnection: (connecteeId, connectorId) => dispatch(fetchConnection(connecteeId, connectorId)),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: user => dispatch(fetchUser(user)),
   openEditProfileModal: (

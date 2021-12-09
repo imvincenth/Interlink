@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :index, :update] do
       resources :experiences, only: [:index]
       resources :educations, only: [:index]
-      resources :connections, only: [:index]
+      resources :connections, only: [:index, :show]
     end
 
     resources :experiences, only: [:create, :update, :destroy]
     resources :educations, only: [:create, :update, :destroy]
-    resources :connections, only: [:create, :show, :update, :destroy]
+    resources :connections, only: [:create, :update, :destroy]
 
     resources :posts, only: [:create, :index, :update, :destroy] do 
       resources :comments, only: [:create, :index, :update, :destroy]

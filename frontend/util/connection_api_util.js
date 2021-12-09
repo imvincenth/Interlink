@@ -13,9 +13,9 @@ export const fetchConnections = userId => (
   })
 );
 
-export const fetchConnection = connectionId => (
+export const fetchConnection = (connecteeId, connectorId) => (
   $.ajax({
-    url: `/api/connections/${connectionId}`,
+    url: `/api/users/${connecteeId}/connections/${connectorId}`,
     method: "GET"
   })
 );
