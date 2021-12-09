@@ -33,12 +33,12 @@ class Profile extends React.Component {
   }
 
   currentUserCheck() {
-    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUser: true }) : null;
+    this.props.currentUser.id === this.props.userId ? this.setState({ currentUserStatus: true }) : null;
   }
 
   componentDidMount() {
     this.props.fetchUser(this.props.userId)
-      // .then(this.currentUserCheck())
+      .then(this.currentUserCheck())
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnection(this.props.userId, this.props.currentUser.id))
@@ -49,7 +49,7 @@ class Profile extends React.Component {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
     if (prevProps.userId !== this.props.userId) {
       this.props.fetchUser(this.props.userId)
-        // .then(this.currentUserCheck())
+        .then(this.currentUserCheck())
         .then(this.props.fetchExperiences(this.props.userId))
         .then(this.props.fetchEducations(this.props.userId))
         .then(this.props.fetchConnection(this.props.userId, this.props.currentUser.id))
@@ -73,38 +73,38 @@ class Profile extends React.Component {
   }
 
   tempDeleteButton(connectionId) {
+    let currentlyConnector = this.props.connection.connector_id === this.props.currentUser.id;
+    if (currentlyConnector) {
+      return (
+        <button onClick={() => this.props.deleteConnection(connectionId)}>
+          Pending
+        </button>
+      )
+    } else {
+      return (
+        <div>
+          <button onClick={() => this.props.updateConnection({...this.props.connection, pending: false})}>
+            Accept 
+          </button>
+
+          <button onClick={() => this.props.deleteConnection(connectionId)}>
+            Ignore
+          </button>
+        </div>
+      )
+    }
+  }
+
+  tempDeleteButton2(connectionId) {
     return (
       <button onClick={() => this.props.deleteConnection(connectionId)}>
-        Disconnect
+        Destroy Connection
       </button>
     )
   }
 
   render() {
     if (!this.props.user || !this.props.connection) return null;
-
-    // for (let i = 0; i < this.props.connections.length; i++) {
-    //   if (this.props.connections[i].connector_id === this.props.currentUser.id || this.props.connections[i].connectee_id === this.props.currentUser.id) {
-    //     if (this.props.connections[i].pending) {
-    //       this.connection = this.props.connections[i];
-    //     }
-    //   }
-    // };
-
-    // let existingConnection;
-    // let pendingConnection;
-
-    // if (this.connection) {
-    //   if (this.connection.pending) {
-    //     existingConnection = true;
-    //     pendingConnection = true;
-    //   } else {
-    //     existingConnection = true;
-    //     pendingConnection = false;
-    //   }
-    // }
-
-    console.log(this.props.connection)
 
     return (
       <div className="profile-background">
@@ -126,11 +126,9 @@ class Profile extends React.Component {
                     <h3 className="profile-location">{this.props.user.city_district}, {this.props.user.country_region}</h3>
                     <div>
                       {/* Connections Logic */}
-                      {/* If profile is NOT current user and NOT connected, render CONNECT*/}
                       {!this.state.currentUserStatus && this.props.connection.error === null ? this.tempConnectButton() : null}
-                      {/* If profile is NOT curent user and CONNECTED, render DISCONNECT */}
-                      {!this.state.currentUserStatus && this.props.connection.error !== null ? this.tempDeleteButton(this.props.connection.id) : null}
-                      {/* If profile is NOT current user and SENT REQUEST, render PENDING */}
+                      {!this.state.currentUserStatus && this.props.connection.error !== null && this.props.connection.pending ? this.tempDeleteButton(this.props.connection.id) : null}
+                      {!this.state.currentUserStatus && this.props.connection.error !== null && !this.props.connection.pending ? this.tempDeleteButton2(this.props.connection.id) : null}
 
                     </div>
                   </div>
