@@ -15,6 +15,7 @@ class Profile extends React.Component {
       connectee_id: ""
     }
 
+    this.connection;
     this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
   }
 
@@ -32,8 +33,13 @@ class Profile extends React.Component {
     });
   }
 
+  currentUserCheck() {
+    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUser: true }) : null;
+  }
+
   componentDidMount() {
     this.props.fetchUser(this.props.userId)
+      // .then(this.currentUserCheck())
       .then(this.props.fetchExperiences(this.props.userId))
       .then(this.props.fetchEducations(this.props.userId))
       .then(this.props.fetchConnections(this.props.userId))
@@ -44,11 +50,12 @@ class Profile extends React.Component {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
     if (prevProps.userId !== this.props.userId) {
       this.props.fetchUser(this.props.userId)
-      .then(this.props.fetchExperiences(this.props.userId))
-      .then(this.props.fetchEducations(this.props.userId))
-      .then(this.props.fetchConnections(this.props.userId))
-      .then(this.setState({ currentUserStatus: false }))
-      .then(this.connectionStatusCheck());
+        // .then(this.currentUserCheck())
+        .then(this.props.fetchExperiences(this.props.userId))
+        .then(this.props.fetchEducations(this.props.userId))
+        .then(this.props.fetchConnections(this.props.userId))
+        .then(this.setState({ currentUserStatus: false }))
+        .then(this.connectionStatusCheck());
     }
   }
 
@@ -58,6 +65,22 @@ class Profile extends React.Component {
     this.props.createConnection({...this.state, connectee_id: this.props.userId});
   }
 
+  tempConnectButton() {
+    return (
+      <button onClick={() => this.props.createConnection({...this.state, connectee_id: this.props.userId})}>
+        Connect
+      </button>
+    )
+  }
+
+  tempDeleteButton(connectionId) {
+    console.log(connectionId);
+    return (
+      <button onClick={() => this.props.deleteConnection(connectionId)}>
+        Disconnect
+      </button>
+    )
+  }
 
   render() {
     if (!this.props.user) return null;
@@ -72,20 +95,17 @@ class Profile extends React.Component {
 
     let existingConnection;
     let pendingConnection;
-    let alreadyConnected;
 
     if (this.connection) {
       if (this.connection.pending) {
         existingConnection = true;
         pendingConnection = true;
-        alreadyConnected = false;
       } else {
         existingConnection = true;
         pendingConnection = false;
-        alreadyConnected = true;
       }
     } else {
-      existingConnection = false;
+      // return null;
     }
 
     return (
@@ -108,6 +128,11 @@ class Profile extends React.Component {
                     <h3 className="profile-location">{this.props.user.city_district}, {this.props.user.country_region}</h3>
                     <div>
                       {/* Connections Logic */}
+                      {/* If profile is NOT current user and NOT connected, render CONNECT*/}
+                      {!this.state.currentUserStatus && this.props.connections.length === 0 ? this.tempConnectButton() : null}
+                      {/* If profile is NOT curent user and CONNECTED, render DISCONNECT */}
+                      {!this.state.currentUserStatus && this.props.connections.length !== 0 ? this.tempDeleteButton(this.connection.id) : null}
+                      {/* If profile is NOT current user and SENT REQUEST, render PENDING */}
 
                     </div>
                   </div>
