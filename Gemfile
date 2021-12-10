@@ -40,6 +40,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Removing SameSite error
 gem 'rails_same_site_cookie'
 
+# AWS
+gem 'aws-sdk-s3'
+
 gem 'rack',  '~> 2.1'
 
 group :development, :test do
