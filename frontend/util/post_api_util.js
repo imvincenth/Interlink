@@ -13,6 +13,13 @@ export const fetchPosts = () => (
   })
 );
 
+export const fetchPost = postId => (
+  $.ajax({
+    url: `/api/posts/${postId}`,
+    method: "GET"
+  })
+);
+
 export const updatePost = post => (
   $.ajax({
     url: `/api/posts/${post.id}`,
