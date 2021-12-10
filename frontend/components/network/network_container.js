@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/user_actions';
+import { fetchConnections } from '../../actions/connection_actions';
 import Network from './network';
 
 const mSTP = state => ({

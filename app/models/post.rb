@@ -27,4 +27,7 @@ class Post < ApplicationRecord
   has_many :reactions,
     as: :reactable,
     dependent: :destroy
+
+  has_one_attached :media,
+    dependent: :destroy
 end

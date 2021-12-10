@@ -16,6 +16,7 @@ const mSTP = (state, ownProps) => ({
   experiences: Object.values(state.entities.experiences),
   errors: state.errors.users,
   connection: Object.values(state.entities.connections)[0]
+  // connection: state.entities.connections
 });
 
 const mDTP = dispatch => ({

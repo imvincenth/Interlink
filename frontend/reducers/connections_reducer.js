@@ -8,6 +8,7 @@ const connectionsReducer = (oldState = {}, action) => {
     case RECEIVE_CONNECTIONS:
       return action.connections;
     case RECEIVE_CONNECTION:
+      // if (action.connection.id === undefined) return newState;
       newState[action.connection.id] = action.connection;
       return newState;
     case REMOVE_CONNECTION:

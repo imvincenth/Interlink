@@ -11,7 +11,6 @@ class Api::ConnectionsController < ApplicationController
   end
 
   def index
-    # @connections = Connection.all
     if params[:user_id]
       @connections = Connection.where("connector_id = ? OR connectee_id = ?", params[:user_id], params[:user_id])
     else
