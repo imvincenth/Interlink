@@ -28,6 +28,9 @@ class Post < ApplicationRecord
     as: :reactable,
     dependent: :destroy
 
-  has_one_attached :media,
+  has_one_attached :photo,
+    dependent: :destroy
+
+  has_one_attached :video,
     dependent: :destroy
 end
