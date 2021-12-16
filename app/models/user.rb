@@ -61,7 +61,7 @@ class User < ApplicationRecord
     foreign_key: :connectee_id,
     class_name: :Connection
 
-  has_one_attached :photo,
+  has_one_attached :profile_picture,
     dependent: :destroy
 
   def self.find_by_credentials(email, password)

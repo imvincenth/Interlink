@@ -83,7 +83,8 @@ class Api::UsersController < ApplicationController
       :start_date,
       :end_date,
       :grade,
-      :extracurriculars
+      :extracurriculars,
+      :profile_picture
     )
   end
 end
