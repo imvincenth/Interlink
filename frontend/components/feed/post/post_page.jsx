@@ -1,3 +1,5 @@
+// PAGE FOR TESTING PURPOSES
+
 import React, { Component } from 'react'
 import CommentItemContainer from './comment/comment_item_container';
 
@@ -47,15 +49,16 @@ export default class Post extends Component {
   }
   
   componentDidMount() {
-    // this.props.fetchPost(this.props.postId)
-    // this.props.fetchComments(this.props.postId);
-    // this.props.fetchPostReactions(this.props.postId)
-      // .then(() => this.setCurrentReaction());
+    this.props.fetchPost(this.props.postId)
+      this.props.fetchComments(this.props.postId);
+      this.props.fetchPostReactions(this.props.postId)
+        .then(() => this.setCurrentReaction());
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // if (this.props.errors.length > 0) this.props.history.replace("/404");
     if (prevProps.postId !== this.props.postId) {
-      this.props.fetchPost();
+      this.props.fetchPost(this.props.postId);
       this.props.fetchComments(this.props.postId);
       this.props.fetchPostReactions(this.props.postId)
         .then(() => this.setCurrentReaction());
@@ -171,7 +174,7 @@ export default class Post extends Component {
 
   render() {
 
-    if (!this.props.post) return null;
+    if (!this.props.post[this.props.postId]) return null;
 
     const { post } = this.props;
     return (
@@ -186,6 +189,7 @@ export default class Post extends Component {
         <button onClick={() => this.setState({ commentField: true })}>
           Comment
         </button>
+        {this.props.post[this.props.postId].photoUrl ? <img src={this.props.post[this.props.postId].photoUrl} alt="test" /> : null}
         {this.state.commentField ? this.commentForm() : null}
           reaction: {this.state.react_type}
         {this.state.currentReaction ? this.tempDislikeButton() : this.reactionForm()}

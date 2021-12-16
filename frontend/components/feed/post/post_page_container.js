@@ -1,3 +1,5 @@
+// PAGE FOR TESTING PURPOSES
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts, fetchPost, deletePost } from '../../../actions/post_actions';
@@ -12,6 +14,7 @@ const mSTP = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
   comments: Object.values(state.entities.comments),
   reactions: Object.values(state.entities.reactions),
+  // errors: Object.values(state.errors.posts),
   postId: ownProps.match.params.postId,
   post: state.entities.posts
 });
