@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+require 'open-uri'
+
 User.destroy_all
 Experience.destroy_all
 Education.destroy_all
@@ -19,6 +21,9 @@ demo_user = User.create(
   country_region: 'Middle-earth', 
   city_district: 'The Shire'
 )
+
+gandalf = open('https://ringin-dev.s3.us-west-1.amazonaws.com/gandalf.png')
+demo_user.profile_picture.attach(io: gandalf, filename: 'gandalf.png')
 
 demo_exp = Experience.create(
   user_id: 1,

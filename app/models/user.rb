@@ -50,7 +50,7 @@ class User < ApplicationRecord
 
   has_many :reactions,
     foreign_key: :reactor_id,
-    class_name: :User,
+    class_name: :Reaction,
     dependent: :destroy
 
   has_many :sent_connects,

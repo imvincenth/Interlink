@@ -116,7 +116,7 @@ class Profile extends React.Component {
               <div className="profile-card">
                 <img src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" alt="sidebar banner" />
                 <div className="profile-avatar">
-                  <img src={window.gandalfURL} alt="gandalf smiling" />
+                  {this.props.currentUser.profilePhotoUrl ? <img src={this.props.currentUser.profilePhotoUrl} alt="user profile picture" /> : <img src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" alt="default profile picture" />}
                 </div>
                 <div className="profile-card-main">
                   <div className="profile-info">
