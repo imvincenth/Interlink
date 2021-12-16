@@ -17,7 +17,7 @@ class Feed extends React.Component {
       <div className="feed-page">
         <div>
           <header>
-            <NavbarContainer />
+            <NavbarContainer page="feed" />
           </header>
 
           <div className="content-body">

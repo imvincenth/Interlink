@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../feed/navbar/navbar_container';
+import NavbarContainer from '../feed/navbar/navbar_container';
 import ExperienceItemContainer from './experience/experience_item_container';
 import EducationItemContainer from './education/education_item_container';
 
@@ -109,7 +109,7 @@ class Profile extends React.Component {
     return (
       <div className="profile-background">
         <div className="profile-container">
-          <Navbar />
+          <NavbarContainer page="profile" />
 
           <div className="profile-main-wrapper">
             <div className="profile-main">
