@@ -6,6 +6,7 @@ import PostItemContainer from './post/post_item_container';
 
 class Feed extends React.Component {
   componentDidMount() {
+    this.props.fetchUsers();
     this.props.fetchPosts();
   }
 

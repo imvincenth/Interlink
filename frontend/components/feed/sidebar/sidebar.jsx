@@ -17,8 +17,10 @@ class Sidebar extends React.Component {
           <div className="sidebar-avatar">
             {this.props.currentUser.profilePhotoUrl ? <img src={this.props.currentUser.profilePhotoUrl} alt="user profile picture" /> : <img src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" alt="default profile picture" />}
           </div>
-          <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
-          <h4 className="sidebar-email">{this.props.currentUser.headline}</h4>
+          <div>
+            <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
+            <h4 className="sidebar-email">{this.props.currentUser.headline}</h4>
+          </div>
         </div>
 
         <div className="sidebar-info-wrap">
