@@ -17,7 +17,7 @@ const mDTP = dispatch => ({
   fetchPosts: () => dispatch(fetchPosts()),
   openCreatePostModal: (
     <button className="open-modal" onClick={() => dispatch(openModal('createPost'))}>
-      <img src={window.plusURL} />
+      Start a post
     </button>
   )
 });

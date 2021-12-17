@@ -17,7 +17,7 @@ class Navbar extends React.Component {
 
   render() {
     if (!this.props.currentUser) return null;
-    console.log(this.props.currentUser.profilePhotoUrl)
+
     return (
       <div id="navbar-container">
         <div className="navbar-content">
