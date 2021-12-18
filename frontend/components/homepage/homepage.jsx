@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 class Homepage extends React.Component {
-
   refreshPage() {
     window.location.reload();
   }

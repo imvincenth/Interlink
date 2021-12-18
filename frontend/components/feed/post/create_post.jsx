@@ -6,13 +6,10 @@ export default class Post extends Component {
 
     this.state = {
       user_id: this.props.currentUser.id,
-      body: "",
-
-      
+      body: ""
     }
     
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleImageFile = this.handleImageFile.bind(this);
   }
 
   handleSubmit(e) {
@@ -20,10 +17,6 @@ export default class Post extends Component {
 
     this.props.createPost({...this.state})
       .then(() => this.props.closeModal());
-  }
-
-  handleImageFile(e) {
-
   }
 
   update(field) {
