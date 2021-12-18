@@ -6,8 +6,8 @@
   left: 0;
   z-index: 999;
   position: sticky;
-  padding-top: 9px;
-  padding-bottom: 3px;
+  // padding-top: 9px;
+  // padding-bottom: 3px;
 }
 
 .navbar-content {
@@ -25,7 +25,7 @@
 
 .navbar-logo {
   margin: auto;
-  padding-bottom: 5px;
+  // padding-bottom: 5px;
   margin-right: 20px;
   font-size: 0;
   height: 35px;
@@ -52,9 +52,13 @@
   display: flex;
   text-align: center;
   flex-direction: column;
+  justify-content: center;
   min-width: 80px;
+  height: 50px;
   cursor: pointer;
   position: relative;
+
+  border-bottom: 2px solid transparent;
 }
 
 .navbar-profile {
@@ -67,10 +71,6 @@
 }
 
 .navbar-link {
-  // display: flex;
-  // flex-direction: column;
-  // text-align: center;
-  // align-content: center;
   text-decoration: none;
   color: black;
 }
@@ -81,37 +81,19 @@
 }
 
 .navbar-arrow {
-  // opacity: 0.63;
   width: 9px;
 }
 
-.navbar-me {
-  opacity: 0.63;
-}
-
-.navbar-arrow:hover {
+h5.navbar-link.transparent:hover {
   opacity: 1;
   color: black;
-}
-
-.navbar-me:hover {
-  opacity: 1;
-  color: black;
-}
-
-.navbar-link {
-  height: 40px;
 }
 
 .navbar-icon.active,
-.navbar-link.active {
+.navbar-link.active,
+.navbar-me.active {
   opacity: 1;
   color: black;
-}
-
-.navbar-link.active {
-  margin-bottom: -1px;
-  border-bottom: 2px solid black;
 }
 
 a:hover {
