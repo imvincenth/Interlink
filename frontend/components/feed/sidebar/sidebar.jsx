@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom';
 class Sidebar extends React.Component {
 
   componentDidMount() {
-    this.props.fetchUser(this.props.currentUser.id);
+    this.props.fetchUsers();
   }
 
   render() {
     if (!this.props.currentUser) return null;
+
     return (
       <div className="sidebar-container">
         
         <div className="sidebar-header">
           <img src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" alt="sidebar banner" />
           <div className="sidebar-avatar">
-            {this.props.currentUser.profilePhotoUrl ? <img src={this.props.currentUser.profilePhotoUrl} alt="user profile picture" /> : <img src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" alt="default profile picture" />}
+            {this.props.currentUser.profilePictureUrl ? <img src={this.props.currentUser.profilePictureUrl} alt="user profile picture" /> : <img src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" alt="default profile picture" />}
           </div>
           <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
           <h4 className="sidebar-email">{this.props.currentUser.headline}</h4>

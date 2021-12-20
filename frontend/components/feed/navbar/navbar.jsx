@@ -29,7 +29,7 @@ class Navbar extends React.Component {
         </div>
 
         <div className="navbar-search-box">
-          <p></p>
+          <input type="text" />
         </div>
 
         <div className="navbar-list">
@@ -67,7 +67,7 @@ class Navbar extends React.Component {
 
           <div className="navbar-item">
             <Link className={this.props.page === "profile" ? "navbar-link active" : "navbar-link"} to={`/users/${this.props.currentUser.id}`}>
-              {this.props.currentUser.profilePhotoUrl ? <img className="navbar-icon-profile" src={this.props.currentUser.profilePhotoUrl} alt="feed url" /> : <img className="navbar-icon-profile" src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" alt="default profile picture" />}
+              {this.props.currentUser.profilePictureUrl ? <img className="navbar-icon-profile" src={this.props.currentUser.profilePictureUrl} alt="feed url" /> : <img className="navbar-icon-profile" src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" alt="default profile picture" />}
               <h5 className={this.props.page === "profile" ? "navbar-me active" : "navbar-link transparent"}>Me<img className="navbar-arrow" src={window.downarrowURL} alt="down arrow" /></h5>
               <div className={this.props.page === "profile" ? "navbar-item-bar active" : "navbar-item-bar"}></div>
             </Link>
