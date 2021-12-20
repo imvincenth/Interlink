@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../../../actions/user_actions';
+import { fetchUsers } from '../../../actions/user_actions';
 import Navbar from './navbar';
 
 const mSTP = (state, ownProps) => ({
@@ -8,7 +8,7 @@ const mSTP = (state, ownProps) => ({
 });
 
 const mDTP = dispatch => ({
-  fetchUser: userId => dispatch(fetchUser(userId)),
+  fetchUsers: () => dispatch(fetchUsers()),
   logout: () => dispatch(logout())
 });
 
