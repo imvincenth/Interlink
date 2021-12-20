@@ -10,6 +10,29 @@
   // padding-bottom: 3px;
 }
 
+.navbar-left {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.navbar-search-box {
+  display: flex;
+}
+
+.search-icon {
+  position: absolute;
+}
+
+.search-bar {
+  width: 100%;
+  background-color: rgb(238, 243, 248);
+  border: none;
+  box-shadow: none;
+  padding-left: 40px;
+}
+
 .navbar-content {
   display: flex;
   align-items: center;
@@ -26,7 +49,7 @@
 .navbar-logo {
   margin: auto;
   // padding-bottom: 5px;
-  margin-right: 20px;
+  margin-right: 8px;
   font-size: 0;
   height: 35px;
   width: 35px;

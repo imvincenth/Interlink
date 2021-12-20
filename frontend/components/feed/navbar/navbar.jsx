@@ -6,10 +6,15 @@ class Navbar extends React.Component {
     super(props);
 
     this.state = {
-      page: this.props.page
+      page: this.props.page,
+
+      searchInput: ""
     }
   }
 
+  update(field) {
+    return e => this.setState({ [field]: e.currentTarget.value });
+  }
 
   componentDidMount() {
     this.props.fetchUsers();
@@ -22,15 +27,19 @@ class Navbar extends React.Component {
       <div id="navbar-container">
         <div className="navbar-content">
 
-        <div className="navbar-logo-box"> 
-          <Link to="/">
-            <img src={window.logoURL} className="navbar-logo" alt="login logo" />
-          </Link>
+        <div className="navbar-left">
+          <div className="navbar-logo-box"> 
+            <Link to="/">
+              <img src={window.logoURL} className="navbar-logo" alt="login logo" />
+            </Link>
+          </div>
+
+          <div className="navbar-search-box">
+            <img className="search-icon" src={window.searchIconURL} alt="search icon" />
+            <input className="search-bar" type="text" value={this.state.searchInput} onChange={this.update("searchInput")} placeholder="Search" />
+          </div>
         </div>
 
-        <div className="navbar-search-box">
-          <input type="text" />
-        </div>
 
         <div className="navbar-list">
           <div className="navbar-item">
