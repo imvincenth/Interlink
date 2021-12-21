@@ -8,7 +8,6 @@ import Education from './education_item.jsx';
 const mSTP = (state, ownProps) => {
   return {
     currentUser: state.entities.users[state.session.id],
-    // user: state.entities.users[ownProps.match.params.userId],
   }
 };
 

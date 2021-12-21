@@ -16,6 +16,7 @@ import NetworkContainer from './network/network_container';
 import PageNotFound from './session_form/404';
 import ProfileContainer from './profile/profile_container';
 import PostPageContainer from './feed/post/post_page_container';
+import SearchResultContainer from './search/search_result_container';
 import Modal from './modal/modal';
 
 import { AuthRoute, LogoutRoute } from '../util/route_util';
@@ -26,6 +27,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/posts/:postId" component={PostPageContainer} />
       <AuthRoute exact path="/users/:userId" component={ProfileContainer} />
+      <AuthRoute exact path="/results/" component={SearchResultContainer} />
       <AuthRoute exact path="/network" component={NetworkContainer} />
       <AuthRoute exact path="/feed" component={FeedContainer} />
       <LogoutRoute exact path="/login" component={LogInFormContainer} />
