@@ -13,6 +13,7 @@ class Navbar extends React.Component {
   }
 
   update(field) {
+    
     return e => this.setState({ [field]: e.currentTarget.value });
   }
 
@@ -35,7 +36,9 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-search-box">
-            <img className="search-icon" src={window.searchIconURL} alt="search icon" />
+            <div className="search-icon-box">
+              <img className="search-icon" src={window.searchIconURL} alt="search icon" />
+            </div>
             <input className="search-bar" type="text" value={this.state.searchInput} onChange={this.update("searchInput")} placeholder="Search" />
           </div>
         </div>

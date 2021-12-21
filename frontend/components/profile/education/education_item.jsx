@@ -27,7 +27,7 @@ class Education extends React.Component {
 
   editEducationButton() {
     return (
-      <button className="open-modal" onClick={() => this.props.openEditEducationModal(education)}>
+      <button className="open-modal" onClick={() => this.props.openEditEducationModal(this.props.education)}>
         <img src={window.vectorURL} alt="pen" />
       </button>
     )
@@ -35,14 +35,13 @@ class Education extends React.Component {
 
   deleteEducationButton() {
     return (
-      <button onClick={() => this.props.deleteEducation(education.id)}>
+      <button onClick={() => this.props.deleteEducation(this.props.education.id)}>
         Delete
       </button>
     )
   }
 
   render() {
-
     // if (!this.props.user) return null;
 
     const { education, key } = this.props;

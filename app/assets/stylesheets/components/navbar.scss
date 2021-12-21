@@ -4,7 +4,7 @@
   width: 100vw;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 998;
   position: sticky;
   // padding-top: 9px;
   // padding-bottom: 3px;
@@ -19,18 +19,40 @@
 
 .navbar-search-box {
   display: flex;
+  align-items: center;
+  width: 280px;
+}
+
+.search-icon-box {
+  position: absolute;
+  vertical-align: middle;
+  padding: 8px;
+  padding-left: 16px;
 }
 
 .search-icon {
-  position: absolute;
+  width: 14px;
+  height: 14px;
+  position: relative;
 }
 
 .search-bar {
   width: 100%;
+  height: 32px;
   background-color: rgb(238, 243, 248);
   border: none;
+  border-style: none;
   box-shadow: none;
   padding-left: 40px;
+  line-height: 1.75;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 0.2rem;
+}
+
+.search-bar:hover,
+.search-bar:focus {
+  outline: none;
 }
 
 .navbar-content {

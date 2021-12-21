@@ -30,7 +30,7 @@ class Experience extends React.Component {
 
   editExperienceButton() {
     return (
-      <button className="open-modal" onClick={() => this.props.openEditExperienceModal(experience)}>
+      <button className="open-modal" onClick={() => this.props.openEditExperienceModal(this.props.experience)}>
         <img src={window.vectorURL} alt="pen" />
       </button>
     )
@@ -38,7 +38,7 @@ class Experience extends React.Component {
 
   deleteExperienceButton() {
     return (
-      <button onClick={() => this.props.deleteExperience(experience.id)}>
+      <button onClick={() => this.props.deleteExperience(this.props.experience.id)}>
         Delete
       </button>
     )

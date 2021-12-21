@@ -503,6 +503,7 @@ class SignupForm extends React.Component {
   }
 
   renderInvalidEmailError() {
+    if (this.state.email.length === 0) return null;
     return(
       <p className="error">
         You must enter a valid email

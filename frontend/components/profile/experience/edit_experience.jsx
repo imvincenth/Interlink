@@ -17,10 +17,12 @@ class EditExperienceForm extends React.Component {
       endYr: ""
     };
 
-    this.oldStartMon = this.props.experience.start_date.split(" ")[0];
-    this.oldStartYr = this.props.experience.start_date.split(" ")[1];
-    this.oldEndMon = this.props.experience.end_date.split(" ")[0];
-    this.oldEndYr = this.props.experience.end_date.split(" ")[1];
+    if (this.props.experience.start_date) {
+      this.oldStartMon = this.props.experience.start_date.split(" ")[0];
+      this.oldStartYr = this.props.experience.start_date.split(" ")[1];
+      this.oldEndMon = this.props.experience.end_date.split(" ")[0];
+      this.oldEndYr = this.props.experience.end_date.split(" ")[1];
+    }
 
     this.createOptions = this.createOptions.bind(this);
     this.flipRole = this.flipRole.bind(this);
