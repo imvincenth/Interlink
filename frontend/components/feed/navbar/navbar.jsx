@@ -8,17 +8,17 @@ class Navbar extends React.Component {
     this.state = {
       page: this.props.page,
 
-      searchInput: ""
+      searchInput: "",
+      searchActive: false
     }
   }
 
   update(field) {
-    
-    return e => this.setState({ [field]: e.currentTarget.value });
+    return e => this.setState({ [field]: e.currentTarget.value, searchActive: true });
   }
 
-  componentDidMount() {
-    this.props.fetchUsers();
+  toggleSearchOn() {
+    this.setState({ searchActive: true });
   }
 
   render() {
@@ -39,10 +39,11 @@ class Navbar extends React.Component {
             <div className="search-icon-box">
               <img className="search-icon" src={window.searchIconURL} alt="search icon" />
             </div>
-            <input className="search-bar" type="text" value={this.state.searchInput} onChange={this.update("searchInput")} placeholder="Search" />
+            <input className="search-bar" type="text" value={this.state.searchInput} onChange={this.update("searchInput")} onClick={() => this.toggleSearchOn()} placeholder="Search" />
           </div>
         </div>
 
+        {/* {this.state.searchActive ? this.props.openSearchModal(this.state.searchInput) : null} */}
 
         <div className="navbar-list">
           <div className="navbar-item">
