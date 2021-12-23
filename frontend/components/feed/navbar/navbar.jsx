@@ -10,6 +10,7 @@ class Navbar extends React.Component {
 
       searchInput: "",
       searchActive: false, 
+      results: {}
     }
 
     this.toggleSearchOn = this.toggleSearchOn.bind(this);
@@ -36,13 +37,15 @@ class Navbar extends React.Component {
 
   filterResults() {
     let clone = {...this.props.users};
-    // for (const userId in clone) {
-    //   if (userId === this.props.currentUser.id) delete clone[userId];
-    //   if (this.props.input === "") console.log(clone);
-    //   if (!clone[userId].first_name.toLowerCase().includes(this.props.input) || !clone[userId].last_name.toLowerCase().includes(this.props.input)) {
-    //     delete clone[userId];
-    //   }
-    // }
+    for (const userId in clone) {
+      // Removing the current user from results
+      if (Number(userId) === this.props.currentUser.id) delete clone[userId];
+      // Removing users whose name does not include the search input
+      let usersName = `${clone[userId].first_name} ${clone[userId].last_name}`.toLowerCase();
+      if (!usersName.includes(this.state.searchInput.toLowerCase())) {
+        delete clone[userId];
+      }
+    }
     console.log(clone);
     // this.setState({ results: clone });
   }
@@ -70,7 +73,8 @@ class Navbar extends React.Component {
     if (!this.props.currentUser) return null;
   
     return (
-      <div id="navbar-container">
+      <div id="navbar-container" onClick={this.state.searchActive ? this.toggleSearchOff : null}>
+        {this.state.searchActive ? this.searchResults() : null}
         <div className="navbar-content">
 
         <div className="navbar-left">
@@ -95,7 +99,6 @@ class Navbar extends React.Component {
           </div>
         </div>
 
-        {this.state.searchActive ? this.searchResults() : null}
 
         <div className="navbar-list">
           <div className="navbar-item">
