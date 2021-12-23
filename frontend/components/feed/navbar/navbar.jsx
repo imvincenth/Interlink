@@ -40,12 +40,13 @@ class Navbar extends React.Component {
     for (const userId in clone) {
       // Removing the current user from results
       if (Number(userId) === this.props.currentUser.id) delete clone[userId];
+    }
+    for (const userId in clone) {
       // Removing users whose name does not include the search input
       let usersName = `${clone[userId].first_name} ${clone[userId].last_name}`.toLowerCase();
-      if (!usersName.includes(this.state.searchInput.toLowerCase())) {
-        delete clone[userId];
-      }
+      if (!this.state.searchInput.toLowerCase().includes(usersName)) delete clone[userId];
     }
+    if (this.state.searchInput.length === 0) console.log("empty drdrdrdr");
     console.log(clone);
     // this.setState({ results: clone });
   }
