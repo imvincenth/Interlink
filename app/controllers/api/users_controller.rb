@@ -54,7 +54,8 @@ class Api::UsersController < ApplicationController
       :headline, 
       :country_region, 
       :city_district, 
-      :password
+      :password,
+      :profile_picture
     )
   end
 
@@ -83,8 +84,7 @@ class Api::UsersController < ApplicationController
       :start_date,
       :end_date,
       :grade,
-      :extracurriculars,
-      :profile_picture
+      :extracurriculars
     )
   end
 end

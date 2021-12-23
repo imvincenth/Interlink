@@ -9,7 +9,16 @@ class Navbar extends React.Component {
       page: this.props.page,
 
       searchInput: "",
-      searchActive: false
+      searchActive: false, 
+    }
+
+    this.toggleSearchOn = this.toggleSearchOn.bind(this);
+    this.toggleSearchOff = this.toggleSearchOff.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.users !== this.props.users) {
+      this.filterResults();
     }
   }
 
@@ -21,9 +30,45 @@ class Navbar extends React.Component {
     this.setState({ searchActive: true });
   }
 
+  toggleSearchOff() {
+    this.setState({ searchActive: false });
+  }
+
+  filterResults() {
+    let clone = {...this.props.users};
+    // for (const userId in clone) {
+    //   if (userId === this.props.currentUser.id) delete clone[userId];
+    //   if (this.props.input === "") console.log(clone);
+    //   if (!clone[userId].first_name.toLowerCase().includes(this.props.input) || !clone[userId].last_name.toLowerCase().includes(this.props.input)) {
+    //     delete clone[userId];
+    //   }
+    // }
+    console.log(clone);
+    // this.setState({ results: clone });
+  }
+
+  searchResultCard(user) {
+    return (
+      <div>
+        <img className="search-icon" src={window.searchIconURL} alt="search icon" />
+        {user.first_name.toLowerCase()} {user.last_name.toLowerCase()} + {user.headline}
+      </div>
+    )
+  }
+
+  searchResults() {
+    return (
+      <div className='search-modal-background' onClick={this.toggleSearchOff}>
+        <div className='search-modal-child' onClick={e => e.stopPropagation()}>
+          please fucking work
+        </div>
+      </div>
+    )
+  }
+
   render() {
     if (!this.props.currentUser) return null;
-
+  
     return (
       <div id="navbar-container">
         <div className="navbar-content">
@@ -35,15 +80,22 @@ class Navbar extends React.Component {
             </Link>
           </div>
 
-          <div className="navbar-search-box">
-            <div className="search-icon-box">
+          <div className={this.state.searchActive ? "navbar-search-box search-active" : "navbar-search-box"}>
+            <div className={this.state.searchActive ? "search-icon-box search-active" : "search-icon-box"}>
               <img className="search-icon" src={window.searchIconURL} alt="search icon" />
             </div>
-            <input className="search-bar" type="text" value={this.state.searchInput} onChange={this.update("searchInput")} onClick={() => this.toggleSearchOn()} placeholder="Search" />
+            <input 
+              className={this.state.searchActive ? "search-bar search-active" : "search-bar"} 
+              type="text" 
+              value={this.state.searchInput} 
+              onChange={this.update("searchInput")} 
+              onClick={() => this.toggleSearchOn()} 
+              placeholder="Search" 
+            />
           </div>
         </div>
 
-        {/* {this.state.searchActive ? this.props.openSearchModal(this.state.searchInput) : null} */}
+        {this.state.searchActive ? this.searchResults() : null}
 
         <div className="navbar-list">
           <div className="navbar-item">
