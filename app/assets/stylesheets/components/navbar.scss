@@ -10,9 +10,11 @@
 
 .search-modal-child {
   position: relative;
-  margin: auto;
-  border-radius: 0.2rem;
-  border: 1px solid rgba(0, 0, 0, 0.9);
+  top: -7px;
+  left: 137px;
+  border-radius: 0.3rem;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  box-shadow: 0 0 0 0.05rem rgba(0, 0, 0, 0.08);
   width: 452px;
   background-color: white;
 }

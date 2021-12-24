@@ -60,11 +60,47 @@ class Navbar extends React.Component {
     )
   }
 
+  noInput() {
+    return (
+      <div>
+        <div>
+          Try searching for
+        </div>
+        <div>
+          Frodo Baggins
+        </div>
+        <div>
+          Samwise Gamgee
+        </div>
+        <div>
+          Gandalf the Grey
+        </div>
+        <div>
+          Aragorn II Elessar
+        </div>
+        <div>
+          Legolas Greenleaf
+        </div>
+        <div>
+          Gimli son of Gloin
+        </div>
+      </div>
+    )
+  }
+
+  noResults() {
+    return (
+      <div>
+
+      </div>
+    )
+  }
+
   searchResults() {
     return (
       <div className='search-modal-background' onClick={this.toggleSearchOff}>
         <div className='search-modal-child' onClick={e => e.stopPropagation()}>
-          please fucking work
+          {this.state.searchInput.length === 0 ? this.noInput() : null}
         </div>
       </div>
     )
