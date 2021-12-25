@@ -63,25 +63,31 @@ class Navbar extends React.Component {
   noInput() {
     return (
       <div>
-        <div>
+        <div className='noinput-search-suggestion'>
           Try searching for
         </div>
-        <div>
+        <div className='noinput-search-suggestion'>
+          <img src={window.searchIconURL} alt="magnifying glass" />
           Frodo Baggins
         </div>
-        <div>
+        <div className='noinput-search-suggestion'>
+          <img src={window.searchIconURL} alt="magnifying glass" />
           Samwise Gamgee
         </div>
-        <div>
+        <div className='noinput-search-suggestion'>
+          <img src={window.searchIconURL} alt="magnifying glass" />
           Gandalf the Grey
         </div>
-        <div>
+        <div className='noinput-search-suggestion'>
+          <img src={window.searchIconURL} alt="magnifying glass" />
           Aragorn II Elessar
         </div>
-        <div>
+        <div className='noinput-search-suggestion'>
+          <img src={window.searchIconURL} alt="magnifying glass" />
           Legolas Greenleaf
         </div>
-        <div>
+        <div className='noinput-search-suggestion'>
+          <img src={window.searchIconURL} alt="magnifying glass" />
           Gimli son of Gloin
         </div>
       </div>

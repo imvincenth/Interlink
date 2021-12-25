@@ -25,6 +25,14 @@
   flex-direction: column;
 }
 
+.noinput-search-suggestion {
+  display: flex;
+}
+
+.noinput-search-suggestion:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
 #navbar-container {
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
