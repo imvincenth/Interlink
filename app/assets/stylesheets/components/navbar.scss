@@ -11,7 +11,7 @@
 .search-modal-child {
   position: relative;
   top: -7px;
-  left: 137px;
+  margin: auto;
   border-radius: 0.3rem;
   border: 1px solid rgba(0, 0, 0, 0.09);
   box-shadow: 0 0 0 0.05rem rgba(0, 0, 0, 0.08);
@@ -25,8 +25,10 @@
   width: 100vw;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 100;
   position: sticky;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .navbar-left {
@@ -34,6 +36,18 @@
   justify-content: center;
   align-content: center;
   align-items: center;
+}
+
+.navbar-logo-box {
+  opacity: 1;
+}
+
+.navbar-logo {
+  margin: auto;
+  margin-right: 8px;
+  font-size: 0;
+  height: 35px;
+  width: 35px;
 }
 
 .navbar-search-box {
@@ -71,7 +85,6 @@
 .search-icon {
   width: 14px;
   height: 14px;
-  position: relative;
 }
 
 .search-bar {
@@ -113,22 +126,6 @@
   margin-bottom: -2px;
 }
 
-.navbar-logo-box {
-  opacity: 1;
-}
-
-.navbar-logo {
-  margin: auto;
-  // padding-bottom: 5px;
-  margin-right: 8px;
-  font-size: 0;
-  height: 35px;
-  width: 35px;
-
-  @media (max-width: 1170px) {
-    padding-left: 24px;
-  }
-}
 
 .navbar-list {
   display: flex;

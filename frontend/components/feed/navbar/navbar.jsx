@@ -98,10 +98,8 @@ class Navbar extends React.Component {
 
   searchResults() {
     return (
-      <div className='search-modal-background' onClick={this.toggleSearchOff}>
-        <div className='search-modal-child' onClick={e => e.stopPropagation()}>
-          {this.state.searchInput.length === 0 ? this.noInput() : null}
-        </div>
+      <div className='search-modal-child' onClick={e => e.stopPropagation()}>
+        {this.state.searchInput.length === 0 ? this.noInput() : null}
       </div>
     )
   }
@@ -111,7 +109,6 @@ class Navbar extends React.Component {
   
     return (
       <div id="navbar-container" onClick={this.state.searchActive ? this.toggleSearchOff : null}>
-        {this.state.searchActive ? this.searchResults() : null}
         <div className="navbar-content">
 
         <div className="navbar-left">
@@ -132,8 +129,9 @@ class Navbar extends React.Component {
               onChange={this.update("searchInput")} 
               onClick={() => this.toggleSearchOn()} 
               placeholder="Search" 
-            />
+              />
           </div>
+          {this.state.searchActive ? <div className='search-modal-background'>{this.searchResults()}</div> : null}
         </div>
 
 
