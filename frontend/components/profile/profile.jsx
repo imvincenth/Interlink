@@ -109,7 +109,7 @@ class Profile extends React.Component {
     return (
       <div className="profile-background">
         <div className="profile-container">
-          <NavbarContainer page="profile" />
+        <NavbarContainer page="profile" />
 
           <div className="profile-main-wrapper">
             <div className="profile-main">

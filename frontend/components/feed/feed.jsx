@@ -16,10 +16,7 @@ class Feed extends React.Component {
     const { currentUser } = this.props;
     return (
       <div className="feed-page">
-        <div>
-          <header>
-            <NavbarContainer page="feed" />
-          </header>
+          <NavbarContainer page="feed" />
 
           <div className="content-body">
             <div className="content-main-wrapper">
@@ -36,7 +33,6 @@ class Feed extends React.Component {
 
               </div>
             </div>
-          </div>
 
         </div>
         

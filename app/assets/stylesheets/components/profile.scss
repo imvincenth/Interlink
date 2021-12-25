@@ -1,43 +1,32 @@
 .profile-background {
   background-color: #F3F2EF;
-  width: 100vw;  
+  width: 100vw;
   height: 100vh;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: -1;
-  margin: auto;
-  overflow: scroll;
+  // margin: auto;
+  overflow: auto;
 }
 
 .profile-container {
-  // display: flex;
-  justify-content: center;
+
 }
 
 .profile-main-wrapper {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  height: calc(100vh - 54px);
 }
 
 .profile-main {
   display: flex;
   flex-direction: column;
-  min-width: 144px;   
-  max-width: 782px;
-  // padding-left: 24px;
-  // margin-right: 24px;
   justify-content: flex-start;
   margin: 0;
 }
-
-// .profile-card-main {
-//   // display: flex;
-//   // justify-content: space-between;
-//   // width: 100%;
-// }
 
 .profile-avatar {
   flex: 1;
@@ -81,7 +70,6 @@
 .profile-info {
   display: flex;
   flex-direction: column;
-  width: 100%;
   justify-content: space-between;
   padding: 6px 12px 6px 12px;
 

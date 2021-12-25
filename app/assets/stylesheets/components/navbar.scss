@@ -28,13 +28,20 @@
 #navbar-container {
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  min-width: 900px;
   width: calc(100vw - 60px);
   top: 0;
   left: 0;
   z-index: 100;
   position: sticky;
+  padding-top: 1px;
   padding-left: 30px;
   padding-right: 30px;
+
+  @media (max-width: 1185px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 .navbar-left {
@@ -59,12 +66,7 @@
 .navbar-search-box {
   display: flex;
   align-items: center;
-  width: 425px;
   color: rgba(0, 0, 0, 0.9);
-}
-
-.navbar-search-box.search-active {
-
 }
 
 .search-icon-box {
@@ -125,22 +127,21 @@
 
 .navbar-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  max-width: 1128px;
   margin: 0 auto;
-  width: 1128px;
+  // width: 100%;
   min-height: 100%;
 }
 
 
 .navbar-list {
   display: flex;
+  justify-content: flex-end;
   font-size: 12px;
   background: transparent;
   font-weight: 400;
-  
-  @media (max-width: 769px) {
-    min-width: 70px;
-  }
 }
 
 .navbar-item {
@@ -201,13 +202,12 @@ a > h5 {
 
 .navbar-item-bar {
   position: relative;
-  top: 6px;
+  top: 6.5px;
   border-bottom: 2px solid transparent;
 }
 
 .navbar-item-bar.active {
   border-bottom: 2px solid black;
-  
 }
 
 .navbar-icon-profile {
