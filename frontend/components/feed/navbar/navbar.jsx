@@ -109,6 +109,7 @@ class Navbar extends React.Component {
   
     return (
       <div id="navbar-container" onClick={this.state.searchActive ? this.toggleSearchOff : null}>
+        {this.state.searchActive ? <div className='search-modal-background'></div> : null}
         <div className="navbar-content">
 
         <div className="navbar-left">
@@ -122,16 +123,18 @@ class Navbar extends React.Component {
             <div className={this.state.searchActive ? "search-icon-box search-active" : "search-icon-box"}>
               <img className="search-icon" src={window.searchIconURL} alt="search icon" />
             </div>
-            <input 
-              className={this.state.searchActive ? "search-bar search-active" : "search-bar"} 
-              type="text" 
-              value={this.state.searchInput} 
-              onChange={this.update("searchInput")} 
-              onClick={() => this.toggleSearchOn()} 
-              placeholder="Search" 
-              />
+            <div className='search-box-wmodal'>
+              <input 
+                className={this.state.searchActive ? "search-bar search-active" : "search-bar"} 
+                type="text" 
+                value={this.state.searchInput} 
+                onChange={this.update("searchInput")} 
+                onClick={this.state.searchActive ? e => e.stopPropagation() : this.toggleSearchOn} 
+                placeholder="Search" 
+                />
+            {this.state.searchActive ? this.searchResults() : null}
+            </div>
           </div>
-          {this.state.searchActive ? <div className='search-modal-background'>{this.searchResults()}</div> : null}
         </div>
 
 

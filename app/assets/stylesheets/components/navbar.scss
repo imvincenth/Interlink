@@ -9,20 +9,26 @@
 }
 
 .search-modal-child {
-  position: relative;
-  top: -7px;
+  position: absolute;
   margin: auto;
+  top: 43.5px;
   border-radius: 0.3rem;
   border: 1px solid rgba(0, 0, 0, 0.09);
   box-shadow: 0 0 0 0.05rem rgba(0, 0, 0, 0.08);
   width: 452px;
   background-color: white;
+  z-index: 999;
+}
+
+.search-box-wmodal {
+  display: flex;
+  flex-direction: column;
 }
 
 #navbar-container {
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  width: 100vw;
+  width: calc(100vw - 60px);
   top: 0;
   left: 0;
   z-index: 100;
@@ -53,21 +59,18 @@
 .navbar-search-box {
   display: flex;
   align-items: center;
-  width: 280px;
+  width: 425px;
   color: rgba(0, 0, 0, 0.9);
-  transition-delay: 0s;
-  transition: width 334ms ease-in-out;
 }
 
 .navbar-search-box.search-active {
-  width: 385px;
-  transition-delay: 0s;
-  transition: width 334ms ease-in-out;
+
 }
 
 .search-icon-box {
   position: absolute;
-  vertical-align: middle;
+  vertical-align: baseline;
+  pointer-events: none;
   padding: 7px;
   padding-left: 16px;
   transition-delay: 0s;
@@ -78,8 +81,7 @@
   margin: 1px;
   padding-left: 15px;
   padding-right: 15px;
-  transition-delay: 0s;
-  transition: width 334ms ease-in-out;
+  
 }
 
 .search-icon {
@@ -88,7 +90,7 @@
 }
 
 .search-bar {
-  width: 100%;
+  width: 232px;
   height: 32px;
   background-color: rgb(238, 243, 248);
   border-style: none;
@@ -100,6 +102,8 @@
   font-weight: 400;
   border-radius: 0.25rem;
   color: rgba(0, 0, 0, 0.9);
+  transition-delay: 0s;
+  transition: width 334ms ease-in-out;
 }
 
 .search-bar:hover,
@@ -108,22 +112,23 @@
 }
 
 .search-bar.search-active {
-  height: 34px;
+  width: 330px;
+  height: 30px;
   font-size: 16px;
   line-height: 28px;
   padding-left: 46px;
-  color: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(0, 0, 0, 0.03);
   border-radius: 0.3rem;
+  transition-delay: 0s;
+  transition: width 334ms ease-in-out;
 }
 
 .navbar-content {
   display: flex;
   align-items: center;
   margin: 0 auto;
-  max-width: 1128px;
-  justify-content: space-between;
-  margin-bottom: -2px;
+  width: 1128px;
+  min-height: 100%;
 }
 
 
@@ -132,7 +137,6 @@
   font-size: 12px;
   background: transparent;
   font-weight: 400;
-  padding-right: 50px;
   
   @media (max-width: 769px) {
     min-width: 70px;
@@ -145,8 +149,7 @@
   flex-direction: column;
   justify-content: center;
   min-width: 80px;
-  padding-top: 3px;
-  height: 50px;
+  height: 52px;
   cursor: pointer;
   position: relative;
 }
@@ -192,12 +195,13 @@ a:hover {
 }
 
 a > h5 {
-  margin-top: 2.5px;
-  margin-bottom: 2.5px;
+  margin-top: 1.5px;
+  // margin-bottom: 5.5px;
 }
 
 .navbar-item-bar {
-  height: 3px;
+  position: relative;
+  top: 6px;
   border-bottom: 2px solid transparent;
 }
 
