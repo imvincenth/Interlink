@@ -46,59 +46,53 @@ class Navbar extends React.Component {
       let usersName = `${clone[userId].first_name} ${clone[userId].last_name}`.toLowerCase();
       if (!this.state.searchInput.toLowerCase().includes(usersName)) delete clone[userId];
     }
-    if (this.state.searchInput.length === 0) console.log("empty drdrdrdr");
-    console.log(clone);
-    // this.setState({ results: clone });
-  }
-
-  searchResultCard(user) {
-    return (
-      <div>
-        <img className="search-icon" src={window.searchIconURL} alt="search icon" />
-        {user.first_name.toLowerCase()} {user.last_name.toLowerCase()} + {user.headline}
-      </div>
-    )
+    this.setState({ results: clone });
+    console.log(this.state.results);
   }
 
   noInput() {
     return (
-      <div>
-        <div className='noinput-search-suggestion'>
+      <div className='noinput-search-suggestion-box'>
+
+        <div className='noinput-search-head'>
           Try searching for
         </div>
-        <div className='noinput-search-suggestion'>
-          <img src={window.searchIconURL} alt="magnifying glass" />
-          Frodo Baggins
-        </div>
-        <div className='noinput-search-suggestion'>
-          <img src={window.searchIconURL} alt="magnifying glass" />
-          Samwise Gamgee
-        </div>
-        <div className='noinput-search-suggestion'>
-          <img src={window.searchIconURL} alt="magnifying glass" />
-          Gandalf the Grey
-        </div>
-        <div className='noinput-search-suggestion'>
-          <img src={window.searchIconURL} alt="magnifying glass" />
-          Aragorn II Elessar
-        </div>
-        <div className='noinput-search-suggestion'>
-          <img src={window.searchIconURL} alt="magnifying glass" />
-          Legolas Greenleaf
-        </div>
-        <div className='noinput-search-suggestion'>
-          <img src={window.searchIconURL} alt="magnifying glass" />
-          Gimli son of Gloin
-        </div>
+
+        <ul className='noinput-search-list'>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=frodo+baggins")}>
+            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <p className='noinput-list-text'>Frodo Baggins</p>
+          </li>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=samwise+gamgee")}>
+            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <p className='noinput-list-text'>Samwise Gamgee</p>
+          </li>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=aragorn+ii+elessar")}>
+            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <p className='noinput-list-text'>Aragorn II Elessar</p>
+          </li>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=legolas+greenleaf")}>
+            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <p className='noinput-list-text'>Legolas Greenleaf</p>
+          </li>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=gimli+son+of+gloin")}>
+            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <p className='noinput-list-text'>Gimli son of Gloin</p>
+          </li>
+        </ul>
+
       </div>
     )
   }
 
-  noResults() {
-    return (
-      <div>
+  yesInput() {
+    this.filterResults();
+    if (Object.values(this.state.results).length === 0) return <div>See all results</div>;
 
-      </div>
+    return (
+      <ul>
+        {this.state.results.map(user => <li>{user.first_name} {user.last_name}</li>)}
+      </ul>
     )
   }
 
@@ -106,6 +100,7 @@ class Navbar extends React.Component {
     return (
       <div className='search-modal-child' onClick={e => e.stopPropagation()}>
         {this.state.searchInput.length === 0 ? this.noInput() : null}
+        
       </div>
     )
   }

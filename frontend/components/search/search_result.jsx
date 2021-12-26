@@ -9,7 +9,7 @@ export default class Search extends Component {
 
   render() {
     return (
-      <div>
+      <div className='result-page'>
         <NavbarContainer page="results" />
         
       </div>

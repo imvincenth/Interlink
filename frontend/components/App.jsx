@@ -27,7 +27,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/posts/:postId" component={PostPageContainer} />
       <AuthRoute exact path="/users/:userId" component={ProfileContainer} />
-      <AuthRoute exact path="/results/" component={SearchResultContainer} />
+      <AuthRoute path="/search/results" component={SearchResultContainer} />
       <AuthRoute exact path="/network" component={NetworkContainer} />
       <AuthRoute exact path="/feed" component={FeedContainer} />
       <LogoutRoute exact path="/login" component={LogInFormContainer} />
