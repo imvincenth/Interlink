@@ -17,6 +17,10 @@ class Navbar extends React.Component {
     this.toggleSearchOff = this.toggleSearchOff.bind(this);
   }
 
+  componentDidMount() {
+    this.filterResults();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.users !== this.props.users) {
       this.filterResults();
@@ -46,8 +50,8 @@ class Navbar extends React.Component {
       let usersName = `${clone[userId].first_name} ${clone[userId].last_name}`.toLowerCase();
       if (!this.state.searchInput.toLowerCase().includes(usersName)) delete clone[userId];
     }
+    console.log(clone);
     this.setState({ results: clone });
-    console.log(this.state.results);
   }
 
   noInput() {
@@ -86,7 +90,6 @@ class Navbar extends React.Component {
   }
 
   yesInput() {
-    this.filterResults();
     if (Object.values(this.state.results).length === 0) return <div>See all results</div>;
 
     return (
@@ -99,7 +102,7 @@ class Navbar extends React.Component {
   searchResults() {
     return (
       <div className='search-modal-child' onClick={e => e.stopPropagation()}>
-        {this.state.searchInput.length === 0 ? this.noInput() : null}
+        {this.state.searchInput.length === 0 ? this.noInput() : this.yesInput()}
         
       </div>
     )
