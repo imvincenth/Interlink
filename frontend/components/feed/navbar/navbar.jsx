@@ -51,23 +51,23 @@ class Navbar extends React.Component {
 
         <ul className='noinput-search-list'>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=frodo+baggins")}>
-            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>frodo baggins</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=samwise+gamgee")}>
-            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>samwise gamgee</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=aragorn+ii+elessar")}>
-            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>aragorn ii elessar</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=legolas+greenleaf")}>
-            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>legolas greenleaf</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=gimli+son+of+gloin")}>
-            <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
+            <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>gimli son of gloin</p>
           </li>
         </ul>
@@ -80,14 +80,44 @@ class Navbar extends React.Component {
     if (Object.values(this.state.results).length === 0) return <div>See all results</div>;
 
     return (
-      <div>
+      <div className='search-suggestion-box'>
         {Object.values(this.state.results).map((user, i) => 
           <div key={`${i}` + user.first_name} className='search-suggestion' onClick={() => this.props.history.push(`/users/${user.id}`)}>
-            {user.first_name} {user.last_name} {user.headline}
+            <div className={i === 0 ? 'search-suggestion-content-one' : 'search-suggestion-content'}>
+              {user.profilePictureUrl ? <img className='suggestion-propic' src={user.profilePictureUrl} /> : <img className='suggestion-propic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
+              <span className='suggestion-text-box'>
+                {this.matchUsername(`${user.first_name} ${user.last_name}`)}
+                <span className='suggestion-headline'> • {user.headline}</span>
+              </span>
+              <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
+            </div>
           </div>
         )}
-        <div>See all results</div>
+        <div className='all-results-box' onClick={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput}`)}>
+          <div className='all-results-content'>
+            <span className='all-results-text'>See all results</span>
+          </div>
+        </div>
       </div>
+    )
+  }
+
+  matchUsername(name) {
+    let firstHalf = "";
+    let secondHalf = "";
+
+    for (let i = 0; i < name.length; i++) {
+      if (this.state.searchInput[i] && name[i].toLowerCase() === this.state.searchInput[i].toLowerCase()) {
+        firstHalf += name[i].toLowerCase();
+      } else {
+        secondHalf += name[i].toLowerCase();
+      }
+    }
+
+    return (
+      <span className='suggestion-name'>
+        {firstHalf}<strong>{secondHalf}</strong>
+      </span>
     )
   }
 
@@ -95,7 +125,6 @@ class Navbar extends React.Component {
     return (
       <div className='search-modal-child' onClick={e => e.stopPropagation()}>
         {this.state.searchInput.length === 0 ? this.noInput() : this.yesInput()}
-        
       </div>
     )
   }
