@@ -147,16 +147,36 @@ class Navbar extends React.Component {
   profileMenu() {
     return (
       <div className='profile-menu' onClick={e => e.stopPropagation()}>
-        
+        <header className='profile-menu-header'>
+          <Link to={`/users/${this.props.currentUser.id}`}>
+            <div className='profile-namecard'>
+              <div className='profile-menu-pic-box'>
+                {this.props.currentUser.profilePictureUrl ? 
+                <img className='profile-menu-pic' src={this.props.currentUser.profilePictureUrl} /> : 
+                <img className='profile-menu-pic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" alt="profile picture" />
+                }
+              </div>
+              <div className='profile-menu-info'>
+                <div className='profile-menu-name'>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</div>
+                <div className='profile-menu-headline'>{this.props.currentUser.headline}</div>
+              </div>
+            </div>
+          </Link>
+          <Link className='profile-view-profile' to={`/users/${this.props.currentUser.id}`}>View Profile</Link>
+        </header>
+        <h3 className='profile-menu-signout-header'>Leaving RingIn?</h3>
+        <div className='profile-menu-signout' onClick={this.props.logout}>
+          Sign Out
+        </div>
       </div>
     )
   }
 
   render() {
     if (!this.props.currentUser) return null;
-  
+
     return (
-      <div id="navbar-container" onClick={this.state.searchActive ? this.toggleModalOff : null}>
+      <div id="navbar-container" onClick={this.state.searchActive || this.state.profileActive ? this.toggleModalOff : null}>
         {this.state.searchActive ? <div className='search-modal-background' onClick={this.toggleModalOff}></div> : null}
         {this.state.profileActive ? <div className='profile-menu-background' onClick={this.toggleModalOff}></div> : null}
         <div className="navbar-content">
@@ -205,7 +225,7 @@ class Navbar extends React.Component {
             </div>
 
             <div className="navbar-item">
-              <a className="navbar-link transparent" href="https://github.com/imvincenth">
+              <a className="navbar-link transparent" href="https://github.com/imvincenth" target="_blank" rel="noopener noreferrer">
                 <img className="navbar-icon" src={window.githubURL} alt="feed url" />
                 <h5>GitHub</h5>
                 <div className="navbar-item-bar"></div>
@@ -213,9 +233,17 @@ class Navbar extends React.Component {
             </div>
 
             <div className="navbar-item">
-              <a className="navbar-link transparent" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/">
+              <a className="navbar-link transparent" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/" target="_blank" rel="noopener noreferrer">
                 <img className="navbar-icon" src={window.linkedinURL} alt="feed url" />
                 <h5>LinkedIn</h5>
+                <div className="navbar-item-bar"></div>
+              </a>
+            </div>
+
+            <div className="navbar-item">
+              <a className="navbar-link transparent" href="https://angel.co/u/vincent-hsu-7" target="_blank" rel="noopener noreferrer">
+                <img className="navbar-icon" src={window.angellistURL} alt="feed url" />
+                <h5>AngelList</h5>
                 <div className="navbar-item-bar"></div>
               </a>
             </div>
