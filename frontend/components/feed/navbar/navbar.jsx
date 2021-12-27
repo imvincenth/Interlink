@@ -50,23 +50,23 @@ class Navbar extends React.Component {
         </div>
 
         <ul className='noinput-search-list'>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=frodo+baggins")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=frodo baggins")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>frodo baggins</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=samwise+gamgee")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=samwise gamgee")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>samwise gamgee</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=aragorn+ii+elessar")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=aragorn ii elessar")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>aragorn ii elessar</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=legolas+greenleaf")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=legolas greenleaf")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>legolas greenleaf</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=gimli+son+of+gloin")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=gimli son of gloin")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>gimli son of gloin</p>
           </li>
@@ -77,7 +77,15 @@ class Navbar extends React.Component {
   }
 
   yesInput() {
-    if (Object.values(this.state.results).length === 0) return <div>See all results</div>;
+    if (Object.values(this.state.results).length === 0) {
+      return (
+        <div className='no-results-box' onClick={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput.trim()}`)}>
+          <div className='no-results-content'>
+            <span className='no-results-text'>See all results</span>
+          </div>
+        </div>
+      )
+    }
 
     return (
       <div className='search-suggestion-box'>

@@ -158,6 +158,30 @@
   color: rgb(10, 102, 194);
 }
 
+.no-results-box {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 2px 2px 2px 2px;
+}
+
+.no-results-content {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.no-results-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  padding-left: 8px;
+  padding-top: 8px;
+  color: rgb(10, 102, 194);
+}
+
 #navbar-container {
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
