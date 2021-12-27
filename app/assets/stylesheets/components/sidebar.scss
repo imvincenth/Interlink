@@ -57,6 +57,14 @@
   margin-bottom: 5px;
 }
 
+.sidebar-name-link {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.sidebar-name-link:hover {
+  text-decoration: underline;
+}
+
 .sidebar-email {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.6);

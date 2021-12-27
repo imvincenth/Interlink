@@ -2,6 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    }
+
+  }
+
+
 
   render() {
     if (!this.props.currentUser) return null;
@@ -14,7 +24,7 @@ class Sidebar extends React.Component {
           <div className="sidebar-avatar">
             {this.props.currentUser.profilePictureUrl ? <img src={this.props.currentUser.profilePictureUrl} alt="user profile picture" /> : <img src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" alt="default profile picture" />}
           </div>
-          <h2 className="sidebar-name">{this.props.currentUser.first_name} {this.props.currentUser.last_name}</h2>
+          <h2 className="sidebar-name"><Link className='sidebar-name-link' to={`/users/${this.props.currentUser.id}`}>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</Link></h2>
           <h4 className="sidebar-email">{this.props.currentUser.headline}</h4>
         </div>
 
@@ -38,7 +48,6 @@ class Sidebar extends React.Component {
           <div className="sidebar-tail-bottom">
             <p className="sidebar-tail-header-text">Discover more</p>
           </div>
-          <button className="header-button" onClick={this.props.logout}>Log Out</button>
         </div>
 
       </div>
