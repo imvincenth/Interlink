@@ -10,11 +10,14 @@ class Navbar extends React.Component {
 
       searchInput: "",
       searchActive: false, 
-      results: {}
+      results: {},
+
+      profileActive: false
     }
 
     this.toggleSearchOn = this.toggleSearchOn.bind(this);
-    this.toggleSearchOff = this.toggleSearchOff.bind(this);
+    this.toggleModalOff = this.toggleModalOff.bind(this);
+    this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
   }
 
   update(field) {
@@ -34,11 +37,15 @@ class Navbar extends React.Component {
   }
 
   toggleSearchOn() {
-    this.setState({ searchActive: true });
+    this.setState({ searchActive: true, profileActive: false });
   }
 
-  toggleSearchOff() {
-    this.setState({ searchActive: false });
+  toggleModalOff() {
+    this.setState({ searchActive: false, profileActive: false });
+  }
+
+  toggleProfileMenu() {
+    this.setState({ searchActive: false, profileActive: !this.state.profileActive });
   }
 
   noInput() {
@@ -137,12 +144,21 @@ class Navbar extends React.Component {
     )
   }
 
+  profileMenu() {
+    return (
+      <div className='profile-menu' onClick={e => e.stopPropagation()}>
+        
+      </div>
+    )
+  }
+
   render() {
     if (!this.props.currentUser) return null;
   
     return (
-      <div id="navbar-container" onClick={this.state.searchActive ? this.toggleSearchOff : null}>
-        {this.state.searchActive ? <div className='search-modal-background'></div> : null}
+      <div id="navbar-container" onClick={this.state.searchActive ? this.toggleModalOff : null}>
+        {this.state.searchActive ? <div className='search-modal-background' onClick={this.toggleModalOff}></div> : null}
+        {this.state.profileActive ? <div className='profile-menu-background' onClick={this.toggleModalOff}></div> : null}
         <div className="navbar-content">
 
           <div className="navbar-left">
@@ -156,7 +172,7 @@ class Navbar extends React.Component {
               <div className={this.state.searchActive ? "search-icon-box search-active" : "search-icon-box"}>
                 <img className="search-icon" src={window.searchIconURL} alt="search icon" />
               </div>
-              <div className='search-box-wmodal'>
+              <div>
                 <input 
                   className={this.state.searchActive ? "search-bar search-active" : "search-bar"} 
                   type="text" 
@@ -164,7 +180,7 @@ class Navbar extends React.Component {
                   onChange={this.update("searchInput")} 
                   onClick={this.state.searchActive ? e => e.stopPropagation() : this.toggleSearchOn} 
                   placeholder="Search" 
-                  />
+                />
               {this.state.searchActive ? this.searchResults() : null}
               </div>
             </div>
@@ -205,11 +221,14 @@ class Navbar extends React.Component {
             </div>
 
             <div className="navbar-item">
-              <Link className={this.props.page === "profile" ? "navbar-link active" : "navbar-link"} to={`/users/${this.props.currentUser.id}`}>
-                {this.props.currentUser.profilePictureUrl ? <img className="navbar-icon-profile" src={this.props.currentUser.profilePictureUrl} alt="feed url" /> : <img className="navbar-icon-profile" src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" alt="default profile picture" />}
-                <h5 className={this.props.page === "profile" ? "navbar-me active" : "navbar-link transparent"}>Me<img className="navbar-arrow" src={window.downarrowURL} alt="down arrow" /></h5>
-                <div className={this.props.page === "profile" ? "navbar-item-bar active" : "navbar-item-bar"}></div>
-              </Link>
+              <div className='navbar-profile-item'>
+                <div className={this.props.page === "profile" ? "navbar-link active" : "navbar-link"} onClick={this.toggleProfileMenu}>
+                  {this.props.currentUser.profilePictureUrl ? <img className="navbar-icon-profile" src={this.props.currentUser.profilePictureUrl} alt="feed url" /> : <img className="navbar-icon-profile" src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" alt="default profile picture" />}
+                  <h5 className={this.props.page === "profile" ? "navbar-me active" : "navbar-link transparent"}>Me<img className="navbar-arrow" src={window.downarrowURL} alt="down arrow" /></h5>
+                  <div className={this.props.page === "profile" ? "navbar-item-bar active" : "navbar-item-bar"}></div>
+                </div>
+              </div>
+              {this.state.profileActive ? this.profileMenu() : null}
             </div>
           </div>
 

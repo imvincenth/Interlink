@@ -8,6 +8,16 @@
   z-index: 9;
 }
 
+.profile-menu-background {
+  position: fixed;
+  top: 52px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: transparent;
+  z-index: 9;
+}
+
 .search-modal-child {
   position: absolute;
   margin: auto;
@@ -372,6 +382,10 @@ a > h5 {
   height: 22px;
   border-radius: 50%;
   opacity: 1;
+}
+
+.profile-menu {
+  
 }
 
 .transparent {
