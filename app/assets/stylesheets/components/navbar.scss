@@ -71,6 +71,15 @@
   cursor: pointer;
 }
 
+.search-suggestion {
+
+}
+
+.search-suggestion:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
 #navbar-container {
   background-color: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);

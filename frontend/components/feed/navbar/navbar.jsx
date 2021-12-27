@@ -17,18 +17,20 @@ class Navbar extends React.Component {
     this.toggleSearchOff = this.toggleSearchOff.bind(this);
   }
 
-  componentDidMount() {
-    this.filterResults();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.users !== this.props.users) {
-      this.filterResults();
-    }
-  }
-
   update(field) {
-    return e => this.setState({ [field]: e.currentTarget.value, searchActive: true });
+    // Search result filtering
+    let clone = Object.assign({}, this.props.users);
+    for (const userId in clone) {
+      // Removing the current user from results
+      if (Number(userId) === this.props.currentUser.id) delete clone[userId];
+    }
+    for (const userId in clone) {
+      // Removing users whose name does not include the search input
+      let usersName = `${clone[userId].first_name} ${clone[userId].last_name}`.toLowerCase();
+      if (!usersName.toLowerCase().includes(this.state.searchInput)) delete clone[userId];
+    }
+
+    return e => this.setState({ [field]: e.currentTarget.value, searchActive: true, results: clone });
   }
 
   toggleSearchOn() {
@@ -37,21 +39,6 @@ class Navbar extends React.Component {
 
   toggleSearchOff() {
     this.setState({ searchActive: false });
-  }
-
-  filterResults() {
-    let clone = {...this.props.users};
-    for (const userId in clone) {
-      // Removing the current user from results
-      if (Number(userId) === this.props.currentUser.id) delete clone[userId];
-    }
-    for (const userId in clone) {
-      // Removing users whose name does not include the search input
-      let usersName = `${clone[userId].first_name} ${clone[userId].last_name}`.toLowerCase();
-      if (!this.state.searchInput.toLowerCase().includes(usersName)) delete clone[userId];
-    }
-    console.log(clone);
-    this.setState({ results: clone });
   }
 
   noInput() {
@@ -65,23 +52,23 @@ class Navbar extends React.Component {
         <ul className='noinput-search-list'>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=frodo+baggins")}>
             <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
-            <p className='noinput-list-text'>Frodo Baggins</p>
+            <p className='noinput-list-text'>frodo baggins</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=samwise+gamgee")}>
             <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
-            <p className='noinput-list-text'>Samwise Gamgee</p>
+            <p className='noinput-list-text'>samwise gamgee</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=aragorn+ii+elessar")}>
             <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
-            <p className='noinput-list-text'>Aragorn II Elessar</p>
+            <p className='noinput-list-text'>aragorn ii elessar</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=legolas+greenleaf")}>
             <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
-            <p className='noinput-list-text'>Legolas Greenleaf</p>
+            <p className='noinput-list-text'>legolas greenleaf</p>
           </li>
           <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=gimli+son+of+gloin")}>
             <img className='noinput-icon' src={window.searchIconURL} alt="magnifying glass" />
-            <p className='noinput-list-text'>Gimli son of Gloin</p>
+            <p className='noinput-list-text'>gimli son of gloin</p>
           </li>
         </ul>
 
@@ -93,9 +80,14 @@ class Navbar extends React.Component {
     if (Object.values(this.state.results).length === 0) return <div>See all results</div>;
 
     return (
-      <ul>
-        {this.state.results.map(user => <li>{user.first_name} {user.last_name}</li>)}
-      </ul>
+      <div>
+        {Object.values(this.state.results).map((user, i) => 
+          <div key={`${i}` + user.first_name} className='search-suggestion' onClick={() => this.props.history.push(`/users/${user.id}`)}>
+            {user.first_name} {user.last_name} {user.headline}
+          </div>
+        )}
+        <div>See all results</div>
+      </div>
     )
   }
 
