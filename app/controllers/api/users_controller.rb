@@ -55,7 +55,8 @@ class Api::UsersController < ApplicationController
       :country_region, 
       :city_district, 
       :password,
-      :profile_picture
+      :profile_picture,
+      :banner
     )
   end
 
