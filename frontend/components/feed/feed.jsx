@@ -21,16 +21,22 @@ class Feed extends React.Component {
 
           <div className="content-body">
             <div className="content-main-wrapper">
+
               <SidebarContainer />
 
               <div className="feed">
-                {this.props.openCreatePostModal}
+
+                <div className='post-modal-box'>
+                  {this.props.openCreatePostModal}
+                </div>
+                
                 <h1 id="construction">UNDER CONSTRUCTION</h1>
                 {this.props.posts.reverse().map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
 
-              </div>
-            </div>
 
+              </div>
+
+            </div>
         </div>
         
         
