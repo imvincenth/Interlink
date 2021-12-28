@@ -5,8 +5,8 @@
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   height: fit-content;
-  width: 30%;
-  flex: 20%;
+  width: 223px;
+  // flex: 20%;
   overflow: hidden;
   text-align: center;
   transition-delay: 0s;
@@ -53,9 +53,9 @@
   border-radius: 50%;
   border: 2px solid rgb(255, 255, 255);
   box-shadow: none;
-  width: 72px;
-  height: 72px;
-  margin: -55px auto 12px;
+  width: 68px;
+  height: 68px;
+  margin: -52px auto 12px;
   overflow-wrap: break-word;
   word-break: break-word;
   text-align: center;
@@ -86,41 +86,78 @@
 }
 
 .sidebar-info-wrap {
-  padding: 6px 12px 6px 12px;
-  background-color: white;
-}
-
-// .sidebar-info-wrap:hover {
-//   background: rgba(0, 0, 0, 0.05);
-// }
-
-.sidebar-info-item {
-  display: flex;
-  justify-content: space-between;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 24px;
+  margin: 12px 0 12px 0;
   text-align: center;
-  height: 28px;
 }
 
-.sidebar-connection {
-  font-size: 12px;
+.sidebar-info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-connection-item {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+}
+
+.sidebar-connection-item:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-connections-wrap {
+  font-size: 16px;
   font-weight: 600;
+  color: rgb(10, 102, 194);
+}
+
+.sidebar-connections {
+  display: flex;
+  align-items: baseline;
+  text-align: center;
+  padding: 4px 12px 4px 12px;
+}
+
+.sidebar-connections-left {
+  text-align: left;
+}
+
+.sidebar-connections-left-top {
+  text-align: left;
+  font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
-  text-decoration: none;
-  margin-block-start: 14px;
+  line-height: 16px;
+  margin-right: 8px;
 }
 
-.sidebar-number {
-  font-size: 12px;
-  font-weight: bold;
-  color: #0a66c2;
-  margin-block-start: 14px;
-}
-
-.sidebar-growyournetwork {
-  font-size: 12px;
+.sidebar-connections-left-top > span {
   font-weight: 600;
-  color: black;
-  text-decoration: none;
-  position: relative;
-  margin-block-start: 1px;
 }
+
+.sidebar-connections-left-bottom {
+  text-align: left;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 16px;
+}
+
+.sidebar-connections-left-bottom > span {
+  font-weight: 600;
+}
+
+.sidebar-connections-right {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  color: rgb(10, 102, 194);
+  font-size: 12px;
+  line-height: 16px;
+  text-align: right;
+}
+
+.sidebar-connections-right > span {
+  font-weight: 600;
+}
+

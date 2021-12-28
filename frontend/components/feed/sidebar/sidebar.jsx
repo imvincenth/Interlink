@@ -49,15 +49,35 @@ class Sidebar extends React.Component {
 
           </div>
 
+          {/* Information Wrap */}
           <div className='sidebar-info-wrap'>
-            <div className='sidebar-info-item'>
-              <p className='sidebar-connection'>Connections</p>
-              <p className='sidebar-number'>{this.state.connections.length}</p>
-            </div>
-            <div className='sidebar-info-item'>
-              <p className='sidebar-growyournetwork'>Grow your network</p>
+            <div className='sidebar-info-content'>
+              <div className='sidebar-connection-item'>
+                <Link className='sidebar-connections-wrap' to={`/network`}>
+                  <div className='sidebar-connections'>
+                    {/* Left Half */}
+                    <div className='sidebar-connections-left'>
+                      <div className='sidebar-connections-left-top'>
+                        <span>Connections</span>
+                      </div>
+                      <div className='sidebar-connections-left-bottom'>
+                        <span>Grow your network</span>
+                      </div>
+                    </div>
+                    {/* Right Half */}
+                    <div className='sidebar-connections-right'>
+                      <span>{this.props.connections.length}</span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
+
+        </div>
+
+        <div className='sidebar-footer'>
+          hello darkness
         </div>
       </div>
     )
