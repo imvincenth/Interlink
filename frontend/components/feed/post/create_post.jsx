@@ -8,7 +8,9 @@ export default class Post extends Component {
       user_id: this.props.currentUser.id,
       body: "",
 
+      photoUrl: "",
       photo: null,
+      videoUrl: "",
       video: null
     }
     
@@ -36,7 +38,16 @@ export default class Post extends Component {
   }
 
   handlePhoto(e) {
-    this.setState({ photo: e.currentTarget.files[0] });
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+    reader.onloadend = () =>
+      this.setState({ photoUrl: reader.result, photo: file });
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ imageUrl: "", imageFile: null });
+    }
   }
 
   update(field) {
