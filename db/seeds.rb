@@ -22,10 +22,11 @@ demo_user = User.create(
   city_district: 'The Shire'
 )
 
+fellowshipbanner = open('https://ringin-dev.s3.us-west-1.amazonaws.com/fellowshipbanner.jpg')
+demo_user.banner.attach(io: fellowshipbanner, filename: 'fellowshipbanner.jpg')
+
 gandalf = open('https://ringin-dev.s3.us-west-1.amazonaws.com/gandalf.png')
 demo_user.profile_picture.attach(io: gandalf, filename: 'gandalf.png')
-gandalfbanner = open()
-demo_user.banner.attach(io: gandalfbanner, filename: )
 
 demo_exp = Experience.create(
   user_id: 1,
