@@ -14,27 +14,35 @@ function Modal(props) {
     return null;
   }
   let component;
+  let classType;
   
   switch (props.modal) {
     case 'createExperience':
+      classType = 'create-experience';
       component = <CreateExperienceFormContainer />;
       break;
     case 'editExperience':
+      classType = 'edit-experience';
       component = <EditExperienceFormContainer />;
       break;
     case 'createEducation':
+      classType = 'create-education';
       component = <CreateEducationFormContainer />;
       break;
     case 'editEducation':
+      classType = 'edit-education';
       component = <EditEducationFormContainer />;
       break;
     case 'createPost':
+      classType = 'create-post';
       component = <CreatePostFormContainer />;
       break;
     case 'editPost':
+      classType = 'edit-post';
       component = <EditPostFormContainer />;
       break;
     case 'editProfile':
+      classType = 'edit-profile';
       component = <EditProfileFormContainer />;
       break;
     default:

@@ -8,7 +8,6 @@ class Feed extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
     this.props.fetchPosts();
-    // this.props.fetchConnections(this.props.currentUser.id);
   }
 
   render() {
@@ -27,7 +26,21 @@ class Feed extends React.Component {
               <div className="feed">
 
                 <div className='post-modal-box'>
-                  {this.props.openCreatePostModal}
+                  <div className='post-modal-main'>
+                    <Link className='post-modal-main-picture-box' to={`/users/${this.props.currentUser.id}`}>
+                      {this.props.currentUser.profilePictureUrl ? 
+                        <img className='post-modal-propic' src={this.props.currentUser.profilePictureUrl} alt="profile picture" /> : 
+                        <img className='post-modal-propic' src='https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x' alt="profile picture" />
+                      }
+                    </Link>
+                    {this.props.openCreatePostModal}
+                  </div>
+
+                  <div className='post-modal-options-wrap'>
+                    <button className='post-option'><img className='post-option-icon' src={window.postPhotoURL}/><span className='post-option-text'>Photo</span></button>
+                    <button className='post-option'><img className='post-option-icon' src={window.postVideoURL}/><span className='post-option-text'>Video</span></button>
+                    <button className='post-option'><img className='post-option-icon' src={window.postAwsURL}/><span className='post-option-text'>About AWS</span></button>
+                  </div>
                 </div>
                 
                 <h1 id="construction">UNDER CONSTRUCTION</h1>

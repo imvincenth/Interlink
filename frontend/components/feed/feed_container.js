@@ -21,8 +21,8 @@ const mDTP = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
   fetchConnections: userId => dispatch(fetchConnections(userId)),
   openCreatePostModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('createPost'))}>
-      Start a post
+    <button className="open-post-modal" onClick={() => dispatch(openModal('createPost'))}>
+      <span className='start-a-post'>Start a post</span>
     </button>
   )
 });
