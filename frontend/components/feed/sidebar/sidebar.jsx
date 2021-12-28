@@ -45,7 +45,11 @@ class Sidebar extends React.Component {
               </div>
             }
             
-            <p className='sidebar-headline'>{this.props.currentUser.headline}</p>
+            {this.props.currentUser.profilePictureUrl ? 
+              <p className='sidebar-headline'>{this.props.currentUser.headline}</p> : 
+              <Link className='sidebar-headline-alt' to={`/users/${this.props.currentUser.id}`}>Add a photo</Link>
+            }
+            
 
           </div>
 
