@@ -77,7 +77,11 @@ class Sidebar extends React.Component {
         </div>
 
         <div className='sidebar-footer'>
-          hello darkness
+          <div className='sidebar-footer-wrap'>
+            <a className='sidebar-footer-item' href='https://imvincenth.github.io/Layout-Trainer/' target="_blank" rel="noopener noreferrer">Keyboard Layout Trainer</a>
+            <a className='sidebar-footer-item' href='https://pantry-chef-mern.herokuapp.com/#/' target="_blank" rel="noopener noreferrer">Recipe Search Application</a>
+            <a className='sidebar-footer-end' href='https://github.com/imvincenth?tab=repositories' target="_blank" rel="noopener noreferrer">Discover more of my projects</a>
+          </div>
         </div>
       </div>
     )
