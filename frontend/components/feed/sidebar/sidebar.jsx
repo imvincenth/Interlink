@@ -22,13 +22,20 @@ class Sidebar extends React.Component {
       <div className='sidebar'>
         <div className='sidebar-container'> 
           <div className='sidebar-header'>
+            {/* Banner */}
             <div className='sidebar-banner'>
-              
+              {this.props.currentUser.bannerUrl ? 
+              <img className='sidebar-banner-img' src={this.props.currentUser.bannerUrl} alt='sidebar banner' /> : 
+              <img className='sidebar-banner-img' src='https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq' alt='sidebar banner' />
+              }
             </div>
-            <img src='https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq' alt='sidebar banner' />
+
+            {/* Avatar */}
             <div className='sidebar-avatar'>
               {this.props.currentUser.profilePictureUrl ? <img src={this.props.currentUser.profilePictureUrl} alt='user profile picture' /> : <img src='https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x' alt='default profile picture' />}
             </div>
+
+
             <h2 className='sidebar-name'><Link className='sidebar-name-link' to={`/users/${this.props.currentUser.id}`}>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</Link></h2>
             <h4 className='sidebar-email'>{this.props.currentUser.headline}</h4>
           </div>
