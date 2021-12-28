@@ -31,10 +31,10 @@ class Sidebar extends React.Component {
             </div>
 
             {/* Avatar */}
-            <div>
+            <div className='avatar-container'>
               {this.props.currentUser.profilePictureUrl ? 
                 <img className='sidebar-avatar' src={this.props.currentUser.profilePictureUrl} alt='user profile picture' /> : 
-                <img src='https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x' alt='default profile picture' />
+                <img className='no-sidebar-avatar' src='https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x' alt='default profile picture' />
               }
             </div>
 
