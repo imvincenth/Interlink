@@ -14,7 +14,6 @@ const mSTP = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
   comments: Object.values(state.entities.comments),
   reactions: Object.values(state.entities.reactions),
-  // errors: Object.values(state.errors.posts),
   postId: ownProps.match.params.postId,
   post: state.entities.posts
 });
