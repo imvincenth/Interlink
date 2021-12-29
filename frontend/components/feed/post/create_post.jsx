@@ -86,13 +86,60 @@ export default class Post extends Component {
   }
 
   render() {
+
+    const textArea = document.querySelector('textarea')
+    const textRowCount = textArea ? textArea.value.split("\n").length : 0
+    const rows = textRowCount + 1
+
     return (
       <form onSubmit={this.handleSubmit}>
+        {/* Header */}
         <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
         <div className='post-modal-header'>
           <h2 className='post-modal-header-text'>Create a post</h2>
         </div>
-        <input type="text" value={this.state.body} onChange={this.update("body")} />
+
+        {/* Content */}
+        <div className='post-modal-content'>
+
+          <div className='post-modal-content-header'>
+            <div className='post-modal-content-top'>
+              {this.props.currentUser.profilePictureUrl ? 
+                <img className='post-modal-avatar' src={this.props.currentUser.profilePictureUrl} alt='user profile picture' /> : 
+                <img className='post-modal-avatar' src='https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x' alt='default profile picture' />
+              }
+              <div className='post-modal-name-box'>
+                <div className='post-modal-name'>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</div>
+                <div className='post-modal-spaceholder'></div>
+              </div>
+            </div>
+
+            <div>
+              <div className='post-modal-content-bottom'>
+                <textarea 
+                  className='post-modal-content-editor' 
+                  value={this.state.body} 
+                  onChange={this.update("body")} 
+                  rows={rows}
+                  placeholder='What do you want to talk about?'
+                >
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div className='post-modal-submit-wrap'>
+          {/* Left */}
+          <div className='post-modal-submit-options'>
+            
+          </div>
+
+          {/* Right */}
+
+        </div>
+
         <input type="submit" value="Post" onSubmit={this.handleSubmit} />
         <label htmlFor="post-image">Photo</label>
         <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
