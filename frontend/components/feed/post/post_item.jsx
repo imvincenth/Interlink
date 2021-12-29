@@ -151,6 +151,7 @@ export default class Post extends Component {
     return (
       <div>
         {this.props.currentUser.first_name} {this.props.currentUser.last_name}:post: {post.body}
+        {post.photoUrl ? <img src={post.photoUrl} /> : null}
         <button className="open-modal" onClick={() => this.props.openEditPostModal(post)}>
           <img src={window.vectorURL} alt="pen" />
         </button>

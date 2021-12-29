@@ -11,11 +11,15 @@ export default class Post extends Component {
       photoUrl: "",
       photo: null,
       videoUrl: "",
-      video: null
+      video: null,
+
+      photoErrors: "",
+      videoErrors: ""
     }
     
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePhoto = this.handlePhoto.bind(this);
+    this.handleVideo = this.handleVideo.bind(this);
   }
 
   handleSubmit(e) {
@@ -43,10 +47,35 @@ export default class Post extends Component {
     reader.onloadend = () =>
       this.setState({ photoUrl: reader.result, photo: file });
 
+    if (file.size > 5242880) {
+      this.setState({
+        photoErrors: "Please attach a photo that is less than 5MB."
+      });
+    }
+
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      this.setState({ imageUrl: "", imageFile: null });
+      this.setState({ photoUrl: "", photo: null });
+    }
+  }
+
+  handleVideo(e) {
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+    reader.onloadend = () =>
+      this.setState({ videoUrl: reader.result, video: file });
+
+    if (file.size > 10485760) {
+      this.setState({
+        videoErrors: "Please attach a video that is less than 10MB."
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ videoUrl: "", video: null });
     }
   }
 

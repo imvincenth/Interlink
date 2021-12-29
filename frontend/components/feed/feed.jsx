@@ -9,22 +9,39 @@ class Feed extends React.Component {
     super(props);
 
     this.state = {
+      postPhotoActive: false,
+      postVideoActive: false,
       awsInfoActive: false
     }
-
   }
-
+  
   componentDidMount() {
     this.props.fetchUsers();
     this.props.fetchPosts();
   }
 
+  postPhoto() {
+    return (
+      <div>
+
+      </div>
+    )
+  }
+
+  postVideo() {
+    return (
+      <div>
+
+      </div>
+    )
+  }
+
   awsInfo() {
     return (
-      <div className='aws-info-background' onClick={() => this.setState({ awsInfoActive: false })}>
+      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
         <div className='aws-info-child' onClick={e => e.stopPropagation()}>
           <h1>About AWS Free Tier</h1>
-          <h2>Due to the restictions of the free tier, photo and video files will be limited under 10MB and 25MB respectively.</h2>
+          <h2>Due to the restictions of the free tier, photo and video files will be limited under 5MB and 10MB respectively.</h2>
           <p>"As part of the AWS Free Tier, you can get started with Amazon S3 for free. 
           Upon sign-up, new AWS customers receive 5GB of Amazon S3 storage in the S3 Standard storage class; 
           20,000 GET Requests; 2,000 PUT, COPY, POST, or LIST Requests; and 100 GB of Data Transfer Out each month.
@@ -73,8 +90,8 @@ class Feed extends React.Component {
                 </div>
                 
                 <h1 id="construction">UNDER CONSTRUCTION</h1>
-                {this.props.posts.reverse().map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />)}
-
+                
+                {this.props.posts.map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />).reverse()}
 
               </div>
 
