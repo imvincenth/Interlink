@@ -1,8 +1,79 @@
 .create-post-modal-child {
-  position: absolute;
-  top: 32px;
-  left: 50%;
-  width: 744px;
-  transform: translate(-50%, -50%);
   background-color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 auto;
+  max-height: 676px;
+  width: 552px;
+  max-width: 552px;
+  overflow: auto;
+  transition-delay: 0s;
+  transition-duration: 0.083s;
+  transition-property: box-shadow;
+  transition-timing-function: ease;
+  position: relative;
+  top: 32px;
 }
+
+.post-modal-x-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 20px;
+  width: 40px;
+  min-width: 0px;
+  max-width: 480px;
+  min-height: 32px;
+  overflow: hidden;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 12px;
+  right: 12px;
+  text-align: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.post-modal-x-box:hover,
+.post-modal-x-box:active {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.post-modal-x {
+  width: 35px;
+}
+
+.post-modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.9);
+  display: block;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  overflow-wrap: break-word;
+  padding: 16px 48px 16px 24px;
+}
+
+.post-modal-header-text {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+

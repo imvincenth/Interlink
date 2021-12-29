@@ -87,16 +87,18 @@ export default class Post extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" value="Post" onSubmit={this.handleSubmit} />
-          <label htmlFor="post-image">Photo</label>
-          <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
-          <label htmlFor="post-video">Video</label>
-          <input id="post-video" type="file" accept="video/*" onChange={this.handlePhoto} style={{display: "none"}}  />
-        </form>
-      </div>
+      <form onSubmit={this.handleSubmit}>
+        <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
+        <div className='post-modal-header'>
+          <h2 className='post-modal-header-text'>Create a post</h2>
+        </div>
+        <input type="text" value={this.state.body} onChange={this.update("body")} />
+        <input type="submit" value="Post" onSubmit={this.handleSubmit} />
+        <label htmlFor="post-image">Photo</label>
+        <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+        <label htmlFor="post-video">Video</label>
+        <input id="post-video" type="file" accept="video/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+      </form>
     )
   }
 }
