@@ -114,11 +114,22 @@ class Feed extends React.Component {
     return (
       <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
         <div className='post-photo-modal-child' onClick={e => e.stopPropagation()}>
-          <h2>Select your photo</h2>
+
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="post-photo-modal1">Select an image to share</label>
-            <input id="post-photo-modal1" type="file" accept="image/*" style={{visibility:"hidden", width: "0", height: "0"}} />
-            <input type="submit" onSubmit={this.handleSubmit} />
+
+            {/* Header */}
+            <button className="post-modal-x-box" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}><img className="post-modal-x" src={window.xURL} /></button>
+            <div className='post-modal-header'>
+              <h2 className='post-modal-header-text'>Post your photo</h2>
+            </div>
+
+            {/* Content */}
+            <div className='post-modal-alt-content-box'>
+              <label className='post-modal-alt-input' htmlFor="post-photo-modal-alt">Select an image to share</label>
+              <input id="post-photo-modal-alt" type="file" accept="image/*" onChange={this.handlePhoto} style={{ display: "none" }} />
+              <input type="submit" onSubmit={this.handleSubmit} />
+            </div>
+
           </form>
         </div>
       </div>
@@ -129,11 +140,21 @@ class Feed extends React.Component {
     return (
       <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
         <div className='post-video-modal-child' onClick={e => e.stopPropagation()}>
-          <h2>Select your video</h2>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="post-video-modal1">Select a video to share</label>
-            <input id="post-video-modal1" type="file" accept="video/*" style={{visibility:"hidden", width: "0", height: "0"}} />
-            <input type="submit" onSubmit={this.handleSubmit} />
+            
+            {/* Header */}
+            <button className="post-modal-x-box" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}><img className="post-modal-x" src={window.xURL} /></button>
+            <div className='post-modal-header'>
+              <h2 className='post-modal-header-text'>Post your video</h2>
+            </div>
+
+            {/* Content */}
+            <div className='post-modal-alt-content-box'>
+              <label className='post-modal-alt-input' htmlFor="post-video-modal-alt">Select a video to share</label>
+              <input id="post-photo-modal-alt" type="file" accept="video/*" onChange={this.handleVideo} style={{ display: "none" }} />
+              <input type="submit" onSubmit={this.handleSubmit} />
+            </div>
+
           </form>
         </div>
       </div>

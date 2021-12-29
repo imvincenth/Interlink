@@ -88,7 +88,7 @@ export default class Post extends Component {
   renderSubmit() {
     if (this.state.body.length === 0) {
       return (
-        <input className='post-modal-cant-submit' type="submit" value="Post" disabled="true" />
+        <input className='post-modal-cant-submit' type="submit" value="Post" disabled={true} />
       )
     } else {
       return (
