@@ -11,8 +11,23 @@ class Feed extends React.Component {
     this.state = {
       postPhotoActive: false,
       postVideoActive: false,
-      awsInfoActive: false
+      awsInfoActive: false,
+
+      user_id: this.props.currentUser.id,
+      body: "",
+
+      photoUrl: "",
+      photo: null,
+      videoUrl: "",
+      video: null,
+
+      photoErrors: "",
+      videoErrors: ""
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePhoto = this.handlePhoto.bind(this);
+    this.handleVideo = this.handleVideo.bind(this);
   }
   
   componentDidMount() {
@@ -20,20 +35,62 @@ class Feed extends React.Component {
     this.props.fetchPosts();
   }
 
-  postPhoto() {
-    return (
-      <div>
+  handleSubmit(e) {
+    e.preventDefault();
 
-      </div>
-    )
+    const formData = new FormData();
+    formData.append('post[user_id]', this.state.user_id);
+    formData.append('post[body]', this.state.body);
+
+    if (this.state.photo) {
+      formData.append('post[photo]', this.state.photo);
+    }
+
+    if(this.state.video) {
+      formData.append('post[video]', this.state.video);
+    }
+
+    this.props.createPost(formData)
+      .then(() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false }));
   }
 
-  postVideo() {
-    return (
-      <div>
 
-      </div>
-    )
+  handlePhoto(e) {
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+    reader.onloadend = () =>
+      this.setState({ photoUrl: reader.result, photo: file, body: file.name });
+
+    if (file.size > 5242880) {
+      this.setState({
+        photoErrors: "Please attach a photo that is less than 5MB."
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ photoUrl: "", photo: null, body: "" });
+    }
+  }
+
+  handleVideo(e) {
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+    reader.onloadend = () =>
+      this.setState({ videoUrl: reader.result, video: file, body: file.name });
+
+    if (file.size > 10485760) {
+      this.setState({
+        videoErrors: "Please attach a video that is less than 10MB."
+      });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ videoUrl: "", video: null, body: "" });
+    }
   }
 
   awsInfo() {
@@ -48,6 +105,36 @@ class Feed extends React.Component {
           Your usage for the free tier is calculated each month across all AWS Regions except the AWS GovCloud Region 
           and automatically applied to your bill; unused monthly usage will not roll over. Restrictions apply; 
           see offer terms for more details."</p>
+        </div>
+      </div>
+    )
+  }
+
+  postPhoto() {
+    return (
+      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
+        <div className='post-photo-modal-child' onClick={e => e.stopPropagation()}>
+          <h2>Select your photo</h2>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="post-photo-modal1">Select an image to share</label>
+            <input id="post-photo-modal1" type="file" accept="image/*" style={{visibility:"hidden", width: "0", height: "0"}} />
+            <input type="submit" onSubmit={this.handleSubmit} />
+          </form>
+        </div>
+      </div>
+    )
+  }
+
+  postVideo() {
+    return (
+      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
+        <div className='post-video-modal-child' onClick={e => e.stopPropagation()}>
+          <h2>Select your video</h2>
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="post-video-modal1">Select a video to share</label>
+            <input id="post-video-modal1" type="file" accept="video/*" style={{visibility:"hidden", width: "0", height: "0"}} />
+            <input type="submit" onSubmit={this.handleSubmit} />
+          </form>
         </div>
       </div>
     )
@@ -68,6 +155,8 @@ class Feed extends React.Component {
 
               <div className="feed">
               {this.state.awsInfoActive ? this.awsInfo() : null}
+              {this.state.postPhotoActive ? this.postPhoto() : null}
+              {this.state.postVideoActive ? this.postVideo() : null}
 
                 <div className='post-modal-box'>
 
@@ -82,9 +171,20 @@ class Feed extends React.Component {
                   </div>
 
                   <div className='post-modal-options-wrap'>
-                    <button className='post-option'><img className='post-option-icon' src={window.postPhotoURL}/><span className='post-option-text'>Photo</span></button>
-                    <button className='post-option'><img className='post-option-icon' src={window.postVideoURL}/><span className='post-option-text'>Video</span></button>
-                    <button onClick={() => this.setState({ awsInfoActive: true })} className='post-option'><img className='post-option-icon' src={window.postAwsURL}/><span className='post-option-text'>About AWS</span></button>
+                    {/* Photo */}
+                    <label htmlFor="post-photo-modal" onClick={() => this.setState({ postPhotoActive: true })} className='post-option'><img className='post-option-icon' src={window.postPhotoURL}/>
+                      <span className='post-option-text'>Photo</span>
+                      <input id="post-photo-modal" type="file" onChange={this.handlePhoto} accept="image/*" style={{display: "none"}} />
+                    </label>
+                    {/* Video */}
+                    <label htmlFor="post-video-modal" onClick={() => this.setState({ postVideoActive: true })} className='post-option'><img className='post-option-icon' src={window.postVideoURL}/>
+                      <span className='post-option-text'>Video</span>
+                      <input id="post-video-modal" type="file" onChange={this.handleVideo} accept="video/*" style={{display: "none"}} />
+                    </label>
+                    {/* About AWS */}
+                    <label onClick={() => this.setState({ awsInfoActive: true })} className='post-option'><img className='post-option-icon' src={window.postAwsURL}/>
+                      <span className='post-option-text'>About AWS</span>
+                    </label>
                   </div>
 
                 </div>

@@ -91,7 +91,10 @@ export default class Post extends Component {
         <form onSubmit={this.handleSubmit}>
           <input type="text" value={this.state.body} onChange={this.update("body")} />
           <input type="submit" value="Post" onSubmit={this.handleSubmit} />
-          <input type="file" onChange={this.handlePhoto} />
+          <label htmlFor="post-image">Photo</label>
+          <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+          <label htmlFor="post-video">Video</label>
+          <input id="post-video" type="file" accept="video/*" onChange={this.handlePhoto} style={{display: "none"}}  />
         </form>
       </div>
     )
