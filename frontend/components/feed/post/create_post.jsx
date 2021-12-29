@@ -85,6 +85,18 @@ export default class Post extends Component {
     }
   }
 
+  renderSubmit() {
+    if (this.state.body.length === 0) {
+      return (
+        <input className='post-modal-cant-submit' type="submit" value="Post" disabled="true" />
+      )
+    } else {
+      return (
+        <input className='post-modal-can-submit' type="submit" value="Post" onSubmit={this.handleSubmit} />
+      )
+    }
+  }
+
   render() {
 
     const textArea = document.querySelector('textarea')
@@ -133,18 +145,16 @@ export default class Post extends Component {
         <div className='post-modal-submit-wrap'>
           {/* Left */}
           <div className='post-modal-submit-options'>
-            
+            <label className='post-modal-submit-option' htmlFor="post-image"><img className='post-modal-submit-icon' src={window.submitPhotoURL} /></label>
+            <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+            <label className='post-modal-submit-option' htmlFor="post-video"><img className='post-modal-submit-icon' src={window.submitVideoURL} /></label>
+            <input id="post-video" type="file" accept="video/*" onChange={this.handlePhoto} style={{display: "none"}}  />
           </div>
 
           {/* Right */}
-
+          {this.renderSubmit()}
         </div>
 
-        <input type="submit" value="Post" onSubmit={this.handleSubmit} />
-        <label htmlFor="post-image">Photo</label>
-        <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
-        <label htmlFor="post-video">Video</label>
-        <input id="post-video" type="file" accept="video/*" onChange={this.handlePhoto} style={{display: "none"}}  />
       </form>
     )
   }
