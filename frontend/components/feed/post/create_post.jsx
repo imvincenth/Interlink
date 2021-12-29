@@ -97,6 +97,96 @@ export default class Post extends Component {
     }
   }
 
+  renderPhotoSelect() {
+    return (
+      <div className='post-modal-alt-content-box'>
+        <label className='post-modal-alt-input' htmlFor="post-photo-modal-alt">Select an image to share</label>
+        <input id="post-photo-modal-alt" type="file" accept="image/*" onChange={this.handlePhoto} style={{ display: "none" }} />
+      </div>
+    )
+  }
+
+  renderVideoSelect() {
+    return (
+      <div className='post-modal-alt-content-box'>
+        <label className='post-modal-alt-input' htmlFor="post-video-modal-alt">Select a video to share</label>
+        <input id="post-photo-modal-alt" type="file" accept="video/*" onChange={this.handleVideo} style={{ display: "none" }} />
+      </div>
+    )
+  }
+
+  renderDone() {
+    if (this.state.photoUrl || this.state.videoUrl) {
+      return (
+        <input className='post-modal-alt-done' type="submit" onSubmit={this.handleSubmit} value="Done" />
+      )
+    } else {
+      return (
+        <button className='post-modal-alt-not-done' disabled={true}>Done</button>
+      )
+    }
+  }
+
+  postPhoto() {
+    return (
+      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}>
+        <div className='post-photo-modal-child' onClick={e => e.stopPropagation()}>
+
+          <form onSubmit={this.handleSubmit}>
+
+            {/* Header */}
+            <button className="post-modal-x-box" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}><img className="post-modal-x" src={window.xURL} /></button>
+            <div className='post-modal-header'>
+              <h2 className='post-modal-header-text'>Post your photo</h2>
+            </div>
+
+            {/* Content */}
+            {this.state.photoUrl ? <img className='post-modal-photo' src={this.state.photoUrl} /> : this.renderPhotoSelect()}
+            
+
+            {/* Footer */}
+            <div className='post-modal-footer-alt'>
+              <div className='post-modal-footer-content'>
+                <button className='post-modal-alt-cancel' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}>Cancel</button>
+                {this.renderDone()}
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    )
+  }
+
+  postVideo() {
+    return (
+      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}>
+        <div className='post-video-modal-child' onClick={e => e.stopPropagation()}>
+          <form onSubmit={this.handleSubmit}>
+            
+            {/* Header */}
+            <button className="post-modal-x-box" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}><img className="post-modal-x" src={window.xURL} /></button>
+            <div className='post-modal-header'>
+              <h2 className='post-modal-header-text'>Post your video</h2>
+            </div>
+
+            {/* Content */}
+            {this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : this.renderVideoSelect()}
+
+            {/* Footer */}
+            <div className='post-modal-footer-alt'>
+              <div className='post-modal-footer-content'>
+                <button className='post-modal-alt-cancel' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}>Cancel</button>
+                {this.renderDone()}
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    )
+  }
+
   render() {
 
     const textArea = document.querySelector('textarea')
