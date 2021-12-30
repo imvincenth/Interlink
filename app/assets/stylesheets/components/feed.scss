@@ -34,7 +34,7 @@
 .aws-info-child {
   background-color: white;
   border-radius: 8px;
-  border: 1px solid #ff9900;
+  border: 2px solid #ff9900;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   color: rgba(0, 0, 0, 0.9);
   display: flex;
@@ -255,4 +255,20 @@
 .aws-modal-logo {
   height: 300px;
   width: 300px;
+}
+
+.feed-breakline {
+  background-color: rgba(0, 0, 0, 0.08);
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  color: rgb(128, 128, 128);
+  flex-grow: 1;
+  margin-bottom: 7.5px;
+  margin-top: 7.5px;
+  height: 1px;
+  font-size: 13.3333px;
+  font-weight: 400;
+  display: block;
+  width: 540px;
 }

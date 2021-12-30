@@ -259,7 +259,9 @@ class Feed extends React.Component {
                   </div>
 
                 </div>
-                
+
+                <hr className='feed-breakline' />
+              
                 <h1 id="construction">UNDER CONSTRUCTION</h1>
                 
                 {this.props.posts.map(post => <PostItemContainer key={`${post.created_at}+${post.body}`} post={post} />).reverse()}
