@@ -276,6 +276,7 @@
 // Post Item
 .post-item {
   background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: visible;
   position: relative;
@@ -328,10 +329,83 @@
   color: rgb(10, 102, 194);
   flex-basis: 0px;
   flex-grow: 1;
-  margin-right: 8px;
+  margin-left: 8px;
   overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
+.post-header-name {
+  display: block;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  // vertical-align: top;
+}
+
+.post-header-headline {
+  display: block;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-header-timestamp {
+  display: block;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-header-edit-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  background-position: 0% 0%;
+  border-radius: 50%;
+  border: none;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 20px;  
+  height: 32px;
+  min-height: 24px;
+  width: 32px;
+  min-width: none;
+  touch-action: manipulation;
+  text-align: center;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  text-align: right;
+}
+
+.post-header-edit-button:hover,
+.post-header-edit-button:active {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.post-header-edit {
+  display: block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  margin: none;
+}

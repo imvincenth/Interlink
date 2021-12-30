@@ -152,15 +152,15 @@ export default class Post extends Component {
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
-        return `${Math.round((rawDate/(1000 * 60)))} minute(s) ago`;
+        return `${Math.round((rawDate/(1000 * 60)))}m`;
       case (rawDate >= 3600000 && rawDate < 86400000): // less than a day
-        return `${Math.floor(rawDate / (1000 * 60 * 60))} hour(s) ago`; 
+        return `${Math.floor(rawDate / (1000 * 60 * 60))}h`; 
       case (rawDate >= 86400000 && rawDate < 604800000): // less than a week
-        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24))} day(s) ago`;
+        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24))}d`;
       case (rawDate >= 604800000 && rawDate < 2419200000): // less than a month
-        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7))} weeks(s) ago`;
+        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7))}w`;
       case (rawDate >= 2419200000): // months
-        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7 * 4))} month(s) ago`;
+        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7 * 4))}m`;
     }
   }
 
@@ -175,13 +175,13 @@ export default class Post extends Component {
               <img className='post-header-photo' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />
             }
             <div className='post-header-text'>
-              <span>{this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}</span>
-              <span>{this.props.users[this.props.post.user_id].headline}</span>
-              <span>{this.convertDate()}</span>
+              <span className='post-header-name'>{this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}</span>
+              <span className='post-header-headline'>{this.props.users[this.props.post.user_id].headline}</span>
+              <span className='post-header-timestamp'>{this.convertDate()}</span>
             </div>
           </Link>
 
-          <button></button>
+          <button className='post-header-edit-button'><img className='post-header-edit' src={window.postEditURL} /></button>
         </div>
 
 
