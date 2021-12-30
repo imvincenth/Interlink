@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import CommentItemContainer from './comment/comment_item_container';
 
 export default class Post extends Component {
@@ -146,20 +147,41 @@ export default class Post extends Component {
     )
   }
 
+  convertDate() {
+    const rawDate = Date.now() - new Date(this.props.post.created_at);
+
+    switch(true) {
+      case (rawDate < 3600000): // less than an hour
+        return `${Math.round((rawDate/(1000 * 60)))} minute(s) ago`;
+      case (rawDate >= 3600000 && rawDate < 86400000): // less than a day
+        return `${Math.floor(rawDate / (1000 * 60 * 60))} hour(s) ago`; 
+      case (rawDate >= 86400000 && rawDate < 604800000): // less than a week
+        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24))} day(s) ago`;
+      case (rawDate >= 604800000 && rawDate < 2419200000): // less than a month
+        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7))} weeks(s) ago`;
+      case (rawDate >= 2419200000): // months
+        return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7 * 4))} month(s) ago`;
+    }
+  }
+
   render() {
     const { post } = this.props;
     return (
-      <div>
+      <div className='post-item'>
         <div className='post-header-wrap'>
-          <Link className='post-header-link'>
+          <Link className='post-header-link' to={`/users/${this.props.post.user_id}`}>
             {this.props.users[this.props.post.user_id].profilePictureUrl ? 
               <img className='post-header-photo' src={this.props.users[this.props.post.user_id].profilePictureUrl} /> : 
               <img className='post-header-photo' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />
             }
             <div className='post-header-text'>
-              
+              <span>{this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}</span>
+              <span>{this.props.users[this.props.post.user_id].headline}</span>
+              <span>{this.convertDate()}</span>
             </div>
           </Link>
+
+          <button></button>
         </div>
 
 
