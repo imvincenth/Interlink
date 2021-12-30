@@ -272,3 +272,35 @@
   display: block;
   width: 540px;
 }
+
+// Post Item
+.post-header-wrap {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.9);
+  flex-wrap: nowrap;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 8px;
+  padding: 12px 40px 0px 16px;
+}
+
+.post-header-link {
+  background-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  color: rgb(10, 102, 194);
+  display: flex;
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-right: 12px;
+  overflow: hidden;
+  text-decoration: rgb(10, 102, 194);
+  touch-action: manipulation;
+}
+
+.post-header-photo {
+  
+}

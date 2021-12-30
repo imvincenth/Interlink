@@ -150,6 +150,19 @@ export default class Post extends Component {
     const { post } = this.props;
     return (
       <div>
+        <div className='post-header-wrap'>
+          <Link className='post-header-link'>
+            {this.props.users[this.props.post.user_id].profilePictureUrl ? 
+              <img className='post-header-photo' src={this.props.users[this.props.post.user_id].profilePictureUrl} /> : 
+              <img className='post-header-photo' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />
+            }
+            <div className='post-header-text'>
+              
+            </div>
+          </Link>
+        </div>
+
+
         {this.props.currentUser.first_name} {this.props.currentUser.last_name}:post: {post.body}
         {post.photoUrl ? <img src={post.photoUrl} /> : null}
         <button className="open-modal" onClick={() => this.props.openEditPostModal(post)}>
