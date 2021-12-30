@@ -32,12 +32,27 @@
 }
 
 .aws-info-child {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 744px;
-  transform: translate(-50%, -50%);
   background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ff9900;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 auto;
+  max-height: 676px;
+  width: 552px;
+  max-width: 552px;
+  overflow: auto;
+  transition-delay: 0s;
+  transition-duration: 0.083s;
+  transition-property: box-shadow;
+  transition-timing-function: ease;
+  position: relative;
+  top: 32px;
 }
 
 .post-photo-modal-child {
@@ -217,4 +232,27 @@
   text-align: center;
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.6);
+}
+
+.aws-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 8px 10px 16px;
+}
+
+.aws-modal-header {
+  font-weight: bolder;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.aws-modal-text {
+  margin-bottom: 15px;
+}
+
+.aws-modal-logo {
+  height: 300px;
+  width: 300px;
 }

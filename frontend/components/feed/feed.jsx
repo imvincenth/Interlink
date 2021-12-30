@@ -97,14 +97,25 @@ class Feed extends React.Component {
     return (
       <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
         <div className='aws-info-child' onClick={e => e.stopPropagation()}>
-          <h1>About AWS Free Tier</h1>
-          <h2>Due to the restictions of the free tier, photo and video files will be limited under 5MB and 10MB respectively.</h2>
-          <p>"As part of the AWS Free Tier, you can get started with Amazon S3 for free. 
-          Upon sign-up, new AWS customers receive 5GB of Amazon S3 storage in the S3 Standard storage class; 
-          20,000 GET Requests; 2,000 PUT, COPY, POST, or LIST Requests; and 100 GB of Data Transfer Out each month.
-          Your usage for the free tier is calculated each month across all AWS Regions except the AWS GovCloud Region 
-          and automatically applied to your bill; unused monthly usage will not roll over. Restrictions apply; 
-          see offer terms for more details."</p>
+
+          {/* Header */}
+          <div className='post-modal-header'>
+            <h2 className='post-modal-header-text'>About AWS Free Tier</h2>
+          </div>
+
+          {/* Content */}
+          <div className='aws-modal-content'>
+            <p className='aws-modal-header'>Due to the restictions of the free tier, photo and video files will be limited under 5MB and 10MB respectively.</p>
+            <p className='aws-modal-text'><em>"As part of the AWS Free Tier, you can get started with Amazon S3 for free. 
+            Upon sign-up, new AWS customers receive 5GB of Amazon S3 storage in the S3 Standard storage class; 
+            20,000 GET Requests; 2,000 PUT, COPY, POST, or LIST Requests; and 100 GB of Data Transfer Out each month.
+            Your usage for the free tier is calculated each month across all AWS Regions except the AWS GovCloud Region 
+            and automatically applied to your bill; unused monthly usage will not roll over. Restrictions apply; 
+            see offer terms for more details."</em></p>
+
+            <img className='aws-modal-logo' src={window.awsURL} alt="aws logo" />
+          </div>
+
         </div>
       </div>
     )
