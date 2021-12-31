@@ -13,6 +13,8 @@ class Feed extends React.Component {
       postVideoActive: false,
       awsInfoActive: false,
 
+      normalModeActive: false,
+
       user_id: this.props.currentUser.id,
       body: "",
 
@@ -93,6 +95,60 @@ class Feed extends React.Component {
     }
   }
 
+  renderNormalContent(rows) {
+    return (
+      <div className='post-modal-content'>
+
+        <div className='post-modal-content-header'>
+          <div className='post-modal-content-top'>
+            {this.props.currentUser.profilePictureUrl ? 
+              <img className='post-modal-avatar' src={this.props.currentUser.profilePictureUrl} alt='user profile picture' /> : 
+              <img className='post-modal-avatar' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" alt='default profile picture' />
+            }
+            <div className='post-modal-name-box'>
+              <div className='post-modal-name'>{this.props.currentUser.first_name} {this.props.currentUser.last_name}</div>
+              <div className='post-modal-spaceholder'></div>
+            </div>
+          </div>
+
+          <div>
+            <div className='post-modal-content-bottom'>
+              <textarea 
+                className='post-modal-content-editor' 
+                value={this.state.body} 
+                onChange={this.update("body")} 
+                rows={rows}
+                placeholder='What do you want to talk about?'
+                autoFocus
+              >
+              </textarea>
+            </div>
+          </div>
+
+          <div className='post-modal-media-wrap' style={!this.state.photoUrl && !this.state.videoUrl ? {display: "none"} : null}>
+
+            <div className='post-modal-media-options' onClick={() => this.setState({ photoUrl: "", photo: null, postPhotoActive: false, videoUrl: "", video: null, postVideoActive: false })}>
+              <button type="button" className='post-modal-media-edit' >
+                <img className='post-modal-media-icon' src={window.mediaEditURL} />
+              </button>
+              <button type="button" className='post-modal-media-cancel' onClick={() => this.setState({ photoUrl: "", photo: null, videoUrl: "", video: null })}>
+                <img className='post-modal-media-icon' src={window.mediaXURL} />
+              </button>
+            </div>
+
+            <div className='post-modal-media'>
+              {this.state.photoUrl ? <img className='post-modal-photo-confirm' src={this.state.photoUrl} alt="submitted photo" /> : null}
+              {this.state.videoUrl ? <video className='post-modal-video-confirm' src={this.state.videoUrl} controls alt="submitted video" /> : null}
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+    )
+  }
+
   awsInfo() {
     return (
       <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false })}>
@@ -140,9 +196,12 @@ class Feed extends React.Component {
   }
 
   renderDone() {
+    let modalCheck;
+
     if (this.state.photoUrl || this.state.videoUrl) {
       return (
-        <input className='post-modal-alt-done' type="submit" onSubmit={this.handleSubmit} value="Done" />
+        // <input className='post-modal-alt-done' type="submit" onSubmit={this.handleSubmit} value="Done" />
+        <button type='button' className='post-modal-alt-done' onClick={() => this.setState({ normalModeActive: true, postPhotoActive: false, postVideoActive: false })}>Done</button>
       )
     } else {
       return (
@@ -151,22 +210,44 @@ class Feed extends React.Component {
     }
   }
 
+  renderSubmit() {
+    if (this.state.body.length === 0) {
+      return (
+        <input className='post-modal-cant-submit' type="submit" value="Post" disabled={true} />
+      )
+    } else {
+      return (
+        <input className='post-modal-can-submit' type="submit" value="Post" onSubmit={this.handleSubmit} />
+      )
+    }
+  }
+
   postPhoto() {
+    let modalHeader;
+    if (!this.state.postPhotoActive && !this.state.postVideoActive) modalHeader = "Create a post"
+    if (this.state.postPhotoActive && !this.state.postVideoActive) modalHeader = "Post your photo"
+    if (!this.state.postPhotoActive && this.state.postVideoActive) modalHeader = "Post your video"
+
+    const textArea = document.querySelector('textarea')
+    const textRowCount = textArea ? textArea.value.split("\n").length : 0
+    const rows = textRowCount + 1
+
     return (
-      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}>
+      <div className='feed-modal-background' onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}>
         <div className='post-photo-modal-child' onClick={e => e.stopPropagation()}>
 
           <form onSubmit={this.handleSubmit}>
 
             {/* Header */}
-            <button className="post-modal-x-box" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}><img className="post-modal-x" src={window.xURL} /></button>
+            <button className="post-modal-x-box" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null })}><img className="post-modal-x" src={window.xURL} /></button>
             <div className='post-modal-header'>
-              <h2 className='post-modal-header-text'>Post your photo</h2>
+              <h2 className='post-modal-header-text'>{modalHeader}</h2>
             </div>
 
             {/* Content */}
-            {this.state.photoUrl ? <img className='post-modal-photo' src={this.state.photoUrl} /> : this.renderPhotoSelect()}
-            
+            {this.state.photoUrl && !this.state.normalModeActive ? <img className='post-modal-photo' src={this.state.photoUrl} /> : null}
+            {!this.state.photoUrl && !this.state.normalModeActive ? this.renderPhotoSelect() : null}
+            {!this.state.photoUrl && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
 
             {/* Footer */}
             <div className='post-modal-footer-alt'>
@@ -176,6 +257,22 @@ class Feed extends React.Component {
               </div>
             </div>
 
+            <div className='post-modal-submit-wrap' style={this.state.postPhotoActive || this.state.postVideoActive ? {display: "none"} : null}>
+              {/* Left */}
+              <div className='post-modal-submit-options'>
+                <label htmlFor="post-image" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: true, postVideoActive: false })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
+                  <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+                </label>
+
+                <label htmlFor="post-video" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: true })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitVideoURL} />
+                  <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}}  />
+                </label>
+              </div>
+
+              {/* Right */}
+              {this.renderSubmit()}
+            </div>
+
           </form>
         </div>
       </div>
@@ -183,26 +280,53 @@ class Feed extends React.Component {
   }
 
   postVideo() {
+    let modalHeader;
+    if (!this.state.postPhotoActive && !this.state.postVideoActive) modalHeader = "Create a post"
+    if (this.state.postPhotoActive && !this.state.postVideoActive) modalHeader = "Post your photo"
+    if (!this.state.postPhotoActive && this.state.postVideoActive) modalHeader = "Post your video"
+
+    const textArea = document.querySelector('textarea')
+    const textRowCount = textArea ? textArea.value.split("\n").length : 0
+    const rows = textRowCount + 1
+
     return (
-      <div className='feed-modal-background' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}>
+      <div className='feed-modal-background' onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}>
         <div className='post-video-modal-child' onClick={e => e.stopPropagation()}>
           <form onSubmit={this.handleSubmit}>
             
             {/* Header */}
-            <button className="post-modal-x-box" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}><img className="post-modal-x" src={window.xURL} /></button>
+            <button className="post-modal-x-box" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}><img className="post-modal-x" src={window.xURL} /></button>
             <div className='post-modal-header'>
-              <h2 className='post-modal-header-text'>Post your video</h2>
+              <h2 className='post-modal-header-text'>{modalHeader}</h2>
             </div>
 
             {/* Content */}
-            {this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : this.renderVideoSelect()}
+            {this.state.videoUrl && !this.state.normalModeActive ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : null}
+            {!this.state.videoUrl && !this.state.normalModeActive ? this.renderVideoSelect() : null}
+            {!this.state.videoUrl && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
 
             {/* Footer */}
-            <div className='post-modal-footer-alt'>
+            <div className='post-modal-footer-alt' style={this.state.normalModeActive ? {display: "none"} : null}>
               <div className='post-modal-footer-content'>
                 <button className='post-modal-alt-cancel' onClick={() => this.setState({ postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null })}>Cancel</button>
                 {this.renderDone()}
               </div>
+            </div>
+
+            <div className='post-modal-submit-wrap' style={this.state.postPhotoActive || this.state.postVideoActive ? {display: "none"} : null}>
+              {/* Left */}
+              <div className='post-modal-submit-options'>
+                <label htmlFor="post-image" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: true, postVideoActive: false })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
+                  <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+                </label>
+
+                <label htmlFor="post-video" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: true })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitVideoURL} />
+                  <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}}  />
+                </label>
+              </div>
+
+              {/* Right */}
+              {this.renderSubmit()}
             </div>
 
           </form>
