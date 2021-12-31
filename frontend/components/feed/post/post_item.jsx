@@ -22,9 +22,12 @@ export default class Post extends Component {
       currentReaction: "",
       editMenuActive: false,
 
-      edited: this.props.post.created_at !== this.props.post.updated_at
+      edited: this.props.post.created_at !== this.props.post.updated_at,
+
+      copySuccess: ""
     }
 
+    this.copyToClipboard = this.copyToClipboard.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.react = this.react.bind(this);
   }
@@ -168,11 +171,27 @@ export default class Post extends Component {
     }
   }
 
+  copyToClipboard() {
+    navigator.clipboard.writeText(`localhost:3000/#/posts/${this.props.post.id}`)
+      .then(() => this.setState({ editMenuActive: false }));
+  }
+
   renderEditMenu() {
     if (this.props.post.user_id === this.props.currentUser.id) {
       return (
         <div className='post-edit-menu-wrap'>
           <ul>
+
+            {/* <li className='post-edit-menu-item' onClick={() => {navigator.clipboard.writeText(`https://ringedin.herokuapp.com/#/posts/${this.props.post.id}`)}}> */}
+            <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
+              <div className='post-edit-menu-item-content'>
+                <img src={window.linkURL} />
+                <div className='post-edit-menu-item-text'>
+                  <h5>Copy link to post</h5>
+                  <p></p>
+                </div>
+              </div>
+            </li>
 
             <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
               <div className='post-edit-menu-item-content'>
@@ -199,7 +218,7 @@ export default class Post extends Component {
       )
     } else {
       return (
-        <div className='psot-edit-menu-wrap'>
+        <div className='post-edit-menu-wrap'>
           <ul>
 
             <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
