@@ -131,7 +131,7 @@ class Feed extends React.Component {
           <div className='post-modal-media-wrap' style={!this.state.photoUrl && !this.state.videoUrl ? {display: "none"} : null}>
 
             <div className='post-modal-media-options'>
-              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ body: "", photoUrl: "", photo: null, videoUrl: "", video: null, normalModeActive: false })}>
+              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ photoUrl: "", photo: null, videoUrl: "", video: null, normalModeActive: false })}>
                 <img className='post-modal-media-icon' src={window.mediaEditURL} />
               </button>
 
@@ -165,7 +165,7 @@ class Feed extends React.Component {
 
           {/* Content */}
           <div className='aws-modal-content'>
-            <p className='aws-modal-header'>Due to the restictions of the free tier, photo and video files will be limited under 5MB and 10MB respectively.</p>
+            <p className='aws-modal-header'>Due to the restictions of AWS free tier, photo and video files will be limited under 5MB and 10MB respectively.</p>
             <p className='aws-modal-text'><em>"As part of the AWS Free Tier, you can get started with Amazon S3 for free. 
             Upon sign-up, new AWS customers receive 5GB of Amazon S3 storage in the S3 Standard storage class; 
             20,000 GET Requests; 2,000 PUT, COPY, POST, or LIST Requests; and 100 GB of Data Transfer Out each month.
@@ -194,7 +194,7 @@ class Feed extends React.Component {
     return (
       <div className='post-modal-alt-content-box'>
         <label className='post-modal-alt-input' htmlFor="post-video-modal-alt">Select a video to share</label>
-        <input id="post-photo-modal-alt" type="file" accept="video/*" onChange={this.handleVideo} style={{ display: "none" }} />
+        <input id="post-video-modal-alt" type="file" accept="video/*" onChange={this.handleVideo} style={{ display: "none" }} />
       </div>
     )
   }
@@ -304,7 +304,7 @@ class Feed extends React.Component {
             {/* Content */}
             {this.state.videoUrl && !this.state.normalModeActive ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : null}
             {!this.state.videoUrl && !this.state.normalModeActive ? this.renderVideoSelect() : null}
-            {!this.state.videoUrl && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
+            {this.state.postVideoActive && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
 
             {/* Footer */}
             <div className='post-modal-footer-alt' style={this.state.normalModeActive ? {display: "none"} : null}>

@@ -178,7 +178,7 @@ export default class Post extends Component {
     return (
       <div className='post-modal-alt-content-box'>
         <label className='post-modal-alt-input' htmlFor="post-video-modal-alt">Select a video to share</label>
-        <input id="post-photo-modal-alt" type="file" accept="video/*" onChange={this.handleVideo} style={{ display: "none" }} />
+        <input id="post-video-modal-alt" type="file" accept="video/*" onChange={this.handleVideo} style={{ display: "none" }} />
       </div>
     )
   }
