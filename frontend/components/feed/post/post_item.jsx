@@ -22,9 +22,7 @@ export default class Post extends Component {
       currentReaction: "",
       editMenuActive: false,
 
-      edited: this.props.post.created_at !== this.props.post.updated_at,
-
-      copySuccess: ""
+      edited: this.props.post.created_at !== this.props.post.updated_at
     }
 
     this.copyToClipboard = this.copyToClipboard.bind(this);
@@ -172,7 +170,8 @@ export default class Post extends Component {
   }
 
   copyToClipboard() {
-    navigator.clipboard.writeText(`localhost:3000/#/posts/${this.props.post.id}`)
+    // navigator.clipboard.writeText(`localhost:3000/#/posts/${this.props.post.id}`)
+    navigator.clipboard.writeText(`https://ringedin.herokuapp.com/#/posts/${this.props.post.id}`)
       .then(() => this.setState({ editMenuActive: false }));
   }
 
@@ -182,7 +181,6 @@ export default class Post extends Component {
         <div className='post-edit-menu-wrap'>
           <ul>
 
-            {/* <li className='post-edit-menu-item' onClick={() => {navigator.clipboard.writeText(`https://ringedin.herokuapp.com/#/posts/${this.props.post.id}`)}}> */}
             <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
               <div className='post-edit-menu-item-content'>
                 <img src={window.linkURL} />

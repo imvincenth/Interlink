@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import CommentItemContainer from './comment/comment_item_container';
+import NavbarContainer from '../navbar/navbar_container';
 
 export default class Post extends Component {
   constructor(props) {
@@ -179,6 +180,7 @@ export default class Post extends Component {
     const { post } = this.props;
     return (
       <div>
+        <NavbarContainer page={"post"} />
         {this.props.currentUser.first_name} {this.props.currentUser.last_name}:post: {post.body}
         <button className="open-modal" onClick={() => this.props.openEditPostModal(post)}>
           <img src={window.vectorURL} alt="pen" />
