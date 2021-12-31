@@ -132,8 +132,8 @@ export default class Post extends Component {
 
           <div className='post-modal-media-wrap' style={!this.state.photoUrl && !this.state.videoUrl ? {display: "none"} : null}>
 
-            <div className='post-modal-media-options' onClick={() => this.setState({ photoUrl: "", photo: null, postPhotoActive: false, videoUrl: "", video: null, postVideoActive: false })}>
-              <button type="button" className='post-modal-media-edit' >
+            <div className='post-modal-media-options'>
+              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ photoUrl: "", photo: null, postPhotoActive: false, videoUrl: "", video: null, postVideoActive: false })}>
                 <img className='post-modal-media-icon' src={window.mediaEditURL} />
               </button>
               <button type="button" className='post-modal-media-cancel' onClick={() => this.setState({ photoUrl: "", photo: null, videoUrl: "", video: null })}>
