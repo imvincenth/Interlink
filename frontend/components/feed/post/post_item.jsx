@@ -19,7 +19,10 @@ export default class Post extends Component {
       reactable_type: "Post",
       reactable_id: this.props.post.id,
 
-      currentReaction: ""
+      currentReaction: "",
+      editMenuActive: false,
+
+      edited: this.props.post.created_at !== this.props.post.updated_at
     }
 
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
@@ -152,6 +155,7 @@ export default class Post extends Component {
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
+        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "Just now";
         return `${Math.round((rawDate/(1000 * 60)))}m`;
       case (rawDate >= 3600000 && rawDate < 86400000): // less than a day
         return `${Math.floor(rawDate / (1000 * 60 * 60))}h`; 
@@ -164,35 +168,99 @@ export default class Post extends Component {
     }
   }
 
+  renderEditMenu() {
+    if (this.props.post.user_id === this.props.currentUser.id) {
+      return (
+        <div className='post-edit-menu-wrap'>
+          <ul>
+
+            <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
+              <div className='post-edit-menu-item-content'>
+                <img src={window.quillURL} />
+                <div className='post-edit-menu-item-text'>
+                  <h5>Edit post</h5>
+                  <p></p>
+                </div>
+              </div>
+            </li>
+
+            <li className='post-edit-menu-item' onClick={() => this.props.deletePost(this.props.post.id)}>
+              <div className='post-edit-menu-item-content'>
+                <img src={window.trashURL} />
+                <div className='post-edit-menu-item-text'>
+                  <h5>Delete</h5>
+                  <p>Cast your post into the flames of Mount Doom</p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      )
+    } else {
+      return (
+        <div className='psot-edit-menu-wrap'>
+          <ul>
+
+            <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
+              <div className='post-edit-menu-item-content'>
+                <img src={window.quillURL} />
+                <div className='post-edit-menu-item-text'>
+                  <h5>Edit post</h5>
+                  <p></p>
+                </div>
+              </div>
+            </li>
+
+            <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
+              <div className='post-edit-menu-item-content'>
+                <img src={window.quillURL} />
+                <div className='post-edit-menu-item-text'>
+                  <h5>Edit post</h5>
+                  <p></p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      )
+    }
+  }
+
   render() {
+    if (!this.props.users[this.props.post.user_id]) return null;
+
     const { post } = this.props;
     return (
       <div className='post-item'>
+
+
         <div className='post-header-wrap'>
           <Link className='post-header-link' to={`/users/${this.props.post.user_id}`}>
             {this.props.users[this.props.post.user_id].profilePictureUrl ? 
               <img className='post-header-photo' src={this.props.users[this.props.post.user_id].profilePictureUrl} /> : 
-              <img className='post-header-photo' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />
+              <img className='post-header-photo' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />
             }
             <div className='post-header-text'>
               <span className='post-header-name'>{this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}</span>
               <span className='post-header-headline'>{this.props.users[this.props.post.user_id].headline}</span>
-              <span className='post-header-timestamp'>{this.convertDate()}</span>
+              <div className='post-header-timestamp-wrap'>
+                <span className='post-header-timestamp'>{this.convertDate()}</span>
+                {this.state.edited ? <span className='post-header-timestamp'>&nbsp;• Edited</span> : null}
+              </div>
             </div>
           </Link>
 
-          <button className='post-header-edit-button'><img className='post-header-edit' src={window.postEditURL} /></button>
+          <button onClick={() => this.setState({ editMenuActive: !this.state.editMenuActive })} className='post-header-edit-button'><img className='post-header-edit' src={window.postEditURL} /></button>
+          {this.state.editMenuActive ? this.renderEditMenu() : null}
         </div>
 
 
         {this.props.currentUser.first_name} {this.props.currentUser.last_name}:post: {post.body}
         {post.photoUrl ? <img src={post.photoUrl} /> : null}
-        <button className="open-modal" onClick={() => this.props.openEditPostModal(post)}>
-          <img src={window.vectorURL} alt="pen" />
-        </button>
-        <button onClick={() => this.props.deletePost(post.id)}>
-          Delete
-        </button>
+        
+        
         <button onClick={() => this.setState({ commentField: true })}>
           Comment
         </button>

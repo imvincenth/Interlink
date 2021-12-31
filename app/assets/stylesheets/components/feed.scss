@@ -359,6 +359,11 @@
   white-space: nowrap;
 }
 
+.post-header-timestamp-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
 .post-header-timestamp {
   display: block;
   color: rgba(0, 0, 0, 0.6);
@@ -408,4 +413,93 @@
   height: 24px;
   text-align: center;
   margin: none;
+}
+
+.post-edit-menu-wrap {
+  background-color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  position: absolute;
+  top: 40px;
+  left: 182px;
+  text-align: right;
+  padding: 4px 0px 4px 0px;
+  max-height: 548px;
+  width: 90vw;
+  max-width: 355px;
+  min-width: 168px;
+  border-radius: 8px;
+  border-top-right-radius: 0;
+  box-shadow: 0 6px 9px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.03), rgba(0, 0, 0, 0.15) 0px 4px 4px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  z-index: 6;
+}
+
+.post-edit-menu-wrap > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-edit-menu-item {
+  cursor: pointer;
+}
+
+.post-edit-menu-item:hover,
+.post-edit-menu-item:active {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.post-edit-menu-item-content {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px 8px 16px;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration-style: solid;
+}
+
+.post-edit-menu-item-content > img {
+  margin-right: 8px;
+  height: 24px;
+  width: 24px;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.post-edit-menu-item-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-decoration-style: solid;
+}
+
+.post-edit-menu-item-text > h5 {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.9);
+  text-align: left;
+}
+
+.post-edit-menu-item-text > p {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: left;
 }

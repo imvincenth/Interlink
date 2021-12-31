@@ -13,13 +13,13 @@
   max-height: 676px;
   width: 552px;
   max-width: 552px;
-  overflow: auto;
   transition-delay: 0s;
   transition-duration: 0.083s;
   transition-property: box-shadow;
   transition-timing-function: ease;
   position: relative;
   top: 32px;
+  overflow: auto;
 }
 
 .post-modal-x-box {
@@ -66,6 +66,7 @@
   font-weight: 400;
   line-height: 24px;
   overflow-wrap: break-word;
+  overflow: hidden;
   padding: 16px 48px 16px 24px;
 }
 
@@ -415,4 +416,100 @@
   height: 350px;
   width: 552px;
   background-color: black;
+}
+
+.post-modal-media-wrap {
+  box-sizing: border-box;
+  margin: 12px 24px 12px 24px;
+  max-width: 600px;
+  position: relative;
+}
+
+.post-modal-media-options {
+  display: flex;
+  padding: 4px 4px 4px 4px;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  vertical-align: baseline;
+  z-index: 1;
+}
+
+.post-modal-media-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 32px;
+  min-height: auto;
+  width: 32px;
+  min-width: auto;
+  max-width: 480px;
+  overflow: hidden;
+  margin-bottom: 0px;
+  margin-right: 8px;
+  padding: 0px 0px 0px 0px;
+  text-align: center;
+  touch-action: manipulation;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
+}
+
+.post-modal-media-cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 32px;
+  min-height: auto;
+  width: 32px;
+  min-width: auto;
+  max-width: 480px;
+  overflow: hidden;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  padding: 0px 0px 0px 0px;
+  text-align: center;
+  touch-action: manipulation;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: middle;
+}
+
+.post-modal-media-icon {
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  vertical-align: top;
+  opacity: 0.9;
+}
+
+.post-modal-media {
+  background-color: white;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.post-modal-photo-confirm {
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
+  background-position: 50% 50%;
+  border-radius: 8px;
+}
+
+.post-modal-video-confirm {
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
+  background-position: 50% 50%;
+  border-radius: 8px;
 }
