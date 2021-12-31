@@ -100,6 +100,24 @@ export default class Post extends Component {
     }
   }
 
+  editMediaOption(mediaType) {
+    let changeType;
+    if (mediaType === "image/*") changeType = this.handlePhoto;
+    if (mediaType === "video/*") changeType = this.handleVideo;
+
+    return (
+      <div className='media-wrap'>
+        {this.state.photoUrl ? <img className='post-modal-photo' src={this.state.photoUrl} /> : null}
+        {this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : null}
+
+        <label className='edit-media-button' htmlFor='edit-media-option'>
+          <span className='edit-media-button-text'>Edit</span>
+          <input id='edit-media-option' type="file" onChange={changeType} accept={mediaType} style={{display: "none"}} />
+        </label>
+      </div>
+    )
+  }
+
   renderNormalContent(rows) {
     return (
       <div className='post-modal-content'>
@@ -133,7 +151,7 @@ export default class Post extends Component {
           <div className='post-modal-media-wrap' style={!this.state.photoUrl && !this.state.videoUrl ? {display: "none"} : null}>
 
             <div className='post-modal-media-options'>
-              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ photoUrl: "", photo: null, postPhotoActive: false, videoUrl: "", video: null, postVideoActive: false })}>
+              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ postPhotoActive: this.state.photoUrl ? true : false, postVideoActive: this.state.videoUrl ? true : false })}>
                 <img className='post-modal-media-icon' src={window.mediaEditURL} />
               </button>
               <button type="button" className='post-modal-media-cancel' onClick={() => this.setState({ photoUrl: "", photo: null, videoUrl: "", video: null })}>
@@ -216,8 +234,8 @@ export default class Post extends Component {
         
         {/* Content */}
         {!this.state.postPhotoActive && !this.state.postVideoActive ? this.renderNormalContent(rows) : null}
-        {this.state.postPhotoActive && !this.state.postVideoActive ? (this.state.photoUrl ? <img className='post-modal-photo' src={this.state.photoUrl} /> : this.renderPhotoSelect()) : null}
-        {!this.state.postPhotoActive && this.state.postVideoActive ? (this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : this.renderVideoSelect()) : null}
+        {this.state.postPhotoActive && !this.state.postVideoActive ? (this.state.photoUrl ? this.editMediaOption("image/*") : this.renderPhotoSelect()) : null}
+        {!this.state.postPhotoActive && this.state.postVideoActive ? (this.state.videoUrl ? this.editMediaOption("video/*") : this.renderVideoSelect()) : null}
 
         {/* Submit Options */}
         {this.state.postPhotoActive || this.state.postVideoActive ? this.renderAltSubmitOptions() : null}

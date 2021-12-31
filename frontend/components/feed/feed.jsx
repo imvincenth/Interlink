@@ -131,7 +131,7 @@ class Feed extends React.Component {
           <div className='post-modal-media-wrap' style={!this.state.photoUrl && !this.state.videoUrl ? {display: "none"} : null}>
 
             <div className='post-modal-media-options'>
-              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ photoUrl: "", photo: null, videoUrl: "", video: null, normalModeActive: false })}>
+              <button type="button" className='post-modal-media-edit' onClick={() => this.setState({ normalModeActive: false })}>
                 <img className='post-modal-media-icon' src={window.mediaEditURL} />
               </button>
 
@@ -223,6 +223,24 @@ class Feed extends React.Component {
     }
   }
 
+  editMediaOption(mediaType) {
+    let changeType;
+    if (mediaType === "image/*") changeType = this.handlePhoto;
+    if (mediaType === "video/*") changeType = this.handleVideo;
+
+    return (
+      <div className='media-wrap'>
+        {this.state.photoUrl ? <img className='post-modal-photo' src={this.state.photoUrl} /> : null}
+        {this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : null}
+
+        <label className='edit-media-button' htmlFor='edit-media-option'>
+          <span className='edit-media-button-text'>Edit</span>
+          <input id='edit-media-option' type="file" onChange={changeType} accept={mediaType} style={{display: "none"}} />
+        </label>
+      </div>
+    )
+  }
+
   postPhoto() {
     let modalHeader;
     if ((this.state.postPhotoActive ^ this.state.postVideoActive) && this.state.normalModeActive) modalHeader = "Create a post"
@@ -246,7 +264,7 @@ class Feed extends React.Component {
             </div>
 
             {/* Content */}
-            {this.state.photoUrl && !this.state.normalModeActive ? <img className='post-modal-photo' src={this.state.photoUrl} /> : null}
+            {this.state.photoUrl && !this.state.normalModeActive ? this.editMediaOption('image/*') : null}
             {!this.state.photoUrl && !this.state.normalModeActive ? this.renderPhotoSelect() : null}
             {this.state.postPhotoActive && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
 
@@ -302,7 +320,7 @@ class Feed extends React.Component {
             </div>
 
             {/* Content */}
-            {this.state.videoUrl && !this.state.normalModeActive ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : null}
+            {this.state.videoUrl && !this.state.normalModeActive ? this.editMediaOption('video/*') : null}
             {!this.state.videoUrl && !this.state.normalModeActive ? this.renderVideoSelect() : null}
             {this.state.postVideoActive && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
 
