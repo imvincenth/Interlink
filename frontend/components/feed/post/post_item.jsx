@@ -252,14 +252,14 @@ export default class Post extends Component {
   renderMedia(mediaType) {
     if (mediaType === "photo") {
       return (
-        <div className='post-media-wrap'>
+        <div className='post-media-wrap' onClick={() => this.props.openPostShowModal(this.props.post)}>
           <img className='post-media' src={this.props.post.photoUrl} alt="post photo" />
         </div>
       )
     } else if (mediaType === "video") {
       return (
-        <div className='post-media-wrap'>
-          <video className='post-media' src={this.props.post.videoUrl} alt="post video" />
+        <div className='post-media-wrap' onClick={() => this.props.openPostShowModal(this.props.post)}>
+          <video className='post-media' src={this.props.post.videoUrl} alt="post video" controls />
         </div>
       )
     }

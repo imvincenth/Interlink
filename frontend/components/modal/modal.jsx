@@ -8,7 +8,7 @@ import EditEducationFormContainer from '../profile/education/edit_education_cont
 import CreatePostFormContainer from '../feed/post/create_post_container';
 import EditPostFormContainer from '../feed/post/edit_post_container';
 import EditProfileFormContainer from '../profile/edit_profile_container';
-import PostShowModal from '../feed/post/post_show_modal';
+import PostShowModalContainer from '../feed/post/post_show_modal_container';
 
 function Modal(props) {
   if (!props.modal) {
@@ -48,7 +48,8 @@ function Modal(props) {
       break;
     case 'postShow':
       classType = 'post-show';
-      component = <PostShowModal />;
+      component = <PostShowModalContainer />;
+      break;
     default:
       return null;
   }

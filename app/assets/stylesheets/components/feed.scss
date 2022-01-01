@@ -596,16 +596,17 @@
 }
 
 .post-media-wrap {
-  // position: absolute;
-  // top: 0px;
-  // left: 0px;
   width: 540px;
+  height: 0px;
+  padding-top: 56.25%;
+  position: relative;
+  cursor: pointer;
 }
 
 .post-media {
-  height: 100%;
   width: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  background-position: 50% 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
