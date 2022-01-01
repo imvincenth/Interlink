@@ -24,7 +24,8 @@ const mDTP = dispatch => ({
   fetchPostReactions: postId => dispatch(fetchPostReactions(postId)),
   createPostReaction: reaction => dispatch(createPostReaction(reaction)),
   updatePostReaction: reaction => dispatch(updatePostReaction(reaction)),
-  deletePostReaction: reactionId => dispatch(deletePostReaction(reactionId))
+  deletePostReaction: reactionId => dispatch(deletePostReaction(reactionId)),
+  openPostModal: post => dispatch(openModal("postShow", post))
 });
 
 export default connect(mSTP, mDTP)(Post);

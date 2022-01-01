@@ -118,7 +118,11 @@ export default class Post extends Component {
     )
   }
 
-  renderNormalContent(rows) {
+  renderNormalContent() {
+    const textArea = document.querySelector('textarea')
+    const textRowCount = textArea ? textArea.value.split("\n").length : 0
+    const rows = textRowCount + 1
+
     return (
       <div className='post-modal-content'>
 
@@ -214,10 +218,6 @@ export default class Post extends Component {
   }
 
   render() {
-    const textArea = document.querySelector('textarea')
-    const textRowCount = textArea ? textArea.value.split("\n").length : 0
-    const rows = textRowCount + 1
-
     let modalHeader;
     if (!this.state.postPhotoActive && !this.state.postVideoActive) modalHeader = "Create a post"
     if (this.state.postPhotoActive && !this.state.postVideoActive) modalHeader = "Post your photo"
@@ -233,7 +233,7 @@ export default class Post extends Component {
         </div>
         
         {/* Content */}
-        {!this.state.postPhotoActive && !this.state.postVideoActive ? this.renderNormalContent(rows) : null}
+        {!this.state.postPhotoActive && !this.state.postVideoActive ? this.renderNormalContent() : null}
         {this.state.postPhotoActive && !this.state.postVideoActive ? (this.state.photoUrl ? this.editMediaOption("image/*") : this.renderPhotoSelect()) : null}
         {!this.state.postPhotoActive && this.state.postVideoActive ? (this.state.videoUrl ? this.editMediaOption("video/*") : this.renderVideoSelect()) : null}
 

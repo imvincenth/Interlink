@@ -57,7 +57,7 @@ class Feed extends React.Component {
     }
 
     this.props.createPost(formData)
-      .then(() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, body: "" }));
+      .then(() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, body: "", photoUrl: "", photo: null, videoUrl: "", video: null }));
   }
 
   handlePhoto(e) {
@@ -98,7 +98,11 @@ class Feed extends React.Component {
     }
   }
 
-  renderNormalContent(rows) {
+  renderNormalContent() {
+    const textArea = document.querySelector('textarea')
+    const textRowCount = textArea ? textArea.value.split("\n").length : 0
+    const rows = textRowCount + 1
+
     return (
       <div className='post-modal-content'>
 
@@ -247,10 +251,6 @@ class Feed extends React.Component {
     if (this.state.postPhotoActive && !this.state.postVideoActive && !this.state.normalModeActive) modalHeader = "Post your photo"
     if (!this.state.postPhotoActive && this.state.postVideoActive && !this.state.normalModeActive) modalHeader = "Post your video"
 
-    const textArea = document.querySelector('textarea')
-    const textRowCount = textArea ? textArea.value.split("\n").length : 0
-    const rows = textRowCount + 1
-
     return (
       <div className='feed-modal-background' onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, photoUrl: "", photo: null, body: "" })}>
         <div className='post-photo-modal-child' onClick={e => e.stopPropagation()}>
@@ -266,7 +266,7 @@ class Feed extends React.Component {
             {/* Content */}
             {this.state.photoUrl && !this.state.normalModeActive ? this.editMediaOption('image/*') : null}
             {!this.state.photoUrl && !this.state.normalModeActive ? this.renderPhotoSelect() : null}
-            {this.state.postPhotoActive && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
+            {this.state.postPhotoActive && this.state.normalModeActive ? this.renderNormalContent() : null}
 
             {/* Footer */}
             <div className='post-modal-footer-alt' style={this.state.normalModeActive ? {display: "none"} : null}>
@@ -304,10 +304,6 @@ class Feed extends React.Component {
     if (this.state.postPhotoActive && !this.state.postVideoActive && !this.state.normalModeActive) modalHeader = "Post your photo"
     if (!this.state.postPhotoActive && this.state.postVideoActive && !this.state.normalModeActive) modalHeader = "Post your video"
 
-    const textArea = document.querySelector('textarea')
-    const textRowCount = textArea ? textArea.value.split("\n").length : 0
-    const rows = textRowCount + 1
-
     return (
       <div className='feed-modal-background' onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: false, awsInfoActive: false, videoUrl: "", video: null, body: "" })}>
         <div className='post-video-modal-child' onClick={e => e.stopPropagation()}>
@@ -322,7 +318,7 @@ class Feed extends React.Component {
             {/* Content */}
             {this.state.videoUrl && !this.state.normalModeActive ? this.editMediaOption('video/*') : null}
             {!this.state.videoUrl && !this.state.normalModeActive ? this.renderVideoSelect() : null}
-            {this.state.postVideoActive && this.state.normalModeActive ? this.renderNormalContent(rows) : null}
+            {this.state.postVideoActive && this.state.normalModeActive ? this.renderNormalContent() : null}
 
             {/* Footer */}
             <div className='post-modal-footer-alt' style={this.state.normalModeActive ? {display: "none"} : null}>
@@ -356,7 +352,7 @@ class Feed extends React.Component {
 
   render() {
     if (!this.props.posts) return null;
-    console.log(this.state);
+
     const { currentUser } = this.props;
     return (
       <div className="feed-page">

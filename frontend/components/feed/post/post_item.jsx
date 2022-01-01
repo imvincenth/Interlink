@@ -6,6 +6,8 @@ export default class Post extends Component {
   constructor(props) {
     super(props);
 
+    const rawDiff = new Date(this.props.post.updated_at) - new Date(this.props.post.created_at);
+
     this.state = {
       user_id: this.props.sessionId,
       reply_id: "",
@@ -22,7 +24,9 @@ export default class Post extends Component {
       currentReaction: "",
       editMenuActive: false,
 
-      edited: this.props.post.created_at !== this.props.post.updated_at
+      edited: rawDiff > 1000,
+
+      seeMoreActive: false
     }
 
     this.copyToClipboard = this.copyToClipboard.bind(this);
@@ -219,27 +223,43 @@ export default class Post extends Component {
         <div className='post-edit-menu-wrap'>
           <ul>
 
-            <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
+            <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
               <div className='post-edit-menu-item-content'>
-                <img src={window.quillURL} />
+                <img src={window.linkURL} />
                 <div className='post-edit-menu-item-text'>
-                  <h5>Edit post</h5>
+                  <h5>Copy link to post</h5>
                   <p></p>
                 </div>
               </div>
             </li>
 
-            <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
+            <li className='post-edit-menu-item'>
               <div className='post-edit-menu-item-content'>
-                <img src={window.quillURL} />
+                <img src={window.ownerURL} />
                 <div className='post-edit-menu-item-text'>
-                  <h5>Edit post</h5>
-                  <p></p>
+                  <h5>This is {this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}'s post.</h5>
+                  <p>Unable to edit or delete this post.</p>
                 </div>
               </div>
             </li>
 
           </ul>
+        </div>
+      )
+    }
+  }
+
+  renderMedia(mediaType) {
+    if (mediaType === "photo") {
+      return (
+        <div className='post-media-wrap'>
+          <img className='post-media' src={this.props.post.photoUrl} alt="post photo" />
+        </div>
+      )
+    } else if (mediaType === "video") {
+      return (
+        <div className='post-media-wrap'>
+          <video className='post-media' src={this.props.post.videoUrl} alt="post video" />
         </div>
       )
     }
@@ -252,8 +272,9 @@ export default class Post extends Component {
     return (
       <div className='post-item'>
 
-
+        {/* Post Header */}
         <div className='post-header-wrap'>
+
           <Link className='post-header-link' to={`/users/${this.props.post.user_id}`}>
             {this.props.users[this.props.post.user_id].profilePictureUrl ? 
               <img className='post-header-photo' src={this.props.users[this.props.post.user_id].profilePictureUrl} /> : 
@@ -269,13 +290,23 @@ export default class Post extends Component {
             </div>
           </Link>
 
+          {/* Edit Menu */}
           <button onClick={() => this.setState({ editMenuActive: !this.state.editMenuActive })} className='post-header-edit-button'><img className='post-header-edit' src={window.postEditURL} /></button>
           {this.state.editMenuActive ? this.renderEditMenu() : null}
+
         </div>
+        
+        <div className='post-content-box'>
+          {/* Post Body */}
+          <div className='post-body-wrap'>
+            {this.state.seeMoreActive ? <span className='post-body-text'>{post.body}</span> : <span className='post-body-text'>{post.body.slice(0, 200)}</span>}
+            {this.state.seeMoreActive || post.body.length < 200 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })}>...see more</button>}
+          </div>
 
-
-        {this.props.currentUser.first_name} {this.props.currentUser.last_name}:post: {post.body}
-        {post.photoUrl ? <img src={post.photoUrl} /> : null}
+          {/* Post Media */}
+          {post.photoUrl ? this.renderMedia("photo") : null}
+          {post.videoUrl ? this.renderMedia("video") : null}
+        </div>
         
         
         <button onClick={() => this.setState({ commentField: true })}>
