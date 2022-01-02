@@ -29,12 +29,17 @@ export default class PostShowModal extends Component {
       reactable_type: "Post",
       reactable_id: this.props.post.id,
 
+      currentReaction: "",
+
       edited: rawDiff > 1000,
 
       reactionIcons: [],
       reactionCount: 0,
-      firstReactorName: ""
+      firstReactorName: "",
+
+      commentsOn: false
     }
+
   }
 
   componentDidMount() {
@@ -46,6 +51,29 @@ export default class PostShowModal extends Component {
     if (prevProps.reactions.length !== this.props.reactions.length) {
       this.reactionsOrganization();
     }
+  }
+
+  setCurrentReaction() {
+    for (let reaction of this.props.reactions) {
+      if (reaction.reactor_id === this.props.currentUser.id && reaction.reactable_id === this.props.post.id) {
+        this.setState({ currentReaction: reaction, react_type: reaction.react_type });
+      }
+    }
+  }
+
+  react(reaction) {
+    this.props.createPostReaction({...this.state, react_type: reaction})
+      .then(() => this.setCurrentReaction());
+  }
+
+  reactEdit(reaction) {
+    this.props.updatePostReaction({...this.state.currentReaction, react_type: reaction})
+      .then(() => this.setCurrentReaction());
+  }
+
+  removeReaction() {
+    this.props.deletePostReaction(this.state.currentReaction.id)
+      .then(() => this.setState({ react_type: "", currentReaction: "" }));
   }
 
   convertDate() {
@@ -116,7 +144,7 @@ export default class PostShowModal extends Component {
 
           <div className='post-show-modal-right-content'>
             <div className='post-show-modal-body'>
-              {this.state.seeMoreActive ? <span className='post-body-text'>{this.props.post.body}</span> : <span className='post-body-text'>{this.props.post.body.slice(0, 200)}</span>}
+              {this.state.seeMoreActive ? <span className='post-show-modal-body-text'>{this.props.post.body}</span> : <span className='post-show-modal-body-text'>{this.props.post.body.slice(0, 200)}</span>}
               {this.state.seeMoreActive || this.props.post.body.length < 200 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })}>...see more</button>}
             </div>
 
@@ -126,11 +154,29 @@ export default class PostShowModal extends Component {
                   {this.state.reactionIcons[0] ? <img src={reactionLibrary[this.state.reactionIcons[0]]} /> : null}
                   {this.state.reactionIcons[1] ? <img src={reactionLibrary[this.state.reactionIcons[1]]} /> : null}
                   {this.state.reactionIcons[2] ? <img src={reactionLibrary[this.state.reactionIcons[2]]} /> : null}
-                  <span>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
+                  <span className='post-show-modal-social'>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
                 </li>
+
+                <span onClick={() => this.setState({ commentsOn: true })} className='post-show-modal-comments'>{this.props.comments.length} comment{this.props.comments.length > 1 ? "s" : ""}</span>
               </ul>
+
+              <div className='post-show-modal-actions'>
+                <button className='post-show-modal-action'>
+                  <img className='post-show-modal-action-icon' src={window.nolikeURL} />
+                  <span className='post-show-modal-action-text'>Like</span>
+                </button>
+
+                <button className='post-show-modal-action'>
+                  <img className='post-show-modal-action-icon' src={window.commentURL} />
+                  <span className='post-show-modal-action-text'>Comment</span>
+                </button>
+
+                <button className='post-show-modal-action'>
+                  <img className='post-show-modal-action-icon' src={window.linkURL} />
+                  <span className='post-show-modal-action-text'>Copy link</span>
+                </button>
+              </div>
             </div>
-            
           </div>
 
         </div>

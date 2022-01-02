@@ -181,7 +181,7 @@ export default class Post extends Component {
   }
 
   copySuccessMessage() {
-    
+
   }
 
   renderEditMenu() {
@@ -319,6 +319,7 @@ export default class Post extends Component {
         </button>
         {this.state.commentField ? this.commentForm() : null}
           reaction: {this.state.react_type}
+        {console.log(this.state.currentReaction)}
         {this.state.currentReaction ? this.tempDislikeButton() : this.reactionForm()}
         {this.props.comments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} comment={comment} /> : null)}
       </div>
