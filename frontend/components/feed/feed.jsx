@@ -279,12 +279,12 @@ class Feed extends React.Component {
             <div className='post-modal-submit-wrap' style={!this.state.normalModeActive ? {display: "none"} : null}>
               {/* Left */}
               <div className='post-modal-submit-options'>
-                <label htmlFor="post-image" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: true, postVideoActive: false })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
-                  <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+                <label htmlFor="post-image" onClick={!this.state.photoUrl && !this.state.videoUrl ? () => this.setState({ normalModeActive: false, postPhotoActive: true, postVideoActive: false, photoUrl: "", photo: null, videoUrl: "", video: null }) : null} className={!this.state.photoUrl || !this.state.videoUrl ? 'post-modal-submit-option not' : 'post-modal-submit-option'}><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
+                  {!this.state.photoUrl && !this.state.videoUrl ? <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}} /> : null}
                 </label>
 
-                <label htmlFor="post-video" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: true })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitVideoURL} />
-                  <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}}  />
+                <label htmlFor="post-video" onClick={!this.state.photoUrl && !this.state.videoUrl ? () => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: true, photoUrl: "", photo: null, videoUrl: "", video: null }) : null} className={!this.state.photoUrl || !this.state.videoUrl ? 'post-modal-submit-option not' : 'post-modal-submit-option'}><img className='post-modal-submit-icon' src={window.submitVideoURL} />
+                  {!this.state.photoUrl && !this.state.videoUrl ? <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}} /> : null}
                 </label>
               </div>
 
@@ -331,12 +331,12 @@ class Feed extends React.Component {
             <div className='post-modal-submit-wrap' style={!this.state.normalModeActive ? {display: "none"} : null}>
               {/* Left */}
               <div className='post-modal-submit-options'>
-                <label htmlFor="post-image" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: true, postVideoActive: false })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
-                  <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
+                <label htmlFor="post-image" onClick={!this.state.photoUrl && !this.state.videoUrl ? () => this.setState({ normalModeActive: false, postPhotoActive: true, postVideoActive: false, photoUrl: "", photo: null, videoUrl: "", video: null }) : null} className={!this.state.photoUrl || !this.state.videoUrl ? 'post-modal-submit-option not' : 'post-modal-submit-option'}><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
+                  {!this.state.photoUrl && !this.state.videoUrl ? <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}} /> : null}
                 </label>
 
-                <label htmlFor="post-video" onClick={() => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: true })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitVideoURL} />
-                  <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}}  />
+                <label htmlFor="post-video" onClick={!this.state.photoUrl && !this.state.videoUrl ? () => this.setState({ normalModeActive: false, postPhotoActive: false, postVideoActive: true, photoUrl: "", photo: null, videoUrl: "", video: null }) : null} className={!this.state.photoUrl || !this.state.videoUrl ? 'post-modal-submit-option not' : 'post-modal-submit-option'}><img className='post-modal-submit-icon' src={window.submitVideoURL} />
+                  {!this.state.photoUrl && !this.state.videoUrl ? <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}} /> : null}
                 </label>
               </div>
 

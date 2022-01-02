@@ -9,6 +9,7 @@ const mSTP = state => ({
   currentUser: state.entities.users[state.session.id],
   errors: state.errors.posts,
   users: state.entities.users,
+  usersArr: Object.values(state.entities.users),
   reactions: Object.values(state.entities.reactions)
 });
 

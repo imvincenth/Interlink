@@ -26,7 +26,8 @@ export default class Post extends Component {
 
       edited: rawDiff > 1000,
 
-      seeMoreActive: false
+      seeMoreActive: false,
+      copySuccess: false
     }
 
     this.copyToClipboard = this.copyToClipboard.bind(this);
@@ -176,7 +177,11 @@ export default class Post extends Component {
   copyToClipboard() {
     // navigator.clipboard.writeText(`localhost:3000/#/posts/${this.props.post.id}`)
     navigator.clipboard.writeText(`https://ringedin.herokuapp.com/#/posts/${this.props.post.id}`)
-      .then(() => this.setState({ editMenuActive: false }));
+      .then(() => this.setState({ editMenuActive: false, copySuccess: true }));
+  }
+
+  copySuccessMessage() {
+    
   }
 
   renderEditMenu() {

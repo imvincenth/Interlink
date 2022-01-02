@@ -243,11 +243,11 @@ export default class Post extends Component {
         <div className='post-modal-submit-wrap' style={this.state.postPhotoActive || this.state.postVideoActive ? {display: "none"} : null}>
           {/* Left */}
           <div className='post-modal-submit-options'>
-            <label htmlFor="post-image" onClick={() => this.setState({ postPhotoActive: true, postVideoActive: false })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
+            <label htmlFor="post-image" onClick={() => this.setState({ postPhotoActive: true, postVideoActive: false, photoUrl: "", photo: null, videoUrl: "", video: null })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitPhotoURL} />
               <input id="post-image" type="file" accept="image/*" onChange={this.handlePhoto} style={{display: "none"}}  />
             </label>
 
-            <label htmlFor="post-video" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: true })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitVideoURL} />
+            <label htmlFor="post-video" onClick={() => this.setState({ postPhotoActive: false, postVideoActive: true, photoUrl: "", photo: null, videoUrl: "", video: null })} className='post-modal-submit-option'><img className='post-modal-submit-icon' src={window.submitVideoURL} />
               <input id="post-video" type="file" accept="video/*" onChange={this.handleVideo} style={{display: "none"}}  />
             </label>
           </div>

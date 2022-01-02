@@ -8,19 +8,34 @@ export default class PostShowModal extends Component {
     const rawDiff = new Date(this.props.post.updated_at) - new Date(this.props.post.created_at);
 
     this.state = {
+      user_id: this.props.currentUser.id,
+      reply_id: "",
+      post_id: this.props.post.id,
+      body: "",
+
+      commentField: false,
+
+      reactor_id: this.props.currentUser.id,
+      react_type: "",
+      reactable_type: "Post",
+      reactable_id: this.props.post.id,
+
       edited: rawDiff > 1000,
 
-      reactIcons: []
+      reactionIcons: [],
+      reactionCount: 0,
+      firstReactorName: ""
     }
   }
 
   componentDidMount() {
-    this.props.fetchPostReactions(this.props.post.id);
+    this.props.fetchPostReactions(this.props.post.id)
+      .then(() => this.reactionsOrganization());
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.reactions.length !== this.props.reactions.length) {
-
+      this.reactionsOrganization();
     }
   }
 
@@ -42,11 +57,20 @@ export default class PostShowModal extends Component {
     }
   }
 
-  reactionsOrg() {
-    let clone = this.props.reactions.slice(0);
+  reactionsOrganization() {
     let tempIconStore = [];
 
-   
+    let tempFirstUserId = this.props.reactions[0].reactor_id;
+    let tempUser;
+    let tempReactCount = this.props.reactions.length;
+
+    this.props.reactions.forEach(reaction => !tempIconStore.includes(reaction.react_type) && tempIconStore.length <= 3 ? tempIconStore.push(reaction.react_type) : null);
+
+    this.props.usersArr.forEach(user => user.id === tempFirstUserId ? tempUser = user : null);
+    let tempUserName = `${tempUser.first_name} ${tempUser.last_name}`;
+    if (tempFirstUserId === this.props.currentUser.id) tempUserName = "You";
+
+    this.setState({ reactionIcons: [...tempIconStore], reactionCount: tempReactCount, firstReactorName: tempUserName });
   }
 
   render() {
