@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
+const reactionLibrary = {
+  "Like": window.likeURL,
+  "Celebrate": window.celebrateURL,
+  "Support": window.supportURL,
+  "Love": window.loveURL,
+  "Insightful": window.insightfulURL,
+  "Curious": window.curiousURL
+};
+
 export default class PostShowModal extends Component {
   constructor(props) {
     super(props);
@@ -114,9 +123,10 @@ export default class PostShowModal extends Component {
             <div>
               <ul className='post-show-modal-reactbar'>
                 <li className='post-show-modal-reactbar-content'>
-                  <button className='post-show-reactbar-button'>
-
-                  </button>
+                  {this.state.reactionIcons[0] ? <img src={reactionLibrary[this.state.reactionIcons[0]]} /> : null}
+                  {this.state.reactionIcons[1] ? <img src={reactionLibrary[this.state.reactionIcons[1]]} /> : null}
+                  {this.state.reactionIcons[2] ? <img src={reactionLibrary[this.state.reactionIcons[2]]} /> : null}
+                  <span>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
                 </li>
               </ul>
             </div>

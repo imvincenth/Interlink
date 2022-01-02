@@ -10,7 +10,8 @@ const mSTP = state => ({
   errors: state.errors.posts,
   users: state.entities.users,
   usersArr: Object.values(state.entities.users),
-  reactions: Object.values(state.entities.reactions)
+  reactions: Object.values(state.entities.reactions),
+  comments: Object.values(state.entities.comments)
 });
 
 const mDTP = dispatch => ({
