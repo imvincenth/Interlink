@@ -8,7 +8,19 @@ export default class PostShowModal extends Component {
     const rawDiff = new Date(this.props.post.updated_at) - new Date(this.props.post.created_at);
 
     this.state = {
-      edited: rawDiff > 1000
+      edited: rawDiff > 1000,
+
+      reactIcons: []
+    }
+  }
+
+  componentDidMount() {
+    this.props.fetchPostReactions(this.props.post.id);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.reactions.length !== this.props.reactions.length) {
+
     }
   }
 
@@ -30,8 +42,16 @@ export default class PostShowModal extends Component {
     }
   }
 
+  reactionsOrg() {
+    let clone = this.props.reactions.slice(0);
+    let tempIconStore = [];
+
+   
+  }
 
   render() {
+    if (!this.props.reactions) return null;
+
     return (
       <div className='post-show-modal-wrap'>
         <button className='post-show-modal-exit' onClick={this.props.closeModal}><img className='post-show-modal-x' src={window.xURL} /></button>
