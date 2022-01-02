@@ -264,7 +264,7 @@ export default class Post extends Component {
     } else if (mediaType === "video") {
       return (
         <div className='post-media-wrap' onClick={() => this.props.openPostShowModal(this.props.post)}>
-          <video className='post-media' src={this.props.post.videoUrl} alt="post video" controls />
+          <video className='post-media' src={this.props.post.videoUrl} alt="post video" controls autoPlay muted />
         </div>
       )
     }
