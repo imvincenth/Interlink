@@ -146,7 +146,7 @@ class Feed extends React.Component {
 
             <div className='post-modal-media'>
               {this.state.photoUrl ? <img className='post-modal-photo-confirm' src={this.state.photoUrl} alt="submitted photo" /> : null}
-              {this.state.videoUrl ? <video className='post-modal-video-confirm' src={this.state.videoUrl} controls alt="submitted video" /> : null}
+              {this.state.videoUrl ? <video className='post-modal-video-confirm' src={this.state.videoUrl} controls autoPlay muted alt="submitted video" /> : null}
             </div>
 
           </div>
@@ -235,7 +235,7 @@ class Feed extends React.Component {
     return (
       <div className='media-wrap'>
         {this.state.photoUrl ? <img className='post-modal-photo' src={this.state.photoUrl} /> : null}
-        {this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls></video> : null}
+        {this.state.videoUrl ? <video className='post-modal-video' src={this.state.videoUrl} controls autoPlay muted></video> : null}
 
         <label className='edit-media-button' htmlFor='edit-media-option'>
           <span className='edit-media-button-text'>Edit</span>

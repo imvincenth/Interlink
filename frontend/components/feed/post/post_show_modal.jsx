@@ -10,6 +10,15 @@ const reactionLibrary = {
   "Curious": window.curiousURL
 };
 
+const reactionColors = {
+  "Like": "#0a66c2",
+  "Celebrate": "#44712e",
+  "Support": "#7a688d",
+  "Love": "#b24020",
+  "Insightful": "#915907",
+  "Curious": "#80597e"
+};
+
 export default class PostShowModal extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +53,8 @@ export default class PostShowModal extends Component {
 
   componentDidMount() {
     this.props.fetchPostReactions(this.props.post.id)
-      .then(() => this.reactionsOrganization());
+      .then(() => this.reactionsOrganization())
+      .then(() => this.setCurrentReaction());
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -110,9 +120,35 @@ export default class PostShowModal extends Component {
     this.setState({ reactionIcons: [...tempIconStore], reactionCount: tempReactCount, firstReactorName: tempUserName });
   }
 
+  renderReactionCard(reaction) {
+    if (reaction !== "") {
+      return (
+        <button className='post-show-modal-action' onClick={() => this.removeReaction()}>
+          <img className='post-show-modal-action-icon' src={reactionLibrary[reaction]} />
+          <span className='post-show-modal-action-text' style={{color: `${reactionColors[reaction]}`}}>{reaction}</span>
+        </button>
+      )
+    } else {
+      return (
+        <button className='post-show-modal-action' onClick={() => this.react("Like")}>
+          <img className='post-show-modal-action-icon' src={window.nolikeURL} />
+          <span className='post-show-modal-action-text'>Like</span>
+        </button>
+      )
+    }
+  }
+
+  renderReactionDeck() {
+    return (
+      <span>
+        
+      </span>
+    )
+  }
+
   render() {
     if (!this.props.reactions) return null;
-
+    console.log(this.state.currentReaction);
     return (
       <div className='post-show-modal-wrap'>
         <button className='post-show-modal-exit' onClick={this.props.closeModal}><img className='post-show-modal-x' src={window.xURL} /></button>
@@ -120,13 +156,13 @@ export default class PostShowModal extends Component {
         {/* Left */}
         <div className='post-show-modal-left-section'>
           {this.props.post.photoUrl ? <img className='post-show-modal-media' src={this.props.post.photoUrl} /> : null}
-          {this.props.post.videoUrl ? <video className='post-show-modal-media' src={this.props.post.videoUrl} controls /> : null}
+          {this.props.post.videoUrl ? <video className='post-show-modal-media' src={this.props.post.videoUrl} controls autoPlay muted /> : null}
         </div>
 
         {/* Right */}
         <div className='post-show-modal-right-section'>
           <div className='post-show-modal-right-header'>
-            <Link className='post-show-modal-namecard' to={`/users/${this.props.post.user_id}`}>
+            <Link className='post-show-modal-namecard' to={`/users/${this.props.post.user_id}`} onClick={this.props.closeModal}>
               {this.props.users[this.props.post.user_id].profilePictureUrl ? 
                 <img className='post-show-modal-propic' src={this.props.users[this.props.post.user_id].profilePictureUrl} /> : 
                 <img className='post-show-modal-propic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />
@@ -161,10 +197,8 @@ export default class PostShowModal extends Component {
               </ul>
 
               <div className='post-show-modal-actions'>
-                <button className='post-show-modal-action'>
-                  <img className='post-show-modal-action-icon' src={window.nolikeURL} />
-                  <span className='post-show-modal-action-text'>Like</span>
-                </button>
+
+                {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
 
                 <button className='post-show-modal-action'>
                   <img className='post-show-modal-action-icon' src={window.commentURL} />
