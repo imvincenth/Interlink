@@ -113,7 +113,7 @@ class SignupForm extends React.Component {
     return (
       <div className="signup-form-container">
         <label className="signup-label">Email
-          <input type="text"
+          <input type="email"
             value={this.state.email}
             onChange={this.update('email')}
             className={(this.props.errors.length === 7 || this.props.errors.length === 6 ) && !this.state.valid ? "signup-input invalid-field" : "signup-input"}

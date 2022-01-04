@@ -604,9 +604,89 @@
 }
 
 .post-media {
-  width: 100%;
+  width: 99.6%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  object-fit: contain;
+}
+
+.post-reaction-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 300px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 6px 9px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.03), rgba(0, 0, 0, 0.2) 0px 4px 4px 0px, rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;;
+  border: none;
+  width: 290px;
+  height: 50px;
+  position: absolute;
+  top: -50px;
+  transition-duration: 0.167s;
+  transition-property: width, height, opacity;
+  transition-timing-function: ease-in-out;
+  display: none;
+  // top: -59px;
+  // opacity: 0;
+  // pointer-events: none;
+  z-index: 9999;
+}
+
+.post-show-modal-action:hover+.post-reaction-dock {display: flex;}
+
+.post-reaction-dock:hover {
+  display: flex;
+
+  .post-reaction-dock-icon {
+    transition-duration: 0.167s;
+    transition-property: width, height;
+    transition-timing-function: ease-in;
+    height: 29px;
+    width: 29px;
+    display: flex;
+  }
+}
+
+.post-reaction-dock-item {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.post-reaction-dock-item:hover {
+
+  .post-reaction-dock-icon {
+    height: 48px;
+    width: 48px;
+  }
+
+  .post-reaction-dock-exp {
+    display: block;
+    position: absolute;
+    top: -19px;
+  }
+}
+
+.post-reaction-dock-icon {
+  height: 30px;
+  width: 30px;
+  position: relative;
+}
+
+.post-reaction-dock-exp {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 255, 255);
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 300px;
+  padding: 2px 5px 2px 5px;
+  pointer-events: none;
+  cursor: default;
+  display: none;
 }

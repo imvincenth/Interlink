@@ -45,10 +45,14 @@ export default class PostShowModal extends Component {
       reactionIcons: [],
       reactionCount: 0,
       firstReactorName: "",
+      reactionDockOn: false,
 
-      commentsOn: false
+      commentInputOn: false,
+      commentSectionOn: false
     }
 
+    this.react = this.react.bind(this);
+    this.reactEdit = this.reactEdit.bind(this);
   }
 
   componentDidMount() {
@@ -58,7 +62,7 @@ export default class PostShowModal extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.reactions.length !== this.props.reactions.length) {
+    if ((prevProps.reactions.length !== this.props.reactions.length) || (JSON.stringify(prevProps.reactions) !== JSON.stringify(this.props.reactions))) {
       this.reactionsOrganization();
     }
   }
@@ -73,12 +77,14 @@ export default class PostShowModal extends Component {
 
   react(reaction) {
     this.props.createPostReaction({...this.state, react_type: reaction})
-      .then(() => this.setCurrentReaction());
+      .then(() => this.setCurrentReaction())
+      .then(() => this.setState({ commentsOn: true }));
   }
 
   reactEdit(reaction) {
     this.props.updatePostReaction({...this.state.currentReaction, react_type: reaction})
-      .then(() => this.setCurrentReaction());
+      .then(() => this.setCurrentReaction())
+      .then(() => this.setState({ commentsOn: true }));
   }
 
   removeReaction() {
@@ -105,6 +111,7 @@ export default class PostShowModal extends Component {
   }
 
   reactionsOrganization() {
+    if (!this.props.reactions[0]) return this.setState({ reactionIcons: [], reactionCount: 0, firstReactorName: "" });
     let tempIconStore = [];
 
     let tempFirstUserId = this.props.reactions[0].reactor_id;
@@ -138,17 +145,60 @@ export default class PostShowModal extends Component {
     }
   }
 
-  renderReactionDeck() {
+  renderReactionDock() {
+    let actionType;
+    if (this.state.currentReaction === "") {
+      actionType = this.react;
+    } else {
+      actionType = this.reactEdit;
+    }
+
     return (
-      <span>
-        
-      </span>
+      <div className='post-reaction-dock'>
+        <button className='post-reaction-dock-item' onClick={() => actionType("Like")}>
+          <span className='post-reaction-dock-exp'>Like</span>
+          <img className='post-reaction-dock-icon' src={window.likeURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Celebrate")}>
+          <span className='post-reaction-dock-exp'>Celebrate</span>
+          <img className='post-reaction-dock-icon' src={window.celebrateURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Support")}>
+          <span className='post-reaction-dock-exp'>Support</span>
+          <img className='post-reaction-dock-icon' src={window.supportURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Love")}>
+          <span className='post-reaction-dock-exp'>Love</span>
+          <img className='post-reaction-dock-icon' src={window.loveURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Insightful")}>
+          <span className='post-reaction-dock-exp'>Insightful</span>
+          <img className='post-reaction-dock-icon' src={window.insightfulURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Curious")}>
+          <span className='post-reaction-dock-exp'>Curious</span>
+          <img className='post-reaction-dock-icon' src={window.curiousURL} />
+        </button>
+      </div>
+    )
+  }
+
+  renderCommentsSections() {
+    return (
+      <div>
+
+      </div>
     )
   }
 
   render() {
     if (!this.props.reactions) return null;
-    console.log(this.state.currentReaction);
+
     return (
       <div className='post-show-modal-wrap'>
         <button className='post-show-modal-exit' onClick={this.props.closeModal}><img className='post-show-modal-x' src={window.xURL} /></button>
@@ -197,10 +247,12 @@ export default class PostShowModal extends Component {
               </ul>
 
               <div className='post-show-modal-actions'>
-
+                <div className='post-show-reaction-box'>
                 {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
+                  {this.renderReactionDock()}
+                </div>
 
-                <button className='post-show-modal-action'>
+                <button className='post-show-modal-action' onClick={() => this.setState({ commentsOn: true })}>
                   <img className='post-show-modal-action-icon' src={window.commentURL} />
                   <span className='post-show-modal-action-text'>Comment</span>
                 </button>

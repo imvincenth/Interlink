@@ -49,6 +49,12 @@ export default class Post extends Component {
       .then(() => this.setCurrentReaction());
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.reactions.length !== this.props.reactions.length) {
+      this.setCurrentReaction();
+    }
+  }
+
   handleCommentSubmit(e) {
     e.preventDefault();
 
