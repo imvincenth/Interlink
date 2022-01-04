@@ -162,8 +162,10 @@ export default class Post extends Component {
     )
   }
 
-  convertDate() {
-    const rawDate = Date.now() - new Date(this.props.post.created_at);
+  convertDate(comment) {
+    let rawDate;
+    if (comment) rawDate = Date.now() - new Date(comment.created_at);
+    if (!comment) rawDate = Date.now() - new Date(this.props.post.created_at);
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour

@@ -368,7 +368,11 @@
 .post-show-modal-comment-card-wrap {
   padding: 0;
   margin: 12px 16px;
-  display: block;
-  clear: left;
-  
+  display: flex;
+}
+
+.post-show-modal-comment-card-pic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }

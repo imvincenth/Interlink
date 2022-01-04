@@ -46,6 +46,7 @@ export default class PostShowModal extends Component {
       reactionDockOn: false,
 
       postComments: [],
+      postReplies: [],
       commentCount: 0,
 
       commentInputOn: false,
@@ -109,8 +110,10 @@ export default class PostShowModal extends Component {
       .then(() => this.setState({ react_type: "", currentReaction: "" }));
   }
 
-  convertDate() {
-    const rawDate = Date.now() - new Date(this.props.post.created_at);
+  convertDate(comment) {
+    let rawDate;
+    if (comment) rawDate = Date.now() - new Date(comment.created_at);
+    if (!comment) rawDate = Date.now() - new Date(this.props.post.created_at);
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
@@ -147,9 +150,17 @@ export default class PostShowModal extends Component {
   commentsOrganization() {
     let tempPostComments = [];
     let tempCommentCount = 0;
+
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempPostComments.push(comment) : null);
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
     this.setState({ postComments: [...tempPostComments], commentCount: tempCommentCount });
+  }
+
+  repliesOrganization(comment) {
+    let tempPostReplies = [];
+
+    this.state.postComments.forEach(postComment => postComment.reply_id === comment.id ? tempPostReplies.push(postComment) : null);
+    this.setState({ postReplies: [...tempPostReplies] });
   }
 
   renderReactionCard(reaction) {
@@ -226,9 +237,36 @@ export default class PostShowModal extends Component {
   }
 
   renderCommentSection(comment) {
+    let user = this.props.users[this.props.post.user_id];
+
     return (
       <article className='post-show-modal-comment-card-wrap' key={`${comment.id}${comment.body}${comment.created_at}`}>
-        {comment.body}
+        <div>
+          <img className='post-show-modal-comment-card-pic' src={user.profilePictureUrl} />
+          <div className='post-show-modal-comment-graybox'>
+
+            <div className='post-show-modal-comment-card-header'>
+              <div className='post-show-modal-comment-card-header-left'>
+                <span>{user.first_name} {user.last_name} {user.id === this.props.currentUser.id ? <div>Author</div> : null}</span>
+                <span>{user.headline}</span>
+              </div>
+
+              <div className='post-show-modal-comment-card-header-right'>
+                <span>{this.convertDate(comment)}</span>
+                <button><img src={window.postEditURL} /></button>
+              </div>
+            </div>
+
+            <div className='post-show-modal-comment-content'>
+              <p>{comment.body}</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div className='post-show-modal-comment-replies'>
+          
+        </div>
       </article>
     )
   }
@@ -280,7 +318,7 @@ export default class PostShowModal extends Component {
                   <span className='post-show-modal-social'>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
                 </li>
 
-                <span onClick={() => this.setState({ commentsOn: true })} className='post-show-modal-comments'>{this.state.commentCount} comment{this.state.commentCount > 1 ? "s" : ""}</span>
+                <span onClick={() => this.setState({ commentInputOn: true, commentSectionOn: true })} className='post-show-modal-comments'>{this.state.commentCount} comment{this.state.commentCount > 1 ? "s" : ""}</span>
               </ul>
 
               <div className='post-show-modal-actions'>
