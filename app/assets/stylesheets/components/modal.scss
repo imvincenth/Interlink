@@ -322,7 +322,7 @@
 }
 
 .post-show-modal-input {
-  margin-top: 4px;
+  margin-top: 4.5px;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   display: flex;
@@ -363,4 +363,12 @@
 
 .post-show-modal-comment:hover {
   background-color: rgb(2, 59, 116)
+}
+
+.post-show-modal-comment-card-wrap {
+  padding: 0;
+  margin: 12px 16px;
+  display: block;
+  clear: left;
+  
 }

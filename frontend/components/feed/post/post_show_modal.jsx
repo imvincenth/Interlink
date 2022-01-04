@@ -45,6 +45,7 @@ export default class PostShowModal extends Component {
       firstReactorName: "",
       reactionDockOn: false,
 
+      postComments: [],
       commentCount: 0,
 
       commentInputOn: false,
@@ -144,9 +145,11 @@ export default class PostShowModal extends Component {
   }
 
   commentsOrganization() {
+    let tempPostComments = [];
     let tempCommentCount = 0;
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempPostComments.push(comment) : null);
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
-    this.setState({ commentCount: tempCommentCount });
+    this.setState({ postComments: [...tempPostComments], commentCount: tempCommentCount });
   }
 
   renderReactionCard(reaction) {
@@ -222,11 +225,11 @@ export default class PostShowModal extends Component {
     )
   }
 
-  renderCommentSection() {
+  renderCommentSection(comment) {
     return (
-      <div>
-
-      </div>
+      <article className='post-show-modal-comment-card-wrap' key={`${comment.id}${comment.body}${comment.created_at}`}>
+        {comment.body}
+      </article>
     )
   }
 
@@ -301,8 +304,9 @@ export default class PostShowModal extends Component {
             {this.state.commentInputOn ? this.renderCommentInput() : null}
 
             <div>
-
+              {this.state.postComments.map(comment => this.renderCommentSection(comment))}
             </div>
+
           </div>
         </div>
 
