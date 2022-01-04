@@ -297,7 +297,70 @@
 
 .post-show-reaction-box {
   width: 100%;
-  // display: flex;
-  // flex-direction: column-reverse;
   position: relative;
+}
+
+.post-show-modal-input-wrap {
+  display: flex;
+  flex-shrink: 0;
+  padding: 4px 14px 8px 14px;
+}
+
+.post-show-modal-input-pic {
+  margin-top: 4px;
+  margin-right: 4px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.post-show-modal-input-box {
+  width: calc(100% - 65px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.post-show-modal-input {
+  margin-top: 4px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10.5px 9.5px 10.5px 9.5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.9);
+  width: 100%;
+  outline: none;
+  transition-duration: 0.1s;
+  transition-property: background-color, box-shadow, color;
+}
+
+.post-show-modal-input:focus {
+  box-shadow: #b2b2b2 0px 0px 0px 1px inset;
+}
+
+.post-show-modal-comment {
+  border: none;
+  border-radius: 16px;
+  background-color: rgb(10, 102, 194);
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-top: 12px;
+  padding: 2px 12px 2px 12px;
+  text-align: center;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.post-show-modal-comment:hover {
+  background-color: rgb(2, 59, 116)
 }

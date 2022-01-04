@@ -600,6 +600,7 @@
   height: 0px;
   padding-top: 56.25%;
   position: relative;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -628,9 +629,6 @@
   transition-property: width, height, opacity;
   transition-timing-function: ease-in-out;
   display: none;
-  // top: -59px;
-  // opacity: 0;
-  // pointer-events: none;
   z-index: 9999;
 }
 

@@ -31,8 +31,6 @@ export default class PostShowModal extends Component {
       post_id: this.props.post.id,
       body: "",
 
-      commentField: false,
-
       reactor_id: this.props.currentUser.id,
       react_type: "",
       reactable_type: "Post",
@@ -47,15 +45,19 @@ export default class PostShowModal extends Component {
       firstReactorName: "",
       reactionDockOn: false,
 
+      commentCount: 0,
+
       commentInputOn: false,
       commentSectionOn: false
     }
 
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.react = this.react.bind(this);
     this.reactEdit = this.reactEdit.bind(this);
   }
 
   componentDidMount() {
+    this.commentsOrganization();
     this.props.fetchPostReactions(this.props.post.id)
       .then(() => this.reactionsOrganization())
       .then(() => this.setCurrentReaction());
@@ -65,6 +67,20 @@ export default class PostShowModal extends Component {
     if ((prevProps.reactions.length !== this.props.reactions.length) || (JSON.stringify(prevProps.reactions) !== JSON.stringify(this.props.reactions))) {
       this.reactionsOrganization();
     }
+    if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
+      this.commentsOrganization();
+    }
+  }
+
+  update(field) {
+    return e => this.setState({ [field]: e.currentTarget.value });
+  }
+
+  handleCommentSubmit(e) {
+    e.preventDefault();
+
+    this.props.createComment({...this.state})
+      .then(() => this.setState({ body: "" }));
   }
 
   setCurrentReaction() {
@@ -125,6 +141,12 @@ export default class PostShowModal extends Component {
     if (tempFirstUserId === this.props.currentUser.id) tempUserName = "You";
 
     this.setState({ reactionIcons: [...tempIconStore], reactionCount: tempReactCount, firstReactorName: tempUserName });
+  }
+
+  commentsOrganization() {
+    let tempCommentCount = 0;
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
+    this.setState({ commentCount: tempCommentCount });
   }
 
   renderReactionCard(reaction) {
@@ -188,7 +210,19 @@ export default class PostShowModal extends Component {
     )
   }
 
-  renderCommentsSections() {
+  renderCommentInput() {
+    return (
+      <form className='post-show-modal-input-wrap'>
+        <img className='post-show-modal-input-pic' src={this.props.currentUser.profilePictureUrl} />
+        <div className='post-show-modal-input-box'>
+          <input className='post-show-modal-input' type="text" placeholder='Add a comment...' value={this.state.body} onChange={this.update("body")} />
+          {this.state.body.length > 0 ? <input className='post-show-modal-comment' type="submit" value="Post" onClick={this.handleCommentSubmit} /> : null}
+        </div>
+      </form>
+    )
+  }
+
+  renderCommentSection() {
     return (
       <div>
 
@@ -243,7 +277,7 @@ export default class PostShowModal extends Component {
                   <span className='post-show-modal-social'>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
                 </li>
 
-                <span onClick={() => this.setState({ commentsOn: true })} className='post-show-modal-comments'>{this.props.comments.length} comment{this.props.comments.length > 1 ? "s" : ""}</span>
+                <span onClick={() => this.setState({ commentsOn: true })} className='post-show-modal-comments'>{this.state.commentCount} comment{this.state.commentCount > 1 ? "s" : ""}</span>
               </ul>
 
               <div className='post-show-modal-actions'>
@@ -252,7 +286,7 @@ export default class PostShowModal extends Component {
                   {this.renderReactionDock()}
                 </div>
 
-                <button className='post-show-modal-action' onClick={() => this.setState({ commentsOn: true })}>
+                <button className='post-show-modal-action' onClick={() => this.setState({ commentInputOn: true })}>
                   <img className='post-show-modal-action-icon' src={window.commentURL} />
                   <span className='post-show-modal-action-text'>Comment</span>
                 </button>
@@ -263,8 +297,13 @@ export default class PostShowModal extends Component {
                 </button>
               </div>
             </div>
-          </div>
 
+            {this.state.commentInputOn ? this.renderCommentInput() : null}
+
+            <div>
+
+            </div>
+          </div>
         </div>
 
       </div>

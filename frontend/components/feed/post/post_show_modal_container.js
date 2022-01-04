@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeModal } from '../../../actions/modal_actions';
+import { fetchComments } from '../../../actions/comment_actions';
+import { createComment } from '../../../actions/comment_actions';
 import { fetchPostReactions, createPostReaction, updatePostReaction, deletePostReaction } from '../../../actions/reaction_actions';
 import PostShowModal from './post_show_modal';
 
@@ -17,6 +19,8 @@ const mSTP = state => ({
 const mDTP = dispatch => ({
   action: post => dispatch(updatePost(post)),
   closeModal: () => dispatch(closeModal()),
+  fetchComments: postId => dispatch(fetchComments(postId)),
+  createComment: comment => dispatch(createComment(comment)),
   fetchPostReactions: postId => dispatch(fetchPostReactions(postId)),
   createPostReaction: reaction => dispatch(createPostReaction(reaction)),
   updatePostReaction: reaction => dispatch(updatePostReaction(reaction)),
