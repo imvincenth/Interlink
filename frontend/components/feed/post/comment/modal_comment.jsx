@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-redux';
+import ModalReplyContainer from './modal_reply_container';
 
 const reactionLibrary = {
   "Like": window.likeURL,
@@ -22,7 +23,7 @@ const reactionColors = {
 export default class ModalComment extends Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props.comment);
     this.state = {
       ...this.props.comment,
 
@@ -39,9 +40,16 @@ export default class ModalComment extends Component {
       edited: this.props.comment.created_at !== this.props.comment.updated_at,
       seeMoreActive: false,
 
-      postReplies: [],
+      postReplies: [...this.props.replies],
+
+      editMenuActive: false,
+      editCommentOn: false
     }
 
+  }
+
+  componentDidMount() {
+    this.repliesOrganization();
   }
 
   convertDate(comment) {
@@ -63,43 +71,104 @@ export default class ModalComment extends Component {
         return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7 * 4))}m`;
     }
   }
+
+  repliesOrganization() {
+    let tempPostReplies = [];
+
+    this.state.postReplies.forEach(reply => reply.reply_id === this.props.comment.id ? tempPostReplies.push(reply) : null);
+    this.setState({ postReplies: [...tempPostReplies] });
+  }
+
+  renderEditMenu() {
+    if (this.props.comment.user_id === this.props.currentUser.id) {
+      return (
+        <div className='post-show-modal-edit-menu-wrap'>
+          <ul>
+
+            <li className='post-show-modal-edit-menu-item' onClick={() => this.setState({ editCommentOn: true })}>
+              <div className='post-show-modal-edit-menu-item-content'>
+                <img src={window.quillURL} />
+                <div className='post-show-modal-edit-menu-item-text'>
+                  <h5>Edit</h5>
+                  <p></p>
+                </div>
+              </div>
+            </li>
+
+            <li className='post-show-modal-edit-menu-item' onClick={() => this.props.deleteComment(this.props.comment.id)}>
+              <div className='post-show-modal-edit-menu-item-content'>
+                <img src={window.trashURL} />
+                <div className='post-show-modal-edit-menu-item-text'>
+                  <h5>Delete</h5>
+                  <p></p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      )
+    } else {
+      return (
+        <div className='post-show-modal-edit-menu-wrap'>
+          <ul>
+
+            <li className='post-show-modal-edit-menu-item'>
+              <div className='post-show-modal-edit-menu-item-content'>
+                <img src={window.ownerURL} />
+                <div className='post-show-modal-edit-menu-item-text'>
+                  <h5>This is {this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}'s comment.</h5>
+                  <p>Unable to edit or delete this comment.</p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      )
+    }
+  }
   
   render() {
-    let user = this.props.users[this.props.post.user_id];
+    let user = this.props.users[this.props.comment.user_id];
 
     const { comment } = this.props;
 
     return (
-      <div>
-        <article className='post-show-modal-comment-card-wrap' key={`${comment.id}${comment.body}${comment.created_at}`}>
-          <div>
-            <img className='post-show-modal-comment-card-pic' src={user.profilePictureUrl} />
-            <div className='post-show-modal-comment-graybox'>
+      <article className='post-show-modal-comment-card-outer' key={`${comment.id}${comment.body}${comment.created_at}`}>
+        <div className='post-show-modal-comment-card-inner'>
+          {user.profilePictureUrl ? <img className='post-show-modal-comment-card-pic' src={user.profilePictureUrl} /> : <img className='post-show-modal-comment-card-pic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
+          <div className='post-show-modal-comment-graybox'>
 
-              <div className='post-show-modal-comment-card-header'>
-                <div className='post-show-modal-comment-card-header-left'>
-                  <span>{user.first_name} {user.last_name} {user.id === this.props.currentUser.id ? <div className='author-tag'>Author</div> : null}</span>
-                  <span>{user.headline}</span>
+            <div className='post-show-modal-comment-card-header'>
+              <div className='post-show-modal-comment-card-header-left'>
+                <div className='post-show-modal-comment-card-header-left-top'>
+                  <span className='post-show-modal-comment-username'>{user.first_name} {user.last_name}</span>
+                  {user.id === this.props.currentUser.id ? <div className='author-tag'>Author</div> : null}
                 </div>
-
-                <div className='post-show-modal-comment-card-header-right'>
-                  <span>{this.convertDate(comment)}</span>
-                  <button><img src={window.postEditURL} /></button>
-                </div>
+                <span className='post-show-modal-comment-headline'>{user.headline}</span>
               </div>
 
-              <div className='post-show-modal-comment-content'>
-                <p>{comment.body}</p>
+              <div className='post-show-modal-comment-card-header-right'>
+                <span className='post-show-modal-comment-card-timestamp'>{this.convertDate(comment)}</span>
+                {this.state.edited ? " (edited) " : null}
+                <button onClick={() => this.setState({ editMenuActive: !this.state.editMenuActive })} className='post-show-modal-comment-card-edit-button'><img className='post-show-modal-comment-card-edit-img' src={window.postEditURL} /></button>
               </div>
-
+              {this.state.editMenuActive ? this.renderEditMenu() : null}
             </div>
-          </div>
 
-          <div className='post-show-modal-comment-replies'>
-            
+            <div className='post-show-modal-comment-content'>
+              {this.state.seeMoreActive ? <span className='post-body-text'>{comment.body}</span> : <span className='post-body-text'>{comment.body.slice(0, 150)}</span>}
+              {this.state.seeMoreActive || comment.body.length < 150 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })}>...see more</button>}
+            </div>
+
           </div>
-        </article>
-      </div>
+        </div>
+            <div className='post-show-modal-comment-replies'>
+              {this.state.postReplies.map(reply => <ModalReplyContainer key={`${reply.id}${reply.body}${reply.created_at}`} reply={reply} />)}
+            </div>
+
+      </article>
     )
   }
 }

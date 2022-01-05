@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchComments, createComment, updateComment, deleteComment } from '../../../../actions/comment_actions';
+import { fetchComments, createComment } from '../../../../actions/comment_actions';
 import { fetchCommentReactions, createCommentReaction, updateCommentReaction, deleteCommentReaction } from '../../../../actions/reaction_actions';
 import { fetchUsers, fetchUser } from '../../../../actions/user_actions';
-import ModalComment from './modal_comment';
+import ModalReply from './modal_reply';
 
 const mSTP = (state, ownProps) => ({
   post: state.ui.modalParamsReducer,
@@ -28,4 +28,4 @@ const mDTP = dispatch => ({
   fetchUser: user => dispatch(fetchUser(user)),
 });
 
-export default connect(mSTP, mDTP)(ModalComment);
+export default connect(mSTP, mDTP)(ModalReply);

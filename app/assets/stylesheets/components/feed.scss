@@ -458,6 +458,7 @@
 }
 
 .post-edit-menu-item {
+  list-style-type: none;
   cursor: pointer;
 }
 
@@ -596,7 +597,7 @@
 }
 
 .post-media-wrap {
-  width: 540px;
+  width: 100%;
   height: 0px;
   padding-top: 56.25%;
   position: relative;
@@ -605,7 +606,7 @@
 }
 
 .post-media {
-  width: 99.6%;
+  width: 100%;
   height: 100%;
   position: absolute;
   top: 0;

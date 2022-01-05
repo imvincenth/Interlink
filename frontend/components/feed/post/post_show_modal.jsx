@@ -150,18 +150,13 @@ export default class PostShowModal extends Component {
 
   commentsOrganization() {
     let tempPostComments = [];
+    let tempPostReplies = [];
     let tempCommentCount = 0;
 
-    this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempPostComments.push(comment) : null);
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === null ? tempPostComments.push(comment) : null);
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id !== null ? tempPostReplies.push(comment) : null);
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
-    this.setState({ postComments: [...tempPostComments], commentCount: tempCommentCount });
-  }
-
-  repliesOrganization(comment) {
-    let tempPostReplies = [];
-
-    this.state.postComments.forEach(postComment => postComment.reply_id === comment.id ? tempPostReplies.push(postComment) : null);
-    this.setState({ postReplies: [...tempPostReplies] });
+    this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
   }
 
   renderReactionCard(reaction) {
@@ -342,9 +337,7 @@ export default class PostShowModal extends Component {
 
             {this.state.commentInputOn ? this.renderCommentInput() : null}
 
-            <div>
-              {this.state.postComments.map(comment => <ModalCommentContainer key={`${comment.id}${comment.body}${comment.created_at}`} props={this.props} comment={comment} />)}
-            </div>
+            {this.state.postComments.map(comment => <ModalCommentContainer key={`${comment.id}${comment.body}${comment.created_at}`} replies={this.state.postReplies} comment={comment} />)}
 
           </div>
         </div>
