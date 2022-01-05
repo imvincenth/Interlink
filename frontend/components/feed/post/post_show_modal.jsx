@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import ModalCommentContainer from './comment/modal_comment_container';
 
 const reactionLibrary = {
   "Like": window.likeURL,
@@ -247,7 +248,7 @@ export default class PostShowModal extends Component {
 
             <div className='post-show-modal-comment-card-header'>
               <div className='post-show-modal-comment-card-header-left'>
-                <span>{user.first_name} {user.last_name} {user.id === this.props.currentUser.id ? <div>Author</div> : null}</span>
+                <span>{user.first_name} {user.last_name} {user.id === this.props.currentUser.id ? <div className='author-tag'>Author</div> : null}</span>
                 <span>{user.headline}</span>
               </div>
 
@@ -342,7 +343,7 @@ export default class PostShowModal extends Component {
             {this.state.commentInputOn ? this.renderCommentInput() : null}
 
             <div>
-              {this.state.postComments.map(comment => this.renderCommentSection(comment))}
+              {this.state.postComments.map(comment => <ModalCommentContainer key={`${comment.id}${comment.body}${comment.created_at}`} props={this.props} comment={comment} />)}
             </div>
 
           </div>
