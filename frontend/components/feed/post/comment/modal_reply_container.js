@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchComments, createComment } from '../../../../actions/comment_actions';
+import { fetchComments, createComment, updateComment, deleteComment } from '../../../../actions/comment_actions';
 import { fetchCommentReactions, createCommentReaction, updateCommentReaction, deleteCommentReaction } from '../../../../actions/reaction_actions';
 import { fetchUsers, fetchUser } from '../../../../actions/user_actions';
 import ModalReply from './modal_reply';

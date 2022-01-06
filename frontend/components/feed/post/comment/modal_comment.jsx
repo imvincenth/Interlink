@@ -73,6 +73,8 @@ export default class ModalComment extends Component {
     }
     if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
       this.commentsOrganization();
+        // .then(() => this.repliesOrganization());
+      this.repliesOrganization();
     }
   }
 
@@ -386,7 +388,7 @@ export default class ModalComment extends Component {
           {this.state.replyFieldActive ? this.renderReplyField() : null}
 
           <div className='post-show-modal-comment-replies'>
-            {this.state.postReplies.map(reply => <ModalReplyContainer key={`${reply.id}${reply.body}${reply.created_at}`} reply={reply} />)}
+            {this.state.postReplies.map(reply => <ModalReplyContainer key={`${reply.id}${reply.body}${reply.created_at}`} replies={this.state.postReplies} reply={reply} />)}
           </div>
 
       </article>
