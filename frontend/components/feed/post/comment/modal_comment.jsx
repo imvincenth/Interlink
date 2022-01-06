@@ -91,7 +91,7 @@ export default class ModalComment extends Component {
   handleCommentSubmit(e) {
     e.preventDefault();
 
-    this.props.createComment({...this.state, reply_id: this.props.comment.id, body: this.state.replyBody})
+    this.props.createComment({...this.state, user_id: this.props.currentUser.id, reply_id: this.props.comment.id, body: this.state.replyBody})
       .then(() => this.setState({ replyBody: "" }));
   }
 
@@ -215,7 +215,7 @@ export default class ModalComment extends Component {
               <div className='post-show-modal-edit-menu-item-content'>
                 <img src={window.ownerURL} />
                 <div className='post-show-modal-edit-menu-item-text'>
-                  <h5>This is {this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}'s comment.</h5>
+                  <h5>This is {this.props.users[this.props.comment.user_id].first_name} {this.props.users[this.props.comment.user_id].last_name}'s comment.</h5>
                   <p>Unable to edit or delete this comment.</p>
                 </div>
               </div>

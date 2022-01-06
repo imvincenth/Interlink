@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-redux';
-import ModalReplyContainer from './modal_reply_container';
 
 const reactionLibrary = {
   "Like": window.likeURL,
@@ -31,8 +30,8 @@ export default class ModalReply extends Component {
 
       reactor_id: this.props.currentUser.id,
       react_type: "",
-      reactable_type: "Comment",
-      reactable_id: this.props.reply.id,
+      reactable_type: "Post",
+      reactable_id: this.props.post.id,
 
       currentReaction: "",
 
@@ -44,80 +43,19 @@ export default class ModalReply extends Component {
       edited: this.props.reply.created_at !== this.props.reply.updated_at,
       seeMoreActive: false,
 
-      postReplies: [...this.props.replies],
-
-      editMenuActive: false,
-      editCommentOn: false,
-
-      replyFieldActive: false,
+      postReplies: [],
     }
 
-    this.bodyFreeze = this.state.body;
-
-    this.handleEditComment = this.handleEditComment.bind(this);
-    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
-    this.react = this.react.bind(this);
-    this.reactEdit = this.reactEdit.bind(this);
   }
 
   componentDidMount() {
-    this.repliesOrganization();
     this.props.fetchCommentReactions(this.props.reply.id)
       .then(() => this.reactionsOrganization())
       .then(() => this.setCurrentReaction());
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if ((prevProps.reactions.length !== this.props.reactions.length) || (JSON.stringify(prevProps.reactions) !== JSON.stringify(this.props.reactions))) {
-      this.reactionsOrganization();
-    }
-    if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
-      this.commentsOrganization();
-        // .then(() => this.repliesOrganization());
-      this.repliesOrganization();
-    }
-  }
-
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
-  }
-
-  handleEditComment(e) {
-    e.preventDefault();
-
-    this.props.updateComment({...this.state});
-  }
-
-  handleCommentSubmit(e) {
-    e.preventDefault();
-
-    this.props.createComment({...this.state, reply_id: this.props.reply.id, body: this.state.replyBody})
-      .then(() => this.setState({ replyBody: "" }));
-  }
-
-  react(reaction) {
-    this.props.createCommentReaction({...this.state, react_type: reaction})
-      .then(() => this.setCurrentReaction())
-      // .then(() => this.setState({ commentsOn: true }));
-  }
-
-  reactEdit(reaction) {
-    this.props.updateCommentReaction({...this.state.currentReaction, react_type: reaction})
-      .then(() => this.setCurrentReaction())
-      // .then(() => this.setState({ commentsOn: true }));
-  }
-
-  removeReaction() {
-    this.props.deleteCommentReaction(this.state.currentReaction.id)
-      .then(() => this.setState({ react_type: "", currentReaction: "" }));
-  }
-
-  setCurrentReaction() {
-    for (let reaction of this.props.reactions) {
-      if (reaction.reactor_id === this.props.currentUser.id && reaction.reactable_id === this.props.reply.id && reaction.reactable_type === "Comment") {
-        this.setState({ currentReaction: reaction, react_type: reaction.react_type });
-      }
-    }
   }
 
   reactionsOrganization() {
@@ -139,21 +77,18 @@ export default class ModalReply extends Component {
     this.setState({ reactionIcons: [...tempIconStore], reactionCount: tempReactCount, firstReactorName: tempUserName });
   }
 
-  commentsOrganization() {
-    let tempPostComments = [];
-    let tempPostReplies = [];
-    let tempCommentCount = 0;
-
-    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === null ? tempPostComments.push(comment) : null);
-    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id !== null ? tempPostReplies.push(comment) : null);
-    this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
-    this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
+  setCurrentReaction() {
+    for (let reaction of this.props.reactions) {
+      if (reaction.reactor_id === this.props.currentUser.id && reaction.reactable_id === this.props.reply.id && reaction.reactable_type === "Comment") {
+        this.setState({ currentReaction: reaction, react_type: reaction.react_type });
+      }
+    }
   }
- 
-  convertDate(comment) {
+
+  convertDate(reply) {
     let rawDate;
-    if (comment) rawDate = Date.now() - new Date(comment.created_at);
-    if (!comment) rawDate = Date.now() - new Date(this.props.post.created_at);
+    if (reply) rawDate = Date.now() - new Date(reply.created_at);
+    if (!reply) rawDate = Date.now() - new Date(this.props.post.created_at);
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
@@ -168,13 +103,6 @@ export default class ModalReply extends Component {
       case (rawDate >= 2419200000): // months
         return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7 * 4))}m`;
     }
-  }
-
-  repliesOrganization() {
-    let tempPostReplies = [];
-
-    this.state.postReplies.forEach(reply => reply.reply_id === this.props.reply.id ? tempPostReplies.push(reply) : null);
-    this.setState({ postReplies: [...tempPostReplies] });
   }
 
   renderEditMenu() {
@@ -215,7 +143,7 @@ export default class ModalReply extends Component {
               <div className='post-show-modal-edit-menu-item-content'>
                 <img src={window.ownerURL} />
                 <div className='post-show-modal-edit-menu-item-text'>
-                  <h5>This is {this.props.users[this.props.post.user_id].first_name} {this.props.users[this.props.post.user_id].last_name}'s comment.</h5>
+                  <h5>This is {this.props.users[this.props.reply.user_id].first_name} {this.props.users[this.props.reply.user_id].last_name}'s comment.</h5>
                   <p>Unable to edit or delete this comment.</p>
                 </div>
               </div>
@@ -302,7 +230,7 @@ export default class ModalReply extends Component {
   
   render() {
     let user = this.props.users[this.props.reply.user_id];
-    console.log(this.props.replies);
+
     const textArea = document.querySelector('textarea')
     const textRowCount = textArea ? textArea.value.split("\n").length : 0
     const rows = textRowCount + 1
@@ -310,8 +238,8 @@ export default class ModalReply extends Component {
     const { reply } = this.props;
 
     return (
-      <article className='post-show-modal-comment-card-outer' key={`${reply.id}${reply.body}${reply.created_at}`}>
-        <div className='post-show-modal-comment-card-inner'>
+      <div>
+          <div className='post-show-modal-comment-card-inner'>
           {user.profilePictureUrl ? <img className='post-show-modal-comment-card-pic' src={user.profilePictureUrl} /> : <img className='post-show-modal-comment-card-pic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
           <div>
             <div className='post-show-modal-comment-graybox'>
@@ -386,12 +314,7 @@ export default class ModalReply extends Component {
           </div>
 
           {this.state.replyFieldActive ? this.renderReplyField() : null}
-
-          <div className='post-show-modal-comment-replies'>
-
-          </div>
-
-      </article>
+      </div>
     )
   }
 }
