@@ -137,13 +137,15 @@ export default class PostShowModal extends Component {
 
     let tempFirstUserId = this.props.reactions[0].reactor_id;
     let tempUser;
-    let tempReactCount = this.props.reactions.length;
+    let tempReactCount = 0;
 
-    this.props.reactions.forEach(reaction => !tempIconStore.includes(reaction.react_type) && tempIconStore.length <= 3 ? tempIconStore.push(reaction.react_type) : null);
+    this.props.reactions.forEach(reaction => !tempIconStore.includes(reaction.react_type) && tempIconStore.length <= 3 && reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempIconStore.push(reaction.react_type) : null);
+    this.props.reactions.forEach(reaction => reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempReactCount++ : null);
 
     this.props.usersArr.forEach(user => user.id === tempFirstUserId ? tempUser = user : null);
     let tempUserName = `${tempUser.first_name} ${tempUser.last_name}`;
     if (tempFirstUserId === this.props.currentUser.id) tempUserName = "You";
+    if (tempIconStore.length === 0) tempUserName = null;
 
     this.setState({ reactionIcons: [...tempIconStore], reactionCount: tempReactCount, firstReactorName: tempUserName });
   }
@@ -223,7 +225,7 @@ export default class PostShowModal extends Component {
   renderCommentInput() {
     return (
       <form className='post-show-modal-input-wrap'>
-        <img className='post-show-modal-input-pic' src={this.props.currentUser.profilePictureUrl} />
+        <img className='post-show-modal-input-pic' src={this.props.currentUser.profilePictureUrl ? this.props.currentUser.profilePictureUrl : "https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q"} />
         <div className='post-show-modal-input-box'>
           <input className='post-show-modal-input' type="text" placeholder='Add a comment...' value={this.state.body} onChange={this.update("body")} />
           {this.state.body.length > 0 ? <input className='post-show-modal-comment' type="submit" value="Post" onClick={this.handleCommentSubmit} /> : null}

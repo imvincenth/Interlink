@@ -6,7 +6,7 @@ const reactionsReducer = (oldState = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_REACTIONS:
-      return action.reactions;
+      return Object.assign(newState, action.reactions);
     case RECEIVE_REACTION:
       newState[action.reaction.id] = action.reaction;
       return newState;
