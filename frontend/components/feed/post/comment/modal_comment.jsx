@@ -61,7 +61,7 @@ export default class ModalComment extends Component {
   }
 
   componentDidMount() {
-    this.repliesOrganization();
+    this.repliesOrganization(); // debug this 01/06/22
     this.props.fetchCommentReactions(this.props.comment.id)
       .then(() => this.reactionsOrganization())
       .then(() => this.setCurrentReaction());
@@ -149,6 +149,13 @@ export default class ModalComment extends Component {
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
     this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
   }
+
+  repliesOrganization() {
+    let tempPostReplies = [];
+
+    this.state.postReplies.forEach(reply => reply.reply_id === this.props.comment.id ? tempPostReplies.push(reply) : null);
+    this.setState({ postReplies: [...tempPostReplies] });
+  }
  
   convertDate(comment) {
     let rawDate;
@@ -168,13 +175,6 @@ export default class ModalComment extends Component {
       case (rawDate >= 2419200000): // months
         return `${Math.floor(rawDate / (1000 * 60 * 60 * 24 * 7 * 4))}m`;
     }
-  }
-
-  repliesOrganization() {
-    let tempPostReplies = [];
-
-    this.state.postReplies.forEach(reply => reply.reply_id === this.props.comment.id ? tempPostReplies.push(reply) : null);
-    this.setState({ postReplies: [...tempPostReplies] });
   }
 
   renderEditMenu() {
