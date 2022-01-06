@@ -32,6 +32,8 @@ export default class ModalComment extends Component {
       reactable_type: "Post",
       reactable_id: this.props.post.id,
 
+      currentReaction: "",
+
       reactionIcons: [],
       reactionCount: 0,
       firstReactorName: "",
@@ -46,12 +48,44 @@ export default class ModalComment extends Component {
       editCommentOn: false
     }
 
+    this.bodyFreeze = this.state.body;
+
+    this.handleEditComment = this.handleEditComment.bind(this);
+    this.react = this.react.bind(this);
+    this.reactEdit = this.reactEdit.bind(this);
   }
 
   componentDidMount() {
     this.repliesOrganization();
   }
 
+  update(field) {
+    return e => this.setState({ [field]: e.currentTarget.value });
+  }
+
+  handleEditComment(e) {
+    e.preventDefault();
+
+    this.props.updateComment({...this.state});
+  }
+
+  react(reaction) {
+    this.props.createPostReaction({...this.state, react_type: reaction})
+      .then(() => this.setCurrentReaction())
+      .then(() => this.setState({ commentsOn: true }));
+  }
+
+  reactEdit(reaction) {
+    this.props.updatePostReaction({...this.state.currentReaction, react_type: reaction})
+      .then(() => this.setCurrentReaction())
+      .then(() => this.setState({ commentsOn: true }));
+  }
+
+  removeReaction() {
+    this.props.deletePostReaction(this.state.currentReaction.id)
+      .then(() => this.setState({ react_type: "", currentReaction: "" }));
+  }
+ 
   convertDate(comment) {
     let rawDate;
     if (comment) rawDate = Date.now() - new Date(comment.created_at);
@@ -85,7 +119,7 @@ export default class ModalComment extends Component {
         <div className='post-show-modal-edit-menu-wrap'>
           <ul>
 
-            <li className='post-show-modal-edit-menu-item' onClick={() => this.setState({ editCommentOn: true })}>
+            <li className='post-show-modal-edit-menu-item' onClick={() => this.setState({ editCommentOn: true, editMenuActive: false })}>
               <div className='post-show-modal-edit-menu-item-content'>
                 <img src={window.quillURL} />
                 <div className='post-show-modal-edit-menu-item-text'>
@@ -128,9 +162,31 @@ export default class ModalComment extends Component {
       )
     }
   }
+
+  renderReactionCard(reaction) {
+    if (reaction !== "") {
+      return (
+        <button className='post-show-modal-action' onClick={() => this.removeReaction()}>
+          {/* <img className='post-show-modal-action-icon' src={reactionLibrary[reaction]} /> */}
+          <span className='post-show-modal-action-text' style={{color: `${reactionColors[reaction]}`}}>{reaction}</span>
+        </button>
+      )
+    } else {
+      return (
+        <button className='post-show-modal-action' onClick={() => this.react("Like")}>
+          {/* <img className='post-show-modal-action-icon' src={window.nolikeURL} /> */}
+          <span className='post-show-modal-action-text'>Like</span>
+        </button>
+      )
+    }
+  }
   
   render() {
     let user = this.props.users[this.props.comment.user_id];
+
+    const textArea = document.querySelector('textarea')
+    const textRowCount = textArea ? textArea.value.split("\n").length : 0
+    const rows = textRowCount + 1
 
     const { comment } = this.props;
 
@@ -151,18 +207,44 @@ export default class ModalComment extends Component {
 
               <div className='post-show-modal-comment-card-header-right'>
                 <span className='post-show-modal-comment-card-timestamp'>{this.convertDate(comment)}</span>
-                {this.state.edited ? " (edited) " : null}
+                {this.state.edited ? <span className='post-show-modal-comment-card-timestamp'> (edited) </span> : null}
                 <button onClick={() => this.setState({ editMenuActive: !this.state.editMenuActive })} className='post-show-modal-comment-card-edit-button'><img className='post-show-modal-comment-card-edit-img' src={window.postEditURL} /></button>
               </div>
               {this.state.editMenuActive ? this.renderEditMenu() : null}
             </div>
 
-            <div className='post-show-modal-comment-content'>
+            {/* Comment Body */}
+            <div className='post-show-modal-comment-content' style={this.state.editCommentOn ? {display: "none"} : null}>
               {this.state.seeMoreActive ? <span className='post-body-text'>{comment.body}</span> : <span className='post-body-text'>{comment.body.slice(0, 150)}</span>}
-              {this.state.seeMoreActive || comment.body.length < 150 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })}>...see more</button>}
+              {this.state.seeMoreActive || comment.body.length < 150 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })} style={{"background-color": "#f2f2f2"}}>...see more</button>}
             </div>
 
+            {/* Comment Editor */}
+            <form className='post-show-modal-comment-form' style={this.state.editCommentOn ? null : {display: "none"}}>
+              {/* <input className='post-show-modal-comment-input-field' type="textarea" value={this.state.body} onChange={this.update("body")} /> */}
+              <textarea className='post-show-modal-comment-input-field' value={this.state.body} onChange={this.update("body")} rows={rows}></textarea>
+              <div>
+                {/* <input type="submit" value="Save Changes" onClick={this.handleEditComment} style={this.bodyFreeze !== this.state.body && this.state.body.length > 0 ? null : {"cursor": "not-allowed"}} /> */}
+                <input type="submit" value="Save Changes" onClick={this.handleEditComment} />
+                <button className='post-show-modal-edit-comment-cancel' onClick={() => this.setState({ editCommentOn: false })}>Cancel</button>
+              </div>
+            </form>
+
           </div>
+
+          {/* Reaction Bar */}
+          <div className='post-show-modal-comment-reaction-bar-wrap'>
+            <div className='post-show-modal-comment-reation-bar-left'>
+              {/* {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)} */}
+            </div>
+
+            <div></div>
+
+            <div className='post-show-modal-comment-reation-bar-right'>
+
+            </div>
+          </div>
+
         </div>
             <div className='post-show-modal-comment-replies'>
               {this.state.postReplies.map(reply => <ModalReplyContainer key={`${reply.id}${reply.body}${reply.created_at}`} reply={reply} />)}

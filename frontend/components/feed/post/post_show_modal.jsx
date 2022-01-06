@@ -319,7 +319,7 @@ export default class PostShowModal extends Component {
 
               <div className='post-show-modal-actions'>
                 <div className='post-show-reaction-box'>
-                {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
+                  {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
                   {this.renderReactionDock()}
                 </div>
 
