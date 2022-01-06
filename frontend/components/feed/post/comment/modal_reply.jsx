@@ -46,6 +46,8 @@ export default class ModalReply extends Component {
       postReplies: [],
     }
 
+    this.react = this.react.bind(this);
+    this.reactEdit = this.reactEdit.bind(this);
   }
 
   componentDidMount() {
@@ -56,6 +58,23 @@ export default class ModalReply extends Component {
 
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
+  }
+
+  react(reaction) {
+    this.props.createCommentReaction({...this.state, react_type: reaction})
+      .then(() => this.setCurrentReaction())
+      // .then(() => this.setState({ commentsOn: true }));
+  }
+
+  reactEdit(reaction) {
+    this.props.updateCommentReaction({...this.state.currentReaction, react_type: reaction})
+      .then(() => this.setCurrentReaction())
+      // .then(() => this.setState({ commentsOn: true }));
+  }
+
+  removeReaction() {
+    this.props.deleteCommentReaction(this.state.currentReaction.id)
+      .then(() => this.setState({ react_type: "", currentReaction: "" }));
   }
 
   reactionsOrganization() {

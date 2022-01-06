@@ -73,8 +73,8 @@ export default class ModalComment extends Component {
     }
     if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
       this.commentsOrganization();
+      // this.repliesOrganization();
         // .then(() => this.repliesOrganization());
-      this.repliesOrganization();
     }
   }
 
@@ -92,7 +92,7 @@ export default class ModalComment extends Component {
     e.preventDefault();
 
     this.props.createComment({...this.state, user_id: this.props.currentUser.id, reply_id: this.props.comment.id, body: this.state.replyBody})
-      .then(() => this.setState({ replyBody: "" }));
+      .then(() => this.setState({ replyBody: "", replyFieldActive: false }));
   }
 
   react(reaction) {
@@ -145,7 +145,7 @@ export default class ModalComment extends Component {
     let tempCommentCount = 0;
 
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === null ? tempPostComments.push(comment) : null);
-    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id !== null ? tempPostReplies.push(comment) : null);
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === this.props.comment.id ? tempPostReplies.push(comment) : null);
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
     this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
   }
