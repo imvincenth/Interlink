@@ -51,6 +51,8 @@ export default class ModalReply extends Component {
       replyFieldActive: false,
     }
 
+    this.handleEditComment = this.handleEditComment.bind(this);
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.react = this.react.bind(this);
     this.reactEdit = this.reactEdit.bind(this);
   }
@@ -74,6 +76,19 @@ export default class ModalReply extends Component {
 
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
+  }
+
+  handleEditComment(e) {
+    e.preventDefault();
+
+    this.props.updateComment({...this.state});
+  }
+
+  handleCommentSubmit(e) {
+    e.preventDefault();
+
+    this.props.createComment({...this.state, user_id: this.props.currentUser.id, reply_id: this.props.reply.reply_id, body: this.state.replyBody})
+      .then(() => this.setState({ replyBody: "", replyFieldActive: false }));
   }
 
   react(reaction) {
@@ -118,7 +133,7 @@ export default class ModalReply extends Component {
     let tempCommentCount = 0;
 
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === null ? tempPostComments.push(comment) : null);
-    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === this.props.comment.id ? tempPostReplies.push(comment) : null);
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === this.props.reply.id ? tempPostReplies.push(comment) : null);
     this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
     this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
   }
@@ -291,11 +306,11 @@ export default class ModalReply extends Component {
     const { reply } = this.props;
 
     return (
-      <div>
-          <div className='post-show-modal-comment-card-inner'>
+      <div className='post-show-modal-reply-card-outer'>
+          <div className='post-show-modal-reply-card-inner'>
           {user.profilePictureUrl ? <img className='post-show-modal-comment-card-pic' src={user.profilePictureUrl} /> : <img className='post-show-modal-comment-card-pic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
           <div>
-            <div className='post-show-modal-comment-graybox'>
+            <div className='post-show-modal-reply-graybox'>
 
               <div className='post-show-modal-comment-card-header'>
                 <div className='post-show-modal-comment-card-header-left'>

@@ -46,13 +46,6 @@ export default class Comment extends Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   // Fixing the memory leak error in console
-  //   this.setState = (state,callback)=>{
-  //     return;
-  //   };
-  // }
-
   handleEditSubmit(e) {
     e.preventDefault();
 

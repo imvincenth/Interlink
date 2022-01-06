@@ -61,10 +61,10 @@ export default class ModalComment extends Component {
   }
 
   componentDidMount() {
-    this.repliesOrganization(); // debug this 01/06/22
     this.props.fetchCommentReactions(this.props.comment.id)
       .then(() => this.reactionsOrganization())
-      .then(() => this.setCurrentReaction());
+      .then(() => this.setCurrentReaction())
+      .then(() => this.repliesOrganization());
   }
 
   componentDidUpdate(prevProps, prevState) {
