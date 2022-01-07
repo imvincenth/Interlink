@@ -19,6 +19,7 @@ const reactionColors = {
   "Insightful": "#915907",
   "Curious": "#80597e"
 };
+
 export default class Post extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +31,6 @@ export default class Post extends Component {
       reply_id: "",
       post_id: this.props.post.id,
       body: "",
-
-      commentField: false,
 
       reactor_id: this.props.sessionId,
       react_type: "",
@@ -53,7 +52,6 @@ export default class Post extends Component {
       postReplies: [],
       commentCount: 0,
 
-      commentInputOn: false,
       commentSectionOn: false,
 
       copySuccess: false
@@ -62,6 +60,7 @@ export default class Post extends Component {
     this.copyToClipboard = this.copyToClipboard.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.react = this.react.bind(this);
+    this.reactEdit = this.reactEdit.bind(this);
   }
   
   componentDidMount() {
@@ -73,8 +72,11 @@ export default class Post extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.reactions.length !== this.props.reactions.length) {
-      this.setCurrentReaction();
+    if ((prevProps.reactions.length !== this.props.reactions.length) || (JSON.stringify(prevProps.reactions) !== JSON.stringify(this.props.reactions))) {
+      this.reactionsOrganization();
+    }
+    if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
+      this.commentsOrganization();
     }
   }
 
@@ -82,7 +84,7 @@ export default class Post extends Component {
     e.preventDefault();
 
     this.props.createComment({...this.state})
-      .then(() => this.setState({ body: "", commentField: false }));
+      .then(() => this.setState({ body: "" }));
   }
 
   update(field) {
@@ -127,73 +129,78 @@ export default class Post extends Component {
     this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
   }
 
-  commentForm() {
+
+  
+  renderReactionCard(reaction) {
+    if (reaction !== "") {
+      return (
+        <button className='post-show-modal-action' onClick={() => this.removeReaction()}>
+          <img className='post-show-modal-action-icon' src={reactionLibrary[reaction]} />
+          <span className='post-show-modal-action-text' style={{color: `${reactionColors[reaction]}`}}>{reaction}</span>
+        </button>
+      )
+    } else {
+      return (
+        <button className='post-show-modal-action' onClick={() => this.react("Like")}>
+          <img className='post-show-modal-action-icon' src={window.nolikeURL} />
+          <span className='post-show-modal-action-text'>Like</span>
+        </button>
+      )
+    }
+  }
+
+  renderReactionDock() {
+    let actionType;
+    if (this.state.currentReaction === "") {
+      actionType = this.react;
+    } else {
+      actionType = this.reactEdit;
+    }
+
     return (
-      <div>
-        <form onSubmit={this.handleCommentSubmit}>
-          <input type="text" value={this.state.body} onChange={this.update("body")} />
-        </form>
+      <div className='post-reaction-dock'>
+        <button className='post-reaction-dock-item' onClick={() => actionType("Like")}>
+          <span className='post-reaction-dock-exp'>Like</span>
+          <img className='post-reaction-dock-icon' src={window.likeURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Celebrate")}>
+          <span className='post-reaction-dock-exp'>Celebrate</span>
+          <img className='post-reaction-dock-icon' src={window.celebrateURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Support")}>
+          <span className='post-reaction-dock-exp'>Support</span>
+          <img className='post-reaction-dock-icon' src={window.supportURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Love")}>
+          <span className='post-reaction-dock-exp'>Love</span>
+          <img className='post-reaction-dock-icon' src={window.loveURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Insightful")}>
+          <span className='post-reaction-dock-exp'>Insightful</span>
+          <img className='post-reaction-dock-icon' src={window.insightfulURL} />
+        </button>
+
+        <button className='post-reaction-dock-item' onClick={() => actionType("Curious")}>
+          <span className='post-reaction-dock-exp'>Curious</span>
+          <img className='post-reaction-dock-icon' src={window.curiousURL} />
+        </button>
       </div>
     )
   }
 
-  reactionForm() {
+  renderCommentInput() {
     return (
-      <div>
-        <button onClick={() => this.react("Like")}>
-          Like
-        </button>
-
-        <button onClick={() => this.react("Celebrate")}>
-          Celebrate
-        </button>
-
-        <button onClick={() => this.react("Support")}>
-          Support
-        </button>
-
-        <button onClick={() => this.react("Love")}>
-          Love
-        </button>
-
-        <button onClick={() => this.react("Insightful")}>
-          Insightful
-        </button>
-
-        <button onClick={() => this.react("Curious")}>
-          Curious
-        </button>
-      </div>
-    )
-  }
-
-  reactionEditForm() {
-    return (
-      <div>
-        <button onClick={() => this.reactEdit("Like")}>
-          Like
-        </button>
-
-        <button onClick={() => this.reactEdit("Celebrate")}>
-          Celebrate
-        </button>
-
-        <button onClick={() => this.reactEdit("Support")}>
-          Support
-        </button>
-
-        <button onClick={() => this.reactEdit("Love")}>
-          Love
-        </button>
-
-        <button onClick={() => this.reactEdit("Insightful")}>
-          Insightful
-        </button>
-
-        <button onClick={() => this.reactEdit("Curious")}>
-          Curious
-        </button>
-      </div>
+      <form className='post-show-modal-input-wrap'>
+        <img className='post-show-modal-input-pic' src={this.props.currentUser.profilePictureUrl ? this.props.currentUser.profilePictureUrl : "https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q"} />
+        <div className='post-show-modal-input-box'>
+          <input className='post-show-modal-input' type="text" placeholder='Add a comment...' value={this.state.body} onChange={this.update("body")} autoFocus />
+          {this.state.body.length > 0 ? <input className='post-show-modal-comment' type="submit" value="Post" onClick={this.handleCommentSubmit} /> : null}
+        </div>
+      </form>
     )
   }
 
@@ -391,18 +398,28 @@ export default class Post extends Component {
               <span className='post-show-modal-social'>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
             </li>
 
-            <span onClick={() => this.setState({ commentInputOn: true, commentSectionOn: true })} className='post-show-modal-comments'>{this.state.commentCount} comment{this.state.commentCount > 1 ? "s" : ""}</span>
+            <span onClick={() => this.setState({ commentSectionOn: true })} className='post-show-modal-comments'>{this.state.commentCount} comment{this.state.commentCount > 1 ? "s" : ""}</span>
           </ul>
+
+          <div className='post-show-modal-actions'>
+            <div className='post-show-reaction-box'>
+              {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
+              {this.renderReactionDock()}
+            </div>
+
+            <button className='post-show-modal-action' onClick={() => this.setState({ commentSectionOn: true })}>
+              <img className='post-show-modal-action-icon' src={window.commentURL} />
+              <span className='post-show-modal-action-text'>Comment</span>
+            </button>
+          </div>
         </div>
         
+        {this.state.commentSectionOn ? this.renderCommentInput() : null}
         
-        <button onClick={() => this.setState({ commentField: true })}>
-          Comment
-        </button>
-        {this.state.commentField ? this.commentForm() : null}
-          reaction: {this.state.react_type}
-        {this.state.currentReaction ? this.tempDislikeButton() : this.reactionForm()}
-        {this.props.comments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} comment={comment} /> : null)}
+        <div style={this.state.commentSectionOn ? null : {"display": "none"}}>
+          {this.state.postComments.map(comment => post.id === comment.post_id ? <CommentItemContainer key={`${comment.created_at}+${comment.body}`} replies={this.state.postReplies} comment={comment} post={post} /> : null).reverse()}
+        </div>
+
       </div>
     )
   }
