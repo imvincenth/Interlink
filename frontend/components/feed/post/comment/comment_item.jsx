@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom';
+import ReplyContainer from './reply_container';
 
 const reactionLibrary = {
   "Like": window.likeURL,
@@ -26,15 +27,24 @@ export default class Comment extends Component {
     this.state = {
       ...this.props.comment,
 
-      editField: false,
-      replyField: false,
+      replyBody: "",
 
       reactor_id: this.props.currentUser.id,
       react_type: "",
       reactable_type: "Comment",
       reactable_id: this.props.comment.id,
 
-      currentReaction: ""
+      currentReaction: "",
+
+      edited: this.props.comment.created_at !== this.props.comment.updated_at,
+      seeMoreActive: false,
+
+      postReplies: [...this.props.replies],
+
+      editMenuActive: false,
+      editCommentOn: false,
+
+      replyFieldActive: false,
     }
 
     this.bodyFreeze = this.state.body;
@@ -213,7 +223,7 @@ export default class Comment extends Component {
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
-        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "Just now";
+        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "now";
         return `${Math.round((rawDate/(1000 * 60)))}m`;
       case (rawDate >= 3600000 && rawDate < 86400000): // less than a day
         return `${Math.floor(rawDate / (1000 * 60 * 60))}h`; 
@@ -337,6 +347,18 @@ export default class Comment extends Component {
     }
   }
 
+  renderReplyField() {
+    return (
+      <form className='post-show-modal-reply-input-wrap'>
+        <img className='post-show-modal-input-pic' src={this.props.currentUser.profilePictureUrl ? this.props.currentUser.profilePictureUrl : "https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q"} />
+        <div className='post-show-modal-input-box'>
+          <input className='post-show-modal-input' type="text" placeholder='Add a reply...' value={this.state.replyBody} onChange={this.update("replyBody")} />
+          {this.state.replyBody.length > 0 ? <input className='post-show-modal-comment' type="submit" value="Reply" onClick={this.handleCommentSubmit} /> : null}
+        </div>
+      </form>
+    )
+  }
+
   render() {
     let user = this.props.users[this.props.comment.user_id];
 
@@ -414,11 +436,16 @@ export default class Comment extends Component {
 
               <div className='post-show-modal-comment-reation-bar-right'>
                 <button className='post-show-modal-comment-reply-button' onClick={() => this.setState({ replyFieldActive: true })}>Reply</button>
-                {/* {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-dot'>•</span> : null} */}
-                {/* {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-reply-count'>{this.state.postReplies.length === 1 ? "1 Reply" : `${this.state.postReplies.length} Replies`}</span> : null} */}
+                  {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-dot'>•</span> : null}
+                  {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-reply-count'>{this.state.postReplies.length === 1 ? "1 Reply" : `${this.state.postReplies.length} Replies`}</span> : null}
               </div>
             </div>
           </div>
+        </div>
+
+        <div className='post-show-modal-comment-replies'>
+          {this.state.postReplies.map(reply => <ReplyContainer key={`${reply.id}${reply.body}${reply.created_at}`} replies={this.state.postReplies} reply={reply} post={this.props.post} />)}
+          {this.state.replyFieldActive ? this.renderReplyField() : null}
         </div>
 
       </article>

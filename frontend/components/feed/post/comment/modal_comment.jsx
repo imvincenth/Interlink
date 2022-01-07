@@ -170,7 +170,7 @@ export default class ModalComment extends Component {
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
-        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "Just now";
+        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "now";
         return `${Math.round((rawDate/(1000 * 60)))}m`;
       case (rawDate >= 3600000 && rawDate < 86400000): // less than a day
         return `${Math.floor(rawDate / (1000 * 60 * 60))}h`; 
@@ -391,10 +391,10 @@ export default class ModalComment extends Component {
           </div>
         </div>
 
-          {this.state.replyFieldActive ? this.renderReplyField() : null}
 
           <div className='post-show-modal-comment-replies'>
             {this.state.postReplies.map(reply => <ModalReplyContainer key={`${reply.id}${reply.body}${reply.created_at}`} replies={this.state.postReplies} reply={reply} />)}
+            {this.state.replyFieldActive ? this.renderReplyField() : null}
           </div>
 
       </article>

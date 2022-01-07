@@ -237,7 +237,7 @@ export default class Post extends Component {
 
     switch(true) {
       case (rawDate < 3600000): // less than an hour
-        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "Just now";
+        if (`${Math.round((rawDate/(1000 * 60)))}m` === "0m") return "now";
         return `${Math.round((rawDate/(1000 * 60)))}m`;
       case (rawDate >= 3600000 && rawDate < 86400000): // less than a day
         return `${Math.floor(rawDate / (1000 * 60 * 60))}h`; 
