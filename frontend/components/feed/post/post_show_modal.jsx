@@ -62,7 +62,7 @@ export default class PostShowModal extends Component {
   componentDidMount() {
     // this.commentsOrganization();
     this.props.fetchPostReactions(this.props.post.id)
-      .then(() => this.commentsOrganization()) 
+      .then(() => this.commentsOrganization())
       .then(() => this.reactionsOrganization())
       .then(() => this.setCurrentReaction());
   }
@@ -74,6 +74,12 @@ export default class PostShowModal extends Component {
     if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
       this.commentsOrganization();
     }
+  }
+
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+        return;
+    };
   }
 
   update(field) {

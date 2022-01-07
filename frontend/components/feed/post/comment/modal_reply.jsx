@@ -74,6 +74,12 @@ export default class ModalReply extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+        return;
+    };
+  }
+
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
   }

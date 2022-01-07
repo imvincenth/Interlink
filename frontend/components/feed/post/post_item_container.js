@@ -12,7 +12,8 @@ const mSTP = state => ({
   currentUser: state.entities.users[state.session.id],
   comments: Object.values(state.entities.comments),
   reactions: Object.values(state.entities.reactions),
-  users: state.entities.users
+  users: state.entities.users,
+  usersArr: Object.values(state.entities.users),
 });
 
 const mDTP = dispatch => ({

@@ -56,12 +56,15 @@ export default class ModalComment extends Component {
 
     this.handleEditComment = this.handleEditComment.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+    this.commentsOrganization = this.commentsOrganization.bind(this);
     this.react = this.react.bind(this);
     this.reactEdit = this.reactEdit.bind(this);
   }
 
   componentDidMount() {
+    // this.commentsOrganization();
     this.props.fetchCommentReactions(this.props.comment.id)
+      .then(() => this.commentsOrganization())
       .then(() => this.reactionsOrganization())
       .then(() => this.setCurrentReaction())
       .then(() => this.repliesOrganization());
@@ -76,6 +79,12 @@ export default class ModalComment extends Component {
       // this.repliesOrganization();
         // .then(() => this.repliesOrganization());
     }
+  }
+
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+        return;
+    };
   }
 
   update(field) {

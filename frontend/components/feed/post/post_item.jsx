@@ -2,6 +2,23 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import CommentItemContainer from './comment/comment_item_container';
 
+const reactionLibrary = {
+  "Like": window.likeURL,
+  "Celebrate": window.celebrateURL,
+  "Support": window.supportURL,
+  "Love": window.loveURL,
+  "Insightful": window.insightfulURL,
+  "Curious": window.curiousURL
+};
+
+const reactionColors = {
+  "Like": "#0a66c2",
+  "Celebrate": "#44712e",
+  "Support": "#7a688d",
+  "Love": "#b24020",
+  "Insightful": "#915907",
+  "Curious": "#80597e"
+};
 export default class Post extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +44,18 @@ export default class Post extends Component {
       edited: rawDiff > 1000,
 
       seeMoreActive: false,
+      reactionIcons: [],
+      reactionCount: 0,
+      firstReactorName: "",
+      reactionDockOn: false,
+
+      postComments: [],
+      postReplies: [],
+      commentCount: 0,
+
+      commentInputOn: false,
+      commentSectionOn: false,
+
       copySuccess: false
     }
 
@@ -34,19 +63,13 @@ export default class Post extends Component {
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.react = this.react.bind(this);
   }
-
-  setCurrentReaction() {
-    for (let reaction of this.props.reactions) {
-      if (reaction.reactor_id === this.props.sessionId && reaction.reactable_id === this.props.post.id) {
-        this.setState({ currentReaction: reaction, react_type: reaction.react_type });
-      }
-    }
-  }
   
   componentDidMount() {
     this.props.fetchComments(this.props.post.id);
     this.props.fetchPostReactions(this.props.post.id)
-      .then(() => this.setCurrentReaction());
+      .then(() => this.setCurrentReaction())
+      .then(() => this.reactionsOrganization())
+      .then(() => this.commentsOrganization())
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -64,6 +87,44 @@ export default class Post extends Component {
 
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
+  }
+
+  setCurrentReaction() {
+    for (let reaction of this.props.reactions) {
+      if (reaction.reactor_id === this.props.sessionId && reaction.reactable_id === this.props.post.id) {
+        this.setState({ currentReaction: reaction, react_type: reaction.react_type });
+      }
+    }
+  }
+
+  reactionsOrganization() {
+    if (!this.props.reactions[0]) return this.setState({ reactionIcons: [], reactionCount: 0, firstReactorName: "" });
+    let tempIconStore = [];
+
+    let tempFirstUserId = this.props.reactions[0].reactor_id;
+    let tempUser;
+    let tempReactCount = 0;
+
+    this.props.reactions.forEach(reaction => !tempIconStore.includes(reaction.react_type) && tempIconStore.length <= 3 && reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempIconStore.push(reaction.react_type) : null);
+    this.props.reactions.forEach(reaction => reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempReactCount++ : null);
+
+    this.props.usersArr.forEach(user => user.id === tempFirstUserId ? tempUser = user : null);
+    let tempUserName = `${tempUser.first_name} ${tempUser.last_name}`;
+    if (tempFirstUserId === this.props.currentUser.id) tempUserName = "You";
+    if (tempIconStore.length === 0) tempUserName = null;
+
+    this.setState({ reactionIcons: [...tempIconStore], reactionCount: tempReactCount, firstReactorName: tempUserName });
+  }
+
+  commentsOrganization() {
+    let tempPostComments = [];
+    let tempPostReplies = [];
+    let tempCommentCount = 0;
+
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id === null ? tempPostComments.push(comment) : null);
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id && comment.reply_id !== null ? tempPostReplies.push(comment) : null);
+    this.props.comments.forEach(comment => comment.post_id === this.props.post.id ? tempCommentCount++ : null);
+    this.setState({ postComments: [...tempPostComments], postReplies: [...tempPostReplies], commentCount: tempCommentCount });
   }
 
   commentForm() {
@@ -319,6 +380,19 @@ export default class Post extends Component {
           {/* Post Media */}
           {post.photoUrl ? this.renderMedia("photo") : null}
           {post.videoUrl ? this.renderMedia("video") : null}
+        </div>
+
+        <div>
+          <ul className='post-show-modal-reactbar'>
+            <li className='post-show-modal-reactbar-content'>
+              {this.state.reactionIcons[0] ? <img src={reactionLibrary[this.state.reactionIcons[0]]} /> : null}
+              {this.state.reactionIcons[1] ? <img src={reactionLibrary[this.state.reactionIcons[1]]} /> : null}
+              {this.state.reactionIcons[2] ? <img src={reactionLibrary[this.state.reactionIcons[2]]} /> : null}
+              <span className='post-show-modal-social'>{this.state.firstReactorName} {this.state.reactionCount > 1 ? `and ${this.state.reactionCount - 1} other${this.state.reactionCount > 2 ? "s" :""}` : null}</span>
+            </li>
+
+            <span onClick={() => this.setState({ commentInputOn: true, commentSectionOn: true })} className='post-show-modal-comments'>{this.state.commentCount} comment{this.state.commentCount > 1 ? "s" : ""}</span>
+          </ul>
         </div>
         
         
