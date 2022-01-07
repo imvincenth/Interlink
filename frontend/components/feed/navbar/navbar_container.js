@@ -15,4 +15,4 @@ const mDTP = dispatch => ({
   logout: () => dispatch(logout())
 });
 
-export default withRouter(connect(mSTP, mDTP)(Navbar))
+export default withRouter(connect(mSTP, mDTP)(Navbar));

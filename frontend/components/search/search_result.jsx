@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavbarContainer from '../feed/navbar/navbar_container';
+import SearchResultCardContainer from './search_result_card_container';
 
 export default class Search extends Component {
   constructor(props) {
@@ -11,11 +12,15 @@ export default class Search extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
+    this.props.fetchUsers()
+      .then(() => this.findMatches());
   }
 
   findMatches() {
-    
+    let searchTerm = window.location.href.slice(window.location.href.indexOf("=") + 1).split("%20").join(" ").trim();
+    let tempMatches = [];
+    this.props.users.forEach(user => `${user.first_name.toLowerCase()} ${user.last_name.toLowerCase()}`.includes(searchTerm) ? tempMatches.push(user) : null);
+    this.setState({ matches: [...tempMatches] });
   }
 
   render() {
@@ -27,7 +32,7 @@ export default class Search extends Component {
         <div className='search-results-wrap'>
           <div className='search-results-container'>
             <ul>
-
+              {this.state.matches.map(match => <SearchResultCardContainer key={`${match.id}${match.first_name}${match.last_name}`} user={match} />)}
             </ul>
           </div>
 

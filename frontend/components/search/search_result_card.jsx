@@ -6,7 +6,7 @@ export default class SearchResultCard extends Component {
     return (
       <li>
         <Link to={`/users/${this.props.user.id}`}>
-          
+          {this.props.user.first_name} {this.props.user.last_name}
         </Link>
       </li>
     )

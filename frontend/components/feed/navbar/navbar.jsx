@@ -86,7 +86,7 @@ class Navbar extends React.Component {
   yesInput() {
     if (Object.values(this.state.results).length === 0) {
       return (
-        <div className='no-results-box' onClick={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput.trim()}`)}>
+        <div className='no-results-box' onClick={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput}`)}>
           <div className='no-results-content'>
             <span className='no-results-text'>See all results</span>
           </div>
@@ -108,7 +108,7 @@ class Navbar extends React.Component {
             </div>
           </div>
         )}
-        <div className='all-results-box' onClick={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput}`)}>
+        <div className='all-results-box' onClick={() => this.props.history.push(`/search/results/?keywords=${this.state.searchInput}`)}>
           <div className='all-results-content'>
             <span className='all-results-text'>See all results</span>
           </div>
@@ -192,7 +192,7 @@ class Navbar extends React.Component {
               <div className={this.state.searchActive ? "search-icon-box search-active" : "search-icon-box"}>
                 <img className="search-icon" src={window.searchIconURL} alt="search icon" />
               </div>
-              <div>
+              <form onSubmit={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput}`)}>
                 <input 
                   className={this.state.searchActive ? "search-bar search-active" : "search-bar"} 
                   type="text" 
@@ -202,7 +202,7 @@ class Navbar extends React.Component {
                   placeholder="Search" 
                 />
               {this.state.searchActive ? this.searchResults() : null}
-              </div>
+              </form>
             </div>
           </div>
 
