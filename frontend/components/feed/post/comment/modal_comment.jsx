@@ -189,7 +189,7 @@ export default class ModalComment extends Component {
         <div className='post-show-modal-edit-menu-wrap'>
           <ul>
 
-            <li className='post-show-modal-edit-menu-item' onClick={() => this.setState({ editCommentOn: true, editMenuActive: false })}>
+            <li className='post-show-modal-edit-menu-item' onClick={() => this.setState({ editCommentOn: true, editMenuActive: false, replyBody: this.state.body })}>
               <div className='post-show-modal-edit-menu-item-content'>
                 <img src={window.quillURL} />
                 <div className='post-show-modal-edit-menu-item-text'>
@@ -357,7 +357,7 @@ export default class ModalComment extends Component {
                     disabled={this.bodyFreeze !== this.state.body && this.state.body.length > 0 ? null : true} 
                   />
                   &nbsp;
-                  <button className='post-show-modal-edit-comment-cancel' onClick={() => this.setState({ editCommentOn: false })}>Cancel</button>
+                  <button className='post-show-modal-edit-comment-cancel' onClick={() => this.setState({ editCommentOn: false, body: this.bodyFreeze })}>Cancel</button>
                 </div>
               </form>
 

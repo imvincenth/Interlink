@@ -146,18 +146,6 @@ export default class Comment extends Component {
     this.setState({ postReplies: [...tempPostReplies] });
   }
 
-  editForm() {
-    return (
-      <div>
-        <form onSubmit={this.handleEditSubmit}>
-          <input type="text" value={this.state.body} onChange={this.update("body")} />
-          <input type="submit" value="Save Changes" />
-          <button onClick={() => this.setState({ editField: false })}>Cancel</button>
-        </form>
-      </div>
-    )
-  }
-
   react(reaction) {
     this.props.createCommentReaction({...this.state, react_type: reaction})
       .then(() => this.setCurrentReaction())
@@ -361,7 +349,7 @@ export default class Comment extends Component {
 
   render() {
     let user = this.props.users[this.props.comment.user_id];
-
+    if (!user) return null;
     const textArea = document.querySelector('textarea')
     const textRowCount = textArea ? textArea.value.split("\n").length : 0
     const rows = textRowCount + 1
@@ -411,7 +399,7 @@ export default class Comment extends Component {
                     disabled={this.bodyFreeze !== this.state.body && this.state.body.length > 0 ? null : true} 
                   />
                   &nbsp;
-                  <button className='post-show-modal-edit-comment-cancel' onClick={() => this.setState({ editCommentOn: false })}>Cancel</button>
+                  <button className='post-show-modal-edit-comment-cancel' onClick={() => this.setState({ editCommentOn: false, body: this.bodyFreeze })}>Cancel</button>
                 </div>
               </form>
 
