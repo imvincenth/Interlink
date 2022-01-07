@@ -405,6 +405,32 @@ class Feed extends React.Component {
 
               </div>
 
+              <section className='project-info-bar'>
+                <div className='project-info-text'>
+                  <h3>Project Description</h3>
+                  <p>RingIn is a clone of LinkedIn themed around J. R. R. Tolkien's Lord of the Rings series.</p>
+
+                  <ul>
+                    <li>
+                      React
+                    </li>
+                    <li>
+                      Redux
+                    </li>
+                    <li>
+                      Ruby on Rails
+                    </li>
+                    <li>
+                      PostgreSQL
+                    </li>
+                    <li>
+                      AWS S3
+                    </li>
+                  </ul>
+                  
+                </div>
+              </section>
+
             </div>
         </div>
         
