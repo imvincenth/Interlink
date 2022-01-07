@@ -60,8 +60,9 @@ export default class PostShowModal extends Component {
   }
 
   componentDidMount() {
-    this.commentsOrganization();
+    // this.commentsOrganization();
     this.props.fetchPostReactions(this.props.post.id)
+      .then(() => this.commentsOrganization()) 
       .then(() => this.reactionsOrganization())
       .then(() => this.setCurrentReaction());
   }

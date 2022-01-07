@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const reactionLibrary = {
   "Like": window.likeURL,
@@ -313,13 +313,13 @@ export default class ModalReply extends Component {
             <div className='post-show-modal-reply-graybox'>
 
               <div className='post-show-modal-comment-card-header'>
-                <div className='post-show-modal-comment-card-header-left'>
+                <Link className='post-show-modal-comment-card-header-left' to={`/users/${user.id}`}>
                   <div className='post-show-modal-comment-card-header-left-top'>
                     <span className='post-show-modal-comment-username'>{user.first_name} {user.last_name}</span>
                     {user.id === this.props.currentUser.id ? <div className='author-tag'>Author</div> : null}
                   </div>
                   <span className='post-show-modal-comment-headline'>{user.headline}</span>
-                </div>
+                </Link>
 
                 <div className='post-show-modal-comment-card-header-right'>
                   <span className='post-show-modal-comment-card-timestamp'>{this.convertDate(reply)}</span>
