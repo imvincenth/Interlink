@@ -408,8 +408,8 @@ class Feed extends React.Component {
               <section className='project-info-bar'>
                 <div className='project-info-text'>
                   <h3>Project Description</h3>
-                  <p>RingIn is a clone of LinkedIn themed around J. R. R. Tolkien's Lord of the Rings series.</p>
-                  <p>This project is built with...</p>
+                  <p>RingIn is a clone of LinkedIn themed around J. R. R. Tolkien's The Lord of the Rings.</p>
+                  <p>This full stack project is built with...</p>
                 </div>
 
                 <ul>
