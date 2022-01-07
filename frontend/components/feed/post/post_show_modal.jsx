@@ -234,7 +234,7 @@ export default class PostShowModal extends Component {
       <form className='post-show-modal-input-wrap'>
         <img className='post-show-modal-input-pic' src={this.props.currentUser.profilePictureUrl ? this.props.currentUser.profilePictureUrl : "https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q"} />
         <div className='post-show-modal-input-box'>
-          <input className='post-show-modal-input' type="text" placeholder='Add a comment...' value={this.state.body} onChange={this.update("body")} />
+          <input className='post-show-modal-input' type="text" placeholder='Add a comment...' value={this.state.body} onChange={this.update("body")} autoFocus />
           {this.state.body.length > 0 ? <input className='post-show-modal-comment' type="submit" value="Post" onClick={this.handleCommentSubmit} /> : null}
         </div>
       </form>

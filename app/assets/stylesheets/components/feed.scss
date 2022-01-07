@@ -279,14 +279,15 @@
   background-color: rgb(255, 255, 255);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  overflow: visible;
   position: relative;
   transition-delay: 0s;
   transition-duration: 0.083s;
   transition-property: box-shadow;
   transition-timing-function: ease;
   width: 538px;
-  height: 100%;
+  margin: 0 0 8px;
+  // overflow: visible;
+  // height: 100%;
 }
 
 .post-header-wrap {

@@ -56,7 +56,6 @@ export default class ModalComment extends Component {
 
     this.handleEditComment = this.handleEditComment.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
-    this.commentsOrganization = this.commentsOrganization.bind(this);
     this.react = this.react.bind(this);
     this.reactEdit = this.reactEdit.bind(this);
   }
@@ -76,8 +75,6 @@ export default class ModalComment extends Component {
     }
     if ((prevProps.comments.length !== this.props.comments.length) || (JSON.stringify(prevProps.comments) !== JSON.stringify(this.props.comments))) {
       this.commentsOrganization();
-      // this.repliesOrganization();
-        // .then(() => this.repliesOrganization());
     }
   }
 
@@ -367,32 +364,32 @@ export default class ModalComment extends Component {
             </div> {/* End of the greybox */} 
 
 
-              {/* Reaction Bar */}
-              <div className='post-show-modal-comment-reaction-bar-wrap'>
-                <div className='post-show-modal-comment-reaction-bar-left'>
-                  {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
-                  {this.renderReactionDock()}
+            {/* Reaction Bar */}
+            <div className='post-show-modal-comment-reaction-bar-wrap'>
+              <div className='post-show-modal-comment-reaction-bar-left'>
+                {this.state.currentReaction === "" ? this.renderReactionCard("") : this.renderReactionCard(this.state.currentReaction.react_type)}
+                {this.renderReactionDock()}
 
-                  {this.state.reactionCount > 0 ? <span className='post-show-modal-comment-dot'>•</span> : null}
+                {this.state.reactionCount > 0 ? <span className='post-show-modal-comment-dot'>•</span> : null}
 
-                  {this.state.reactionCount > 0 && this.state.reactionIcons[0] ? <img src={reactionLibrary[this.state.reactionIcons[0]]} /> : null}
-                  {this.state.reactionCount > 0 && this.state.reactionIcons[1] ? <img src={reactionLibrary[this.state.reactionIcons[1]]} /> : null}
-                  {this.state.reactionCount > 0 && this.state.reactionIcons[2] ? <img src={reactionLibrary[this.state.reactionIcons[2]]} /> : null}
-                  
-                  {this.state.reactionCount > 0 ? <span className='post-show-modal-comment-count'>{this.state.reactionCount}</span> : null}
-                </div>
-
-                <div className='post-show-modal-comment-divider'></div>
-
-                <div className='post-show-modal-comment-reation-bar-right'>
-                  <button className='post-show-modal-comment-reply-button' onClick={() => this.setState({ replyFieldActive: true })}>Reply</button>
-                  {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-dot'>•</span> : null}
-                  {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-reply-count'>{this.state.postReplies.length === 1 ? "1 Reply" : `${this.state.postReplies.length} Replies`}</span> : null}
-                </div>
+                {this.state.reactionCount > 0 && this.state.reactionIcons[0] ? <img src={reactionLibrary[this.state.reactionIcons[0]]} /> : null}
+                {this.state.reactionCount > 0 && this.state.reactionIcons[1] ? <img src={reactionLibrary[this.state.reactionIcons[1]]} /> : null}
+                {this.state.reactionCount > 0 && this.state.reactionIcons[2] ? <img src={reactionLibrary[this.state.reactionIcons[2]]} /> : null}
+                
+                {this.state.reactionCount > 0 ? <span className='post-show-modal-comment-count'>{this.state.reactionCount}</span> : null}
               </div>
 
+              <div className='post-show-modal-comment-divider'></div>
+
+              <div className='post-show-modal-comment-reation-bar-right'>
+                <button className='post-show-modal-comment-reply-button' onClick={() => this.setState({ replyFieldActive: true })}>Reply</button>
+                {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-dot'>•</span> : null}
+                {this.state.postReplies.length > 0 ? <span className='post-show-modal-comment-reply-count'>{this.state.postReplies.length === 1 ? "1 Reply" : `${this.state.postReplies.length} Replies`}</span> : null}
+              </div>
             </div>
+
           </div>
+        </div>
 
           {this.state.replyFieldActive ? this.renderReplyField() : null}
 

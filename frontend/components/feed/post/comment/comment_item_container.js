@@ -5,10 +5,13 @@ import { fetchCommentReactions, createCommentReaction, updateCommentReaction, de
 import Comment from './comment_item';
 
 const mSTP = state => ({
+  // post: state.ui.modalParamsReducer,
   currentUser: state.entities.users[state.session.id],
-  users: Object.values(state.entities.users),
-  comments: Object.values(state.entities.comments),
-  reactions: Object.values(state.entities.reactions)
+  errors: state.errors.posts,
+  users: state.entities.users,
+  usersArr: Object.values(state.entities.users),
+  reactions: Object.values(state.entities.reactions),
+  comments: Object.values(state.entities.comments)
 });
 
 const mDTP = dispatch => ({
