@@ -459,14 +459,22 @@
 }
 
 .post-modal-photo {
-  height: 350px;
-  width: 552px;
+  // height: 350px;
+  // width: 552px;
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
+  background-position: 50% 50%;
   border-bottom: rgba(0, 0, 0, 0.08);
 }
 
 .post-modal-video {
-  height: 350px;
-  width: 552px;
+  // height: 350px;
+  // width: 552px;
+  object-position: center;
+  object-fit: cover;
+  width: 100%;
+  background-position: 50% 50%;
   background-color: black;
 }
 
