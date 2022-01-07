@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../../actions/user_actions';
-import Search from './search_result';
+import SearchResultCard from './search_result_card';
 
 const mSTP = state => ({
-  currentUser: state.entities.users[state.session.id],
-  users: Object.values(state.entities.users)
+  currentUser: state.entities.users[state.session.id]
 });
 
 const mDTP = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers())
 });
 
-export default connect(mSTP, mDTP)(Search);
+export default connect(mSTP, mDTP)(SearchResultCard);

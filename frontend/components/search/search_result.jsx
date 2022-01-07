@@ -5,15 +5,30 @@ export default class Search extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      matches: []
+    }
+  }
+
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
+  findMatches() {
+    
   }
 
   render() {
+    if (!this.props.users) return null;
+
     return (
       <div className='result-page'>
         <NavbarContainer page="results" />
         <div className='search-results-wrap'>
-          <div>
-            
+          <div className='search-results-container'>
+            <ul>
+
+            </ul>
           </div>
 
           <section className='project-info-bar'>

@@ -9,3 +9,15 @@
   overflow: auto;
 }
 
+.search-results-wrap {
+  display: flex;
+}
+
+.search-results-container {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+}
