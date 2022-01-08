@@ -105,10 +105,8 @@
 }
 
 .search-card-connect-corner {
-  display: grid;
-  justify-content: end;
-  align-items: start;
-  padding: 0 16px 18px 0;
+  display: flex;
+  padding: 16px 16px 36px 0;
 }
 
 .search-card-connect {
@@ -185,6 +183,7 @@
   margin-right: 8px;
   border: none;
   border-radius: 4px;
+  background-color: transparent;
   color: rgba(0, 0, 0, 0.6);
   font-size: 16px;
   font-weight: 600;
@@ -198,4 +197,25 @@
 
 .search-card-ignore:hover {
   background-color: rgba(0, 0, 0, 0.08);
+}
+
+.search-card-withdrawn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 32px;
+  padding: 6px 16px;
+  text-align: center;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: not-allowed;
 }

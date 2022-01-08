@@ -14,6 +14,8 @@ export default class SearchResultCard extends Component {
 
       withdrawn: false,
     }
+
+    this.handleWithdraw = this.handleWithdraw.bind(this);
   }
 
   componentDidMount() {
@@ -21,7 +23,7 @@ export default class SearchResultCard extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (JSON.stringify(prevProps.connections) !== JSON.stringify(this.props.connections)) {
+    if (JSON.stringify(prevProps.connections) !== JSON.stringify(this.props.connections) && !this.state.withdrawn) {
       this.connectionCheck();
     }
   }
@@ -32,11 +34,16 @@ export default class SearchResultCard extends Component {
     this.setState({ currentConnection: connectionTemp });
   }
 
+  handleWithdraw() {
+    this.props.deleteConnection(this.state.currentConnection.id);
+    this.setState({ withdrawn: true })
+  }
+
   renderConnectOptions() {
     if (!this.state.currentConnection) {
       // No connection object exists between the current user and search result
       return (
-        <div className='search-card-connect-corner'>
+        <div className='search-card-connect-corner' style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
           <button className='search-card-connect' onClick={() => this.props.createConnection({...this.state, connectee_id: this.props.user.id})}>
             Connect
           </button>
@@ -45,16 +52,16 @@ export default class SearchResultCard extends Component {
     } else if (this.state.currentConnection.pending && this.state.currentConnection.connector_id === this.props.currentUser.id) {
       // If the sender of connection request is the current user
       return (
-        <div className='search-card-connect-corner' onClick={() => this.props.deleteConnection(this.state.currentConnection.id)}>
-          <button className='search-card-pending'>
-            Pending
+        <div className='search-card-connect-corner' onClick={this.handleWithdraw} style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
+          <button className={this.state.withdrawn ? 'search-card-withdrawn' : 'search-card-pending'} disabled={this.state.withdrawn ? true : null}>
+            {this.state.withdrawn ? "Withdrawn" : "Pending"}
           </button>
         </div>
       )
     } else if (this.state.currentConnection.pending && this.state.currentConnection.connector_id === this.props.user.id) {
       // If the current user is receiving a connnection request from the user
       return (
-        <div>
+        <div className='search-card-connect-corner' style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
           <button className='search-card-ignore' onClick={() => this.props.deleteConnection(this.state.currentConnection.id)}>
             Ignore
           </button>
@@ -66,7 +73,7 @@ export default class SearchResultCard extends Component {
     } else if (!this.state.currentConnection.pending) {
       // If the current user has an existing accepted connection with the search result
       return (
-        <div className='search-card-connect-corner'>
+        <div className='search-card-connect-corner' style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
           <button onClick={() => this.props.deleteConnection(this.state.currentConnection.id)}>
             Disconnect
           </button>
@@ -87,7 +94,7 @@ export default class SearchResultCard extends Component {
             }
           </Link>
 
-          <Link className='search-card-social-wrap' to={`/users/${this.props.user.id}`} style={this.props.count !== this.props.place ? {"border-bottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
+          <Link className='search-card-social-wrap' to={`/users/${this.props.user.id}`} style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
             <span className='search-card-username'>{this.props.user.first_name} {this.props.user.last_name}</span>
             <span className='search-card-headline'>{this.props.user.headline}</span>
             <span className='search-card-location'>{this.props.user.city_district}, {this.props.user.country_region}</span>
