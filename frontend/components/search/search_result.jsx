@@ -7,8 +7,13 @@ export default class Search extends Component {
     super(props);
 
     this.state = {
-      matches: []
+      matches: [],
+      action: false
     }
+  }
+
+  handleSearchEdit() {
+    this.setState({ action: true });
   }
 
   componentDidMount() {
@@ -24,17 +29,27 @@ export default class Search extends Component {
     this.setState({ matches: [...tempMatches] });
   }
 
+  renderNoSearchResults() {
+    return (
+      <div className='no-search-results'>
+        <button onClick={this.handleSearchEdit}>Edit</button>
+      </div>
+    )
+  }
+
   render() {
     if (!this.props.users) return null;
 
     return (
       <div className='result-page'>
-        <NavbarContainer page="results" />
+        <NavbarContainer action={this.state.action} page="results" />
         <div className='search-results-wrap'>
           <div className='search-results-container'>
-            <div className='search-results-header'>
+            <div className='search-results-header' style={this.state.matches.length === 0 ? {"display": "none"} : null}>
               People
             </div>
+
+            {this.state.matches.length === 0 ? this.renderNoSearchResults() : null}
 
             <ul>
               {this.state.matches.map((match, i) => <SearchResultCardContainer key={`${match.id}${match.first_name}${match.last_name}`} user={match} count={this.state.matches.length} place={i+1} />)}

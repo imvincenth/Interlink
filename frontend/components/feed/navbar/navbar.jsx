@@ -12,12 +12,21 @@ class Navbar extends React.Component {
       searchActive: false, 
       results: {},
 
-      profileActive: false
+      profileActive: false,
     }
 
     this.toggleSearchOn = this.toggleSearchOn.bind(this);
     this.toggleModalOff = this.toggleModalOff.bind(this);
     this.toggleProfileMenu = this.toggleProfileMenu.bind(this);
+    this.count = 0;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.action !== this.props.action) {
+      this.toggleSearchOn();
+    } else {
+      this.toggleModalOff();
+    }
   }
 
   update(field) {
@@ -37,6 +46,7 @@ class Navbar extends React.Component {
   }
 
   toggleSearchOn() {
+    console.log("hello")
     this.setState({ searchActive: true, profileActive: false });
   }
 
