@@ -13,6 +13,8 @@ import SignUpFormContainer from './session_form/signup_form_container';
 import HomepageContainer from './homepage/homepage_container';
 import FeedContainer from './feed/feed_container';
 import NetworkContainer from './network/network_container';
+import ConnectionsContainer from './network/connection/connections_page_container';
+import InvitationManagerContainer from './network/connection/invitation_manager_container';
 import PageNotFound from './session_form/404';
 import ProfileContainer from './profile/profile_container';
 import PostPageContainer from './feed/post/post_page_container';
@@ -28,6 +30,8 @@ const App = () => (
       <AuthRoute exact path="/posts/:postId" component={PostPageContainer} />
       <AuthRoute exact path="/users/:userId" component={ProfileContainer} />
       <AuthRoute path="/search/results" component={SearchResultContainer} />
+      <AuthRoute exact path="/connections" component={ConnectionsContainer} />
+      <AuthRoute exact path="/invitations" component={InvitationManagerContainer} />
       <AuthRoute exact path="/network" component={NetworkContainer} />
       <AuthRoute exact path="/feed" component={FeedContainer} />
       <LogoutRoute exact path="/login" component={LogInFormContainer} />

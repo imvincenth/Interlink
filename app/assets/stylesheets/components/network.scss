@@ -12,7 +12,7 @@
 }
 
 .network-wrap {
-  // display: flex;
+  display: flex;
 }
 
 .network-management-bar {
@@ -36,10 +36,39 @@
 
 .network-management-item {
   display: flex;
+  align-items: center;
+  flex-basis: 0%;
+  flex-grow: 1;
+  flex-shrink: 1;
   padding: 8px 20px;
   width: 100%;
   color: rgba(0, 0, 0, 0.6);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.network-management-item:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.network-management-item > div {
+  display: flex;
+}
+
+.network-management-item > div > img {
+  display: block;
+  position: relative;
+  margin-right: 16px;
+  height: 22px;
+  width: 22px;
+}
+
+.network-management-item > span {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  padding-left: 12px;
 }

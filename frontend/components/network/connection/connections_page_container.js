@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers, fetchUser } from '../../actions/user_actions';
-import { fetchConnections } from '../../actions/connection_actions';
-import Network from './network';
+import { fetchUsers, fetchUser } from '../../../actions/user_actions';
+import { fetchConnections } from '../../../actions/connection_actions';
+import ConnectionsPage from './connections_page';
 
 const mSTP = state => ({
   users: Object.values(state.entities.users),
@@ -16,4 +16,4 @@ const mDTP = dispatch => ({
   fetchConnections: userId => dispatch(fetchConnections(userId))
 });
 
-export default connect(mSTP, mDTP)(Network);
+export default connect(mSTP, mDTP)(ConnectionsPage);
