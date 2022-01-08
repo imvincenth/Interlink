@@ -13,6 +13,7 @@ export default class Search extends Component {
 
   componentDidMount() {
     this.props.fetchUsers()
+      .then(() => this.props.fetchConnections(this.props.currentUser.id))
       .then(() => this.findMatches());
   }
 
@@ -31,8 +32,12 @@ export default class Search extends Component {
         <NavbarContainer page="results" />
         <div className='search-results-wrap'>
           <div className='search-results-container'>
+            <div className='search-results-header'>
+              People
+            </div>
+
             <ul>
-              {this.state.matches.map(match => <SearchResultCardContainer key={`${match.id}${match.first_name}${match.last_name}`} user={match} />)}
+              {this.state.matches.map((match, i) => <SearchResultCardContainer key={`${match.id}${match.first_name}${match.last_name}`} user={match} count={this.state.matches.length} place={i+1} />)}
             </ul>
           </div>
 
@@ -87,7 +92,7 @@ export default class Search extends Component {
               <li className='post-info-item-wrap'>
                 <div className='post-info-item-header'>
                   <span className='post-info-bullet'></span>
-                  <span className='post-info-item'>HTML, CSS, jQuery</span>
+                  <span className='post-info-item'>HTML, CSS</span>
                 </div>
                 <span className='post-info-item-desc'></span>
               </li>

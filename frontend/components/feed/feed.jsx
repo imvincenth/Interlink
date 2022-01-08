@@ -456,7 +456,7 @@ class Feed extends React.Component {
                   <li className='post-info-item-wrap'>
                     <div className='post-info-item-header'>
                       <span className='post-info-bullet'></span>
-                      <span className='post-info-item'>HTML, CSS, jQuery</span>
+                      <span className='post-info-item'>HTML, CSS</span>
                     </div>
                     <span className='post-info-item-desc'></span>
                   </li>

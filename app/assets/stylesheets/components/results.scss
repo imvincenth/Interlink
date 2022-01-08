@@ -9,15 +9,193 @@
   overflow: auto;
 }
 
-.search-results-wrap {
+.search-results-header {
+  padding: 16px 24px 4px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 24px;
   display: flex;
+  align-items: center;
+}
+
+.search-results-wrap {
+  display: grid;
+  column-gap: 24px;
+  grid-column-end: content;
+  grid-column-start: content;
+  grid-row-end: content;
+  grid-row-start: content;
+  grid-template-columns: minmax(0,17fr) minmax(0,7fr);
+  grid-template-rows: auto;
+  margin-top: 0;
+  width: 1128px;
+  max-width: unset;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search-results-container {
   background-color: rgb(255, 255, 255);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: none;
   border-radius: 8px;
-  padding: 0 8px;
+  height: fit-content;
+  // padding: 0 8px;
+  // display: flex;
+  // flex-direction: column;
+}
+
+.search-results-container > ul {
+  list-style-type: none;
+}
+
+.search-result {
+  display: flex;
+  align-items: center;
+}
+
+.search-card-propic-box {
+  margin: 16px 12px;
+}
+
+.search-card-propic {
+  height: 48px;
+  width: 48px;
+  background-color: rgb(255, 255, 255);
+  background-position: 50% 50%;
+  border-radius: 50%;
+  object-position: center;
+  object-fit: cover;
+}
+
+.search-card-social-wrap {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  padding: 12px 0;
+  margin-bottom: 4px;
+  width: 100%;
+  cursor: pointer;
+  // border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.search-card-username {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.search-card-headline {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-card-location {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.search-card-connect-corner {
+  display: grid;
+  justify-content: end;
+  align-items: start;
+  padding: 0 16px 18px 0;
+}
+
+.search-card-connect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border: 1px solid rgb(10, 102, 194);
+  border-radius: 16px;
+  color: rgb(10, 102, 194);
+  padding: 6px 16px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  height: 32px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.search-card-connect:hover {
+  background-color: rgba(112, 181, 249, 0.04);
+  box-shadow: rgb(10, 102, 194) 0px 0px 0px 1px inset;
+}
+
+.search-card-connect:active {
+  background-color: rgba(112, 181, 249, 0.04);
+  box-shadow: rgb(5, 52, 100) 0px 0px 0px 1px inset;
+  color: rgb(5, 52, 100);
+}
+
+.search-card-pending {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 6px 16px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  height: 32px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.search-card-pending:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 1px inset;
+}
+
+.search-card-pending:active {
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 0px 1px inset;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.search-card-ignore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  min-height: 32px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.search-card-ignore:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }
