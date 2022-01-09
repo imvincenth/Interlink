@@ -53,6 +53,12 @@ export default class Search extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+        return;
+    };
+  }
+
   toggleSearchOn() {
     this.setState({ searchActive: true, profileActive: false });
   }

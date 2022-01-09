@@ -12,7 +12,23 @@
 }
 
 .network-wrap {
-  display: flex;
+  width: 1128px;
+  max-width: unset;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: visible;
+}
+
+.network-wrap-structure {
+  display: grid;
+  column-gap: 24px;
+  row-gap: 24px;
+  grid-column-end: content;
+  grid-column-start: content;
+  grid-row-end: content;
+  grid-row-start: content;
+  grid-template-columns: minmax(300px,7fr)minmax(0,17fr);
+  grid-template-rows: auto;
 }
 
 .network-management-bar {
@@ -23,6 +39,7 @@
   display: block;
   padding: 8px 0;
   position: relative;
+  top: 22px;
 }
 
 .network-management-bar > h2 {
@@ -36,12 +53,12 @@
 
 .network-management-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   flex-basis: 0%;
   flex-grow: 1;
   flex-shrink: 1;
   padding: 8px 20px;
-  width: 100%;
   color: rgba(0, 0, 0, 0.6);
   font-size: 16px;
   font-weight: 400;
@@ -72,3 +89,41 @@
   line-height: 24px;
   padding-left: 12px;
 }
+
+.network-invitations-section {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 0;
+  border-radius: 8px;
+  display: block;
+}
+
+.network-invitations-section > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 8px 8px 8px 16px;
+}
+
+.network-management-see-all {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 8px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.network-management-see-all:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
