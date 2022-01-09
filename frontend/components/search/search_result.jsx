@@ -47,6 +47,12 @@ export default class Search extends Component {
       .then(() => this.findMatches());
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.location.search !== prevProps.location.search) {
+      this.findMatches();
+    }
+  }
+
   toggleSearchOn() {
     this.setState({ searchActive: true, profileActive: false });
   }
@@ -68,23 +74,23 @@ export default class Search extends Component {
         </div>
 
         <ul className='noinput-search-list'>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=frodo baggins")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.replace("/search/results/?keywords=frodo baggins")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>frodo baggins</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=samwise gamgee")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.replace("/search/results/?keywords=samwise gamgee")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>samwise gamgee</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=aragorn ii elessar")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.replace("/search/results/?keywords=aragorn ii elessar")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>aragorn ii elessar</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=legolas greenleaf")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.replace("/search/results/?keywords=legolas greenleaf")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>legolas greenleaf</p>
           </li>
-          <li className='noinput-search-suggestion' onClick={() => this.props.history.push("/search/results/?keywords=gimli son of gloin")}>
+          <li className='noinput-search-suggestion' onClick={() => this.props.history.replace("/search/results/?keywords=gimli son of gloin")}>
             <img className='input-icon' src={window.searchIconURL} alt="magnifying glass" />
             <p className='noinput-list-text'>gimli son of gloin</p>
           </li>
@@ -97,7 +103,7 @@ export default class Search extends Component {
   yesInput() {
     if (Object.values(this.state.results).length === 0) {
       return (
-        <div className='no-results-box' onClick={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput}`)}>
+        <div className='no-results-box' onClick={() => this.props.history.replace(`/search/results/?keyword=${this.state.searchInput}`)}>
           <div className='no-results-content'>
             <span className='no-results-text'>See all results</span>
           </div>
@@ -108,7 +114,7 @@ export default class Search extends Component {
     return (
       <div className='search-suggestion-box'>
         {Object.values(this.state.results).map((user, i) => 
-          <div key={`${i}` + user.first_name} className='search-suggestion' onClick={() => this.props.history.push(`/users/${user.id}`)}>
+          <div key={`${i}` + user.first_name} className='search-suggestion' onClick={() => this.props.history.replace(`/users/${user.id}`)}>
             <div className={i === 0 ? 'search-suggestion-content-one' : 'search-suggestion-content'}>
               {user.profilePictureUrl ? <img className='suggestion-propic' src={user.profilePictureUrl} /> : <img className='suggestion-propic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
               <span className='suggestion-text-box'>
@@ -119,7 +125,7 @@ export default class Search extends Component {
             </div>
           </div>
         )}
-        <div className='all-results-box' onClick={() => this.props.history.push(`/search/results/?keywords=${this.state.searchInput}`)}>
+        <div className='all-results-box' onClick={() => this.props.history.replace(`/search/results/?keywords=${this.state.searchInput}`)}>
           <div className='all-results-content'>
             <span className='all-results-text'>See all results</span>
           </div>
@@ -187,7 +193,7 @@ export default class Search extends Component {
     let searchTerm = window.location.href.slice(window.location.href.indexOf("=") + 1).split("%20").join(" ").trim();
     let tempMatches = [];
     this.props.users.forEach(user => `${user.first_name.toLowerCase()} ${user.last_name.toLowerCase()}`.includes(searchTerm) ? tempMatches.push(user) : null);
-    this.setState({ matches: [...tempMatches] });
+    this.setState({ matches: [...tempMatches], searchInput: searchTerm, searchActive: false });
   }
 
   renderNoSearchResults() {
@@ -224,7 +230,7 @@ export default class Search extends Component {
                 <div className={this.state.searchActive ? "search-icon-box search-active" : "search-icon-box"}>
                   <img className="search-icon" src={window.searchIconURL} alt="search icon" />
                 </div>
-                <form onSubmit={() => this.props.history.push(`/search/results/?keyword=${this.state.searchInput}`)}>
+                <form onSubmit={() => this.props.history.replace(`/search/results/?keyword=${this.state.searchInput}`)}>
                   <input 
                     className={this.state.searchActive ? "search-bar search-active" : "search-bar"} 
                     type="text" 
