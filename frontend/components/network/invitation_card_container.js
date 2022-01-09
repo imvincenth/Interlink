@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers, fetchUser } from '../../actions/user_actions';
-import { fetchConnections } from '../../actions/connection_actions';
-import Network from './network';
+import { fetchConnections, updateConnection, deleteConnection } from '../../actions/connection_actions';
+import InvitationCard from './invitation_card';
 
 const mSTP = state => ({
   users: state.entities.users,
@@ -13,7 +13,9 @@ const mSTP = state => ({
 const mDTP = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: userId => dispatch(fetchUser(userId)),
-  fetchConnections: userId => dispatch(fetchConnections(userId))
+  fetchConnections: userId => dispatch(fetchConnections(userId)),
+  updateConnection: connection => dispatch(updateConnection(connection)),
+  deleteConnection: connectionId => dispatch(deleteConnection(connectionId))
 });
 
-export default connect(mSTP, mDTP)(Network);
+export default connect(mSTP, mDTP)(InvitationCard);

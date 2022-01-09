@@ -40,6 +40,7 @@ export default class SearchResultCard extends Component {
   }
 
   renderConnectOptions() {
+    if (this.props.user === this.props.currentUser) return null;
     if (!this.state.currentConnection) {
       // No connection object exists between the current user and search result
       return (

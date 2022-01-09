@@ -6,7 +6,8 @@ const connectionsReducer = (oldState = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_CONNECTIONS:
-      return action.connections;
+      // return action.connections;
+      return Object.assign(newState, action.connections);
     case RECEIVE_CONNECTION:
       // if (action.connection.id === undefined) return newState;
       newState[action.connection.id] = action.connection;
