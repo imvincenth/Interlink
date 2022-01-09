@@ -219,3 +219,55 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   cursor: not-allowed;
 }
+
+.no-search-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.no-search-results > img {
+  border-radius: 8px;
+}
+
+.no-search-results > h2 {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  margin-top: 8px;
+}
+
+.no-search-results > span {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.no-search-results > button {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.no-search-results > button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 1px inset;
+}

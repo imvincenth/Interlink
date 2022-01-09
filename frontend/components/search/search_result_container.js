@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { fetchUsers } from '../../actions/user_actions';
 import { createConnection,fetchConnections, fetchConnection, updateConnection, deleteConnection } from '../../actions/connection_actions';
 import Search from './search_result';
@@ -19,4 +20,4 @@ const mDTP = dispatch => ({
   deleteConnection: connectionId => dispatch(deleteConnection(connectionId)),
 });
 
-export default connect(mSTP, mDTP)(Search);
+export default withRouter(connect(mSTP, mDTP)(Search));
