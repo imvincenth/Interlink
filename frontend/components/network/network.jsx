@@ -82,8 +82,8 @@ export default class Network extends Component {
 
               {this.state.pendingConnections.length > 3 && this.state.expandedInvitations ? this.renderRemainingInvitations() : null}
 
-              {this.state.pendingConnections.length > 3 && this.state.expandedInvitations ? <li onClick={() => this.setState({ expandedInvitations: false })}>Show fewer</li> : null}
-              {this.state.pendingConnections.length > 3 && !this.state.expandedInvitations ? <li onClick={() => this.setState({ expandedInvitations: true })}>Show more</li> : null}
+              {this.state.pendingConnections.length > 3 && this.state.expandedInvitations ? <li className='network-invitations-expansion' onClick={() => this.setState({ expandedInvitations: false })}>Show fewer</li> : null}
+              {this.state.pendingConnections.length > 3 && !this.state.expandedInvitations ? <li className='network-invitations-expansion' onClick={() => this.setState({ expandedInvitations: true })}>Show more</li> : null}
             </ul>
 
           </section>

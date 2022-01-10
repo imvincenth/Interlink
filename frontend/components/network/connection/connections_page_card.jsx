@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 
 export default class ConnectionsCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      deleteMenu: false
+    }
+  }
+
   render() {
     return (
-      <div>
+      <li className='connections-page-card-wrap'>
         
-      </div>
+      </li>
     )
   }
 }
