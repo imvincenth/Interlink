@@ -44,7 +44,7 @@ export default class Network extends Component {
 
   renderRemainingInvitations() {
     return (
-      this.state.pendingConnections.slice(3).map((connection, i) => <InvitationCardContainer key={`${connection.id}${i}`} connection={connection} accepted={this.state.currentUserConnections} />)
+      this.state.pendingConnections.slice(3).map((connection, i) => <InvitationCardContainer key={`${connection.id}${i}`} connection={connection} currentUserConnections={this.state.currentUserConnections} accepted={this.state.currentUserConnections} />)
     )
   }
 

@@ -54,6 +54,8 @@ export default class InvitationCard extends Component {
   }
 
   render() {
+    // if (!this.props.currentUserConnections) return null;
+
     return (
       <li className='network-invitation-card'>
         <div className='network-invitation-card-left'>
