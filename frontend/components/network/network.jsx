@@ -26,6 +26,12 @@ export default class Network extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+        return;
+    };
+  }
+
   filterConnectionType() {
     let tempAccepted = [];
     let tempPending = [];

@@ -21,6 +21,12 @@ export default class InvitationCard extends Component {
       .then(() => this.findMutuals());
   }
 
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+        return;
+    };
+  }
+
   handleAccept() {
     this.props.updateConnection({ ...this.props.connection, pending: false })
       .then(() => this.setState({ accepted: true }));
@@ -60,7 +66,7 @@ export default class InvitationCard extends Component {
               <span className='network-invitation-card-name'>{this.state.user.first_name} {this.state.user.last_name}</span>
               <span className='network-invitation-card-headline'>{this.state.user.headline}</span>
             </Link>
-            {this.state.mutuals.length === 0 ? <span className='network-invitation-card-no-mutual'><img src={window.invitePlaceURL} />{this.state.user.city_district}, {this.state.user.country_region}</span> : <span className='network-invitation-card-mutual'><img src={window.inviteMutualURL} />{this.state.firstMutual} {this.state.mutuals.length > 1 ? `and ${this.state.mutuals.length - 1} other${this.state.mutuals.length > 2 ? "s" : null}` : null}</span>}
+            {this.state.mutuals.length === 0 ? <span className='network-invitation-card-no-mutual'><img src={window.invitePlaceURL} />{this.state.user.city_district}, {this.state.user.country_region}</span> : <span className='network-invitation-card-mutual'><img src={window.inviteMutualURL} />{this.state.firstMutual} {this.state.mutuals.length > 1 ? `and ${this.state.mutuals.length - 1} other${this.state.mutuals.length > 2 ? "s" : ""}` : null}</span>}
           </div>
         </div>
 

@@ -11,9 +11,9 @@
   overflow: auto;
 }
 
-.profile-container {
+// .profile-container {
 
-}
+// }
 
 .profile-main-wrapper {
   display: flex;
@@ -81,19 +81,21 @@
 
 .stat-wrap-header {
   padding: 6px 12px 6px 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+  // border-top: 0;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  border-top: 0;
   background-color: white;
 }
 
 .stat-wrap-tail {
   padding: 6px 12px 6px 12px;
   margin-bottom: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+  // border-top: 0;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-top: 0;
   background-color: white;
 }

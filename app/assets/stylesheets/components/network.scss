@@ -94,8 +94,9 @@
 
 .network-invitations-section {
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-top: 0;
+  // border: 1px solid rgba(0, 0, 0, 0.08);
+  // border-top: 0;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 8px;
   display: block;
 }
@@ -226,7 +227,7 @@
   cursor: pointer;
 }
 
-.network-invitation-card-mutual {
+.network-invitation-card-mutual:hover {
   text-decoration: underline;
 }
 

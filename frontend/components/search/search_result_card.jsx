@@ -12,35 +12,28 @@ export default class SearchResultCard extends Component {
 
       currentConnection: null,
 
-      withdrawn: false,
     }
 
-    this.handleWithdraw = this.handleWithdraw.bind(this);
   }
 
   componentDidMount() {
     this.connectionCheck();
   }
-
+  
   componentDidUpdate(prevProps, prevState) {
-    if (JSON.stringify(prevProps.connections) !== JSON.stringify(this.props.connections) && !this.state.withdrawn) {
+    if (JSON.stringify(prevProps.connections) !== JSON.stringify(this.props.connections)) {
+      console.log(this.state.currentConnection);
       this.connectionCheck();
     }
   }
 
   connectionCheck() {
     let connectionTemp;
-    this.props.connections.forEach(connection => connection.connectee_id === this.props.user.id || connection.connector_id === this.props.user.id ? connectionTemp = connection : null);
+    this.props.currentUserConnections.forEach(connection => connection.connectee_id === this.props.user.id || connection.connector_id === this.props.user.id ? connectionTemp = connection : null);
     this.setState({ currentConnection: connectionTemp });
   }
 
-  handleWithdraw() {
-    this.props.deleteConnection(this.state.currentConnection.id);
-    this.setState({ withdrawn: true })
-  }
-
   renderConnectOptions() {
-    if (this.props.user === this.props.currentUser) return null;
     if (!this.state.currentConnection) {
       // No connection object exists between the current user and search result
       return (
@@ -53,9 +46,9 @@ export default class SearchResultCard extends Component {
     } else if (this.state.currentConnection.pending && this.state.currentConnection.connector_id === this.props.currentUser.id) {
       // If the sender of connection request is the current user
       return (
-        <div className='search-card-connect-corner' onClick={this.handleWithdraw} style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
-          <button className={this.state.withdrawn ? 'search-card-withdrawn' : 'search-card-pending'} disabled={this.state.withdrawn ? true : null}>
-            {this.state.withdrawn ? "Withdrawn" : "Pending"}
+        <div className='search-card-connect-corner' onClick={() => this.props.deleteConnection(this.state.currentConnection.id)} style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
+          <button className='search-card-pending'>
+            Pending
           </button>
         </div>
       )
@@ -75,9 +68,9 @@ export default class SearchResultCard extends Component {
       // If the current user has an existing accepted connection with the search result
       return (
         <div className='search-card-connect-corner' style={this.props.count !== this.props.place ? {"borderBottom" : "1px solid rgba(0, 0, 0, 0.15)"} : null}>
-          <button onClick={() => this.props.deleteConnection(this.state.currentConnection.id)}>
-            Disconnect
-          </button>
+          <Link className='search-card-connect-view-profile' to={`/users/${this.props.user.id}`}>
+            <span>View full profile</span>
+          </Link>
         </div>
       )
     }
@@ -102,7 +95,7 @@ export default class SearchResultCard extends Component {
           </Link>
 
           
-          {this.renderConnectOptions()}
+          {this.props.user !== this.props.currentUser ? this.renderConnectOptions() : null}
 
         </div>
       </li>
