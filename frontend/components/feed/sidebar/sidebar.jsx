@@ -6,13 +6,20 @@ class Sidebar extends React.Component {
     super(props);
 
     this.state = {
-      connections: this.props.connections
+      connections: []
     }
 
   }
 
   componentDidMount() {
-    this.props.fetchConnections(this.props.currentUser.id);
+    this.props.fetchConnections(this.props.currentUser.id)
+      .then(() => this.filterConnections());
+  }
+
+  filterConnections() {
+    let tempAccepted = [];
+    this.props.connections.forEach(connection => connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id && !connection.pending ? tempAccepted.push(connection) : null);
+    this.setState({ connections: [...tempAccepted] });
   }
 
   render() {
@@ -73,7 +80,7 @@ class Sidebar extends React.Component {
                     </div>
                     {/* Right Half */}
                     <div className='sidebar-connections-right'>
-                      <span>{this.props.connections.length}</span>
+                      <span>{this.state.connections.length}</span>
                     </div>
                   </div>
                 </Link>
