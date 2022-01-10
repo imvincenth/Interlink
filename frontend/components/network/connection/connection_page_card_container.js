@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers, fetchUser } from '../../../actions/user_actions';
-import { fetchConnections } from '../../../actions/connection_actions';
+import { fetchConnections, deleteConnection } from '../../../actions/connection_actions';
 import ConnectionsCard from './connections_page_card';
 
 const mSTP = state => ({
@@ -13,7 +13,8 @@ const mSTP = state => ({
 const mDTP = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: userId => dispatch(fetchUser(userId)),
-  fetchConnections: userId => dispatch(fetchConnections(userId))
+  fetchConnections: userId => dispatch(fetchConnections(userId)),
+  deleteConnection: connectionId => dispatch(deleteConnection(connectionId))
 });
 
 export default connect(mSTP, mDTP)(ConnectionsCard);

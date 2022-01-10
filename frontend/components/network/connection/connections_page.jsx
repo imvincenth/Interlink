@@ -38,12 +38,12 @@ export default class Connection extends Component {
 
           {/* Connections Section */}
           <section className='network-connections-main'>
-            <header style={this.state.acceptedConnectionObjs.length > 0 ? {"border-bottom": "1px solid rgba(0, 0, 0, 0.08)"} : null}>
+            <header style={this.state.acceptedConnectionObjs.length > 0 ? {"borderBottom": "1px solid rgba(0, 0, 0, 0.08)"} : null}>
               {this.state.acceptedConnectionObjs.length} Connections
             </header>
 
             <ul>
-              {this.state.acceptedConnectionObjs.map((connection, i) => <ConnectionPageCardContainer key={`${connection.id}${i}${connection.connector_id}`} connection={connection} user={this.state.acceptedUserObjs[i]} />)}
+              {this.state.acceptedConnectionObjs.map((connection, i) => <ConnectionPageCardContainer key={`${connection.id}${i}${connection.connector_id}`} connection={connection} user={this.state.acceptedUserObjs[i]} count={this.state.acceptedConnectionObjs.length} place={i+1} />)}
             </ul>
           </section>
 

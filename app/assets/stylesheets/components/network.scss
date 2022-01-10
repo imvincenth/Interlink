@@ -243,6 +243,7 @@
   display: flex;
   align-items: center;
   padding-left: 12px;
+  position: relative;
 }
 
 .network-invitation-card-ignore {
@@ -349,8 +350,43 @@
 
 .connections-page-card-wrap {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 8px 8px 8px 24px;
   position: relative;
 }
 
+.connections-page-card-menu-button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-radius: 50%;
+  margin: 0 16px 0 8px;
+  padding: 4px;
+  height: 32px;
+  width: 32px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.connections-page-card-menu-button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.connections-page-card-menu-button > img {
+  height: 24px;
+  width: 24px;
+  display: inline;
+}
+
+.connections-page-card-delete-menu {
+  position: absolute;
+  background-color: white;
+  top: 40px;
+  left: -10px;
+}
+
+.connections-page-card-delete-menu > div {
+  cursor: pointer;
+}
