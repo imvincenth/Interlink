@@ -18,6 +18,13 @@ export default class Connection extends Component {
       .then(() => this.filterAcceptedConnections());
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.connections.length !== this.props.connections.length) {
+      this.filterAcceptedConnections();
+    }
+  }
+
+
   filterAcceptedConnections() {
     let tempAccepted = [];
     this.props.connections.forEach(connection => connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id && !connection.pending ? tempAccepted.push(connection) : null);

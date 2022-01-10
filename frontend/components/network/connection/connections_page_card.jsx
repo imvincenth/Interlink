@@ -36,8 +36,9 @@ export default class ConnectionsCard extends Component {
   renderDeleteMenu() {
     return (
       <div className='connections-page-card-delete-menu'>
-        <div onClick={() => this.props.deleteConnection(this.props.connection.id)}>
-          Remove connection
+        <div className='connection-page-card-delete-menu-item' onClick={() => this.props.deleteConnection(this.props.connection.id)}>
+          <img className='connections-page-card-delete-menu-trash' src={window.trashURL} />
+          <span className='connections-page-card-delete-menu-remove'>&nbsp;Remove connection</span>
         </div>
       </div>
     )

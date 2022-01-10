@@ -383,10 +383,43 @@
 .connections-page-card-delete-menu {
   position: absolute;
   background-color: white;
+  border-radius: 8px;
+  border-top-right-radius: 0;
   top: 40px;
-  left: -10px;
+  left: -100px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  box-shadow: 0 6px 9px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.03), rgba(0, 0, 0, 0.15) 0px 4px 4px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  min-width: 168px;
+  max-width: 26.4rem;
+  max-height: 54.8rem;
+  z-index: 9999;
 }
 
-.connections-page-card-delete-menu > div {
+.connection-page-card-delete-menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 4px 8px 4px;
+  width: auto;
+  z-index: 9998;
+  cursor: pointer;
+}
+
+.connection-page-card-delete-menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.connections-page-card-delete-menu-trash {
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
+}
+
+.connections-page-card-delete-menu-remove {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
   cursor: pointer;
 }
