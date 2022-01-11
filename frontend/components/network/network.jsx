@@ -36,15 +36,15 @@ export default class Network extends Component {
     let tempAccepted = [];
     let tempPending = [];
 
-    this.props.connections.forEach(connection => connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id && !connection.pending ? tempAccepted.push(connection) : null);
-    this.props.connections.forEach(connection => connection.connector_id !== this.props.currentUser.id && connection.connectee_id === this.props.currentUser.id && connection.pending ? tempPending.push(connection) : null);
+    this.props.connections.forEach(connection => (connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id) && !connection.pending ? tempAccepted.push(connection) : null);
+    this.props.connections.forEach(connection => (connection.connector_id !== this.props.currentUser.id && connection.connectee_id === this.props.currentUser.id) && connection.pending ? tempPending.push(connection) : null);
 
     this.setState({ currentUserConnections: [...tempAccepted], pendingConnections: [...tempPending] });
   }
 
   renderRemainingInvitations() {
     return (
-      this.state.pendingConnections.slice(3).map((connection, i) => <InvitationCardContainer key={`${connection.id}${i}`} connection={connection} currentUserConnections={this.state.currentUserConnections} accepted={this.state.currentUserConnections} />)
+      this.state.pendingConnections.slice(3).map((connection, i) => <InvitationCardContainer key={`${connection.id}${i}`} connection={connection} currentUserConnections={this.state.currentUserConnections} />)
     )
   }
 
@@ -72,7 +72,7 @@ export default class Network extends Component {
           <section className='network-invitations-section'>
             <header>
               <h2>Invitations</h2>
-              <Link className='network-management-see-all' to={`/invitations`}>See all {this.state.pendingConnections.length}</Link>
+              <Link className='network-management-see-all' to={`/invitations`}>{this.state.pendingConnections.length === 0 ? "Manage" : "See all"} {this.state.pendingConnections.length}</Link>
             </header>
 
             <ul className='network-invitations-wrap'>

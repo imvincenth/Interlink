@@ -423,3 +423,33 @@
   line-height: 20px;
   cursor: pointer;
 }
+
+.invitations-filter-choices {
+  display: flex;
+  align-items: flex-end;
+  line-height: 48px;
+}
+
+.invitations-filter-choice {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: rgb(5, 118, 66);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 16px;
+  padding: 9px 8px 11px 8px;
+  cursor: pointer;
+}
+
+.invitations-filter-choice.active {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: rgb(5, 118, 66);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-left: 16px;
+  padding: 9px 8px 11px 8px;
+  border-bottom: 2px solid rgb(5, 118, 66);
+}

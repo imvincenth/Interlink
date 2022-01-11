@@ -27,8 +27,8 @@ export default class Connection extends Component {
 
   filterAcceptedConnections() {
     let tempAccepted = [];
-    this.props.connections.forEach(connection => connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id && !connection.pending ? tempAccepted.push(connection) : null);
-    
+    this.props.connections.forEach(connection => (connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id) && !connection.pending ? tempAccepted.push(connection) : null);
+
     let tempUserIds = tempAccepted.map(connection => connection.connector_id === this.props.currentUser.id ? connection.connectee_id : connection.connector_id);
     let tempUsers = tempUserIds.map(id => this.props.users[id]);
 

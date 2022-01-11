@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
-export default class InvitationCard extends Component {
+export default class InvitationManagerCard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user: this.props.users[this.props.connection.connector_id],
+      user: this.props.type === "received" ? this.props.users[this.props.connection.connector_id] : this.props.users[this.props.connection.connectee_id],
 
       invitorConnections: [],
       mutuals: [],
@@ -53,10 +53,8 @@ export default class InvitationCard extends Component {
   }
 
   render() {
-    // if (!this.props.currentUserConnections) return null;
-
     return (
-      <li className='network-invitation-card'>
+      <li className='network-invitation-card' style={this.props.place === 1 ? {"borderTop": "1px solid rgba(0, 0, 0, 0.08)"} : null}>
         <div className='network-invitation-card-left'>
           <Link to={`/users/${this.state.user.id}`}>
             {this.state.user.profilePictureUrl ? <img className='network-invitation-card-propic' src={this.state.user.profilePictureUrl} /> : <img className='network-invitation-card-propic' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
@@ -68,12 +66,14 @@ export default class InvitationCard extends Component {
               <span className='network-invitation-card-headline'>{this.state.user.headline}</span>
             </Link>
             {this.state.mutuals.length === 0 ? <span className='network-invitation-card-no-mutual'><img src={window.invitePlaceURL} />{this.state.user.city_district}, {this.state.user.country_region}</span> : <span className='network-invitation-card-mutual'><img src={window.inviteMutualURL} />{this.state.firstMutual} {this.state.mutuals.length > 1 ? `and ${this.state.mutuals.length - 1} other${this.state.mutuals.length > 2 ? "s" : ""}` : null}</span>}
+
           </div>
         </div>
 
         <div className='network-invitation-card-right'>
-          <button className='network-invitation-card-ignore' onClick={() => this.props.deleteConnection(this.props.connection.id)}>Ignore</button>
-          <button className='network-invitation-card-accept' onClick={this.handleAccept}>Accept</button>
+          <button className='network-invitation-card-ignore' onClick={() => this.props.deleteConnection(this.props.connection.id)} style={this.props.type === "sent" ? {"display": "none"} : null}>Ignore</button>
+          <button className='network-invitation-card-accept' onClick={this.handleAccept} style={this.props.type === "sent" ? {"display": "none"} : null}>Accept</button>
+          <button className='network-invitation-card-ignore' onClick={() => this.props.deleteConnection(this.props.connection.id)} style={this.props.type === "received" ? {"display": "none"} : null}>Withdraw</button>
         </div>
       </li>
     )

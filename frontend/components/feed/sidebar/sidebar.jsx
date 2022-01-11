@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
 
   filterConnections() {
     let tempAccepted = [];
-    this.props.connections.forEach(connection => connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id && !connection.pending ? tempAccepted.push(connection) : null);
+    this.props.connections.forEach(connection => (connection.connector_id === this.props.currentUser.id || connection.connectee_id === this.props.currentUser.id) && !connection.pending ? tempAccepted.push(connection) : null);
     this.setState({ connections: [...tempAccepted] });
   }
 
