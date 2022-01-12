@@ -42,8 +42,12 @@ export const logout = () => dispatch => (
 
 export const update = user => dispatch => (
   APIUtil.update(user).then(user => (
-    dispatch(receiveCurrentUser(user))
-  ), err => (
-    dispatch(receiveErrors(err.responseJSON))
-  ))
+    dispatch(receiveCurrentUser(user))), 
+    err => (dispatch(receiveErrors(err.responseJSON))))
+);
+
+export const updatePicture = (formData, userId) => dispatch => (
+  APIUtil.updatePicture(formData, userId)
+    .then(user => dispatch(receiveCurrentUser(user)),
+    err => (dispatch(receiveErrors(err.responseJSON))))
 );

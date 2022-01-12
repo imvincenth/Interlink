@@ -10,7 +10,9 @@ export const signup = user => (
   $.ajax({
     method: 'POST',
     url: '/api/users',
-    data: { user }
+    data: { user },
+    contentType: false,
+    processData: false
   })
 );
 
@@ -28,6 +30,16 @@ export const update = user => (
     data: { user }
   })
 );
+
+export const updatePicture = (formData, userId) => (
+  $.ajax({
+    url: `/api/users/${userId}`,
+    method: 'PATCH',
+    data: formData,
+    contentType: false,
+    processData: false
+  })
+)
 
 export const fetchUsers = userId => (
   $.ajax({

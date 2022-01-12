@@ -35,10 +35,234 @@
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  height: fit-content;
 }
 
 .profile-banner-wrap {
   position: relative;
+}
+
+.banner-button-button {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.banner-button-img {
+  height: 16px;
+  width: 16px;
+}
+
+.banner-modal-child {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 auto;
+  max-height: 676px;
+  width: 744px;
+  max-width: 744px;
+  transition-delay: 0s;
+  transition-duration: 0.083s;
+  transition-property: box-shadow;
+  transition-timing-function: ease;
+  position: relative;
+  top: 32px;
+  overflow: auto;
+}
+
+.edit-banner-button {
+  background-color: rgba(255, 255, 255, 0);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  max-width: 480px;
+  margin-bottom: 0px;
+  padding: 6px 8px;
+  text-align: center;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  cursor: pointer;
+}
+
+.edit-banner-button:hover,
+.edit-banner-button:active {
+  background-color: rgba(0, 0, 0, .08);
+}
+
+.edit-banner-button-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+.apply-banner-change {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #0a66c2;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  border: 1px solid #0a66c2;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 0px;
+  margin-right: 12px;
+  max-width: 480px;
+  min-width: 0px;
+  // min-height: 32px;
+  overflow: hidden;
+  padding: 6px 16px 6px 16px;
+  text-align: center;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.apply-banner-change > span {
+  color: #0a66c2;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.apply-banner-change:hover,
+.apply-banner-change:active {
+  background-color: rgba(112,181,249,0.15);
+  color: #0a66c2;
+  box-shadow: #0a66c2 0px 0px 0px 1px inset;
+}
+
+.apply-banner-done {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #0a66c2;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 0px;
+  max-width: 480px;
+  min-width: 0px;
+  // min-height: 32px;
+  overflow: hidden;
+  padding: 6px 16px 6px 16px;
+  text-align: center;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.apply-banner-done > span {
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.apply-banner-done:hover,
+.apply-banner-done:active {
+  background-color: rgb(5, 83, 161);
+  color: white;
+}
+
+.banner-choice-wrap {
+  padding: 16px 24px;
+  display: flex;
+}
+
+.upload-banner-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #eef3f8;
+  height: 56px;
+  width: 56px;
+  margin-right: 16px;
+}
+
+.uplaod-banner-logo {
+  height: 24px;
+  width: 24px;
+}
+
+.upload-photo-header {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.upload-photo-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.upload-banner-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  margin-top: 8px;
+  padding: 6px 16px;
+  width: 138px;
+  max-width: 480px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.upload-banner-button:hover {
+  color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 1px inset;
+}
+
+.upload-banner-button-text {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
 }
 
 .profile-banner {
@@ -46,7 +270,6 @@
   min-height: 195.5px;
   max-height: 195.5px;
   position: relative;
-  padding-bottom: 25%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   object-fit: cover;
@@ -62,7 +285,57 @@
 }
 
 .profile-picture-box {
+  position: relative;
   margin-top: -112px;
   z-index: 4;
 }
 
+.profile-picture-wrap {
+  background-color: rgb(255, 255, 255);
+  border-radius: 49.9%;
+  height: 160px;
+  width: 160px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-picture {
+  height: 152px;
+  width: 152px;
+  border-radius: 50%;
+}
+
+.profile-picture-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  cursor: pointer;
+}
+
+.profile-picture-modal-child {
+  background-color: #1d2226;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  color: #e8e9e9;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 auto;
+  max-height: 676px;
+  width: 552px;
+  max-width: 552px;
+  transition-delay: 0s;
+  transition-duration: 0.083s;
+  transition-property: box-shadow;
+  transition-timing-function: ease;
+  position: relative;
+  top: 32px;
+  overflow: auto;
+}

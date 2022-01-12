@@ -9,6 +9,8 @@ import CreatePostFormContainer from '../feed/post/create_post_container';
 import EditPostFormContainer from '../feed/post/edit_post_container';
 import EditProfileFormContainer from '../profile/edit_profile_container';
 import PostShowModalContainer from '../feed/post/post_show_modal_container';
+import ProfilePictureModalContainer from '../profile/profile_picture_modal_container';
+import BannerModalContainer from '../profile/banner_modal_container';
 
 function Modal(props) {
   if (!props.modal) {
@@ -49,6 +51,14 @@ function Modal(props) {
     case 'postShow':
       classType = 'post-show';
       component = <PostShowModalContainer />;
+      break;
+    case 'profilePicture':
+      classType = 'profile-picture';
+      component = <ProfilePictureModalContainer />;
+      break;
+    case 'banner':
+      classType = 'banner';
+      component = <BannerModalContainer />;
       break;
     default:
       return null;

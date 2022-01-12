@@ -25,6 +25,7 @@ const mDTP = dispatch => ({
   fetchConnection: (connecteeId, connectorId) => dispatch(fetchConnection(connecteeId, connectorId)),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: user => dispatch(fetchUser(user)),
+  openModal: (modalType, user) => dispatch(openModal(modalType, user)),
   openEditProfileModal: (
     <button className="open-modal" onClick={() => dispatch(openModal('editProfile'))}>
       <img src={window.vectorURL} />

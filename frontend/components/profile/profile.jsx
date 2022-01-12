@@ -38,8 +38,7 @@ class Profile extends React.Component {
         .then(this.props.fetchExperiences(this.props.userId))
         .then(this.props.fetchEducations(this.props.userId))
         .then(this.props.fetchConnection(this.props.userId, this.props.currentUser.id))
-        .then(this.setState({ currentUserStatus: false }))
-        .then(this.connectionStatusCheck());
+        .then(this.setState({ currentUserStatus: false }));
     }
   }
 
@@ -61,6 +60,7 @@ class Profile extends React.Component {
             <section className='profile-content-main'>
               {/* Banner */}
               <div className='profile-banner-wrap'>
+                <button className='banner-button-button' onClick={() => this.props.openModal("banner", this.props.user)}><img className='banner-button-img' src={window.bannerButtonURL} /></button>
                 {this.props.user.bannerUrl ? <img className='profile-banner' src={this.props.user.bannerUrl} /> : <img className='profile-banner' src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" />}
               </div>
         
@@ -68,10 +68,17 @@ class Profile extends React.Component {
               <div className='profile-info-wrap'>
                 <div className='profile-info-propic-box'>
                   <div className='profile-picture-box'>
-                    {this.props.user.profilePictureUrl ? <img /> : <img />}
+                    <div className='profile-picture-wrap'>
+                      <button className='profile-picture-edit' onClick={() => this.props.openModal("profilePicture", this.props.user)}>
+                        {this.props.user.profilePictureUrl ? <img className='profile-picture' src={this.props.user.profilePictureUrl} /> : <img className='profile-picture' src="https://static-exp1.licdn.com/sc/h/1c5u578iilxfi4m4dvc4q810q" />}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
+                <div>
+                  ok cmon
+                </div>
               </div>
 
             </section>
