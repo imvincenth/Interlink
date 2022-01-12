@@ -41,6 +41,15 @@ export const updatePicture = (formData, userId) => (
   })
 )
 
+export const deletePicture = imageType => (
+  $.ajax({
+    url: `/api/users/${imageType}`,
+    method: 'DELETE',
+    contentType: false,
+    processData: false
+  })
+)
+
 export const fetchUsers = userId => (
   $.ajax({
     url: `/api/users`,

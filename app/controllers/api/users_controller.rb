@@ -45,6 +45,18 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_user
+    if params[:id] == "banner" 
+      @user.banner.purge
+    elsif params[:id] == "profile_picture" 
+      @user.profile_picture.purge
+    end
+
+    render :show
+  end
+  
+
   # private
   def user_params
     params.require(:user).permit(

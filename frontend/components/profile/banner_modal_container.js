@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { update, updatePicture } from '../../actions/session_actions';
+import { update, updatePicture, deletePicture } from '../../actions/session_actions';
 import { closeModal } from '../../actions/modal_actions';
 import BannerModal from './banner_modal';
 
@@ -14,6 +14,7 @@ const mSTP = (state, ownProps) => ({
 const mDTP = dispatch => ({
   action: user => dispatch(update(user)),
   updatePicture: (formData, userId) => dispatch(updatePicture(formData, userId)),
+  deletePicture: imageType => dispatch(deletePicture(imageType)),
   closeModal: () => dispatch(closeModal())
 });
 

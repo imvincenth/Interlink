@@ -51,3 +51,9 @@ export const updatePicture = (formData, userId) => dispatch => (
     .then(user => dispatch(receiveCurrentUser(user)),
     err => (dispatch(receiveErrors(err.responseJSON))))
 );
+
+export const deletePicture = imageType => dispatch => (
+  APIUtil.deletePicture(imageType)
+    .then(user => dispatch(receiveCurrentUser(user)),
+    err => (dispatch(receiveErrors(err.responseJSON))))
+)

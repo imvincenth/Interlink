@@ -33,11 +33,9 @@ export default class BannerModal extends Component {
 
   handleDelete(e) {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('user[banner]', null);
 
-    // this.props.updatePicture(formData, this.props.currentUser.id)
-    //   .then(() => this.props.closeModal());
+    this.props.deletePicture("banner")
+      .then(() => this.props.closeModal());
   }
 
   handleBanner(e) {
