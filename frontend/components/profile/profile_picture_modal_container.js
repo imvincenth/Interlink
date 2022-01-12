@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { update } from '../../actions/session_actions';
-import { closeModal, clsoeModal } from '../../actions/modal_actions';
+import { update, updatePicture, deletePicture } from '../../actions/session_actions';
+import { closeModal } from '../../actions/modal_actions';
 import ProfilePictureModal from './profile_picture_modal';
 
 const mSTP = (state, ownProps) => ({
-  user: state.ui.modalParamsReducer,
   users: Object.values(state.entities.users),
   currentUser: state.entities.users[state.session.id],
   errors: state.errors.users,
@@ -13,7 +12,9 @@ const mSTP = (state, ownProps) => ({
 
 const mDTP = dispatch => ({
   action: user => dispatch(update(user)),
-  clsoeModal: () => dispatch(closeModal())
+  updatePicture: (formData, userId) => dispatch(updatePicture(formData, userId)),
+  deletePicture: imageType => dispatch(deletePicture(imageType)),
+  closeModal: () => dispatch(closeModal())
 });
 
 export default connect(mSTP, mDTP)(ProfilePictureModal);
