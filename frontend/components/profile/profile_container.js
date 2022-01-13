@@ -26,21 +26,6 @@ const mDTP = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
   fetchUser: user => dispatch(fetchUser(user)),
   openModal: (modalType, user) => dispatch(openModal(modalType, user)),
-  openEditProfileModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('editProfile'))}>
-      <img src={window.vectorURL} />
-    </button>
-  ),
-  openCreateExperienceModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('createExperience'))}>
-      <img src={window.plusURL} />
-    </button>
-  ),
-  openCreateEducationModal: (
-    <button className="open-modal" onClick={() => dispatch(openModal('createEducation'))}>
-      <img src={window.plusURL} />
-    </button>
-  ),
   createConnection: connection => dispatch(createConnection(connection)),
   updateConnection: connection => dispatch(updateConnection(connection)),
   deleteConnection: connectionId => dispatch(deleteConnection(connectionId)),

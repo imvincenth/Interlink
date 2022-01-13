@@ -178,7 +178,7 @@ class Navbar extends React.Component {
     return (
       <div id="navbar-container" onClick={this.state.searchActive || this.state.profileActive ? this.toggleModalOff : null}>
         {this.state.searchActive ? <div className='search-modal-background' onClick={this.toggleModalOff}></div> : null}
-        {this.state.profileActive ? <div className='profile-menu-background' onClick={this.toggleModalOff}></div> : null}
+        {this.state.profileActive ? <div className='profile-menu-navbar-background' onClick={this.toggleModalOff}></div> : null}
         <div className="navbar-content">
 
           <div className="navbar-left">

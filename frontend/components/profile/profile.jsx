@@ -17,9 +17,17 @@ class Profile extends React.Component {
 
       connections: [],
 
+      addSectionActive: false,
+      moreActive: false,
+
+      copySuccess: false
     }
 
     this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
+    this.toggleMenusOff = this.toggleMenusOff.bind(this);
+    this.openExperienceCreate = this.openExperienceCreate.bind(this);
+    this.openEducationCreate = this.openEducationCreate.bind(this);
+    this.copyToClipboard = this.copyToClipboard.bind(this);
   }
 
   currentUserCheck() {
@@ -63,11 +71,52 @@ class Profile extends React.Component {
     this.props.createConnection({...this.state, connectee_id: this.props.userId});
   }
 
+  openExperienceCreate() {
+    this.props.openModal('createExperience', this.props.currentUser)
+    this.toggleMenusOff();
+  }
+
+  openEducationCreate() {
+    this.props.openModal('createEducation', this.props.currentUser)
+    this.toggleMenusOff();
+  }
+
+  toggleMenusOff() {
+    this.setState({ addSectionActive: false, moreActive: false });
+  }
+
+  copyToClipboard() {
+    // navigator.clipboard.writeText(`localhost:3000/#/posts/${this.props.post.id}`)
+    navigator.clipboard.writeText(`https://ringedin.herokuapp.com/#/users/${this.props.user.id}`)
+      .then(() => this.setState({ addSectionActive: false, moreActive: false, copySuccess: true }));
+  }
+
   renderProfileOptions() {
     return (
       <div style={{display: "flex", paddingTop: "8px"}}>
         <button className='profile-user-option' style={this.props.user !== this.props.currentUser ? {display: "none"} : null}>Add section</button>
         <button className='profile-user-option'>More</button>
+      </div>
+    )
+  }
+
+  renderAddSection() {
+    return (
+      <ul className='profile-add-section-menu'>
+        <h4>Background</h4>
+        <li style={{borderBottom: "1px solid rgba(0, 0, 0, 0.08)"}} onClick={this.openExperienceCreate}>Work experience</li>
+        <li onClick={this.openEducationCreate}>Education</li>
+      </ul>
+    )
+  }
+
+  renderMore() {
+    return (
+      <div className='profile-more-menu'>
+        <div onClick={this.copyToClipboard}>
+          <img src={window.copyLinkURL} />
+          <span>Copy profile link</span>
+        </div>
       </div>
     )
   }
@@ -78,6 +127,8 @@ class Profile extends React.Component {
     return (
       <div className="profile-background">
         <NavbarContainer page="profile" />
+        {this.state.addSectionActive || this.state.moreActive ? <div className='profile-menu-background' onClick={this.toggleMenusOff}></div> : null}
+
         <div className="profile-container">
           <div className='profile-content-wrap'>
 
@@ -111,7 +162,7 @@ class Profile extends React.Component {
                         <span className='profile-user-headline'>{this.props.user.headline}</span>
                       </div>
 
-                      <span className='profile-user-school' style={{display: "flex", alignItems: "center"}}><img style={{width: "32px", height: "32px", marginRight: "8px"}} src="https://static-exp1.licdn.com/sc/h/aajlclc14rr2scznz5qm2rj9u" />{this.props.educations[0] ? this.props.educations[0].school : null}</span>
+                      <span className='profile-user-school' style={{display: "flex", alignItems: "center", marginRight: "16px"}}><img style={{width: "32px", height: "32px", marginRight: "8px"}} src="https://static-exp1.licdn.com/sc/h/aajlclc14rr2scznz5qm2rj9u" />{this.props.educations[0] ? this.props.educations[0].school : null}</span>
                     </div>
 
                     <span className='profile-user-location'>{this.props.user.city_district}, {this.props.user.country_region}</span>
@@ -122,9 +173,11 @@ class Profile extends React.Component {
                     </Link>
 
                     {/* User Options */}
-                    <div style={{display: "flex", paddingTop: "8px"}}>
-                      <button className='profile-user-option'>Add section</button>
-                      <button className='profile-user-option'>More</button>
+                    <div style={{display: "flex", paddingTop: "8px", position: "relative"}}>
+                      <button className='profile-user-option' onClick={() => this.setState({ addSectionActive: true })}>Add section</button>
+                      {this.state.addSectionActive ? this.renderAddSection() : null}
+                      <button className='profile-user-option' onClick={() => this.setState({ moreActive: true })}>More</button>
+                      {this.state.moreActive ? this.renderMore() : null}
                     </div>
 
                   </div>

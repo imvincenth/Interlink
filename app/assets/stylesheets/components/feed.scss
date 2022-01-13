@@ -33,6 +33,10 @@
   grid-template-rows: auto;
   row-gap: 24px;
   column-gap: 24px;
+
+  @media (max-width: 1135px) {
+    width: 960px;
+  }
 }
 
 .feed-modal-background {
@@ -118,7 +122,7 @@
 }
 
 .post-modal-box {
-  width: 540px;
+  // width: 540px;
   border-radius: 8px;
   background-color: rgb(255, 255, 255);
   // border: 1px solid rgba(0, 0, 0, 0.1);
@@ -285,7 +289,7 @@
   font-size: 13.3333px;
   font-weight: 400;
   display: block;
-  width: 540px;
+  // width: 540px;
 }
 
 // Post Item
@@ -298,7 +302,7 @@
   transition-duration: 0.083s;
   transition-property: box-shadow;
   transition-timing-function: ease;
-  width: 538px;
+  // width: 538px;
   margin: 0 0 8px;
   // overflow: visible;
   // height: 100%;
@@ -717,8 +721,8 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
-  width: 315px;
-  height: 335px;
+  // width: 315px;
+  height: fit-content;
 }
 
 .project-info-text {
