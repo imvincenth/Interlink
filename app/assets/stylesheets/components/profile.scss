@@ -580,3 +580,41 @@
   font-weight: 400;
   line-height: 28px;
 }
+
+.banner-show-modal-child {
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 auto;
+  max-height: 676px;
+  max-width: 1128px;
+  transition-delay: 0s;
+  transition-duration: 0.083s;
+  transition-property: box-shadow;
+  transition-timing-function: ease;
+  position: relative;
+  top: 32px;
+  overflow: auto;
+}
+
+.banner-show-modal-content {
+  display: flex;
+  justify-content: center;
+  padding: 32px 48px 48px 48px;
+  margin-top: 32px;
+}
+
+.banner-show-banner {
+  object-fit: cover;
+  width: 100vw;
+  height: calc(100vw / 4);
+  max-width: 792px;
+  max-height: 198px;
+}

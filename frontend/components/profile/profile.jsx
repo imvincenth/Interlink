@@ -61,7 +61,7 @@ class Profile extends React.Component {
               {/* Banner */}
               <div className='profile-banner-wrap'>
                 <button className='banner-button-button' onClick={() => this.props.openModal("banner", this.props.user)}><img className='banner-button-img' src={window.bannerButtonURL} /></button>
-                {this.props.user.bannerUrl ? <img className='profile-banner' src={this.props.user.bannerUrl} /> : <img className='profile-banner' src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" />}
+                {this.props.user.bannerUrl ? <img onClick={() => this.props.openModal("bannerShow", this.props.user)} className='profile-banner' src={this.props.user.bannerUrl} /> : <img onClick={() => this.props.openModal("bannerShow", this.props.user)} className='profile-banner' src="https://static-exp1.licdn.com/sc/h/55k1z8997gh8dwtihm11aajyq" />}
               </div>
         
               {/* Profile Info */}
