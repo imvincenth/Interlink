@@ -379,6 +379,7 @@ a > h5 {
 }
 
 .navbar-icon-profile {
+  object-fit: cover;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -430,6 +431,7 @@ a > h5 {
 
 .profile-menu-pic {
   aspect-ratio: auto 70 / 70;
+  object-fit: cover;
   width: 56px;
   height: 56px;
   border-radius: 50%;

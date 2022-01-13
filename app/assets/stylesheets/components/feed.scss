@@ -21,6 +21,7 @@
   width: 1128px;
   max-width: unset;
   overflow: unset;
+  margin-top: 24px;
   margin-left: auto;
   margin-right: auto;
   display: grid;
@@ -154,6 +155,7 @@
 .post-modal-propic {
   margin-right: 8px;
   border-radius: 50%;
+  object-fit: cover;
   height: 48px;
   width: 48px;
 }
@@ -333,7 +335,7 @@
   background-color: rgb(255, 255, 255);
   border-radius: 50%;
   background-position: 50% 50%;
-  object-fit: contain;
+  object-fit: cover;
   object-position: 50% 50%;
   height: 48px;
   width: 48px;

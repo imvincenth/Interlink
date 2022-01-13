@@ -70,11 +70,13 @@
 }
 
 .sidebar-avatar {
-  object-fit: contain;
+  object-fit: cover;
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
+  height: 72px;
+  width: 72px;
+  // width: auto;
+  // height: auto;
   border-radius: 50%;
 }
 

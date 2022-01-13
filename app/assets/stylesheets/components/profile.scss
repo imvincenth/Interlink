@@ -28,7 +28,7 @@
   grid-row-end: content;
   grid-row-start: content;
   grid-template-columns: minmax(0,17fr)minmax(300px,7fr);
-  margin-top: 0;
+  margin-top: 24px;
 }
 
 .profile-content-main {
@@ -617,4 +617,111 @@
   height: calc(100vw / 4);
   max-width: 792px;
   max-height: 198px;
+}
+
+.profile-social-wrap {
+  position: relative;
+  margin-top: 8px;
+}
+
+.profile-social-info-edit-button {
+ position: absolute;
+ top: -45px;
+ right: -8px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background-color: rgba(255, 255, 255, 0);
+ border: none;
+ border-radius: 50%;
+ height: 40px;
+ width: 40px;
+ cursor: pointer;
+}
+
+.profile-social-info-edit-button:hover {
+  background-color: rgba(0, 0, 0, .08);
+}
+
+.profile-social-info-edit-button > img {
+  height: 18px;
+  width: 18px;
+}
+
+.profile-user-name {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
+  word-break: break-word;
+}
+
+.profile-user-headline {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.profile-user-school {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  max-height: 40px;
+  text-overflow: ellipsis;
+}
+
+.profile-user-school:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+
+.profile-user-location {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.5px;
+  padding-bottom: 8px;
+}
+
+.profile-user-connections {
+  color: #0a66c2;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17.5px;
+  cursor: pointer;
+}
+
+.profile-user-connections:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+
+.profile-user-option {
+  background-color: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  max-height: 32px;
+  padding: 6px 16px;
+  margin-right: 8px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.profile-user-option:hover,
+.profile-user-option:active {
+  color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.08);
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 1.00137px inset;
 }
