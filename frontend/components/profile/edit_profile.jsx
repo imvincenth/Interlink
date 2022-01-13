@@ -26,7 +26,7 @@ class EditProfileForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <div>
 
         {/* Header */}
         <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
@@ -109,7 +109,7 @@ class EditProfileForm extends React.Component {
           <button className='profile-edit-modal-save' onClick={this.handleSubmit}>Save</button>
         </footer>
 
-      </form>
+      </div>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { update } from '../../actions/session_actions';
+import { update, updatePicture } from '../../actions/session_actions';
 import { closeModal } from '../../actions/modal_actions';
 import EditProfileForm from './edit_profile';
 
@@ -10,6 +10,7 @@ const mSTP = state => ({
 
 const mDTP = dispatch => ({
   action: user => dispatch(update(user)),
+  updatePicture: (formData, userId) => dispatch(updatePicture(formData, userId)),
   closeModal: () => dispatch(closeModal())
 });
 

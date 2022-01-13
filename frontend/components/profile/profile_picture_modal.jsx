@@ -27,7 +27,6 @@ export default class ProfilePictureModal extends Component {
       this.props.action({...this.props.user})
         .then(() => this.props.closeModal());
     }
-
   }
 
   handleDelete(e) {

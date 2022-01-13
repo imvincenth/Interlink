@@ -199,12 +199,13 @@ export default class Search extends Component {
 
   findMatches() {
     let searchTerm = window.location.href.slice(window.location.href.indexOf("=") + 1).split("%20").join(" ").trim();
+
     let tempMatches = [];
     let tempCurrentUserConnections = [];
 
     this.props.connections.forEach(connection => this.props.currentUser.id === connection.connector_id || this.props.currentUser.id === connection.connectee_id ? tempCurrentUserConnections.push(connection) : null);
     this.props.users.forEach(user => `${user.first_name.toLowerCase()} ${user.last_name.toLowerCase()}`.includes(searchTerm) ? tempMatches.push(user) : null);
-    this.setState({ matches: [...tempMatches], searchInput: searchTerm, searchActive: false, currentUserConnections: [...tempCurrentUserConnections] });
+    this.setState({ matches: searchTerm === "" ? [] : [...tempMatches], searchInput: searchTerm, searchActive: false, currentUserConnections: [...tempCurrentUserConnections] });
   }
 
   renderNoSearchResults() {
