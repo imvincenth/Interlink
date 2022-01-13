@@ -5,7 +5,7 @@ export default class ProfilePictureModal extends Component {
     super(props);
 
     this.state = {
-      page: 2,
+      page: this.props.currentUser.profilePictureUrl ? 3 : 1,
 
       profile_picture: this.props.currentUser.profile_picture ? this.props.currentUser.profile_picture : null,
       profilePictureUrl: this.props.currentUser.profilePictureUrl ? this.props.currentUser.profilePictureUrl : ""
@@ -21,12 +21,13 @@ export default class ProfilePictureModal extends Component {
     const formData = new FormData();
     if (this.state.profile_picture) {
       formData.append('user[profile_picture]', this.state.profile_picture);
+      this.props.updatePicture(formData, this.props.currentUser.id)
+        .then(() => this.props.closeModal());
     } else {
-      formData.append('user[profile_picture]', this.props.user.profile_picture);
+      this.props.action({...this.props.user})
+        .then(() => this.props.closeModal());
     }
 
-    this.props.updatePicture(formData, this.props.currentUser.id)
-      .then(() => this.props.closeModal());
   }
 
   handleDelete(e) {
@@ -133,10 +134,32 @@ export default class ProfilePictureModal extends Component {
       <div>
 
         {/* Header */}
-        <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
-        <div className='post-modal-header'>
-          <h2 className='post-modal-header-text'>Profile photo</h2>
+        <button className="propic-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.propicXURL} /></button>
+        <div className='propic-modal-header'>
+          <h2 className='propic-modal-header-text'>Profile photo</h2>
         </div>
+
+        {/* Page Three Content */}
+        <div className='propic-modal-content-page-three'>
+          <div>
+            {this.state.profilePictureUrl ? <img className='propic-modal-existing' src={this.state.profilePictureUrl} /> : null}
+          </div>
+        </div>
+
+        {/* Footer Options */}
+        <footer style={{display: "flex", justifyContent: "space-between", alignItems: "center", backgroundColor: "#1d2226", borderTop: "1px solid rgba(255, 255, 255, 0.08)", padding: "0 40px"}}>
+
+          <button className='propic-modal-option' onClick={() => this.setState({ page: 1 })}>
+            <img src={window.propicEditURL} />
+            <span>Add photo</span>
+          </button>
+
+          <button className='propic-modal-option' onClick={this.handleDelete}>
+            <img src={window.propicTrashURL} />
+            <span>Delete</span>
+          </button>
+
+        </footer>
 
       </div>
     )

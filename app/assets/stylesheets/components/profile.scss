@@ -291,7 +291,7 @@
 }
 
 .profile-picture-wrap {
-  background-color: rgb(255, 255, 255);
+  background-color: #f9fafb;
   border-radius: 49.9%;
   height: 160px;
   width: 160px;
@@ -302,9 +302,18 @@
 }
 
 .profile-picture {
+  object-fit: cover;
   height: 152px;
   width: 152px;
   border-radius: 50%;
+}
+
+.no-profile-picture {
+  height: 152px;
+  width: 152px;
+  -moz-transform:scale(0.3);
+  -webkit-transform:scale(0.3);
+  transform:scale(0.3);
 }
 
 .profile-picture-edit {
@@ -314,30 +323,6 @@
   background-color: rgba(255, 255, 255, 0);
   border: none;
   cursor: pointer;
-}
-
-.profile-picture-modal-child.existing {
-  background-color: #1d2226;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.9);
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  color: #e8e9e9;
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  margin: 0 auto;
-  max-height: 676px;
-  width: 552px;
-  max-width: 552px;
-  transition-delay: 0s;
-  transition-duration: 0.083s;
-  transition-property: box-shadow;
-  transition-timing-function: ease;
-  position: relative;
-  top: 32px;
-  overflow: auto;
 }
 
 .profile-picture-modal-child {
@@ -374,6 +359,7 @@
 
 .propic-modal-main-picture {
   border-radius: 50%;
+  object-fit: cover;
   height: 110px;
   width: 110px;
   margin-right: 5px;
@@ -382,6 +368,7 @@
 
 .propic-modal-side-pictures {
   border-radius: 50%;
+  object-fit: cover;
   height: 90px;
   width: 90px;
   margin-right: 5px;
@@ -390,6 +377,7 @@
 
 .propic-modal-side-side-pictures {
   border-radius: 50%;
+  object-fit: cover;
   height: 70px;
   width: 70px;
   margin-right: 5px;
@@ -441,13 +429,14 @@
   align-items: center;
   // position: absolute;
   width: calc(100% - 64px);
-  padding: 16px 32px;
+  padding: 16px 32px 32px 32px;
   z-index: 0;
 }
 
 .propic-modal-preview {
   border: 1px solid white;
   border-radius: 50%;
+  object-fit: cover;
   height: 230px;
   width: 230px;
 }
@@ -489,4 +478,105 @@
   color: rgba(0, 0, 0, 0.6);
   background-color: rgba(0, 0, 0, 0.08);
   box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 0px 1px inset;
+}
+
+.propic-modal-x-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 20px;
+  width: 40px;
+  min-width: 0px;
+  max-width: 480px;
+  min-height: 32px;
+  overflow: hidden;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 12px;
+  right: 12px;
+  text-align: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.propic-modal-x-box:hover,
+.propic-modal-x-box:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.propic-modal-header {
+  background-color: #1d2226;
+  color: #e8e9e9;
+  display: block;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  padding: 16px 48px 16px 24px;
+}
+
+.propic-modal-header-text {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+
+.propic-modal-content-page-three {
+  background-color: #1d2226;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // position: absolute;
+  width: calc(100% - 48px);
+  padding: 16px 32px 32px 16px;
+  z-index: 0;
+}
+
+.propic-modal-existing {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 280px;
+  width: 280px;
+}
+
+.propic-modal-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-radius: 4px;
+  min-height: 48px;
+  padding: 10px 8px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.propic-modal-option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.propic-modal-option > img {
+  height: 24px;
+  width: 24px;
+}
+
+.propic-modal-option > span {
+  color: #e8e9e9;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
 }

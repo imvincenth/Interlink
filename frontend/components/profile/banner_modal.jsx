@@ -23,12 +23,13 @@ export default class BannerModal extends Component {
     const formData = new FormData();
     if (this.state.banner) {
       formData.append('user[banner]', this.state.banner);
+      this.props.updatePicture(formData, this.props.currentUser.id)
+        .then(() => this.props.closeModal());
     } else {
-      formData.append('user[banner]', this.props.user.banner);
+      this.props.action({...this.props.user})
+        .then(() => this.props.closeModal());
     }
 
-    this.props.updatePicture(formData, this.props.currentUser.id)
-      .then(() => this.props.closeModal());
   }
 
   handleDelete(e) {

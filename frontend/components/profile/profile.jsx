@@ -70,7 +70,7 @@ class Profile extends React.Component {
                   <div className='profile-picture-box'>
                     <div className='profile-picture-wrap'>
                       <button className='profile-picture-edit' onClick={() => this.props.openModal("profilePicture", this.props.user)}>
-                        {this.props.user.profilePictureUrl ? <img className='profile-picture' src={this.props.user.profilePictureUrl} /> : <img className='profile-picture' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />}
+                        {this.props.user.profilePictureUrl ? <img className='profile-picture' src={this.props.user.profilePictureUrl} /> : <img className='no-profile-picture' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />}
                       </button>
                     </div>
                   </div>
