@@ -280,9 +280,9 @@ class CreateExperienceForm extends React.Component {
             </div>
 
             {/* Current Role Check */}
-            <div>
+            <div style={{display: "flex", alignItems: "center", paddingBottom: "24px"}}>
               <input type="checkbox" checked={this.state.current_role ? true : false} onChange={this.flipRole} />
-              <label>I am currently working in this role</label>
+              <label className='profile-current-role-check'>I am currently working in this role</label>
             </div>
 
             {/* Start date */}
