@@ -143,6 +143,20 @@ class Profile extends React.Component {
     )
   }
 
+  renderConnectionsSection() {
+    if (this.state.currentUserStatus) {
+      return (
+        <Link to={`/connections`}>
+          <span className='profile-user-connections'>{this.state.connections.length} connection{this.state.connections.length > 1 ? "s" : ""}</span>
+        </Link>
+      )
+    } else {
+      return (
+        <span className='profile-user-alt-connections'><strong>{this.state.connections.length}</strong> connection{this.state.connections.length > 1 ? "s" : ""}</span>
+      )
+    }
+  }
+
   render() {
     if (!this.props.user) return null;
 
@@ -166,7 +180,7 @@ class Profile extends React.Component {
                 <div className='profile-info-propic-box'>
                   <div className='profile-picture-box'>
                     <div className='profile-picture-wrap'>
-                      <button className='profile-picture-edit' onClick={() => this.props.openModal("profilePicture", this.props.user)}>
+                      <button className='profile-picture-edit' onClick={this.state.currentUserStatus ? (() => this.props.openModal("profilePicture", this.props.user)) : null}>
                         {this.props.user.profilePictureUrl ? <img className='profile-picture' src={this.props.user.profilePictureUrl} /> : <img className='no-profile-picture' src="https://static-exp1.licdn.com/sc/h/3h0vrtch1zepjr4p54aja8i9x" />}
                       </button>
                     </div>
@@ -190,9 +204,7 @@ class Profile extends React.Component {
                     <span className='profile-user-location'>{this.props.user.city_district}, {this.props.user.country_region}</span>
 
                     {/* User Connections Section */}
-                    <Link to={`/connections`}>
-                      <span className='profile-user-connections'>{this.state.connections.length} Connection{this.state.connections.length > 1 ? "s" : ""}</span>
-                    </Link>
+                    {this.renderConnectionsSection()}
 
                     {/* User Options */}
                     <div style={{display: "flex", paddingTop: "8px", position: "relative"}}>
