@@ -10,71 +10,77 @@ class Profile extends React.Component {
 
     this.state = {
       currentUserStatus: false,
-      connectionStatus: "",
-      connection: null,
-
+      
       pending: true,
       connector_id: this.props.currentUser.id,
-      connectee_id: "",
-
+      connectee_id: Number(window.location.href.split("/users/")[1]),
+      
       connections: [],
+      connection: null,
 
       addSectionActive: false,
       moreActive: false,
 
       copySuccess: false
     }
-
+    
     this.handleConnectSubmit = this.handleConnectSubmit.bind(this);
     this.toggleMenusOff = this.toggleMenusOff.bind(this);
     this.openExperienceCreate = this.openExperienceCreate.bind(this);
     this.openEducationCreate = this.openEducationCreate.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
+    console.log(Number(window.location.href.split("/users/")[1]));
   }
 
   currentUserCheck() {
-    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUserStatus: true }) : null;
+    this.props.currentUser.id === Number(window.location.href.split("/users/")[1]) ? this.setState({ currentUserStatus: true }) : this.setState({ currentUserStatus: false });
   }
 
   filterConnections() {
-    // For the user's accepted connection count
     let tempAccepted = [];
     this.props.connections.forEach(connection => (connection.connector_id === this.props.user.id || connection.connectee_id === this.props.user.id) && !connection.pending ? tempAccepted.push(connection) : null);
 
-    // The current user's connection to the user
     let tempCurrentConnection = "";
     this.props.connections.forEach(connection => ((connection.connector_id === this.props.currentUser.id && connection.connectee_id === this.props.user.id) || (connection.connectee_id === this.props.currentUser.id && connection.connector_id === this.props.user.id)) ? tempCurrentConnection = connection : null);
 
-    let tempConnectionStatus = "none";
-    if (this.props.user !== this.props.currentUser && tempCurrentConnection.pending && this.props.currentUser.id === tempCurrentConnection.connector_id) tempConnectionStatus = "pending";
-    if (this.props.user !== this.props.currentUser && tempCurrentConnection.pending && this.props.currentUser.id === tempCurrentConnection.connectee_id) tempConnectionStatus = "received";
-    if (!tempCurrentConnection.pending) tempConnectionStatus = "accepted";
-
-    this.setState({ connections: [...tempAccepted], connectionStatus: tempConnectionStatus, connection: tempCurrentConnection });
+    this.setState({ connections: [...tempAccepted], connection: tempCurrentConnection });
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.userId)
-      .then(this.currentUserCheck())
-      .then(this.props.fetchExperiences(this.props.userId))
-      .then(this.props.fetchEducations(this.props.userId))
-      .then(this.props.fetchConnections(this.props.userId))
+    this.props.fetchUser(Number(window.location.href.split("/users/")[1]))
+      .then(() => this.currentUserCheck())
+      .then(this.props.fetchExperiences(Number(window.location.href.split("/users/")[1])))
+      .then(this.props.fetchEducations(Number(window.location.href.split("/users/")[1])))
+      .then(this.props.fetchConnections(Number(window.location.href.split("/users/")[1])))
       .then(() => this.filterConnections());
+
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.errors.length > 0) this.props.history.replace("/404");
-    if (prevProps.userId !== this.props.userId) {
-      this.props.fetchUser(this.props.userId)
-        .then(this.currentUserCheck())
-        .then(this.props.fetchExperiences(this.props.userId))
-        .then(this.props.fetchEducations(this.props.userId))
-        .then(this.props.fetchConnections(this.props.userId))
-        .then(this.setState({ currentUserStatus: false }))
+    if (JSON.stringify(prevProps.user) !== JSON.stringify(this.props.user)) {
+      this.props.fetchUser(Number(window.location.href.split("/users/")[1]))
+        .then(() => this.currentUserCheck())
+        .then(this.props.fetchExperiences(Number(window.location.href.split("/users/")[1])))
+        .then(this.props.fetchEducations(Number(window.location.href.split("/users/")[1])))
+        .then(this.props.fetchConnections(Number(window.location.href.split("/users/")[1])))
+        .then(() => this.filterConnections());
+    }
+    if (prevProps.location.href !== this.props.location.href) {
+      this.props.fetchUser(Number(window.location.href.split("/users/")[1]))
+        .then(() => this.currentUserCheck())
+        .then(this.props.fetchExperiences(Number(window.location.href.split("/users/")[1])))
+        .then(this.props.fetchEducations(Number(window.location.href.split("/users/")[1])))
+        .then(this.props.fetchConnections(Number(window.location.href.split("/users/")[1])))
         .then(() => this.filterConnections());
     }
     if (JSON.stringify(prevProps.connections) !== JSON.stringify(this.props.connections)) {
-      this.filterConnections();
+      this.props.fetchUser(Number(window.location.href.split("/users/")[1]))
+        .then(() => this.currentUserCheck())
+        .then(this.props.fetchExperiences(Number(window.location.href.split("/users/")[1])))
+        .then(this.props.fetchEducations(Number(window.location.href.split("/users/")[1])))
+        .then(this.props.fetchConnections(Number(window.location.href.split("/users/")[1])))
+        .then(() => this.filterConnections());
     }
   }
 
@@ -128,6 +134,10 @@ class Profile extends React.Component {
         <div onClick={this.copyToClipboard}>
           <img src={window.copyLinkURL} />
           <span>Copy profile link</span>
+        </div>
+        <div onClick={() => this.props.deleteConnection(this.state.connection.id)} style={!this.state.currentUserStatus && !this.state.connection.pending ? null : {"display": "none"}}>
+          <img src={window.copyLinkURL} />
+          <span>Remove connection</span>
         </div>
       </div>
     )
@@ -187,15 +197,23 @@ class Profile extends React.Component {
                     {/* User Options */}
                     <div style={{display: "flex", paddingTop: "8px", position: "relative"}}>
 
-                      {this.state.connectionStatus === "none" ? <button className='profile-user-connect' onClick={() => this.props.updateConnection({...this.state.connection, pending: false})}>Connect</button> : null}
-                      {this.state.connectionStatus === "pending" ? <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>Pending</button> : null}
-                      {this.state.connectionStatus === "received" ? <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>Ignore</button> : null}
-                      {this.state.connectionStatus === "received" ? <button onClick={() => this.props.updateConnection({...this.state.connection, pending: false})}>Accept</button> : null}
+                        {/* Is not the current user and had no connection */}
+                        {!this.state.currentUserStatus && this.state.connection === "" ? <button className='profile-user-connect' onClick={() => this.props.createConnection({...this.state, connectee_id: Number(window.location.href.split("/users/")[1])})}>Connect</button> : null}
+                        {/* Is not the current user and sent the connection request which is pending */}
+                        {!this.state.currentUserStatus && this.state.connection && this.state.connection.connector_id === this.props.currentUser.id && this.state.connection.pending ? <button className='profile-user-option' onClick={() => this.props.deleteConnection(this.state.connection.id)}>Pending</button> : null}
+                        {/* Is not the current user and but received a connection request which is pending */}
+                        {!this.state.currentUserStatus && this.state.connection && this.state.connection.connectee_id === this.props.currentUser.id && this.state.connection.pending ? <button className='profile-user-connect' onClick={() => this.props.updateConnection({...this.state.connection, pending: false})}>Accept</button> : null}
+                        {!this.state.currentUserStatus && this.state.connection && this.state.connection.connectee_id === this.props.currentUser.id && this.state.connection.pending ? <button className='profile-user-option' onClick={() => this.props.deleteConnection(this.state.connection.id)}>Ignore</button> : null}
 
-                      <button className='profile-user-option' onClick={() => this.setState({ addSectionActive: true })} style={this.state.currentUserStatus ? {"marginRight": "8px"} : {"display": "none"}}>Add section</button>
-                      {this.state.addSectionActive ? this.renderAddSection() : null}
-                      <button className='profile-user-option' onClick={() => this.setState({ moreActive: true })}>More</button>
-                      {this.state.moreActive ? this.renderMore() : null}
+                      <button className='profile-user-option' onClick={() => this.setState({ addSectionActive: true })} style={this.props.currentUser.id === this.props.user.id ? null : {"display": "none"}}>
+                        Add section
+                        {this.state.addSectionActive ? this.renderAddSection() : null}
+                      </button>
+
+                      <button className='profile-user-option' onClick={() => this.setState({ moreActive: true })}>
+                        More
+                        {this.state.moreActive ? this.renderMore() : null}
+                      </button>
                     </div>
 
                   </div>

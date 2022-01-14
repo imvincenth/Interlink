@@ -12,9 +12,9 @@ const mSTP = (state, ownProps) => ({
   user: state.entities.users[ownProps.match.params.userId],
   userId: ownProps.match.params.userId,
   currentUser: state.entities.users[state.session.id],
+  errors: state.errors.users,
   educations: Object.values(state.entities.educations),
   experiences: Object.values(state.entities.experiences),
-  errors: state.errors.users,
   connections: Object.values(state.entities.connections)
 });
 

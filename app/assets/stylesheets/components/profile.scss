@@ -711,7 +711,9 @@
   font-weight: 600;
   line-height: 20px;
   max-height: 32px;
+  position: relative;
   padding: 6px 16px;
+  margin-right: 8px;
   transition-duration: 0.167s;
   transition-property: background-color, box-shadow, color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -837,7 +839,8 @@
   box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, rgba(0, 0, 0, 0.3) 0px 4px 4px 0px;
   position: absolute;
   margin-top: 8px;
-  top: 40px;
+  top: 30px;
+  left: 0px;
   width: 312px;
   z-index: 3000;
 }
@@ -855,6 +858,7 @@
 }
 
 .profile-add-section-menu > li {
+  display: flex;
   padding: 16px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
@@ -869,8 +873,9 @@
   border-radius: 8px;
   border-top-left-radius: 0;
   position: absolute;
-  top: 48px;
-  left: 137px;
+  margin-top: 8px;
+  top: 30px;
+  left: 0px;
   width: max-content;
   padding: 4px 0;
   z-index: 3000;
@@ -917,4 +922,10 @@
   transition-property: background-color, box-shadow, color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+}
+
+.profile-user-connect:hover,
+.profile-user-connect:active,
+.profile-user-connect:focus {
+  background-color: rgb(0, 65, 130);
 }
