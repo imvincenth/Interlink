@@ -712,7 +712,6 @@
   line-height: 20px;
   max-height: 32px;
   padding: 6px 16px;
-  margin-right: 8px;
   transition-duration: 0.167s;
   transition-property: background-color, box-shadow, color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -899,4 +898,23 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+}
+
+.profile-user-connect {
+  border: none;
+  border-radius: 16px;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  background-color: #0a66c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 16px;
+  margin-right: 8px;
+  transition-duration: 0.167s;
+  transition-property: background-color, box-shadow, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }

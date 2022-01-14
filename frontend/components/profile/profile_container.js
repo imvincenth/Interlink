@@ -15,7 +15,6 @@ const mSTP = (state, ownProps) => ({
   educations: Object.values(state.entities.educations),
   experiences: Object.values(state.entities.experiences),
   errors: state.errors.users,
-  // connection: Object.values(state.entities.connections)[0],
   connections: Object.values(state.entities.connections)
 });
 

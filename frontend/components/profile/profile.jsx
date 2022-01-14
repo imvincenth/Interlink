@@ -10,6 +10,8 @@ class Profile extends React.Component {
 
     this.state = {
       currentUserStatus: false,
+      connectionStatus: "",
+      connection: null,
 
       pending: true,
       connector_id: this.props.currentUser.id,
@@ -31,13 +33,24 @@ class Profile extends React.Component {
   }
 
   currentUserCheck() {
-    this.props.currentUser.id === this.props.userId ? this.setState({ currentUserStatus: true }) : null;
+    this.props.currentUser.id === this.props.user.id ? this.setState({ currentUserStatus: true }) : null;
   }
 
   filterConnections() {
+    // For the user's accepted connection count
     let tempAccepted = [];
     this.props.connections.forEach(connection => (connection.connector_id === this.props.user.id || connection.connectee_id === this.props.user.id) && !connection.pending ? tempAccepted.push(connection) : null);
-    this.setState({ connections: [...tempAccepted] });
+
+    // The current user's connection to the user
+    let tempCurrentConnection = "";
+    this.props.connections.forEach(connection => ((connection.connector_id === this.props.currentUser.id && connection.connectee_id === this.props.user.id) || (connection.connectee_id === this.props.currentUser.id && connection.connector_id === this.props.user.id)) ? tempCurrentConnection = connection : null);
+
+    let tempConnectionStatus = "none";
+    if (this.props.user !== this.props.currentUser && tempCurrentConnection.pending && this.props.currentUser.id === tempCurrentConnection.connector_id) tempConnectionStatus = "pending";
+    if (this.props.user !== this.props.currentUser && tempCurrentConnection.pending && this.props.currentUser.id === tempCurrentConnection.connectee_id) tempConnectionStatus = "received";
+    if (!tempCurrentConnection.pending) tempConnectionStatus = "accepted";
+
+    this.setState({ connections: [...tempAccepted], connectionStatus: tempConnectionStatus, connection: tempCurrentConnection });
   }
 
   componentDidMount() {
@@ -86,7 +99,6 @@ class Profile extends React.Component {
   }
 
   copyToClipboard() {
-    // navigator.clipboard.writeText(`localhost:3000/#/posts/${this.props.post.id}`)
     navigator.clipboard.writeText(`https://ringedin.herokuapp.com/#/users/${this.props.user.id}`)
       .then(() => this.setState({ addSectionActive: false, moreActive: false, copySuccess: true }));
   }
@@ -174,7 +186,13 @@ class Profile extends React.Component {
 
                     {/* User Options */}
                     <div style={{display: "flex", paddingTop: "8px", position: "relative"}}>
-                      <button className='profile-user-option' onClick={() => this.setState({ addSectionActive: true })}>Add section</button>
+
+                      {this.state.connectionStatus === "none" ? <button className='profile-user-connect' onClick={() => this.props.updateConnection({...this.state.connection, pending: false})}>Connect</button> : null}
+                      {this.state.connectionStatus === "pending" ? <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>Pending</button> : null}
+                      {this.state.connectionStatus === "received" ? <button onClick={() => this.props.deleteConnection(this.state.connection.id)}>Ignore</button> : null}
+                      {this.state.connectionStatus === "received" ? <button onClick={() => this.props.updateConnection({...this.state.connection, pending: false})}>Accept</button> : null}
+
+                      <button className='profile-user-option' onClick={() => this.setState({ addSectionActive: true })} style={this.state.currentUserStatus ? {"marginRight": "8px"} : {"display": "none"}}>Add section</button>
                       {this.state.addSectionActive ? this.renderAddSection() : null}
                       <button className='profile-user-option' onClick={() => this.setState({ moreActive: true })}>More</button>
                       {this.state.moreActive ? this.renderMore() : null}
