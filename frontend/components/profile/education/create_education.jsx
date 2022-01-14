@@ -25,10 +25,6 @@ class CreateEducationForm extends React.Component {
 
     this.createOptions = this.createOptions.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.setStartTime = this.setStartTime.bind(this);
-    this.setEndTime = this.setEndTime.bind(this);
-    this.setTimes = this.setTimes.bind(this);
   }
 
   createOptions(str) {
@@ -45,27 +41,13 @@ class CreateEducationForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.action({...this.state})
+    if (this.state.start_date === "Month" || this.state.end_date === "Year") throw "Start and end dates are required";
+
+    let tempStart = `${this.state.startMon} ${this.state.startYr}`;
+    let tempEnd = this.state.current_role ? "Present" : `${this.state.endMon} ${this.state.endYr}`;
+
+    this.props.action({...this.state, start_date: tempStart, end_date: tempEnd})
       .then(() => this.props.closeModal());
-  }
-
-  setStartTime() {
-    if (this.state.startMon === "Month" && this.state.startYr === "Year") return null;
-    
-    this.setState({ 
-      start_date: `${this.state.startMon} ${this.state.startYr}`
-    });
-  }
-
-  setEndTime() {
-    this.setState({
-      end_date: `${this.state.endMon} ${this.state.endYr}`
-    });
-  }
-
-  setTimes() {
-    this.setStartTime();
-    this.setEndTime();
   }
 
   schoolErrors() {
@@ -90,89 +72,131 @@ class CreateEducationForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <form>
 
-          <header>
-            <h2>{this.props.formType}</h2>
-          </header>
+        {/* Header */}
+        <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
+        <div className='post-modal-header' style={{display: "flex", alignItems: "center"}}>
+          <h2 className='post-modal-header-text'>Add education</h2>
+        </div>
 
-          <div>
-            <label>School*
-              <input 
-                type="text" 
-                placeholder="Ex: Hogwarts School of Witchcraft and Wizardry"
-                value={this.state.school} 
-                onChange={this.update("school")}
-              />
-            </label>
+        {/* Add Education Content */}
+        {/* <p className='profile-edit-indicates-required'>* Indicates required</p> */}
+        <div className='profile-edit-modal-name-section'>
+
+          {/* School */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+            <label className='profile-edit-modal-label' htmlFor="education-add-modal-input">School<sup>*</sup></label>
+            <input 
+              className='profile-edit-modal-input' 
+              type="text" 
+              id='education-add-modal-input' 
+              value={this.state.school} 
+              onChange={this.update("school")} 
+              placeholder="Ex: Hogwarts School of Witchcraft and Wizardry" 
+            />
             {this.schoolErrors()}
           </div>
 
-          <div>
-            <label>Degree
-              <input 
-                value={this.state.degree} 
-                onChange={this.update("degree")} 
-              />
-            </label>
+          {/* Degree */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+            <label className='profile-edit-modal-label' htmlFor="education-degree">Degree</label>
+            <input 
+              className='profile-edit-modal-input' 
+              type="text" 
+              id='education-degree' 
+              value={this.state.degree} 
+              onChange={this.update("degree")} 
+            />
           </div>
 
-          <div>
-            <label>Field of study
-              <input 
-                placeholder="Ex: Fellowship of the Ring"
-                type="text" 
-                value={this.state.subject} 
-                onChange={this.update("subject")} 
-              />
-            </label>
+          {/* Field of Study */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+            <label className='profile-edit-modal-label' htmlFor="education-field-of-study">Field of study</label>
+            <input 
+              className='profile-edit-modal-input' 
+              type="text" 
+              id='education-field-of-study' 
+              value={this.state.subject} 
+              onChange={this.update("subject")} 
+              placeholder="Ex: Fellowship of the Ring" 
+            />
           </div>
 
-          <div>
-            <label>Start date
-              <div>
-                <select onChange={this.update("startMon")}>
-                  <option>Month</option>
-                  {this.createOptions(months)}
-                </select>
-                <select onChange={this.update("startYr")}>
-                  <option>Year</option>
-                  {this.createOptions(years)}
-                </select>
-              </div>
-            </label>
+          {/* Start date */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+
+            <label className='profile-edit-modal-label'>Start date<sup>*</sup></label>
+
+            <div style={{display: "flex"}}>
+              <select className='profile-select-menu' onChange={this.update("startMon")} defaultValue={this.oldStartMon} style={{marginRight: "8px"}}>
+                <option>Month</option>
+                {this.createOptions(months)}
+              </select>
+
+              <select className='profile-select-menu' onChange={this.update("startYr")} defaultValue={this.oldStartYr}>
+                <option>Year</option>
+                {this.createOptions(years)}
+              </select>
+            </div>
+
           </div>
 
-          <div>
-            <label>End date (or expected)
-              <div>
-                <select onChange={this.update("endMon")}>
-                  <option>Month</option>
-                  {this.createOptions(months)}
-                </select>
-                <select onChange={this.update("endYr")}>
-                  <option>Year</option>
-                  {this.createOptions(years)}
-                </select>
-              </div>
-            </label>
+          {/* End date */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+
+            <label className='profile-edit-modal-label'>End date<sup>*</sup></label>
+
+            <div style={{display: "flex"}}>
+              <select className='profile-select-menu' onChange={this.update("endMon")} defaultValue={this.oldEndMon} style={{marginRight: "8px"}}>
+                <option>Month</option>
+                {this.createOptions(months)}
+              </select>
+
+              <select className='profile-select-menu' onChange={this.update("endYr")} defaultValue={this.oldEndYr}>
+                <option>Year</option>
+                {this.createOptions(years)}
+              </select>
+            </div>
+
           </div>
 
-          <div>
-            <label>Grade
-              <input type="text" value={this.state.grade} onChange={this.update("grade")} />
-            </label>
+          {/* Grade */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+            <label className='profile-edit-modal-label' htmlFor="education-grade">Grade</label>
+            <input 
+              className='profile-edit-modal-input' 
+              type="text" 
+              id='education-grade' 
+              value={this.state.grade} 
+              onChange={this.update("grade")} 
+            />
           </div>
 
-          <div>
-            <label>Activities and societies</label>
-            <textarea value={this.state.extracurriculars} onChange={this.update("extracurriculars")} placeholder="Ex: "></textarea>
+          {/* Activities and societies */}
+          <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+            <label className='profile-edit-modal-label' htmlFor="education-activities-societies">Activities and societies</label>
+            <textarea 
+              className='profile-edit-textarea' 
+              type="text" 
+              id='education-activities-societies' 
+              value={this.state.extracurriculars} 
+              onChange={this.update("extracurriculars")} 
+            />
           </div>
+        </div>
 
-          <input type="submit" onClick={this.setTimes} onSubmit={this.handleSubmit} value="Save" />
-        </form>
-      </div>
+        <footer 
+          style={{display: "flex", 
+          flexDirection: "row-reverse", 
+          justifyContent: "space-between", 
+          padding: "16px 24px", 
+          borderTop: "1px solid rgba(0, 0, 0, 0.08)"}}
+        >
+          <button className='profile-edit-modal-save' onClick={this.handleSubmit}>Save</button>
+        </footer>
+
+      </form>
     )
   }
 }

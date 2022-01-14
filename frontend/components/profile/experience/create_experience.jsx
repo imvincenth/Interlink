@@ -221,10 +221,10 @@ class CreateExperienceForm extends React.Component {
         {/* Header */}
         <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
         <div className='post-modal-header' style={{display: "flex", alignItems: "center"}}>
-          <h2 className='post-modal-header-text'>Edit experience</h2>
+          <h2 className='post-modal-header-text'>Add experience</h2>
         </div>
 
-        {/* Edit Experience Content */}
+        {/* Add Experience Content */}
         {/* <div className='profile-edit-modal-wrap'> */}
           {/* <p className='profile-edit-indicates-required'>* Indicates required</p> */}
           <div className='profile-edit-modal-name-section'>

@@ -337,7 +337,7 @@ class EditExperienceForm extends React.Component {
           borderTop: "1px solid rgba(0, 0, 0, 0.08)"}}
         >
           <button className='profile-edit-modal-save' onClick={this.handleSubmit}>Save</button>
-          <button onClick={() => this.props.deleteExperience(this.props.experience.id).then(() => this.props.closeModal())}>Delete experience</button>
+          <button className='profile-stat-deletion' onClick={() => this.props.deleteExperience(this.props.experience.id).then(() => this.props.closeModal())}>Delete experience</button>
         </footer>
         
       </form>
