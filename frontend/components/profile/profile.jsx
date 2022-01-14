@@ -198,7 +198,7 @@ class Profile extends React.Component {
                         <span className='profile-user-headline'>{this.props.user.headline}</span>
                       </div>
 
-                      <span className='profile-user-school' style={{display: "flex", alignItems: "center", marginRight: "16px"}}><img style={{width: "32px", height: "32px", marginRight: "8px"}} src="https://static-exp1.licdn.com/sc/h/aajlclc14rr2scznz5qm2rj9u" />{this.props.educations[0] ? this.props.educations[0].school : null}</span>
+                      <span className='profile-user-school' style={{display: "flex", alignItems: "center", marginRight: "16px"}}><img style={this.props.educations[0] ? {"width": "32px", "height": "32px", "marginRight": "8px"} : {"display": "none"}} src="https://static-exp1.licdn.com/sc/h/aajlclc14rr2scznz5qm2rj9u" />{this.props.educations[0] ? this.props.educations[0].school : null}</span>
                     </div>
 
                     <span className='profile-user-location'>{this.props.user.city_district}, {this.props.user.country_region}</span>
