@@ -14,7 +14,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => ({
   fetchUser: userId => dispatch(fetchUser(userId)),
   fetchExperiences: () => dispatch(fetchExperiences()),
-  openEditExperienceModal: experience => dispatch(openModal("editExperience", experience)),
+  openModal: (modalType, user) => dispatch(openModal(modalType, user)),
   deleteExperience: experience => dispatch(deleteExperience(experience))
 });
 

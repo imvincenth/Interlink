@@ -281,30 +281,38 @@ class Profile extends React.Component {
                 </li>
               </ul>
             </section>
-          </div>
 
+            <section className="stat-wrap">
+
+              <div className="stat-section">
+                <header>
+                  <h2>Experience</h2>
+                  {this.state.currentUserStatus ? <button className='stat-add-button' onClick={() => this.props.openModal("createExperience", this.props.currentUser)}><img className='profile-stat-plus-sign' src={window.plusURL} /></button> : null}
+                </header>
+
+                <ul className='profile-stats-info'>
+                  {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} user={this.props.user} />)}
+                </ul>
+              </div>
+
+              <hr className='stat-breakline' />
+
+              <div className="stat-section">
+                <header>
+                  <h2>Education</h2>
+                  {this.state.currentUserStatus ? <button className='stat-add-button' onClick={() => this.props.openModal("createEducation", this.props.currentUser)}><img className='profile-stat-plus-sign' src={window.plusURL}/></button> : null}
+                </header>
+
+                <ul className='profile-stats-info'>
+                  {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} user={this.props.user} />)}
+                </ul>
+              </div>
+
+            </section>
+          </div>
+          
         </div>
-
-        {/* <div className="stat-wrap">
-          <div className="stat-wrap-header">
-            <h1 className="experience-header">Experience</h1>
-            <br />
-            <div className="experience-item">
-              {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} user={this.props.user} />)}
-              {this.state.currentUserStatus ? this.props.openCreateExperienceModal : null}
-            </div>
-          </div>
-
-          <div className="stat-wrap-tail">
-            <h1 className="education-header">Education</h1>
-            <br />
-            <div>
-              {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} user={this.props.user} />)}
-              {this.state.currentUserStatus ? this.props.openCreateEducationModal : null}
-            </div>
-          </div>
-        </div> */}
-
+        <footer style={{height: "100px"}}></footer>
       </div>
     )
   }

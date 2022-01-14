@@ -14,7 +14,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => ({
   fetchUser: userId => dispatch(fetchUser(userId)),
   fetchEducations: () => dispatch(fetchEducations()),
-  openEditEducationModal: education => dispatch(openModal("editEducation", education)),
+  openModal: (modalType, user) => dispatch(openModal(modalType, user)),
   deleteEducation: education => dispatch(deleteEducation(education))
 });
 

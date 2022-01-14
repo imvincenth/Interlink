@@ -929,3 +929,119 @@
 .profile-user-connect:focus {
   background-color: rgb(0, 65, 130);
 }
+
+.stat-wrap {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  padding-bottom: 24px;
+}
+
+.stat-section {
+  padding-bottom: 24px;
+}
+
+.stat-section > header {
+  padding: 24px 24px 0px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-section > header > h2 {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.stat-add-button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.stat-add-button:hover {
+  background-color: rgba(0, 0, 0, .08);
+}
+
+.profile-stat-plus-sign {
+  height: 24px;
+  width: 24px;
+}
+
+.profile-stats-info {
+  list-style-type: none;
+  margin-top: -4px;
+}
+
+.stat-item-section {
+  padding: 20px 24px 0px 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-first-line {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.stat-second-line {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.stat-third-line {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.stat-edit-button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+}
+
+.stat-edit-button:hover {
+  background-color: rgba(0, 0, 0, .08);
+}
+
+.stat-edit-button > img {
+  height: 24px;
+  width: 24px;
+}
+
+.stat-breakline {
+  background-color: rgba(0, 0, 0, 0.08);
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  color: rgb(128, 128, 128);
+  flex-grow: 1;
+  margin-bottom: 7.5px;
+  margin-top: 7.5px;
+  height: 1px;
+  font-size: 13.3333px;
+  font-weight: 400;
+  display: block;
+  // width: 540px;
+}

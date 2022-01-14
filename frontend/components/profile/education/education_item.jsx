@@ -25,38 +25,30 @@ class Education extends React.Component {
     }
   }
 
-  editEducationButton() {
-    return (
-      <button className="open-modal" onClick={() => this.props.openEditEducationModal(this.props.education)}>
-        <img src={window.vectorURL} alt="pen" />
-      </button>
-    )
-  }
-
-  deleteEducationButton() {
-    return (
-      <button onClick={() => this.props.deleteEducation(this.props.education.id)}>
-        Delete
-      </button>
-    )
-  }
-
   render() {
     // if (!this.props.user) return null;
 
     const { education, key } = this.props;
     return (
-      <div>
-        <div className="education-item-wrap">
-          <div className="education-item-head">
-            <h1>{education.school}</h1>
-            {this.state.currentUser ? this.editEducationButton() : null}
-            {this.state.currentUser ? this.deleteEducationButton() : null}
+      <li className='stat-item-section'>
+        <div>
+          <div style={{display: "flex", alignItems: "center"}}>
+            <img style={{height: "56px", width: "56px", marginRight: "22px"}} src="https://static-exp1.licdn.com/sc/h/8zzzkhxduv0r11cuxbs48pg03" />
+
+            <div style={{display: "flex", flexDirection: "column"}}>
+              <span className='stat-first-line'>{education.school}</span>
+              <span className='stat-second-line'>{education.degree} - {education.subject}</span>
+              <span className='stat-third-line'>{education.start_date} - {education.end_date}</span>
+            </div>
           </div>
-          <h2>{education.degree} {education.subject}</h2>
-          <h2>{education.start_date} - {education.end_date}</h2>
+
         </div>
-      </div>
+
+        <button className='stat-edit-button' onClick={() => this.props.openModal("editEducation", this.props.education)} style={this.state.currentUser ? null : {"display": "none"}}>
+          <img src={window.statEditURL} />
+        </button>
+
+      </li>
     )
   }
 }
