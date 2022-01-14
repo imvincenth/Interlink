@@ -30,10 +30,6 @@ class CreateExperienceForm extends React.Component {
     this.createOptions = this.createOptions.bind(this);
     this.flipRole = this.flipRole.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.setStartTime = this.setStartTime.bind(this);
-    this.setEndTime = this.setEndTime.bind(this);
-    this.setTimes = this.setTimes.bind(this);
   }
 
   createOptions(str) {
@@ -54,26 +50,13 @@ class CreateExperienceForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.props.action({...this.state})
+    if (this.state.start_date === "Month" || this.state.end_date === "Year") throw "Start and end dates are required";
+
+    let tempStart = `${this.state.startMon} ${this.state.startYr}`;
+    let tempEnd = this.state.current_role ? "Present" : `${this.state.endMon} ${this.state.endYr}`;
+
+    this.props.action({...this.state, start_date: tempStart, end_date: tempEnd})
       .then(() => this.props.closeModal());
-  }
-
-  setStartTime() {
-    this.setState({ 
-      start_date: `${this.state.startMon} ${this.state.startYr}`
-    });
-  }
-
-  setEndTime() {
-    if (this.state.current_role) {
-      this.setState({
-        end_date: "Present"
-      });
-    } else {
-      this.setState({
-        end_date: `${this.state.endMon} ${this.state.endYr}`
-      });
-    }
   }
 
   endDate() {
@@ -81,15 +64,23 @@ class CreateExperienceForm extends React.Component {
       return null;
     } else {
       return (
-        <div>
-          <select onChange={this.update("endMon")}>
-            <option>Month</option>
-            {this.createOptions(months)}
-          </select>
-          <select onChange={this.update("endYr")}>
-            <option>Year</option>
-            {this.createOptions(years)}
-          </select>
+        <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+
+          <label className='profile-edit-modal-label'>End date<sup>*</sup></label>
+
+          <div style={{display: "flex"}}>
+            <select className='profile-select-menu' onChange={this.update("endMon")} defaultValue={this.oldEndMon} style={{marginRight: "8px"}}>
+              <option>Month</option>
+              {this.createOptions(months)}
+            </select>
+
+            <select className='profile-select-menu' onChange={this.update("endYr")} defaultValue={this.oldEndYr}>
+              <option>Year</option>
+              {this.createOptions(years)}
+            </select>
+          </div>
+
+          {this.endDateErrors()}
         </div>
       )
     }
@@ -100,10 +91,15 @@ class CreateExperienceForm extends React.Component {
       return null;
     } else {
       return (
-        <div>
-          <label>Headline
-            <input type="text" value={this.state.headline} onChange={this.update("headline")} />
-          </label>
+        <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+          <label className='profile-edit-modal-label' htmlFor="profile-edit-headline">Headline<sup>*</sup></label>
+          <input 
+            className='profile-edit-modal-input' 
+            type="text" 
+            id='profile-edit-headline' 
+            value={this.state.headline} 
+            onChange={this.update("headline")} 
+          />
         </div>
       )
     }
@@ -114,11 +110,15 @@ class CreateExperienceForm extends React.Component {
       return null;
     } else {
       return (
-        <div>
-          <label>Industry*
-            <input type="text" value={this.state.industry} onChange={this.update("industry")} />
-          </label>
-          {this.industryErrors()}
+        <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+          <label className='profile-edit-modal-label' htmlFor="profile-edit-industry">Industry<sup>*</sup></label>
+          <input 
+            className='profile-edit-modal-input' 
+            type="text" 
+            id='profile-edit-industry' 
+            value={this.state.industry} 
+            onChange={this.update("industry")} 
+          />
         </div>
       )
     }
@@ -216,101 +216,125 @@ class CreateExperienceForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
+      <form>
 
-          <header>
-            <h2>{this.props.formType}</h2>
-          </header>
+        {/* Header */}
+        <button className="post-modal-x-box" onClick={this.props.closeModal}><img className="post-modal-x" src={window.xURL} /></button>
+        <div className='post-modal-header' style={{display: "flex", alignItems: "center"}}>
+          <h2 className='post-modal-header-text'>Edit experience</h2>
+        </div>
 
-          <div>
-            <label>Title*
+        {/* Edit Experience Content */}
+        {/* <div className='profile-edit-modal-wrap'> */}
+          {/* <p className='profile-edit-indicates-required'>* Indicates required</p> */}
+          <div className='profile-edit-modal-name-section'>
+
+            {/* Title */}
+            <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+              <label className='profile-edit-modal-label' htmlFor="experience-edit-title">Title<sup>*</sup></label>
               <input 
+                className='profile-edit-modal-input' 
                 type="text" 
-                placeholder="Ex: Dwarven Blacksmith"
+                id='experience-edit-title' 
                 value={this.state.title} 
-                onChange={this.update("title")}
+                onChange={this.update("title")} 
+                placeholder="Ex: Dwarven Blacksmith" 
               />
-            </label>
-            {this.titleErrors()}
-          </div>
+              {this.titleErrors()}
+            </div>
 
-          <div>
-            <label>Employment
-              <select value={this.state.employment_type} onChange={this.update("employment_type")}>
+            {/* Employment */}
+            <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+              <label className='profile-edit-modal-label'>Employment type</label>
+              <select className='profile-select-menu' value={this.state.employment_type} onChange={this.update("employment_type")}>
                 <option>Please select</option>
                 {this.createOptions(positions)}
               </select>
-            </label>
-          </div>
+            </div>
 
-          <div>
-            <label>Company name*
+            {/* Company */}
+            <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+              <label className='profile-edit-modal-label' htmlFor="profile-edit-company-name">Company name<sup>*</sup></label>
               <input 
-                placeholder="Ex: Fellowship of the Ring"
+                className='profile-edit-modal-input' 
                 type="text" 
+                id='profile-edit-company-name' 
                 value={this.state.company} 
                 onChange={this.update("company")} 
+                placeholder="Ex: Fellowship of the Ring" 
               />
-            </label>
-            {this.companyErrors()}
-          </div>
+              {this.companyErrors()}
+            </div>
 
-          <div>
-            <label>Location
+            {/* Location */}
+            <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+              <label className='profile-edit-modal-label' htmlFor="profile-edit-location">Location</label>
               <input 
-                placeholder="Ex: Rivendell"
+                className='profile-edit-modal-input' 
                 type="text" 
+                id='profile-edit-location' 
                 value={this.state.location} 
                 onChange={this.update("location")} 
+                placeholder="Ex: Rivendell" 
               />
-            </label>
-          </div>
+            </div>
 
-          <div>
-            <input type="checkbox" checked={this.state.current_role ? true : false} onChange={this.flipRole} />
-            <label>I am currently working in this role</label>
-          </div>
+            {/* Current Role Check */}
+            <div>
+              <input type="checkbox" checked={this.state.current_role ? true : false} onChange={this.flipRole} />
+              <label>I am currently working in this role</label>
+            </div>
 
-          <div>
-            <label>Start date*
-              <div>
-                <select onChange={this.update("startMon")}>
+            {/* Start date */}
+            <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+
+              <label className='profile-edit-modal-label'>Start date<sup>*</sup></label>
+
+              <div style={{display: "flex"}}>
+                <select className='profile-select-menu' onChange={this.update("startMon")} defaultValue={this.oldStartMon} style={{marginRight: "8px"}}>
                   <option>Month</option>
                   {this.createOptions(months)}
                 </select>
-                <select onChange={this.update("startYr")}>
+
+                <select className='profile-select-menu' onChange={this.update("startYr")} defaultValue={this.oldStartYr}>
                   <option>Year</option>
                   {this.createOptions(years)}
                 </select>
               </div>
-            </label>
-            {this.startDateErrors()}
-          </div>
 
-          <div>
-            <label>End date*
-              {this.endDate()}
-            </label>
-            {this.endDateErrors()}
-          </div>
+              {this.startDateErrors()}
+            </div>
 
-          <div>
+            {/* Toggled Fields */}
+            {this.endDate()}
             {this.headline()}
-          </div>
-
-          <div>
             {this.industry()}
-          </div>
 
-          <div>
-            <label>Description</label>
-            <textarea value={this.state.description} onChange={this.update("description")}></textarea>
-          </div>
+            <div style={{display: "flex", flexDirection: "column", paddingBottom: "32px"}}>
+              <label className='profile-edit-modal-label' htmlFor="profile-edit-description">Description</label>
+              <textarea 
+                className='profile-edit-textarea' 
+                type="text" 
+                id='profile-edit-description' 
+                value={this.state.description} 
+                onChange={this.update("description")} 
+              />
+            </div>
 
-          <input type="submit" onClick={this.setTimes} onSubmit={this.handleSubmit} value="Save" />
-        </form>
-      </div>
+          {/* </div> */}
+        </div>
+
+        <footer 
+          style={{display: "flex", 
+          flexDirection: "row-reverse", 
+          justifyContent: "space-between", 
+          padding: "16px 24px", 
+          borderTop: "1px solid rgba(0, 0, 0, 0.08)"}}
+        >
+          <button className='profile-edit-modal-save' onClick={this.handleSubmit}>Save</button>
+        </footer>
+
+      </form>
     )
   }
 }
