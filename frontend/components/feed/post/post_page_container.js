@@ -1,34 +1,29 @@
-// PAGE FOR TESTING PURPOSES
-
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchPost, deletePost } from '../../../actions/post_actions';
-import { fetchComments } from '../../../actions/comment_actions';
-import { openModal } from '../../../actions/modal_actions';
-import { createComment } from '../../../actions/comment_actions';
+import { closeModal } from '../../../actions/modal_actions';
+import { fetchComments, createComment } from '../../../actions/comment_actions';
 import { fetchPostReactions, createPostReaction, updatePostReaction, deletePostReaction } from '../../../actions/reaction_actions';
-import Post from './post_page';
+import PostPage from './post_page';
 
-const mSTP = (state, ownProps) => ({
-  sessionId: state.session.id,
+const mSTP = state => ({
+  post: state.ui.modalParamsReducer,
   currentUser: state.entities.users[state.session.id],
-  comments: Object.values(state.entities.comments),
+  errors: state.errors.posts,
+  users: state.entities.users,
+  usersArr: Object.values(state.entities.users),
   reactions: Object.values(state.entities.reactions),
-  postId: ownProps.match.params.postId,
-  post: state.entities.posts
+  comments: Object.values(state.entities.comments)
 });
 
 const mDTP = dispatch => ({
-  fetchPosts: () => dispatch(fetchPosts()),
-  fetchPost: postId => dispatch(fetchPost(postId)),
+  action: post => dispatch(updatePost(post)),
+  closeModal: () => dispatch(closeModal()),
   fetchComments: postId => dispatch(fetchComments(postId)),
-  openEditPostModal: post => dispatch(openModal("editPost", post)),
-  deletePost: post => dispatch(deletePost(post)),
   createComment: comment => dispatch(createComment(comment)),
   fetchPostReactions: postId => dispatch(fetchPostReactions(postId)),
   createPostReaction: reaction => dispatch(createPostReaction(reaction)),
   updatePostReaction: reaction => dispatch(updatePostReaction(reaction)),
-  deletePostReaction: reactionId => dispatch(deletePostReaction(reactionId))
+  deletePostReaction: reactionId => dispatch(deletePostReaction(reactionId)),
 });
 
-export default connect(mSTP, mDTP)(Post);
+export default connect(mSTP, mDTP)(PostPage);

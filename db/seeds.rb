@@ -501,17 +501,23 @@ post_one_comment_reply = Comment.create(
   reply_id: post_one_comment.id,
   post_id: post_one.id,
   body: "The Ring cannot be destroyed @Gimli son of Gloin by any craft we here possess. 
-  The Ring was made in the fire of Mount Doom, only there can it be unmade. 
-  It must be taken with Mordor and be cast back into whence it came."
+  The Ring was made in the fires of Mount Doom, only there can it be unmade. 
+  It must be taken deep within Mordor and be cast back from whence it came. One of you, must do this."
 )
 
 post_one_comment_reply_two = Comment.create(
   user_id: merryandpippin.id,
   reply_id: post_one_comment.id,
   post_id: post_one.id,
-  body: "Well what if we had some have to fly the Ring over the volcano and just drop it in? Like eagles or something..."
+  body: "Well what if we could just fly the Ring over the volcano and just drop it in? Like eagles or something..."
 )
 
 # post_one_comment_reply_three = Comment.create(
 
 # )
+
+post_one_comment_two = Comment.create(
+  user_id: frodo.id,
+  post_id: post_one.id,
+  body: "I will take it."
+)
