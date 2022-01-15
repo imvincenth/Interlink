@@ -303,7 +303,7 @@ class Profile extends React.Component {
                 </header>
 
                 <ul className='profile-stats-info'>
-                  {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} user={this.props.user} />)}
+                  {this.props.experiences.map(experience => <ExperienceItemContainer key={experience.id} experience={experience} user={this.props.user} />).reverse()}
                 </ul>
               </div>
 
@@ -316,7 +316,7 @@ class Profile extends React.Component {
                 </header>
 
                 <ul className='profile-stats-info'>
-                  {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} user={this.props.user} />)}
+                  {this.props.educations.map(education => <EducationItemContainer key={education.id} education={education} user={this.props.user} />).reverse()}
                 </ul>
               </div>
 
