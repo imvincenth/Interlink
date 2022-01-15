@@ -270,7 +270,7 @@ export default class PostPage extends Component {
 
           <ul>
 
-            <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
+            {/* <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
               <div className='post-edit-menu-item-content'>
                 <img src={window.linkURL} />
                 <div className='post-edit-menu-item-text'>
@@ -278,7 +278,7 @@ export default class PostPage extends Component {
                   <p></p>
                 </div>
               </div>
-            </li>
+            </li> */}
 
             <li className='post-edit-menu-item' onClick={() => this.props.openEditPostModal(this.props.post)}>
               <div className='post-edit-menu-item-content'>
@@ -308,7 +308,7 @@ export default class PostPage extends Component {
         <div className='post-edit-menu-wrap'>
           <ul>
 
-            <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
+            {/* <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
               <div className='post-edit-menu-item-content'>
                 <img src={window.linkURL} />
                 <div className='post-edit-menu-item-text'>
@@ -316,7 +316,7 @@ export default class PostPage extends Component {
                   <p></p>
                 </div>
               </div>
-            </li>
+            </li> */}
 
             <li className='post-edit-menu-item'>
               <div className='post-edit-menu-item-content'>
