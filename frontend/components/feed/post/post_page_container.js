@@ -6,7 +6,7 @@ import { fetchPostReactions, createPostReaction, updatePostReaction, deletePostR
 import PostPage from './post_page';
 
 const mSTP = state => ({
-  post: state.ui.modalParamsReducer,
+  // post: state.ui.modalParamsReducer,
   currentUser: state.entities.users[state.session.id],
   errors: state.errors.posts,
   users: state.entities.users,
