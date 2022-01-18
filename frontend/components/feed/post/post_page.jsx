@@ -267,8 +267,6 @@ export default class PostPage extends Component {
       return (
         <div className='post-edit-menu-wrap'>
 
-          <NavbarContainer page="post page" /> 
-
           <ul>
 
             {/* <li className='post-edit-menu-item' onClick={this.copyToClipboard}>
@@ -356,7 +354,9 @@ export default class PostPage extends Component {
 
     const { post } = this.props;
     return (
-      <div className='post-item'>
+      <div>
+
+        <NavbarContainer page="post page" /> 
 
         {/* Post Header */}
         <div className='post-header-wrap'>

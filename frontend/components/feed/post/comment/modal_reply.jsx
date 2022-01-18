@@ -338,7 +338,7 @@ export default class ModalReply extends Component {
               {/* Comment Body */}
               <div className='post-show-modal-comment-content' style={this.state.editCommentOn ? {display: "none"} : null}>
                 {this.state.seeMoreActive ? <span className='post-body-text'>{reply.body}</span> : <span className='post-body-text'>{reply.body.slice(0, 150)}</span>}
-                {this.state.seeMoreActive || reply.body.length < 150 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })} style={{"background-color": "#f2f2f2"}}>...see more</button>}
+                {this.state.seeMoreActive || reply.body.length < 150 ? null : <button className='see-more' onClick={() => this.setState({ seeMoreActive: true })} style={{"backgroundColor": "#f2f2f2"}}>...see more</button>}
               </div>
 
               {/* Comment Editor */}
