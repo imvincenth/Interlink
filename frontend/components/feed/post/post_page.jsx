@@ -65,8 +65,9 @@ export default class PostPage extends Component {
   }
   
   componentDidMount() {
-    this.props.fetchComments(this.props.post.id);
-    this.props.fetchPostReactions(this.props.post.id)
+    this.props.fetchPost(Number(window.location.href.split("/posts/")[1]))
+      .then(() => this.props.fetchComments(this.props.post.id))
+      .then(() => this.props.fetchPostReactions(this.props.post.id))
       .then(() => this.setCurrentReaction())
       .then(() => this.reactionsOrganization())
       .then(() => this.commentsOrganization())

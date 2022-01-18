@@ -29,7 +29,6 @@ class Profile extends React.Component {
     this.openExperienceCreate = this.openExperienceCreate.bind(this);
     this.openEducationCreate = this.openEducationCreate.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
-    console.log(Number(window.location.href.split("/users/")[1]));
   }
 
   currentUserCheck() {

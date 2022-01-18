@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { closeModal } from '../../../actions/modal_actions';
 import { fetchComments, createComment } from '../../../actions/comment_actions';
 import { fetchPostReactions, createPostReaction, updatePostReaction, deletePostReaction } from '../../../actions/reaction_actions';
+import { fetchPost } from '../../../actions/post_actions';
 import PostPage from './post_page';
 
 const mSTP = state => ({
-  // post: state.ui.modalParamsReducer,
+  post: Object.values(state.entities.posts)[0],
   currentUser: state.entities.users[state.session.id],
   errors: state.errors.posts,
   users: state.entities.users,
@@ -24,6 +25,7 @@ const mDTP = dispatch => ({
   createPostReaction: reaction => dispatch(createPostReaction(reaction)),
   updatePostReaction: reaction => dispatch(updatePostReaction(reaction)),
   deletePostReaction: reactionId => dispatch(deletePostReaction(reactionId)),
+  fetchPost: postId => dispatch(fetchPost(postId))
 });
 
 export default connect(mSTP, mDTP)(PostPage);
