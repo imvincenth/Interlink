@@ -97,17 +97,17 @@ class EditProfileForm extends React.Component {
             </div>
 
           </div>
+          <footer 
+            style={{display: "flex", 
+            flexDirection: "row-reverse", 
+            justifyContent: "space-between", 
+            padding: "16px 24px", 
+            borderTop: "1px solid rgba(0, 0, 0, 0.08)"}}
+          >
+            <button className='profile-edit-modal-save' onClick={this.handleSubmit}>Save</button>
+          </footer>
         </div>
 
-        <footer 
-          style={{display: "flex", 
-          flexDirection: "row-reverse", 
-          justifyContent: "space-between", 
-          padding: "16px 24px", 
-          borderTop: "1px solid rgba(0, 0, 0, 0.08)"}}
-        >
-          <button className='profile-edit-modal-save' onClick={this.handleSubmit}>Save</button>
-        </footer>
 
       </div>
     )

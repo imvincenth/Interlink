@@ -752,9 +752,10 @@
   font-weight: 400;
   line-height: 24px;
   margin: 0 auto;
-  max-height: 676px;
+  // max-height: 676px;
   width: 744px;
   max-width: 744px;
+  height: fit-content;
   transition-delay: 0s;
   transition-duration: 0.083s;
   transition-property: box-shadow;
@@ -764,11 +765,18 @@
   // overflow: auto;
 }
 
+.profile-edit-modal-wrap {
+  height: fit-content;
+}
+
 .profile-edit-indicates-required {
+  margin-left: 24px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 12px;
   font-weight: 400;
   line-height: 16px;
+  // position: absolute;
+  // top: 68px;
 }
 
 .profile-edit-modal-name-section {
