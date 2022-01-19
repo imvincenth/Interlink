@@ -1,4 +1,4 @@
-# RingIn
+# <p align="center"><img src={window.nameLogoURL} /></p>
 RingIn is a LinkedIn clone built for the characters in Lord of the Rings. Users are able to create an account and view their own profile. On their profile they can add and edit their work experience and education.
 
 Multi-stage sign up page
