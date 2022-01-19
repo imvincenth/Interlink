@@ -3,7 +3,7 @@
 
 <strong>RingIn</strong> is a full stack LinkedIn clone themed around J. R. R. Tolkien's <em>The Lord of the Rings</em> series. Users are able to create their own accounts, to which they are able to add their work <em>experience</em>, <em>education</em>, a <em>profile picture</em> and a <em>banner photo</em>. Like LinkedIn, users can create <em>posts</em> and <em>comments</em> with optionally attached photo or video, and make <em>reactions</em> to their own posts/comments or the posts/comments of other users. Users can use the <em>search feature</em> to find other users, see their profile, experiences, and education, as well as send them a <em>connection request</em>. Users are able to utilize the <em>network manager</em> component to see their sent and received connection requests, from which they are also able to accept or ignore incoming requests or withdraw their pending sent connections.
 
-<strong>Check out [RingIn](https://ringedin.herokuapp.com/#/)!</strong>
+<p align="center"><strong>Check out <a href="https://ringedin.herokuapp.com/#/">RingIn</a>!</strong></p>
 
 ## Technologies
 * React, Redux, Javascript, HTML, CSS
