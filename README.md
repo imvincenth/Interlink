@@ -1,5 +1,6 @@
 # <p align="center"><img src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/namelogo.svg" /></p>
-RingIn is a LinkedIn clone built for the characters in Lord of the Rings. Users are able to create an account and view their own profile. On their profile they can add and edit their work experience and education.
+
+RingIn is a full stack LinkedIn clone themed around J. R. R. Tolkien's The Lord of the Rings series. 
 
 Multi-stage sign up page
 ```
