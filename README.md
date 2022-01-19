@@ -1,32 +1,18 @@
 # <p align="center"><img src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/namelogo.svg" /></p>
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/homepage.gif" />
 
-RingIn is a full stack LinkedIn clone themed around J. R. R. Tolkien's The Lord of the Rings series. 
+<strong>RingIn</strong> is a full stack LinkedIn clone themed around J. R. R. Tolkien's <em>The Lord of the Rings</em> series. Users are able to create their own accounts, to which they are able to add their work <em>experience</em>, <em>education</em>, a <em>profile picture</em> and a <em>banner photo</em>. Like LinkedIn, users can make <em>posts</em>, <em>comments</em>, and create <em>reactions</em> to their own or the posts/comments of other users. Users can use the <em>search feature</em> to find other users, see their profile, experiences, and education, as well as send them a <em>connection request</em>. Users are able to utilize the <em>network manager</em> component to see their sent and received connection requests, from which they are also able to accept or ignore incoming requests or withdraw their pending sent connections.
 
-Multi-stage sign up page
-```
-pageCheck() {
-    if (this.props.errors.length === 7 || this.props.errors.length === 6 || this.props.errors.length === 0) {
-      this.setState({ visiblePage: 1});
-    } else if (this.props.errors.length === 5 || this.props.errors.length === 4) {
-      this.setState({ visiblePage: 2 });
-    } else if (this.props.errors.length === 3 || this.props.errors.length === 2) {
-      this.setState({ visiblePage: 3 });
-    } else if (this.props.errors.length === 1) {
-      this.setState({ visiblePage: 4 });
-    }
-  }
+<strong>Check out [RingIn](https://ringedin.herokuapp.com/#/)!</strong>
 
-  visibleCheck() {
-    if (this.state.visiblePage === 1) {
-      return this.pageOne();
-    } else if (this.state.visiblePage === 2) {
-      return this.pageTwo();
-    } else if (this.state.visiblePage === 3) {
-      return this.pageThree();
-    } else {
-      return this.pageFour();
-    }
-  }
-  ```
-  
-  
+## Technologies
+* React, Redux, Javascript, HTML, CSS
+* Ruby, Ruby on Rails
+* PostgreSQL
+* Amazon S3
+* Webpack, Babel
+
+## Features
+Users create their accounts by going through a multi-step sign up process. During which, they also either create a work experience or education that will be displayed on their profile for other users to see.
+
+### User Authentication
