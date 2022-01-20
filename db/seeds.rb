@@ -901,10 +901,18 @@ reaction_thirty_five = Reaction.create(
   react_type: "Love"
 )
 
+post_four_reply = Comment.create(
+  user_id: samwise.id,
+  post_id: post_four.id,
+  body: "This is sick!"
+)
+
 post_five = Post.create(
   user_id: demo_user.id,
   body: "Well, here at last, dear friends, on the shores of the Sea comes the end of our fellowship in Middle-earth. Go in peace! I will not say: do not weep; for not all tears are an evil."
 )
+
+
 
 # C O N N E C T I O N S
 

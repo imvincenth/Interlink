@@ -326,7 +326,7 @@ export default class ModalComment extends Component {
                 <Link className='post-show-modal-comment-card-header-left' to={`/users/${user.id}`}>
                   <div className='post-show-modal-comment-card-header-left-top'>
                     <span className='post-show-modal-comment-username'>{user.first_name} {user.last_name}</span>
-                    {user.id === this.props.currentUser.id ? <div className='author-tag'>Author</div> : null}
+                    {user.id === this.props.post.user_id ? <div className='author-tag'>Author</div> : null}
                   </div>
                   <span className='post-show-modal-comment-headline'>{user.headline}</span>
                 </Link>

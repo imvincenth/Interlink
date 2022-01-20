@@ -252,7 +252,7 @@ export default class PostShowModal extends Component {
 
             <div className='post-show-modal-comment-card-header'>
               <div className='post-show-modal-comment-card-header-left'>
-                <span>{user.first_name} {user.last_name} {user.id === this.props.currentUser.id ? <div className='author-tag'>Author</div> : null}</span>
+                <span>{user.first_name} {user.last_name} {user.id === this.props.post.user_id ? <div className='author-tag'>Author</div> : null}</span>
                 <span>{user.headline}</span>
               </div>
 
