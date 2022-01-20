@@ -482,12 +482,70 @@ merryandpippin_exp = Experience.create(
   description: 'Helped the trents defeat Saruman'
 )
 
-# P O S T S && C O M M E N T S
+
+
+# P O S T S && C O M M E N T S && R E A C T I O N S
 post_one = Post.create(
   user_id: elrond.id,
   body: "HIRING: Strangers from distant lands, friends of old. You've been summoned here to answer the threat of Mordor. 
   Middle-Earth stands at the brink of destruction, none can escape it. You will unite or you will fall. 
   You have only one choice, the Ring must be destroyed."
+)
+
+reaction_one = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: demo_user.id,
+  react_type: "Like"
+)
+
+reaction_two = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: legolas.id,
+  react_type: "Love"
+)
+
+reaction_three = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: gimli.id,
+  react_type: "Support"
+)
+
+reaction_four = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: frodo.id,
+  react_type: "Like"
+)
+
+reaction_five = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: samwise.id,
+  react_type: "Like"
+)
+
+reaction_six = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: aragorn.id,
+  react_type: "Support"
+)
+
+reaction_seven = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: boromir.id,
+  react_type: "Insightful"
+)
+
+reaction_eight = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Post",
+  reactor_id: merryandpippin.id,
+  react_type: "Curious"
 )
 
 post_one_comment = Comment.create(
@@ -502,22 +560,62 @@ post_one_comment_reply = Comment.create(
   post_id: post_one.id,
   body: "The Ring cannot be destroyed @Gimli son of Gloin by any craft we here possess. 
   The Ring was made in the fires of Mount Doom, only there can it be unmade. 
-  It must be taken deep within Mordor and be cast back from whence it came. One of you, must do this."
+  It must be taken deep within Mordor and be cast back into the fiery chasm from whence it came. One of you, must do this."
 )
 
 post_one_comment_reply_two = Comment.create(
   user_id: merryandpippin.id,
   reply_id: post_one_comment.id,
   post_id: post_one.id,
-  body: "Well what if we could just fly the Ring over the volcano and just drop it in? Like eagles or something..."
+  body: "Well what if we could just fly the Ring over the volcano and just drop it in? Like if we rode on eagles or something..."
 )
 
-# post_one_comment_reply_three = Comment.create(
+post_one_comment_reply_three = Comment.create(
+  user_id: boromir.id,
+  post_id: post_one.id,
+  body: "One does not simply walk into Mordor... its black gates are guarded by more than just orcs. There is evil there that does not sleep. 
+  The great eye is ever watchful. It is a barren wasteland, riddled with fire, and ash, and dust. The very air you breath, is a poisonous fume. 
+  Not with 10,000 men could you do this. It is folly."
+)
 
-# )
+post_one_comment_reply_three_reply = Comment.create(
+  user_id: merryandpippin.id,
+  reply_id: post_one_comment_reply_three.id,
+  post_id: post_one.id,
+  body: "Yeah uhhh tldr, like we said, a catapult or like eagles... if only one of us could summon them..."
+)
+
+post_one_comment_reply_three_reply_two = Comment.create(
+  user_id: legolas.id,
+  reply_id: post_one_comment_reply_three.id,
+  post_id: post_one.id,
+  body: "Have you ever nothing Lord Elrond has said? The Ring must be destroyed."
+)
+
+post_one_comment_reply_three_reply_two_reply = Comment.create(
+  user_id: gimli.id,
+  reply_id: post_one_comment_reply_three.id,
+  post_id: post_one.id,
+  body: "And I suppose you think you're the one to do it."
+)
+
+post_one_comment_reply_three_reply_two_reply_two = Comment.create(
+  user_id: boromir.id,
+  reply_id: post_one_comment_reply_three.id,
+  post_id: post_one.id,
+  body: "And if we fail, what then? What happens when Sauron takes back what's his?"
+)
+
+post_one_comment_reply_three_reply_two_reply_three = Comment.create(
+  user_id: merryandpippin.id,
+  reply_id: post_one_comment_reply_three.id,
+  post_id: post_one.id,
+  body: "I don't know, it just seems like, there is a very simple and easy solution to avoid all of this..."
+)
 
 post_one_comment_two = Comment.create(
   user_id: frodo.id,
   post_id: post_one.id,
   body: "I will take it."
 )
+
