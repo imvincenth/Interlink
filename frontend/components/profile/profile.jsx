@@ -130,10 +130,10 @@ class Profile extends React.Component {
   renderMore() {
     return (
       <div className='profile-more-menu'>
-        {/* <div onClick={this.copyToClipboard}>
+        <div onClick={this.copyToClipboard}>
           <img src={window.copyLinkURL} />
           <span>Copy profile link</span>
-        </div> */}
+        </div>
         <div onClick={() => this.props.deleteConnection(this.state.connection.id)} style={!this.state.currentUserStatus && !this.state.connection.pending ? null : {"display": "none"}}>
           <img src={window.copyLinkURL} />
           <span>Remove connection</span>
