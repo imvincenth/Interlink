@@ -72,3 +72,115 @@ Users can add, change, or delete a profile picture or banner to their own profil
 * In the list of experiences and educations, the user can choose to edit or delete their experience and/or education by clicking on the quill.
 
 <img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/profile.gif" />
+
+### Code Snippets
+
+#### Mutuals Friends Logic
+```javascript
+findMutuals() {
+    let tempInvitorConnections = [];
+    let tempMutualIDs = [];
+
+    this.props.connections.forEach(connection => (connection.connector_id === this.state.user.id || connection.connectee_id === this.state.user.id) && !connection.pending ? tempInvitorConnections.push(connection) : null);
+    // IDs of all of the invitor's accepted connections
+    let tempInvitorConnectionIDs = tempInvitorConnections.map(connection => connection.connector_id === this.state.user.id ? connection.connectee_id : connection.connector_id);
+    // IDs of all of the current user's accepted connections
+    let tempCurrentUserConnectionIDs = this.props.currentUserConnections.map(connection => connection.connector_id === this.props.currentUser.id ? connection.connectee_id : connection.connector_id);
+    // Filtering user IDs of the mutal connections
+    tempCurrentUserConnectionIDs.forEach(id => tempInvitorConnectionIDs.includes(id) && !tempMutualIDs.includes(id) ? tempMutualIDs.push(id) : null);
+    // Getting the user objects from the mutuals IDs
+    let tempMutuals = tempMutualIDs.map(id => this.props.users[id]);
+    // Getting name of the first mutual connection
+    let tempFirstMutual;
+    if (tempMutuals[0]) tempFirstMutual = `${tempMutuals[0].first_name} ${tempMutuals[0].last_name}`;
+    if (!tempMutuals[0]) tempFirstMutual = null;
+
+    this.setState({ invitorConnections: tempInvitorConnections, mutuals: tempMutuals, firstMutual: tempFirstMutual });
+  }
+```
+
+#### Modals Logic
+```javascript
+function Modal(props) {
+  if (!props.modal) {
+    return null;
+  }
+  let component;
+  let classType;
+  
+  switch (props.modal) {
+    case 'createExperience':
+      classType = 'create-experience';
+      component = <CreateExperienceFormContainer />;
+      break;
+    case 'editExperience':
+      classType = 'edit-experience';
+      component = <EditExperienceFormContainer />;
+      break;
+    case 'createEducation':
+      classType = 'create-education';
+      component = <CreateEducationFormContainer />;
+      break;
+    case 'editEducation':
+      classType = 'edit-education';
+      component = <EditEducationFormContainer />;
+      break;
+    case 'createPost':
+      classType = 'create-post';
+      component = <CreatePostFormContainer />;
+      break;
+    case 'editPost':
+      classType = 'edit-post';
+      component = <EditPostFormContainer />;
+      break;
+    case 'editProfile':
+      classType = 'edit-profile';
+      component = <EditProfileFormContainer />;
+      break;
+    case 'postShow':
+      classType = 'post-show';
+      component = <PostShowModalContainer />;
+      break;
+    case 'profilePicture':
+      classType = 'profile-picture';
+      component = <ProfilePictureModalContainer />;
+      break;
+    case 'banner':
+      classType = 'banner';
+      component = <BannerModalContainer />;
+      break;
+    case 'bannerShow':
+      classType = 'banner-show';
+      component = <BannerShowModalContainer />;
+      break;
+    default:
+      return null;
+  }
+
+  return (
+    <div className="modal-background" onClick={props.closeModal}>
+      <div className={`${classType}-modal-child`} onClick={e => e.stopPropagation()}>
+        { component }
+      </div>
+    </div>
+  );
+}
+
+const mSTP = state => {
+  return {
+    modal: state.ui.modal
+  };
+};
+
+const mDTP = dispatch => {
+  return {
+    closeModal: () => dispatch(closeModal())
+  };
+};
+
+export default connect(mSTP, mDTP)(Modal);
+```
+## Future Features
+
+* Infinite scroll to the Feed component
+* Chat messaging with Websockets
