@@ -24,13 +24,13 @@ demo_user = User.create(
   password: 'password', 
   first_name: 'Gandalf', 
   last_name: 'the Grey', 
-  headline: 'the Wandering Wizard', 
+  headline: 'Servant of the Secret Fire | Wielder of the flame of Anor', 
   country_region: 'Middle-earth', 
   city_district: 'The Shire'
 )
 
-fellowshipbanner = open('https://ringin-dev.s3.us-west-1.amazonaws.com/fellowshipbanner.jpg')
-demo_user.banner.attach(io: fellowshipbanner, filename: 'fellowshipbanner.jpg')
+fellowshipbanner = open('https://ringin-dev.s3.us-west-1.amazonaws.com/gandalfthewhite.gif')
+demo_user.banner.attach(io: fellowshipbanner, filename: 'gandalfthewhite.gif')
 
 gandalf = open('https://ringin-dev.s3.us-west-1.amazonaws.com/gandalf.png')
 demo_user.profile_picture.attach(io: gandalf, filename: 'gandalf.png')
@@ -66,7 +66,7 @@ frodo = User.create(
   password: 'password', 
   first_name: 'Frodo', 
   last_name: 'Baggins', 
-  headline: 'Useless', 
+  headline: 'Least Valuable Hobbit', 
   country_region: 'Middle-earth', 
   city_district: 'The Shire'
 )
@@ -589,7 +589,7 @@ post_one_comment_reply_three_reply_two = Comment.create(
   user_id: legolas.id,
   reply_id: post_one_comment_reply_three.id,
   post_id: post_one.id,
-  body: "Have you ever nothing Lord Elrond has said? The Ring must be destroyed."
+  body: "Have you heard nothing Lord Elrond has said? The Ring must be destroyed."
 )
 
 post_one_comment_reply_three_reply_two_reply = Comment.create(
@@ -610,7 +610,7 @@ post_one_comment_reply_three_reply_two_reply_three = Comment.create(
   user_id: merryandpippin.id,
   reply_id: post_one_comment_reply_three.id,
   post_id: post_one.id,
-  body: "I don't know, it just seems like, there is a very simple and easy solution to avoid all of this..."
+  body: "I don't know, it just seems like, there is a very simple and easy solution to avoid all of the hassle..."
 )
 
 post_one_comment_two = Comment.create(
@@ -619,3 +619,297 @@ post_one_comment_two = Comment.create(
   body: "I will take it."
 )
 
+reaction_nine = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Comment",
+  reactor_id: samwise.id,
+  react_type: "Support"
+)
+
+reaction_ten = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Comment",
+  reactor_id: merryandpippin.id,
+  react_type: "Love"
+)
+
+reaction_eleven = Reaction.create(
+  reactable_id: post_one.id,
+  reactable_type: "Comment",
+  reactor_id: demo_user.id,
+  react_type: "Like"
+)
+
+post_two = Post.create(
+  user_id: frodo.id,
+  body: "HIRING: I will take the Ring to Mordor. Though, I do not know the way."
+)
+
+post_two_photo = open('https://ringin-dev.s3.us-west-1.amazonaws.com/onering.gif')
+post_two.photo.attach(io: post_two_photo, filename: 'onering.gif')
+
+reaction_twelve = Reaction.create(
+  reactable_id: post_two.id,
+  reactable_type: "Post",
+  reactor_id: demo_user.id,
+  react_type: "Support"
+)
+
+reaction_thirteen = Reaction.create(
+  reactable_id: post_two.id,
+  reactable_type: "Post",
+  reactor_id: elrond.id,
+  react_type: "Support"
+)
+
+reaction_fourteen = Reaction.create(
+  reactable_id: post_two.id,
+  reactable_type: "Post",
+  reactor_id: aragorn.id,
+  react_type: "Support"
+)
+
+reaction_fifteen = Reaction.create(
+  reactable_id: post_two.id,
+  reactable_type: "Post",
+  reactor_id: legolas.id,
+  react_type: "Support"
+)
+
+reaction_sixteen = Reaction.create(
+  reactable_id: post_two.id,
+  reactable_type: "Post",
+  reactor_id: gimli.id,
+  react_type: "Support"
+)
+
+post_two_reply = Comment.create(
+  user_id: demo_user.id,
+  post_id: post_two.id,
+  body: "I will help you bear this burden @Frodo Baggins, as long as it is yours to bear."
+)
+
+reaction_seventeen = Reaction.create(
+  reactable_id: post_two_reply.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Celebrate"
+)
+
+post_two_reply_two = Comment.create(
+  user_id: aragorn.id,
+  post_id: post_two.id,
+  body: "If by my life or death I can protect you, I will. You have my sword."
+)
+
+reaction_eighteen = Reaction.create(
+  reactable_id: post_two_reply_two.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Celebrate"
+)
+
+post_two_reply_three = Comment.create(
+  user_id: legolas.id,
+  post_id: post_two.id,
+  body: "And you have my bow."
+)
+
+reaction_nineteen = Reaction.create(
+  reactable_id: post_two_reply_three.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Celebrate"
+)
+
+post_two_reply_four = Comment.create(
+  user_id: gimli.id,
+  post_id: post_two.id,
+  body: "And my axe."
+)
+
+reaction_twenty = Reaction.create(
+  reactable_id: post_two_reply_four.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Celebrate"
+)
+
+post_two_reply_five = Comment.create(
+  user_id: boromir.id,
+  post_id: post_two.id,
+  body: "You carry the fate of us all little one. If this is indeed the will of the council, then Gondor will see it done."
+)
+
+reaction_twenty_one = Reaction.create(
+  reactable_id: post_two_reply_five.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Like"
+)
+
+post_two_reply_six = Comment.create(
+  user_id: samwise.id,
+  post_id: post_two.id,
+  body: "Hey! Mr. Frodo isn't going anywhere without me."
+)
+
+reaction_twenty_two = Reaction.create(
+  reactable_id: post_two_reply_six.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Love"
+)
+
+post_two_reply_seven = Comment.create(
+  user_id: elrond.id,
+  post_id: post_two.id,
+  reply_id: post_two_reply_six.id,
+  body: "No indeed, it is hardly possible to separate you two. Even when he is summoned to a secret council and you are not."
+)
+
+post_two_reply_eight = Comment.create(
+  user_id: merryandpippin.id,
+  post_id: post_two.id,
+  reply_id: post_two_reply_six.id,
+  body: "Oi! We're coming too! You'll have to send us home tied up in a sack to stop us. Anyway, you need people of intelligence on this sort of mission, quest, thing."
+)
+
+reaction_twenty_three = Reaction.create(
+  reactable_id: post_two_reply_eight.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Love"
+)
+
+post_two_reply_nine = Comment.create(
+  user_id: elrond.id,
+  post_id: post_two.id,
+  body: "Nine companions. So be it. You shall be the Fellowship of the Ring."
+)
+
+reaction_twenty_four = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: frodo.id,
+  react_type: "Love"
+)
+
+reaction_twenty_five = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: demo_user.id,
+  react_type: "Love"
+)
+
+reaction_twenty_six = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: aragorn.id,
+  react_type: "Love"
+)
+
+reaction_twenty_seven = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: legolas.id,
+  react_type: "Love"
+)
+
+reaction_twenty_eight = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: gimli.id,
+  react_type: "Love"
+)
+
+reaction_twenty_nine = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: boromir.id,
+  react_type: "Love"
+)
+
+reaction_thirty = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: samwise.id,
+  react_type: "Love"
+)
+
+reaction_thirty_one = Reaction.create(
+  reactable_id: post_two_reply_nine.id,
+  reactable_type: "Comment",
+  reactor_id: merryandpippin.id,
+  react_type: "Love"
+)
+
+post_two_reply_ten = Comment.create(
+  user_id: merryandpippin.id,
+  post_id: post_two.id,
+  reply_id: post_two_reply_nine.id,
+  body: "Great! Where are we going?"
+)
+
+post_three = Post.create(
+  user_id: theoden.id,
+  body: "Glow up! Thank you @Gandalf!"
+)
+
+post_three_photo = open('https://ringin-dev.s3.us-west-1.amazonaws.com/theoden.gif')
+post_three.photo.attach(io: post_three_photo, filename: 'theoden.gif')
+
+reaction_thirty_two = Reaction.create(
+  reactable_id: post_three.id,
+  reactable_type: "Post",
+  reactor_id: demo_user.id,
+  react_type: "Love"
+)
+
+post_three_reply = Comment.create(
+  user_id: demo_user.id,
+  post_id: post_three.id,
+  body: "Too long you have sat in darkness."
+)
+
+reaction_thirty_three = Reaction.create(
+  reactable_id: post_three_reply.id,
+  reactable_type: "Comment",
+  reactor_id: theoden.id,
+  react_type: "Love"
+)
+
+post_four = Post.create(
+  user_id: gollum.id,
+  body: "Wanted to drop this sick Lo-Fi beat here. Credits to: https://www.youtube.com/watch?v=bO9VYaWSx-I"
+)
+
+post_four_video = open('https://ringin-dev.s3.us-west-1.amazonaws.com/lofibeat.mp4')
+post_four.video.attach(io: post_four_video, filename: 'lofibeat.mp4')
+
+reaction_thirty_four = Reaction.create(
+  reactable_id: post_four.id,
+  reactable_type: "Post",
+  reactor_id: samwise.id,
+  react_type: "Love"
+)
+
+reaction_thirty_five = Reaction.create(
+  reactable_id: post_four.id,
+  reactable_type: "Post",
+  reactor_id: merryandpippin.id,
+  react_type: "Love"
+)
+
+post_five = Post.create(
+  user_id: demo_user.id,
+  body: "Well, here at last, dear friends, on the shores of the Sea comes the end of our fellowship in Middle-earth. Go in peace! I will not say: do not weep; for not all tears are an evil."
+)
+
+# C O N N E C T I O N S
+
+connection1 = Connection.create(
+  connector_id: demo_user.id,
+  connectee_id: frodo.id,
+  pending: false
+)
