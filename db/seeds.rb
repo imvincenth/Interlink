@@ -482,8 +482,6 @@ merryandpippin_exp = Experience.create(
   description: 'Helped the trents defeat Saruman'
 )
 
-
-
 # P O S T S && C O M M E N T S && R E A C T I O N S
 post_one = Post.create(
   user_id: elrond.id,
@@ -912,8 +910,6 @@ post_five = Post.create(
   body: "Well, here at last, dear friends, on the shores of the Sea comes the end of our fellowship in Middle-earth. Go in peace! I will not say: do not weep; for not all tears are an evil."
 )
 
-
-
 # C O N N E C T I O N S
 
 connection1 = Connection.create(
@@ -952,3 +948,62 @@ connection6 = Connection.create(
   pending: true
 )
 
+connection7 = Connection.create(
+  connector_id: gollum.id,
+  connectee_id: demo_user.id,
+  pending: true
+)
+
+connection8 = Connection.create(
+  connector_id: merryandpippin.id,
+  connectee_id: demo_user.id,
+  pending: true
+)
+
+connection9 = Connection.create(
+  connector_id: boromir.id,
+  connectee_id: demo_user.id,
+  pending: true
+)
+
+connection10 = Connection.create(
+  connector_id: elrond.id,
+  connectee_id: demo_user.id,
+  pending: true
+)
+
+connection11 = Connection.create(
+  connector_id: merryandpippin.id,
+  connectee_id: frodo.id,
+  pending: false
+)
+
+connection12 = Connection.create(
+  connector_id: merryandpippin.id,
+  connectee_id: samwise.id,
+  pending: false
+)
+
+connection13 = Connection.create(
+  connector_id: merryandpippin.id,
+  connectee_id: boromir.id,
+  pending: false
+)
+
+connection14 = Connection.create(
+  connector_id: aragorn.id,
+  connectee_id: boromir.id,
+  pending: false
+)
+
+connection15 = Connection.create(
+  connector_id: elrond.id,
+  connectee_id: boromir.id,
+  pending: false
+)
+
+connection16 = Connection.create(
+  connector_id: frodo.id,
+  connectee_id: boromir.id,
+  pending: false
+)
