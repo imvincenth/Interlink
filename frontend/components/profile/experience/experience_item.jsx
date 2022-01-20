@@ -42,7 +42,7 @@ class Experience extends React.Component {
             <div style={{display: "flex", flexDirection: "column"}}>
               <span className='stat-first-line'>{experience.title}</span>
               <span className='stat-second-line'>{experience.company}</span>
-              {experience.start_date !== "invalid" ? <span className='stat-third-line'>{experience.start_date} - {experience.end_date}</span> : null}
+              {experience.start_date !== "invalid" && experience.start_date !== "undefined" && experience.start_date ? <span className='stat-third-line'>{experience.start_date} - {experience.end_date}</span> : null}
             </div>
           </div>
 

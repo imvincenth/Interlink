@@ -332,7 +332,7 @@ class SignupForm extends React.Component {
   studentReqCheck() {
     if (this.state.student) {
       if (this.state.school.length > 0 && this.state.degree.length > 0 && this.state.subject.length > 0) {
-        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "") {
+        if (this.state.startYr !== "-" && this.state.endYr !== "-" && this.state.startYr !== "" && this.state.endYr !== "" && this.state.startYr !== "invalid" && this.state.endYr !== "invalid") {
           if (Number(this.state.endYr) >= Number(this.state.startYr)) {
             return true;
           }
