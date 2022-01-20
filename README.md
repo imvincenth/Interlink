@@ -63,7 +63,7 @@ From the network tab, users will be able to accept or ignore incoming connection
 
 ### Profile (Users: Update)(Connections, Experiences, Educations: CRUD)
 
-Users can add a profile picture or banner to their own profiles, create, edit, and delete their own work experiences and educations, and view the profiles of other users.
+Users can add, change, or delete a profile picture or banner to their own profiles, create, edit, and delete their own work experiences and educations, and view the profiles of other users.
 
 * To change the banner, the user can select an image file from the top right camera icon.
 * To change the profile, the user can select an image file by clicking on the existing profile picture (or where the profile picture should be)
