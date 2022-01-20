@@ -52,8 +52,23 @@ This is where users can view posts made by other users, create posts, attach a p
 
 ### Network Manager (Connections: Read, Update, Delete)
 
-From the network tab, users will be able to accept or ignore incoming connection requests, view all their existing connections
+From the network tab, users will be able to accept or ignore incoming connection requests, view all their existing connections and disconnect them, view all their sent connection request and withdraw them.
+
+* The starting page is where the user is able to accept or ignore connection requests sent to the current user.
+* If there are more than 3 incoming requests a <em>Show more</em> tab will be toggleable.
+* Clicking on the <em>Connections</em> option under Manage my network redirects the user to the connections page.
+* <em>See all</em> redirects the user to the invitations page from which they can select and view all received or sent connection requests.
 
 <img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
 
-### Profile (Users: Update, Connections, Experiences, Educations: CRUD)
+### Profile (Users: Update)(Connections, Experiences, Educations: CRUD)
+
+Users can add a profile picture or banner to their own profiles, create, edit, and delete their own work experiences and educations, and view the profiles of other users.
+
+* To change the banner, the user can select an image file from the top right camera icon.
+* To change the profile, the user can select an image file by clicking on the existing profile picture (or where the profile picture should be)
+* From the profile edit modal that is opened by clicking on the quill, the user can change their first and last names, headline, and location.
+* From the <em>Add section</em> dropdown menu or by clicking the plus sign, the user can choose to add an experience or education to their profile.
+* In the list of experiences and educations, the user can choose to edit or delete their experience and/or education by clicking on the quill.
+
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
