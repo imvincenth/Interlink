@@ -35,7 +35,7 @@ Users can utilize the search bar to find and connect with other users.
 * Hitting enter or choosing the <em>see all results</em> option will open the search results page
 * From the search results page the user can send/accept/ignore connection requests
 
-<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/searchbar.gif" />
 
 ### User Feed (Posts, Comments, Reactions: CRUD)
 
@@ -48,7 +48,7 @@ This is where users can view posts made by other users, create posts, attach a p
 * Hovering over the <em>Like</em> option will open a dock from which the user can select or change their reaction to a post or comment.
 * The user can see the number of comments on a post, the number of replies to a comment, the number of reactions on the post/comment, whether or not the post/comment has been edited, as well as how long ago the post/comment was created.
 
-<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/userfeed.gif" />
 
 ### Network Manager (Connections: Read, Update, Delete)
 
@@ -59,7 +59,7 @@ From the network tab, users will be able to accept or ignore incoming connection
 * Clicking on the <em>Connections</em> option under Manage my network redirects the user to the connections page.
 * <em>See all</em> redirects the user to the invitations page from which they can select and view all received or sent connection requests.
 
-<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/network.gif" />
 
 ### Profile (Users: Update)(Connections, Experiences, Educations: CRUD)
 
@@ -71,4 +71,4 @@ Users can add a profile picture or banner to their own profiles, create, edit, a
 * From the <em>Add section</em> dropdown menu or by clicking the plus sign, the user can choose to add an experience or education to their profile.
 * In the list of experiences and educations, the user can choose to edit or delete their experience and/or education by clicking on the quill.
 
-<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/profile.gif" />
