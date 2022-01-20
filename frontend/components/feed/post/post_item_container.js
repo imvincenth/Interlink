@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { fetchUsers } from '../../../actions/user_actions';
 import { fetchPosts, deletePost } from '../../../actions/post_actions';
 import { fetchComments } from '../../../actions/comment_actions';
 import { openModal } from '../../../actions/modal_actions';
@@ -17,6 +18,7 @@ const mSTP = state => ({
 });
 
 const mDTP = dispatch => ({
+  fetchUsers: () => dispatch(fetchUsers()),
   fetchPosts: () => dispatch(fetchPosts()),
   fetchComments: postId => dispatch(fetchComments(postId)),
   openEditPostModal: post => dispatch(openModal("editPost", post)),

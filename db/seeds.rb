@@ -87,7 +87,7 @@ frodo_exp = Experience.create(
   current_role: false, 
   end_date: "May 2020", 
   industry: 'Getting Carried',
-  headline: 'Useless',
+  headline: 'Useless and lost',
   description: 'Protect the Ring'
 )
 
@@ -243,7 +243,7 @@ gimli = User.create(
   password: 'password', 
   first_name: 'Gimli', 
   last_name: 'son of Gloin', 
-  headline: 'Legolas BFF', 
+  headline: "Legolas' BFF", 
   country_region: 'Middle-earth', 
   city_district: 'Mirkwood'
 )
