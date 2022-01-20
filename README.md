@@ -14,7 +14,7 @@
 
 ## Features
 
-### User Authentication
+### User Authentication (Users: Create, Read)
 
 Users create their accounts by going through a multi-step sign up process. During which, they also either create a work experience or education that will be displayed on their profile for other users to see.
 
@@ -22,8 +22,38 @@ Users create their accounts by going through a multi-step sign up process. Durin
 * The second page prompts the user for their first and last names.
 * The third page for the user's location details.
 * The last page is where the user can choose between signing up with either an experience or an education.
+
 <img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
 
-### User Feed
+### Search Bar (Connections: CRUD)
 
-This is where users can view posts made by other users, create posts, attach a photo or video to their post, edit or delete their own posts, comment on posts, reply to comments, edit or delete their own comments.
+Users can utilize the search bar to find and connect with other users.
+
+* When there is no input into the search field, a list of recommended results will appear
+* As the user fills in the search field, suggestions will display a filtered list users matching the input
+* Clicking on a search result in the suggestions box will bring the current user to that user's profile page
+* Hitting enter or choosing the <em>see all results</em> option will open the search results page
+* From the search results page the user can send/accept/ignore connection requests
+
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+
+### User Feed (Posts, Comments, Reactions: CRUD)
+
+This is where users can view posts made by other users, create posts, attach a photo or video to their post, edit or delete their own posts, comment on posts, reply to comments, edit or delete their own comments. Users may also choose to create, change, or remove a reaction to a post or comment.
+
+* Selecting the <em>Start a post</em> option will open a modal from which the user can draft their post, add a photo, or video.
+* The photo and video options underneath will immediately prompt the user to add their chosen media type to a post.
+* If a post/comment is made by the current user, they will be able to access the edit option through the dropdown menu opened from the three dots at the top right.
+* Clicking on an image or video attached to the post will open a post show modal.
+* Hovering over the <em>Like</em> option will open a dock from which the user can select or change their reaction to a post or comment.
+* The user can see the number of comments on a post, the number of replies to a comment, the number of reactions on the post/comment, whether or not the post/comment has been edited, as well as how long ago the post/comment was created.
+
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+
+### Network Manager (Connections: Read, Update, Delete)
+
+From the network tab, users will be able to accept or ignore incoming connection requests, view all their existing connections
+
+<img style="width: 100%" src="https://github.com/imvincenth/RingIn/blob/master/app/assets/images/signup.gif" />
+
+### Profile (Users: Update, Connections, Experiences, Educations: CRUD)
