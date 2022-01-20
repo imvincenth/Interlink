@@ -104,13 +104,17 @@ export default class Post extends Component {
     if (!this.props.reactions[0]) return this.setState({ reactionIcons: [], reactionCount: 0, firstReactorName: "" });
     let tempIconStore = [];
 
-    let tempFirstUserId = this.props.reactions[0].reactor_id;
+    let tempReactions = [];
+    this.props.reactions.forEach(reaction => reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempReactions.push(reaction) : null);
+    if (!tempReactions[0]) return this.setState({ reactionIcons: [], reactionCount: 0, firstReactorName: "" });
+    
+    let tempFirstUserId = tempReactions[0].reactor_id;
     let tempUser;
     let tempReactCount = 0;
-
+    
     this.props.reactions.forEach(reaction => !tempIconStore.includes(reaction.react_type) && tempIconStore.length <= 3 && reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempIconStore.push(reaction.react_type) : null);
     this.props.reactions.forEach(reaction => reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempReactCount++ : null);
-    console.log(this.props.usersArr)
+
     this.props.usersArr.forEach(user => user.id === tempFirstUserId ? tempUser = user : null);
     let tempUserName = `${tempUser.first_name} ${tempUser.last_name}`;
     if (tempFirstUserId === this.props.currentUser.id) tempUserName = "You";

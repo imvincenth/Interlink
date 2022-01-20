@@ -113,7 +113,11 @@ export default class Comment extends Component {
     if (!this.props.reactions[0]) return this.setState({ reactionIcons: [], reactionCount: 0, firstReactorName: "" });
     let tempIconStore = [];
 
-    let tempFirstUserId = this.props.reactions[0].reactor_id;
+    let tempReactions = [];
+    this.props.reactions.forEach(reaction => reaction.reactable_type === "Post" && reaction.reactable_id === this.props.post.id ? tempReactions.push(reaction) : null);
+    if (!tempReactions[0]) return this.setState({ reactionIcons: [], reactionCount: 0, firstReactorName: "" });
+    
+    let tempFirstUserId = tempReactions[0].reactor_id;
     let tempUser;
     let tempReactCount = 0;
 

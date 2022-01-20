@@ -363,7 +363,7 @@ theoden= User.create(
   email: 'theoden@king.ofrohan', 
   password: 'password', 
   first_name: 'Théoden', 
-  last_name: 'Trahald', 
+  last_name: 'Ednew', 
   headline: 'King of Rohan', 
   country_region: 'Middle-earth',
   city_district: 'Helms Deep'
@@ -913,3 +913,34 @@ connection1 = Connection.create(
   connectee_id: frodo.id,
   pending: false
 )
+
+connection2 = Connection.create(
+  connector_id: demo_user.id,
+  connectee_id: samwise.id,
+  pending: false
+)
+
+connection3 = Connection.create(
+  connector_id: demo_user.id,
+  connectee_id: aragorn.id,
+  pending: false
+)
+
+connection4 = Connection.create(
+  connector_id: demo_user.id,
+  connectee_id: theoden.id,
+  pending: true
+)
+
+connection5 = Connection.create(
+  connector_id: demo_user.id,
+  connectee_id: legolas.id,
+  pending: true
+)
+
+connection6 = Connection.create(
+  connector_id: demo_user.id,
+  connectee_id: gimli.id,
+  pending: true
+)
+
