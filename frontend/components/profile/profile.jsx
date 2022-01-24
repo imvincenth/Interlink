@@ -146,7 +146,7 @@ class Profile extends React.Component {
     if (this.state.currentUserStatus) {
       return (
         <Link to={`/connections`}>
-          <span className='profile-user-connections'>{this.state.connections.length} connection{this.state.connections.length > 1 ? "s" : ""}</span>
+          <span className='profile-user-connections'>{this.state.connections.length} connection{this.state.connections.length > 1 || this.state.connections.length === 0 ? "s" : ""}</span>
         </Link>
       )
     } else {
