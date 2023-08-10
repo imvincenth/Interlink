@@ -283,7 +283,7 @@ export default class Search extends Component {
               </div>
 
               <div className="navbar-item">
-                <a className="navbar-link transparent" href="https://www.linkedin.com/in/vincent-hsu-45a6a1220/" target="_blank" rel="noopener noreferrer">
+                <a className="navbar-link transparent" href="https://www.linkedin.com/in/vincent-hsu-1025a9a3/" target="_blank" rel="noopener noreferrer">
                   <img className="navbar-icon" src={window.linkedinURL} alt="feed url" />
                   <h5>LinkedIn</h5>
                   <div className="navbar-item-bar"></div>
